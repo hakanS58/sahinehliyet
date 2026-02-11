@@ -1,348 +1,553 @@
 <!doctype html>
 <html lang="tr">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Motor Testleri</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
-     crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;400;500;600;700&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;400;500;600;700&display=swap"
+            rel="stylesheet"
     />
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-      }
-
-      body {
-        background: linear-gradient(135deg, #f6f9fc, #eef3f8);
-        min-height: 100vh;
-        color: #222;
-      }
-
-      /* HEADER */
-
-      .top-bar {
-        background: linear-gradient(135deg, #1f4037, #99f2c8);
-        color: white;
-        padding: 18px;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .top-bar h2 {
-        font-size: 26px;
-      }
-
-      .top-bar a {
-        display: inline-block;
-        margin: 6px 5px 0;
-        padding: 8px 18px;
-        background: white;
-        color: #1f4037;
-        border-radius: 20px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: 0.3s;
-      }
-
-      .top-bar a:hover {
-        background: #e8fff6;
-        transform: scale(1.05);
-      }
-
-      /* CONTAINER */
-
-      .container {
-        max-width: 540px;
-        margin: auto;
-        padding: 18px;
-        animation: fadeIn 0.7s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(25px);
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: "Poppins", sans-serif;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+
+        body {
+          background: linear-gradient(135deg, #f6f9fc, #eef3f8);
+          min-height: 100vh;
+          color: #222;
         }
-      }
 
-      /* HEADER BOX */
+        /* HEADER */
 
-      .header {
-        background: white;
-        border-radius: 20px;
-        padding: 22px;
-        margin-bottom: 18px;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-        animation: slideDown 0.7s ease;
-      }
-
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
+        .top-bar {
+          background: linear-gradient(135deg, #1f4037, #99f2c8);
+          color: white;
+          padding: 18px;
+          text-align: center;
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
 
-      .header h2 {
-        text-align: center;
-        margin-bottom: 12px;
-        color: #1f4037;
-      }
-
-      .header p {
-        font-size: 15px;
-        line-height: 1.7;
-        color: #444;
-        text-align: center;
-      }
-
-      /* TEST LIST */
-
-      .test-list {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      /* TEST CARD */
-
-      .test-btn {
-        background: white;
-        border-radius: 18px;
-        padding: 18px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-decoration: none;
-        color: #222;
-        font-weight: 600;
-        font-size: 17px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-        transition: 0.35s;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .test-btn::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, #99f2c8, #1f4037);
-        opacity: 0;
-        transition: 0.3s;
-      }
-
-      .test-btn span {
-        font-size: 13px;
-        color: #666;
-        font-weight: 400;
-      }
-
-      .test-btn * {
-        position: relative;
-        z-index: 2;
-      }
-
-      .test-btn:hover::before {
-        opacity: 0.12;
-      }
-
-      .test-btn:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
-      }
-
-      /* COMPLETED */
-
-      .test-btn.completed {
-        background: #e9f7ec;
-        border: 2px solid #2ecc71;
-        color: #1b5e20;
-        pointer-events: none;
-      }
-
-      .test-btn.completed::after {
-        content: "✓ ÇÖZÜLDÜ";
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #2ecc71;
-        color: white;
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        animation: pulse 1.5s infinite;
-      }
-
-      @keyframes pulse {
-        0% {
-          transform: translateY(-50%) scale(1);
-        }
-        50% {
-          transform: translateY(-50%) scale(1.1);
-        }
-        100% {
-          transform: translateY(-50%) scale(1);
-        }
-      }
-
-      /* MOBILE */
-
-      @media (max-width: 600px) {
         .top-bar h2 {
-          font-size: 22px;
+          font-size: 26px;
+        }
+
+        .top-bar a {
+          display: inline-block;
+          margin: 6px 5px 0;
+          padding: 8px 18px;
+          background: white;
+          color: #1f4037;
+          border-radius: 20px;
+          text-decoration: none;
+          font-weight: 500;
+          transition: 0.3s;
+        }
+
+        .top-bar a:hover {
+          background: #e8fff6;
+          transform: scale(1.05);
+        }
+
+        /* CONTAINER */
+
+        .container {
+          max-width: 540px;
+          margin: auto;
+          padding: 18px;
+          animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(25px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* HEADER BOX */
+
+        .header {
+          background: white;
+          border-radius: 20px;
+          padding: 22px;
+          margin-bottom: 18px;
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+          animation: slideDown 0.7s ease;
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .header h2 {
+          text-align: center;
+          margin-bottom: 12px;
+          color: #1f4037;
         }
 
         .header p {
-          font-size: 14px;
+          font-size: 15px;
+          line-height: 1.7;
+          color: #444;
+          text-align: center;
         }
+
+        /* TEST LIST */
+
+        .test-list {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        /* TEST CARD */
 
         .test-btn {
-          font-size: 15px;
+          background: white;
+          border-radius: 18px;
+          padding: 18px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-decoration: none;
+          color: #222;
+          font-weight: 600;
+          font-size: 17px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+          transition: 0.35s;
+          position: relative;
+          overflow: hidden;
         }
-      }
 
-      /* === TEST TEKRAR KARTI === */
+        .test-btn::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #99f2c8, #1f4037);
+          opacity: 0;
+          transition: 0.3s;
+        }
 
-.repeat-card {
-  margin: 25px 15px;
-  background: linear-gradient(135deg, #1f4037, #99f2c8);
-  color: white;
-  border-radius: 18px;
-  padding: 22px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  display: block;
-  animation: popUp 0.7s ease;
-}
+        .test-btn span {
+          font-size: 13px;
+          color: #666;
+          font-weight: 400;
+        }
 
-@keyframes popUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.9);
+        .test-btn * {
+          position: relative;
+          z-index: 2;
+        }
+
+        .test-btn:hover::before {
+          opacity: 0.12;
+        }
+
+        .test-btn:hover {
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+        }
+
+        /* COMPLETED */
+
+        .test-btn.completed {
+          background: #e9f7ec;
+          border: 2px solid #2ecc71;
+          color: #1b5e20;
+          pointer-events: none;
+        }
+
+        .test-btn.completed::after {
+          content: "✓ ÇÖZÜLDÜ";
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: #2ecc71;
+          color: white;
+          padding: 4px 12px;
+          border-radius: 12px;
+          font-size: 12px;
+          animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: translateY(-50%) scale(1);
+          }
+          50% {
+            transform: translateY(-50%) scale(1.1);
+          }
+          100% {
+            transform: translateY(-50%) scale(1);
+          }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+          .top-bar h2 {
+            font-size: 22px;
+          }
+
+          .header p {
+            font-size: 14px;
+          }
+
+          .test-btn {
+            font-size: 15px;
+          }
+        }
+
+        /* === TEST TEKRAR KARTI === */
+
+  .repeat-card {
+    margin: 25px 15px;
+    background: linear-gradient(135deg, #1f4037, #99f2c8);
+    color: white;
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: block;
+    animation: popUp 0.7s ease;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+
+  @keyframes popUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
-}
 
-.repeat-card h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
+  .repeat-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
 
-.repeat-card p {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 15px;
-  opacity: 0.95;
-}
+  .repeat-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    opacity: 0.95;
+  }
 
-.repeat-card a {
-  display: inline-block;
-  background: white;
-  color: #1f4037;
-  padding: 9px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
+  .repeat-card a {
+    display: inline-block;
+    background: white;
+    color: #1f4037;
+    padding: 9px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
 
-.repeat-card a:hover {
-  background: #e6fff5;
-  transform: scale(1.05);
-}
+  .repeat-card a:hover {
+    background: #e6fff5;
+    transform: scale(1.05);
+  }
+
+
+
+
+  /* MODERN TEXT PREMIUM */
+
+  .premium-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+  }
+
+  .premium-box-modern{
+    width:92%;
+    max-width:360px;
+    background:white;
+    border-radius:22px;
+    padding:22px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    animation:pop .35s ease;
+  }
+
+  @keyframes pop{
+    from{transform:scale(.85);opacity:0}
+    to{transform:scale(1);opacity:1}
+  }
+
+  .premium-box-modern h3{
+    text-align:center;
+    font-size:18px;
+    margin-bottom:6px;
+  }
+
+  .premium-box-modern .desc{
+    text-align:center;
+    font-size:13px;
+    color:#64748b;
+    margin-bottom:14px;
+  }
+
+  /* CHOICES */
+
+  .choice-card{
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:.25s;
+    border:1px solid #e5e7eb;
+  }
+
+  .choice-card:hover{
+    transform:scale(1.03);
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+  }
+
+  /* HEAD */
+
+  .choice-head{
+    font-weight:700;
+    font-size:15px;
+    margin-bottom:6px;
+  }
+
+  /* AD */
+
+  .choice-card.ad{
+    background:#f0f9ff;
+    border-color:#3b82f6;
+  }
+
+  .choice-card.ad .choice-head{
+    color:#1d4ed8;
+  }
+
+  /* PREMIUM */
+
+  .choice-card.premium{
+    background:linear-gradient(135deg,#fff7cc,#fde047);
+    border-color:#eab308;
+  }
+
+  .choice-card.premium .choice-head{
+    color:#92400e;
+  }
+
+  /* TEXT */
+
+  .choice-card p{
+    font-size:13px;
+    color:#475569;
+    line-height:1.4;
+  }
+
+  /* CANCEL */
+
+  .cancel-btn{
+    width:100%;
+    margin-top:8px;
+    padding:11px;
+    border:none;
+    border-radius:12px;
+    background:#f1f5f9;
+    font-weight:600;
+    cursor:pointer;
+  }
+
+  .cancel-btn:hover{
+    background:#e2e8f0;
+  }
     </style>
-  </head>
+</head>
 
-  <body>
-    <header class="top-bar">
-      <h2>Şahin Ehliyet</h2>
-      <a href="katagoriler.html">Kategoriler</a>
-      <a href="hesabim.html">Hesabım</a>
-    </header>
+<body>
+<header class="top-bar">
+    <h2>Şahin Ehliyet</h2>
+    <a href="katagoriler.html">Kategoriler</a>
+    <a href="hesabim.html">Hesabım</a>
+</header>
 
-    <div class="container">
-      <!-- BİLGİ -->
+<div class="container">
+    <!-- BİLGİ -->
 
-      <div class="header">
+    <div class="header">
         <h2>⚙️ Motor Test Soruları</h2>
 
         <p>
-          Motor testleri, araçların çalışma sistemi, bakım kuralları ve teknik
-          bilgileri kapsar. Bu testlerde; motor parçaları, yakıt sistemi,
-          yağlama, soğutma ve arıza işaretleri gibi konular yer alır. Testleri
-          sırayla çözerek teknik bilginizi güçlendirebilirsiniz.
+            Motor testleri, araçların çalışma sistemi, bakım kuralları ve teknik
+            bilgileri kapsar. Bu testlerde; motor parçaları, yakıt sistemi,
+            yağlama, soğutma ve arıza işaretleri gibi konular yer alır. Testleri
+            sırayla çözerek teknik bilginizi güçlendirebilirsiniz.
         </p>
-      </div>
-
-      <!-- TESTLER -->
-
-      <div class="test-list">
-        <a href="motortest1.html" class="test-btn" id="motor-test-1">
-          🔧 Test 1
-        </a>
-
-        <a href="motortest2.html" class="test-btn" id="motor-test-2">
-          🔧 Test 2
-        </a>
-
-        <a href="motortest3.html" class="test-btn" id="motor-test-3">
-          🔧 Test 3
-        </a>
-      </div>
-         <!-- TEST TEKRAR BİLGİ KARTI -->
-<div class="repeat-card">
-  <h3>🎯 Tekrar Et, Daha İyi Öğren</h3>
-  <p>
-    Çözdüğün testleri <b>Hesabım</b> menüsünden tekrar çözerek
-    bilgilerini pekiştirebilirsin.  
-    Düzenli tekrar = Başarı 🚀
-  </p>
-  <a href="hesabim.html">👤 Hesabıma Git</a>
-      </div>
     </div>
 
-    <script>
-      let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
+    <!-- TESTLER -->
 
-      function loadStatus() {
-        if (!user.tests) return;
+    <div class="test-list">
+        <a href="javascript:void(0)" class="test-btn" onclick="openPremium('motortest1.html')" id="motor-test-1">
+            🔧 Test 1
+        </a>
 
-        Object.keys(user.tests).forEach((key) => {
-          const btn = document.getElementById(key);
+        <a href="javascript:void(0)" class="test-btn" onclick="openPremium('motortest2.html')" id="motor-test-2">
+            🔧 Test 2
+        </a>
 
-          if (btn) {
-            btn.classList.add("completed");
-          }
-        });
-      }
+        <a href="javascript:void(0)" class="test-btn" onclick="openPremium('motortest3.html')" id="motor-test-3">
+            🔧 Test 3
+        </a>
+    </div>
+    <!-- TEST TEKRAR BİLGİ KARTI -->
+    <div class="repeat-card">
+        <h3>🎯 Tekrar Et, Daha İyi Öğren</h3>
+        <p>
+            Çözdüğün testleri <b>Hesabım</b> menüsünden tekrar çözerek
+            bilgilerini pekiştirebilirsin.
+            Düzenli tekrar = Başarı 🚀
+        </p>
+        <a href="hesabim.html">👤 Hesabıma Git</a>
+    </div>
+</div>
 
-      loadStatus();
-    </script>
-  </body>
+<script>
+    let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
+
+    function loadStatus() {
+      if (!user.tests) return;
+
+      Object.keys(user.tests).forEach((key) => {
+        const btn = document.getElementById(key);
+
+        if (btn) {
+          btn.classList.add("completed");
+        }
+      });
+    }
+
+    loadStatus();
+
+
+      let selectedTest = "";
+
+function openPremium(url){
+
+// Premium varsa direkt gir
+if(localStorage.getItem("premium")==="true"){
+  location.href = url;
+  return;
+}
+
+selectedTest = url;
+
+document.getElementById("premiumModal").style.display="flex";
+}
+
+function closePremium(){
+document.getElementById("premiumModal").style.display="none";
+}
+
+//test-reklam
+function watchAd(){
+closePremium();
+Android.showRewardedAd(selectedTest);
+}
+// Android’den geri dönüş
+function adCompleted(url){
+location.href = url;
+}
+
+
+
+// Premium alma (Firebase bağlıysa çalışır)
+function buyPremium(){
+alert("Premium sayfası açılıyor ⭐");
+// Buraya Firebase premium kodu bağlanır
+}
+
+</script>
+
+
+<!-- PREMIUM MODAL -->
+
+<div id="premiumModal" class="premium-modal">
+
+    <div class="premium-box-modern">
+
+        <h3>Bir Seçenek Seç</h3>
+
+        <p class="desc">
+            Teste devam etmek için aşağıdan bir yöntem seç.
+        </p>
+
+        <!-- AD -->
+
+        <div class="choice-card ad" onclick="watchAd()">
+
+            <div class="choice-head">
+                🎬 Reklam İzle
+            </div>
+
+            <p>
+                Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
+                Reklamdan sonra teste devam edebilirsin.
+            </p>
+
+        </div>
+
+        <!-- PREMIUM -->
+
+        <div class="choice-card premium" onclick="buyPremium()">
+
+            <div class="choice-head">
+                ⭐ Premium Al
+            </div>
+
+            <p>
+                Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
+                Sınırsız erişim elde et.
+            </p>
+
+        </div>
+
+        <button class="cancel-btn" onclick="closePremium()">
+            Vazgeç
+        </button>
+
+    </div>
+
+</div>
+</body>
 </html>
