@@ -14,408 +14,121 @@
       rel="stylesheet"
     />
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-      }
-
-      body {
-        background: linear-gradient(135deg, #f6f9fc, #eef3f8);
-        color: #222;
-        user-select: none;
-      }
-
-      /* HEADER */
-
-      .top-bar {
-        background: linear-gradient(135deg, #1f4037, #99f2c8);
-        padding: 20px;
-        text-align: center;
-        color: white;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        
-      }
-
-      .top-bar h2 {
-        font-size: 26px;
-        letter-spacing: 1px;
-      }
-
-      .top-bar a {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 8px 18px;
-        background: white;
-        color: #1f4037;
-        border-radius: 20px;
-        text-decoration: none;
-        transition: 0.3s;
-      }
-
-      .top-bar a:hover {
-        background: #e8fff6;
-        transform: scale(1.05);
-      }
-
-      /* REKLAM */
-
-      .ad-area {
-        margin: 20px;
-        height: 100px;
-        background: linear-gradient(135deg, #ddd, #f1f1f1);
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #666;
-        font-size: 14px;
-      }
-
-      .bottom {
-        height: 130px;
-      }
-
-      /* CONTENT */
-
-      .content {
-        padding: 25px;
-        animation: fadeIn 0.8s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .content h3 {
-        font-size: 22px;
-        text-align: center;
-        margin-bottom: 20px;
-        color: #1f4037;
-      }
-
-      /* GRID */
-
-      .category-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 18px;
-      }
-
-      /* CARD */
-
-      .card {
-        background: white;
-        padding: 22px;
-        border-radius: 18px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        transition: 0.35s;
-        position: relative;
-        overflow: hidden;
-        text-decoration: none;
-        color: #222;
-      }
-
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, #99f2c8, #1f4037);
-        opacity: 0;
-        transition: 0.3s;
-      }
-
-      .card * {
-        position: relative;
-        z-index: 2;
-      }
-
-      .card:hover::before {
-        opacity: 0.12;
-      }
-
-      .card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-      }
-
-      .card h4 {
-        font-size: 18px;
-        margin-bottom: 8px;
-        color: #00796b;
-      }
-
-      .card p {
-        font-size: 14px;
-        line-height: 1.6;
-        color: #555;
-      }
-
-      /* DENEME */
-
-      .highlight {
-        background: linear-gradient(135deg, #00c9ff, #92fe9d);
-        color: white;
-      }
-
-      .highlight h4,
-      .highlight p {
-        color: white;
-      }
-
-      /* INFO */
-
-      .info-section {
-        margin: 30px 20px;
-        padding: 25px;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      }
-
-      .info-section h3 {
-        margin-top: 20px;
-        color: #1f4037;
-      }
-
-      .info-section p {
-        font-size: 14.5px;
-        line-height: 1.7;
-        margin: 10px 0;
-      }
-
-      /* FOOTER */
-
-      .footer {
-        text-align: center;
-        padding: 18px;
-        font-size: 13px;
-        color: #777;
-        background: #f0f4f7;
-      }
-
-      /* MOBILE */
-
-      @media (max-width: 600px) {
-        .top-bar h2 {
-          font-size: 22px;
-        }
-
-        .card h4 {
-          font-size: 16px;
-        }
-
-        .info-section {
-          padding: 20px;
-        }
-      }
-
-      /* FOOTER */
-
-      .footer {
-        background: linear-gradient(135deg, #1f4037, #99f2c8);
-        color: white;
-        margin-top: 40px;
-        padding: 35px 15px;
-        text-align: center;
-        animation: fadeFooter 0.8s ease;
-      }
-
-      @keyframes fadeFooter {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .footer-container {
-        max-width: 600px;
-        margin: auto;
-      }
-
-      .footer h3 {
-        font-size: 24px;
-        margin-bottom: 8px;
-      }
-
-      .footer p {
-        font-size: 14px;
-        line-height: 1.6;
-        opacity: 0.95;
-      }
-
-      .footer-links {
-        margin: 15px 0;
-      }
-
-      .footer-links a {
-        color: white;
-        text-decoration: none;
-        margin: 0 10px;
-        font-weight: 500;
-        transition: 0.3s;
-      }
-
-      .footer-links a:hover {
-        text-decoration: underline;
-        opacity: 0.8;
-      }
-
-      .footer-copy {
-        display: block;
-        margin-top: 10px;
-        font-size: 13px;
-        opacity: 0.9;
-      }
-
-      /* TIKTOK BUTON */
-
-      .tiktok-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 14px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.15);
-        margin-left: 5px;
-        transition: 0.3s;
-        font-weight: 600;
-      }
-
-      .tiktok-link:hover {
-        background: white;
-        color: #1f4037;
-        transform: scale(1.1) rotate(2deg);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      /* TIKTOK ÖZEL BUTON */
-
-      .tiktok-btn {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 12px 26px;
-
-        background: linear-gradient(135deg, #000000, #ff0050, #00f2ea);
-        color: white;
-
-        font-size: 15px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-
-        border-radius: 30px;
-        text-decoration: none;
-
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-
-        transition: 0.35s;
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* Parlama Efekti */
-
-      .tiktok-btn::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          120deg,
-          transparent,
-          rgba(255, 255, 255, 0.6),
-          transparent
-        );
-        transition: 0.6s;
-      }
-
-      .tiktok-btn:hover::before {
-        left: 100%;
-      }
-
-      /* Hover */
-
-      .tiktok-btn:hover {
-        transform: scale(1.08);
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
-      }
-
-      /* HEADER TIKTOK BUTONU */
-
-      .tiktok-header-btn {
-        display: inline-block;
-
-        margin-left: 6px;
-
-        padding: 6px 16px;
-
-        background: linear-gradient(135deg, #000000, #ff0050, #00f2ea);
-
-        color: white;
-
-        font-size: 13px;
-        font-weight: 700;
-
-        border-radius: 20px;
-
-        text-decoration: none;
-
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-
-        transition: 0.3s;
-      }
-
-      /* Hover */
-
-      .tiktok-header-btn:hover {
-        transform: scale(1.1);
-
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      }
-
-
-
-
-
-
-
-
-/* DAILY TASK BAR */
-
-.task-bar{
-  background:white;
-  border-radius:14px;
-  padding:12px 14px;
-  margin-bottom:18px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.06);
-  font-size:13px;
-  
+    <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ================= ROOT THEME ================= */
+
+:root {
+  --primary: #1B2FAF;
+  --secondary: #D62828;
+  --bg: #F4F6FB;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
-.task-bar-header{
-  display:flex;
-  justify-content:space-between;
-  font-weight:600;
-  margin-bottom:8px;
-  color:#1f4037;
+body.dark {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --shadow: 0 10px 30px rgba(0,0,0,.4);
+}
+
+/* ================= GENERAL ================= */
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: .3s;
+padding-top: 20px;
+  padding-top: env(safe-area-inset-top);
+
+
+}
+
+/* ================= TOP BAR ================= */
+
+.top-bar {
+  background: linear-gradient(135deg,var(--primary),#3b5bfd);
+  color: white;
+
+  padding: 15px 18px;
+  padding-top: calc(15px + env(safe-area-inset-top));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 0 0 25px 25px;
+  box-shadow: var(--shadow);
+
+  margin-top: 15px;
+}
+
+
+.top-bar h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.top-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.top-icons i {
+  font-size: 20px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.top-icons i:hover {
+  transform: scale(1.2);
+}
+
+/* ================= CONTENT ================= */
+
+.content {
+  padding: 20px;
+  animation: fade 1s;
+}
+
+@keyframes fade {
+  from {opacity:0; transform:translateY(20px)}
+  to {opacity:1; transform:translateY(0)}
+}
+
+/* ================= TASK CARD ================= */
+
+.task-bar {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 25px;
+}
+
+.task-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 15px;
 }
 
 .task-row{
@@ -465,94 +178,436 @@
 }
 
 
+/* ================= CARDS ================= */
 
-/* XP POPUP */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+  gap: 15px;
+}
 
-.xp-popup{
-  position:fixed;
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: var(--text);
+  transition: .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content:"";
+  position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.55);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
+  background:linear-gradient(135deg,transparent,rgba(27,47,175,.1));
+  opacity:0;
+  transition:.3s;
 }
 
-.xp-card{
-  background:white;
-  padding:24px 22px;
-  border-radius:18px;
-  text-align:center;
-  width:85%;
-  max-width:300px;
-  animation:popUp 0.4s ease;
+.card:hover::before {
+  opacity:1;
 }
 
-.xp-card h2{
-  margin-bottom:8px;
-  color:#16a34a;
+.card:hover {
+  transform: translateY(-6px);
 }
 
-.xp-card p{
-  font-size:17px;
-  font-weight:600;
+.card h4 {
+  margin: 0 0 5px;
 }
 
-.xp-card button{
-  margin-top:16px;
-  background:#16a34a;
-  color:white;
-  border:none;
-  padding:10px 18px;
-  border-radius:10px;
-  font-weight:600;
+.highlight {
+  border: 2px solid var(--secondary);
 }
 
-@keyframes popUp{
-  from{transform:scale(0.7);opacity:0}
-  to{transform:scale(1);opacity:1}
+/* ================= INFO ================= */
+
+.info-section {
+  background: var(--card);
+  margin: 30px 20px;
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  line-height: 1.7;
+}
+
+.info-section h3 {
+  color: var(--primary);
+}
+
+/* ================= XP POPUP ================= */
+
+.xp-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.xp-card {
+  background: var(--card);
+  padding: 25px;
+  border-radius: var(--radius);
+  text-align: center;
+  width: 85%;
+  max-width: 300px;
+  animation: pop .4s;
+}
+
+@keyframes pop {
+  from {transform:scale(.7); opacity:0}
+  to {transform:scale(1); opacity:1}
+}
+
+.xp-card button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 99px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  background: var(--card);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -5px 20px rgba(0,0,0,.1);
+  z-index: 99;
+  border-radius: 25px 25px 0 0;
+}
+
+.bottom-nav button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.bottom-nav i {
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+
+.bottom-nav button:hover {
+  color: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* Sayfa alta değmesin */
+body {
+  padding-bottom: 80px;
+}
+
+
+/* ================= GRID DÜZEN ================= */
+
+.category-grid {
+  margin-top: 15px;
+  grid-template-columns: repeat(2,1fr);
+}
+
+
+/* ================= RGB DENEME ================= */
+
+.card.highlight {
+
+  background: linear-gradient(
+    135deg,
+    #00f5ff,
+    #00ff99,
+    #00b4ff,
+    #6a5cff
+  );
+
+  color: white;
+  border: none;
+}
+
+.card.highlight h4,
+.card.highlight p {
+  color: white;
+}
+
+/* ===== GÖREV BAR DÜZEN ===== */
+
+.task-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 50px;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-name {
+  font-weight: 600;
+}
+
+.task-progress {
+  height: 8px;
+  border-radius: 10px;
+  background: #ddd;
+  overflow: hidden;
+}
+
+.task-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#00c6ff,#00ff99);
+}
+
+
+/* ===== GÖREV BAŞLIK ===== */
+
+.task-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-title span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.task-title small {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* ===== FOOTER ===== */
+
+.app-footer {
+  margin-top: 60px;
+  padding: 25px 20px;
+  background: linear-gradient(135deg,#0f172a,#020617);
+  color: white;
+  border-radius: 25px 25px 0 0;
+}
+
+/* Üst Alan */
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Logo Alanı */
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,255,255,0.4);
+}
+
+.footer-brand h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.footer-brand p {
+  font-size: 12px;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* TikTok Buton */
+
+.footer-social {
+  background: linear-gradient(135deg,#00f2ea,#ff0050);
+  color: white;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-social:hover {
+  transform: scale(1.1);
+}
+
+/* Açıklama */
+
+.footer-desc {
+  margin: 18px 0;
+  font-size: 13px;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+/* Alt Alan */
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.footer-bottom a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+
+/* Mobil Uyum */
+
+@media(max-width:600px){
+
+  .footer-top{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom{
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+}
+
+.motivation-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 650px;
+  margin: 20px auto;
+
+  padding: 14px 18px;
+
+  background: linear-gradient(135deg, #2563eb, #1e40af, #0f172a);
+  color: #fff;
+
+  border-radius: 18px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+
+  transition: all 0.3s ease;
+}
+
+.motivation-text {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 85%;
+
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.motivation-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+
+  color: #fff;
+  font-size: 20px;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+}
+
+.motivation-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.1);
+}
+
+.motivation-btn:active {
+  transform: scale(0.95);
+}
+
+.motivation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.motivation-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
 }
 
 
 
-    </style>
+
+
+
+
+
+</style>
+
   </head>
-
   <body>
 
+<header class="top-bar">
+  <h2>Ehliyet 2026 / Şahin Ehliyet</h2>
+</header>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    <header class="top-bar">
-      <h2>Şahin Ehliyet</h2>
-      <a style="margin-left: 10px; margin-right: 10px" href="hesabim.html"
-        >Hesabım</a
-      >
-      <a href="https://www.tiktok.com/@sahinehliyet" target="_blank"
-        >🎵 TikTok'ta Bizi Takip Et</a
-      >
-    </header>
 
     <main class="content">
-      <h3>Şahin Ehliyet'e Hoşgeldin!</h3>
+    <center>  <h3>Şahin Ehliyet'e Hoşgeldin!</h3></center>
 
 
    <div class="task-bar">
 
   <div class="task-bar-header">
-    <span>🎯 Günlük Görevler (Ehliyet sınavına en iyi şekilde hazırlanmak için hergün bu görevleri tamamlamaya çalış.)</span>
+    <div class="task-title">
+  <span>🎯 Günlük Görevler</span>
+  <small>Ehliyet sınavına en iyi şekilde hazırlanmak için hergün bu görevleri tamamlamaya çalış.</small>
+</div>
+
     <span id="taskProgress">0/3</span>
   </div>
 
@@ -591,22 +646,22 @@
 
 
       <div class="category-grid">
-        <a class="card" href="konuanlatimlari.html">
+        <a class="card"  href="konuanlatimlari.html">
           <h4>Konu Anlatımları</h4>
           <p>Ehliyet sınavına yönelik güncel konu anlatımları.</p>
         </a>
 
-        <a class="card" href="trafiktestleri.html">
+        <a class="card"  href="trafiktestleri.html">
           <h4>Trafik Testleri</h4>
           <p>Trafik kuralları ve işaret soruları.</p>
         </a>
 
-        <a class="card" href="motortestleri.html">
+        <a class="card"  href="motortestleri.html">
           <h4>Motor Testleri</h4>
           <p>Araç ve motor bilgisi soruları.</p>
         </a>
 
-        <a class="card" href="ilkyardimtestleri.html">
+        <a class="card"  href="ilkyardimtestleri.html">
           <h4>İlk Yardım</h4>
           <p>Hayat kurtaran bilgiler.</p>
         </a>
@@ -624,140 +679,29 @@
     </main>
 
 
+<div class="motivation-card">
 
-    <section class="info-section">
-      <h3>Ehliyet Sınavı Nedir?</h3>
-      <p>
-        Ehliyet sınavı, sürücü adaylarının trafikte güvenli, bilinçli ve
-        kurallara uygun bir şekilde araç kullanabilmesi için yapılan resmi bir
-        değerlendirme sürecidir. Bu sınav sayesinde adayların yalnızca araç
-        kullanma becerileri değil, aynı zamanda trafik kurallarına uyumları,
-        çevreye ve diğer sürücülere karşı davranışları da ölçülür.
-      </p>
-      <p>
-        Günümüzde ehliyet almak isteyen herkes, belirli aşamalardan geçmek
-        zorundadır. Bu aşamaların en önemlisi yazılı ehliyet sınavıdır. Yazılı
-        sınav, sürücü adaylarının teorik bilgilerini ölçerken, ileride
-        karşılaşabilecekleri trafik durumlarına nasıl tepki vereceklerini de
-        değerlendirmeyi amaçlar.
-      </p>
+  <div class="motivation-content">
 
-      <h3>Ehliyet Sınavı Nasıl Yapılır?</h3>
-      <p>
-        Ehliyet sınavı, Milli Eğitim Bakanlığı (MEB) tarafından belirlenen
-        tarihlerde yapılır. Sınavlar genellikle elektronik ortamda veya çoktan
-        seçmeli test şeklinde uygulanır. Adaylara toplam 50 soru sorulur ve bu
-        sorular için 45 dakika süre verilir.
-      </p>
-      <p>
-        Sorular rastgele dağıtılır ve her aday için sınav içeriği farklı
-        olabilir. Bu durum, sınavın adil ve güvenilir olmasını sağlar. Sınav
-        süresi boyunca adayların dikkatli olması, soruları iyi okuması ve zamanı
-        doğru kullanması büyük önem taşır.
-      </p>
+    <div class="motivation-title">
+      🔥 Motivasyonun Burada! 🔥
+    </div>
 
-      <h3>Ehliyet Sınavında Başarı Şartları</h3>
-      <p>
-        Ehliyet sınavında başarılı olabilmek için en az 35 doğru cevap verilmesi
-        gerekir. Yanlış cevaplar doğruları götürmez. Bu nedenle adayların tüm
-        soruları cevaplaması önerilir. Başarısız olan adaylar, belirlenen
-        tarihlerde sınava tekrar girme hakkına sahiptir.
-      </p>
-      <p>
-        Sınavdan başarılı olan adaylar, bir sonraki aşama olan direksiyon
-        sınavına katılmaya hak kazanır. Direksiyon sınavı da en az yazılı sınav
-        kadar önemlidir ve adayların pratik sürüş becerileri değerlendirilir.
-      </p>
+    <div class="motivation-text" id="motivationText">
+      🚗 Hedefine bir adım daha yaklaştın!
+    </div>
 
-      <h3>Ehliyet Sınavına Girmek İçin Gereken Şartlar</h3>
-      <p>
-        Ehliyet sınavına katılabilmek için bazı temel şartların yerine
-        getirilmesi gerekir. Bu şartlar, sürücü adaylarının hem fiziksel hem de
-        zihinsel olarak araç kullanmaya uygun olup olmadığını belirlemek
-        amacıyla oluşturulmuştur.
-      </p>
+  </div>
 
-      <ul>
-        <li>Ehliyet türüne göre belirlenen yaş sınırını doldurmuş olmak</li>
-        <li>En az ilkokul mezunu olmak</li>
-        <li>Geçerli bir sağlık raporu almak</li>
-        <li>Yetkili bir sürücü kursuna kayıt yaptırmak</li>
-        <li>Ehliyet sınav ücretini yatırmak</li>
-      </ul>
+  <button class="motivation-btn" onclick="nextMotivation()">
+    ➜
+  </button>
 
-      <h3>Ehliyet Sınavı Konuları Nelerdir?</h3>
-      <p>
-        Ehliyet sınavı, sürücü adaylarının trafikte karşılaşabileceği tüm
-        durumları kapsayan konulardan oluşur. Bu konular, adayların hem teorik
-        bilgi seviyesini hem de bilinçli sürücü olma düzeyini ölçer.
-      </p>
+</div>
 
-      <ul>
-        <li>
-          <strong>Trafik ve Çevre Bilgisi:</strong> Trafik işaretleri, levhalar,
-          geçiş üstünlükleri, hız sınırları ve yol kuralları
-        </li>
-        <li>
-          <strong>Motor ve Araç Tekniği:</strong> Motorun çalışma prensibi, araç
-          bakımı ve temel teknik bilgiler
-        </li>
-        <li>
-          <strong>İlk Yardım Bilgisi:</strong> Temel yaşam desteği, kazalarda
-          yapılması gereken ilk müdahaleler
-        </li>
-        <li>
-          <strong>Trafik Adabı:</strong> Sürücülerin trafikte sergilemesi
-          gereken davranışlar ve etik kurallar
-        </li>
-      </ul>
 
-      <h3>Ehliyet Sınavına Nasıl Hazırlanılmalıdır?</h3>
-      <p>
-        Ehliyet sınavına hazırlanırken düzenli çalışmak büyük önem taşır. Konu
-        anlatımlarını dikkatlice okumak, ardından bol bol test çözmek sınav
-        başarısını artırır. Özellikle deneme sınavları, adayların eksiklerini
-        görmesi açısından oldukça faydalıdır.
-      </p>
-      <p>
-        Test çözerken yapılan yanlışların neden yanlış olduğunu öğrenmek, aynı
-        hataların tekrar edilmesini önler. Bu nedenle açıklamalı test çözümleri
-        büyük avantaj sağlar.
-      </p>
 
-      <h3>Online Ehliyet Testlerinin Önemi</h3>
-      <p>
-        Günümüzde birçok sürücü adayı, ehliyet sınavına online platformlar
-        üzerinden hazırlanmaktadır. Online testler sayesinde adaylar,
-        istedikleri zaman ve istedikleri yerde pratik yapma imkanı bulur.
-      </p>
-      <p>
-        Şahin Ehliyet platformu, güncel müfredata uygun testleri ve anlaşılır
-        konu anlatımlarıyla sürücü adaylarına kapsamlı bir çalışma ortamı sunar.
-      </p>
-
-      <h3>Deneme Sınavlarının Faydaları</h3>
-      <p>
-        Deneme sınavları, gerçek sınav ortamını birebir yansıttığı için
-        adayların sınav stresini azaltır. Süreyi doğru kullanmayı öğrenmek ve
-        soru dağılımına alışmak için deneme sınavları mutlaka çözülmelidir.
-      </p>
-      <p>
-        Karışık deneme sınavları sayesinde trafik, motor, ilk yardım ve trafik
-        adabı konuları bir arada tekrar edilir ve genel bilgi seviyesi ölçülür.
-      </p>
-
-      <h3>Neden Şahin Ehliyet?</h3>
-      <p>
-        Şahin Ehliyet, ehliyet sınavına hazırlanan adaylar için sade, anlaşılır
-        ve kullanıcı dostu bir platform sunar. Mobil uyumlu yapısı sayesinde hem
-        web sitesinden hem de mobil uygulama olarak rahatlıkla kullanılabilir.
-      </p>
-      <p>
-        Güncel içerikler, açıklamalı sorular ve düzenli güncellenen testler
-        sayesinde ehliyet sınavına güvenle hazırlanabilirsiniz.
-      </p>
-    </section>
-
+    
 
         <!-- XP POPUP -->
 
@@ -1007,49 +951,147 @@ function closeXPPopup(){
 
 
 
+//DARK MODE
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("dark")
+  );
+}
+
+if(localStorage.getItem("theme")==="true"){
+  document.body.classList.add("dark");
+}
+
+
+const motivations = [
+  "🚗 Hedefine bir adım daha yaklaştın!",
+  "🔥 Bugün çalış, yarın rahat et!",
+  "🏁 Ehliyet sana çok yakın!",
+  "💪 Vazgeçmek yok, devam!",
+  "📘 Her test seni güçlendirir!",
+  "🎯 35 doğru = Yeni bir başlangıç!",
+  "🚦 Kuralları öğren, güvenle sür!",
+  "🌟 Disiplin başarıyı getirir!",
+  "🚀 Sen bu sınavı geçeceksin!",
+  "🏆 Azim = Ehliyet"
+];
+
+let currentIndex = 0;
+
+const textEl = document.getElementById("motivationText");
+
+function showMotivation(index){
+
+  textEl.style.opacity = 0;
+  textEl.style.transform = "translateY(5px)";
+
+  setTimeout(() => {
+    textEl.textContent = motivations[index];
+
+    textEl.style.opacity = 1;
+    textEl.style.transform = "translateY(0)";
+  }, 350);
+}
+
+function nextMotivation(){
+
+  currentIndex = (currentIndex + 1) % motivations.length;
+  showMotivation(currentIndex);
+}
+
+/* Otomatik 30 saniye */
+setInterval(() => {
+  nextMotivation();
+}, 30000);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
     </script>
+ <!-- FOOTER -->
+<footer class="app-footer">
 
-    <!-- FOOTER -->
+  <div class="footer-top">
 
-    <footer class="footer">
-      <div class="footer-container">
+    <div class="footer-brand">
+      <img src="playstore.png" alt="Şahin Ehliyet Logo">
+      <div>
         <h3>Şahin Ehliyet</h3>
-
-        <p>
-          2026 Güncel Ehliyet Sınavları, Denemeler ve Konu Anlatımları<br />
-          ile başarıya giden yol burada başlar.
-        </p>
-
-        <div class="footer-links">
-          <!-- TIKTOK -->
-          <!-- TIKTOK BUTON -->
-
-          <a
-            href="https://www.tiktok.com/@sahinehliyet"
-            target="_blank"
-            class="tiktok-btn"
-          >
-            🎵 TikTok'ta Bizi Takip Et
-          </a>
-        </div>
-
-        <span class="footer-copy">
-          © 2026 Şahin Ehliyet | Tüm Hakları Saklıdır <br>
-          <a href="gizlilik.html"> gizlilik politikası </a>
-        </span>
+        <p>2026 Güncel Ehliyet Hazırlık Platformu</p>
       </div>
-    </footer>
+    </div>
+
+
+  </div>
+
+
+  <div class="footer-desc">
+    Deneme sınavları, konu anlatımları ve güncel testlerle
+    ehliyet sınavına güvenle hazırlan.
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 Şahin Ehliyet
+    </span>
+
+    <a href="gizlilik.html">
+      Gizlilik Politikası
+    </a>
+
+  </div>
+
+</footer>
 
     
+    <!-- BOTTOM MENU -->
+
+<nav class="bottom-nav">
+
+  <button onclick="location.href='katagoriler.html'">
+    <i class="fa-solid fa-house"></i>
+    <span>Ana</span>
+  </button>
+
+  <button onclick="location.href='hesabim.html'">
+    <i class="fa-solid fa-user"></i>
+    <span>Hesap</span>
+  </button>
+
+  <button onclick="toggleTheme()">
+    <i class="fa-solid fa-moon"></i>
+    <span>Mod</span>
+  </button>
+
+  <button onclick="window.open('https://www.tiktok.com/@sahinehliyet')">
+    <i class="fa-brands fa-tiktok"></i>
+    <span>TikTok</span>
+  </button>
+
+</nav>
+
 
 
 
 
   </body>
 </html>
-
-
