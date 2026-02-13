@@ -14,6 +14,15 @@
       rel="stylesheet"
     />
 
+          <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <style>
       * {
         margin: 0;
@@ -22,47 +31,113 @@
         font-family: "Poppins", sans-serif;
       }
 
-      /* BODY */
+       /* üst banner sistemi back-btn:active e kadar */
+      :root {
+  --primary: #1B2FAF;
+  --secondary: #D62828;
+  --bg: #F4F6FB;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: .3s;
+padding-top: 20px;
+  padding-top: env(safe-area-inset-top);
 
-      body {
-        background: linear-gradient(135deg, #f6f9fc, #eef3f8);
-        min-height: 100vh;
-        color: #222;
-      }
 
-      /* HEADER */
+}
+      /* ÜST BAR */
 
-      .top-bar {
-        background: linear-gradient(135deg, #1f4037, #99f2c8);
-        color: white;
-        padding: 18px;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
+   .top-bar {
+  background: linear-gradient(135deg,var(--primary),#3b5bfd);
+  color: white;
 
-      .top-bar h2 {
-        font-size: 26px;
-      }
+  padding: 15px 18px;
+  padding-top: calc(15px + env(safe-area-inset-top));
 
-      .top-bar a {
-        display: inline-block;
-        margin: 6px 4px 0;
-        padding: 8px 18px;
-        background: white;
-        color: #1f4037;
-        border-radius: 20px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: 0.3s;
-      }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-      .top-bar a:hover {
-        transform: scale(1.08);
-        background: #e8fff6;
-      }
+  border-radius: 0 0 25px 25px;
+  box-shadow: var(--shadow);
+
+  margin-top: 15px;
+}
+
+
+.top-bar h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.top-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.top-icons i {
+  font-size: 20px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.top-icons i:hover {
+  transform: scale(1.2);
+}
+
+
+/* BACK BUTTON */
+
+/* HEADER FIX */
+
+.top-bar{
+  position: relative;
+  justify-content: center;
+}
+
+/* BACK BUTTON FIXED */
+
+.back-btn{
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: .25s;
+  backdrop-filter: blur(6px);
+}
+
+.back-btn:hover{
+  background: rgba(255,255,255,0.28);
+}
+
+.back-btn:active{
+  transform: translateY(-50%) scale(.9);
+}
 
       /* CONTAINER */
 
@@ -404,26 +479,423 @@
   }
 }
 
+/* =========================
+   MODERN ACCOUNT UI FIX
+========================= */
+
+/* Genel Kartlar */
+.card{
+  background: linear-gradient(145deg,#ffffff,#f1f5ff);
+  border:1px solid #e5edff;
+}
+
+/* Nickname Kart */
+.nickname{
+  background: linear-gradient(135deg,#2563eb,#3b82f6);
+  color:white;
+  padding:14px;
+  border-radius:16px;
+  font-size:22px;
+  letter-spacing:.5px;
+  box-shadow:0 6px 18px rgba(37,99,235,.4);
+}
+
+/* Rozet Alanı */
+#rozetler{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin-top:10px;
+}
+
+.rozet{
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+  font-size:13px;
+}
+
+/* Level Box */
+.level-box{
+  background:linear-gradient(135deg,#f8fafc,#eef2ff);
+  border:1px solid #dbeafe;
+}
+
+.xp-bar{
+  background:#dbeafe;
+}
+
+#xpFill{
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+}
+
+/* Test Kategorileri */
+.test-category{
+  background:linear-gradient(135deg,#ffffff,#eef2ff);
+  border-left:5px solid var(--primary);
+}
+
+/* Başlık */
+.test-category h4{
+  color:#1e3a8a;
+}
+
+/* Test Kartları */
+.test-item{
+  background:linear-gradient(135deg,#ffffff,#f8fafc);
+  border:1px solid #e2e8f0;
+}
+
+/* Test Başarı Yazısı */
+.test-item div{
+  font-size:13px;
+  line-height:1.4;
+}
+
+/* Retry Buton */
+.retry-btn{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  padding:7px 14px;
+  border-radius:10px;
+}
+
+.retry-btn:hover{
+  transform:scale(1.08);
+}
+
+/* Modal */
+.modal-box{
+  background:linear-gradient(145deg,#ffffff,#eef2ff);
+  border:1px solid #dbeafe;
+}
+
+/* Input */
+.modal-box input{
+  border:2px solid #c7d2fe;
+  outline:none;
+}
+
+.modal-box input:focus{
+  border-color:#2563eb;
+}
+
+/* Modal Buttons */
+.save,.confirm{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+.cancel{
+  background:#f1f5f9;
+}
+
+/* === DARK MODE UYUM === */
+
+body.dark{
+  --bg: linear-gradient(135deg,#020617,#020b2a);
+  --card:#0b1220;
+  --text:#f1f5f9;
+}
+
+body.dark .card,
+body.dark .level-box,
+body.dark .test-category,
+body.dark .modal-box{
+  background:linear-gradient(145deg,#0b1220,#020617);
+  border-color:#1e293b;
+  color:#f1f5f9;
+}
+
+body.dark .nickname{
+  background:linear-gradient(135deg,#1e40af,#2563eb);
+}
+
+body.dark .test-item{
+  background:#020617;
+  border-color:#1e293b;
+}
+
+body.dark .retry-btn{
+  background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+body.dark .xp-bar{
+  background:#020617;
+}
+
+body.dark .modal-box input{
+  background:#020617;
+  color:white;
+  border-color:#334155;
+}
+
+
+
+/* PROFILE */
+
+.profile-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+
+/* Avatar */
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--primary);
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+/* Gender */
+
+.gender-box{
+  display:flex;
+  gap:10px;
+}
+
+.gender-box button{
+  border:none;
+  background:#e0e7ff;
+  color:#1e3a8a;
+  padding:6px 14px;
+  border-radius:12px;
+  font-size:13px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.gender-box button:hover{
+  background:#c7d2fe;
+  transform:scale(1.05);
+}
+
+/* Dark */
+
+body.dark .gender-box button{
+  background:#020617;
+  color:#cbd5f5;
+}
+
+
+/* CHART */
+
+.chart-card{
+  background:linear-gradient(135deg,#ffffff,#eef2ff);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+.chart-card h3{
+  text-align:center;
+  margin-bottom:12px;
+  font-size:17px;
+}
+
+body.dark .chart-card{
+  background:#020617;
+}
+
+
+
+
+.motivation-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 650px;
+  margin: 20px auto;
+
+  padding: 14px 18px;
+
+  background: linear-gradient(135deg, #2563eb, #1e40af, #0f172a);
+  color: #fff;
+
+  border-radius: 18px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+
+  transition: all 0.3s ease;
+}
+
+.motivation-text {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 85%;
+
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.motivation-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+
+  color: #fff;
+  font-size: 20px;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+}
+
+.motivation-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.1);
+}
+
+.motivation-btn:active {
+  transform: scale(0.95);
+}
+
+.motivation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.motivation-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+}
+
+
+
+
+
+/* PROFILE BOX */
+
+.profile-box{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* STATUS TEXT */
+
+.user-status{
+  font-size:14px;
+  font-weight:600;
+  color:#64748b;
+}
+
+/* PREMIUM BUTTON */
+
+.premium-btn{
+  margin-top:6px;
+  align-self:center;
+
+  background:linear-gradient(135deg,#facc15,#f59e0b);
+  border:none;
+  padding:7px 18px;
+  border-radius:20px;
+
+  font-weight:600;
+  color:#78350f;
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.premium-btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 6px 15px rgba(245,158,11,.4);
+}
+
 
     </style>
   </head>
 
   <body>
-    <header class="top-bar">
-      <h2>Şahin Ehliyet</h2>
+<header class="top-bar">
 
-      <a href="katagoriler.html">Kategoriler</a>
+  <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
 
-      <a href="https://www.tiktok.com/@sahinehliyet" target="_blank"
-        >🎵 TikTok'ta Bizi Takip Et</a
-      >
-    </header>
+  <h2>Ehliyet 2026</h2>
 
-    <button class="dark-toggle" onclick="toggleDark()">🌙</button>
+</header>
+
+   
 
     <div class="container">
       <div class="card">
-        <div id="nicknameText" class="nickname" onclick="openNickname()"></div>
+        <div class="profile-box">
+
+  <img id="avatar" src="" class="avatar">
+  <div class="profile-box">
+
+  <div id="nicknameText" class="nickname" onclick="openNickname()"></div>
+
+  <div id="userStatus" class="user-status"></div>
+
+  <button id="premiumBtn" class="premium-btn" onclick="goPremium()">
+    ⭐ Premium’a Geç
+  </button>
+
+</div>
+
+
+  <div class="gender-box">
+    <button onclick="setGender('male')">👨 Erkek</button>
+    <button onclick="setGender('female')">👩 Kadın</button>
+  </div>
+
+</div>
+
+
+
+                <div class="motivation-card">
+  <div class="motivation-content">
+    <div class="motivation-title">
+      🔥 Motivasyonun Burada! 🔥
+    </div>
+    <div class="motivation-text" id="motivationText">
+      🚗 Hedefine bir adım daha yaklaştın!
+    </div>
+  </div>
+  <button class="motivation-btn" onclick="nextMotivation()">
+    ➜
+  </button>
+</div>
+
+
+
+
+
+
+      <div class="level-box">
+        <div class="level-info">
+          <span id="levelText"></span>
+          <span id="xpText"></span>
+        </div>
+ 
+        <div class="xp-bar">
+          <div id="xpFill"></div>
+        </div>
+      </div>
+
       </div>
 
       <div id="nicknameModal" class="modal">
@@ -436,25 +908,22 @@
             <button class="cancel" onclick="closeNickname()">Vazgeç</button>
             <button class="save" onclick="saveNickname()">Kaydet</button>
           </div>
+
+
+  
         </div>
       </div>
 
-      <div class="card">
-        <h3>🏆 Rozetler</h3>
-        <div id="rozetler"></div>
-      </div>
 
-      <div class="level-box">
-        <div class="level-info">
-          <span id="levelText"></span>
-          <span id="xpText"></span>
-        </div>
+ 
 
-        <div class="xp-bar">
-          <div id="xpFill"></div>
-        </div>
-      </div>
+       
 
+
+<div class="card">
+  <h4>🏆 Rozetlerin</h4>
+<div id="rozetler"></div>
+</div>
       <div class="card">
         <h3 style="margin-bottom: 20px;">📘 Çözülen Testler</h3>
         <div id="testResults"></div>
@@ -489,6 +958,7 @@ let user = JSON.parse(localStorage.getItem("user")) || {
   tests: {},
   xp: 0,
   level: 1,
+  isPremium: false
 };
 
 
@@ -705,6 +1175,134 @@ let user = JSON.parse(localStorage.getItem("user")) || {
       loadTests();
       loadBadges();
       updateLevel();
+
+
+
+
+
+      /* DEFAULT AVATAR */
+
+if(!user.gender){
+  user.gender = "male";
+}
+
+/* AVATAR URLS */
+
+const avatars = {
+  male: "pngtree-user-profile-avatar-png-image_13369991.png",
+  female: "iconfinder-4-avatar-2754580_120522.png"
+};
+
+/* LOAD AVATAR */
+
+function loadAvatar(){
+  const img = document.getElementById("avatar");
+  img.src = avatars[user.gender];
+}
+
+/* SET GENDER */
+
+function setGender(g){
+
+  user.gender = g;
+
+  localStorage.setItem("user",JSON.stringify(user));
+
+  loadAvatar();
+}
+
+loadAvatar();
+
+
+
+
+const motivations = [
+  "🚗 Hedefine bir adım daha yaklaştın!",
+  "🔥 Bugün çalış, yarın rahat et!",
+  "🏁 Ehliyet sana çok yakın!",
+  "💪 Vazgeçmek yok, devam!",
+  "📘 Her test seni güçlendirir!",
+  "🎯 35 doğru = Yeni bir başlangıç!",
+  "🚦 Kuralları öğren, güvenle sür!",
+  "🌟 Disiplin başarıyı getirir!",
+  "🚀 Sen bu sınavı geçeceksin!",
+  "🏆 Azim = Ehliyet"
+];
+
+let currentIndex = 0;
+
+const textEl = document.getElementById("motivationText");
+
+function showMotivation(index){
+
+  textEl.style.opacity = 0;
+  textEl.style.transform = "translateY(5px)";
+
+  setTimeout(() => {
+    textEl.textContent = motivations[index];
+
+    textEl.style.opacity = 1;
+    textEl.style.transform = "translateY(0)";
+  }, 350);
+}
+
+function nextMotivation(){
+
+  currentIndex = (currentIndex + 1) % motivations.length;
+  showMotivation(currentIndex);
+}
+
+/* Otomatik 30 saniye */
+setInterval(() => {
+  nextMotivation();
+}, 30000);
+
+
+
+
+
+
+function updatePremiumUI(){
+
+  const status = document.getElementById("userStatus");
+  const btn = document.getElementById("premiumBtn");
+
+  if(user.isPremium){
+
+    status.innerHTML = "⭐ Premium Kullanıcı";
+    status.style.color = "#f59e0b";
+
+    btn.style.display = "none";
+
+  }else{
+
+    status.innerHTML = "🧑 Normal Kullanıcı";
+    status.style.color = "#64748b";
+
+    btn.style.display = "inline-block";
+  }
+
+}
+
+function goPremium(){
+
+  if(confirm("Premium üyeliğe geçmek istiyor musun? ⭐")){
+
+    user.isPremium = true;
+
+    localStorage.setItem("user",JSON.stringify(user));
+
+    updatePremiumUI();
+
+    alert("Tebrikler! Artık Premiumsun 🎉");
+
+  }
+
+}
+updatePremiumUI();
+
+
+
     </script>
   </body>
 </html>
