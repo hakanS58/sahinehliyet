@@ -71,15 +71,14 @@ body {
   background: var(--bg);
   color: var(--text);
   transition: .3s;
+padding-top: 20px;
   padding-top: env(safe-area-inset-top);
-  padding-bottom: calc(90px + env(safe-area-inset-bottom));
 
 
 }
+      /* ÜST BAR */
 
-/* ================= TOP BAR ================= */
-
-.top-bar {
+   .top-bar {
   background: linear-gradient(135deg,var(--primary),#3b5bfd);
   color: white;
 
@@ -92,6 +91,8 @@ body {
 
   border-radius: 0 0 25px 25px;
   box-shadow: var(--shadow);
+
+  margin-top: 15px;
 }
 
 
@@ -114,6 +115,16 @@ body {
 
 .top-icons i:hover {
   transform: scale(1.2);
+}
+
+
+/* BACK BUTTON */
+
+/* HEADER FIX */
+
+.top-bar{
+  position: relative;
+  justify-content: center;
 }
 
 /* ================= CONTENT ================= */
