@@ -1107,18 +1107,15 @@ function toggleTasks(){
 }
 
 
-
-
-
-
-
-
 function closeTasks(){
   document.getElementById("taskPopup").style.display="none";
 }
 
+/* GÖREVLERİ OTOMATİK GÜNCELLE */
 
-
+setInterval(() => {
+  updateTasksUI();
+}, 1000); // 1 saniyede bir kontrol eder
 
 
 
