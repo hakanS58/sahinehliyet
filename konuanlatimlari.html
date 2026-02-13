@@ -14,6 +14,12 @@
       rel="stylesheet"
     />
 
+       <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
       * {
         margin: 0;
@@ -22,27 +28,53 @@
         font-family: "Poppins", sans-serif;
       }
 
-      body {
-        background: linear-gradient(135deg, #f6f9fc, #eef3f8);
-        min-height: 100vh;
-        color: #222;
-      }
+     body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: .3s;
+padding-top: 20px;
+  padding-top: env(safe-area-inset-top);
 
-      /* HEADER */
-      .top-bar {
-        background: linear-gradient(135deg, #1f4037, #99f2c8);
-        color: white;
-        padding: 18px;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
 
-      .top-bar h2 {
-        font-size: 26px;
-      }
+}
+
+/* ================= TOP BAR ================= */
+
+.top-bar {
+  background: linear-gradient(135deg,var(--primary),#3b5bfd);
+  color: white;
+
+  padding: 15px 18px;
+  padding-top: calc(15px + env(safe-area-inset-top));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 0 0 25px 25px;
+  box-shadow: var(--shadow);
+
+  margin-top: 15px;
+}
+
+
+.top-bar h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.task-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.top-icons {
+  display: flex;
+  gap: 15px;
+}
 
       .top-bar a {
         display: inline-block;
@@ -181,15 +213,163 @@
           font-size: 15px;
         }
       }
+
+      /* GLOBAL SAFE AREA */
+body {
+  margin: 0;
+  padding-top: env(safe-area-inset-top);
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* HEADER */
+.top-bar {
+  background: linear-gradient(135deg,var(--primary),#3b5bfd);
+  color: white;
+
+  padding: 15px 18px;
+  padding-top: calc(15px + env(safe-area-inset-top));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 0 0 25px 25px;
+  box-shadow: var(--shadow);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+/* THEME COLORS */
+
+:root {
+  --primary: #2563eb;
+
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+
+  --shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* DARK MODE */
+
+body.dark {
+
+  /* Ana Arkaplan */
+  --bg: linear-gradient(135deg,#020617,#020b2a);
+
+  /* Kartlar */
+  --card: #0b1220;
+
+  /* Yazılar */
+  --text: #f1f5f9;
+
+  /* Gölgeler */
+  --shadow: 0 8px 30px rgba(0,0,0,0.8);
+}
+
+/* DARK MODE CARD FIX */
+
+body.dark .item,
+body.dark .header {
+  background: var(--card);
+  color: var(--text);
+}
+
+body.dark .item span {
+  color: #cbd5f5 !important;
+}
+
+/* HEADER TEXT DARK MODE FIX */
+
+.header h2,
+.header p{
+  color: var(--text);
+}
+
+body.dark .header h2{
+  color: #f8fafc;
+}
+
+body.dark .header p{
+  color: #cbd5f5;
+}
+
+/* BACK BUTTON */
+
+/* HEADER FIX */
+
+.top-bar{
+  position: relative;
+  justify-content: center;
+}
+
+/* BACK BUTTON FIXED */
+
+.back-btn{
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: .25s;
+  backdrop-filter: blur(6px);
+}
+
+.back-btn:hover{
+  background: rgba(255,255,255,0.28);
+}
+
+.back-btn:active{
+  transform: translateY(-50%) scale(.9);
+}
+
+
+
+
+
+
+
+
+
+
+
     </style>
   </head>
 
   <body>
-    <header class="top-bar">
-      <h2>Şahin Ehliyet</h2>
-      <a href="katagoriler.html">Kategoriler</a>
-      <a href="hesabim.html">Hesabım</a>
-    </header>
+<header class="top-bar">
+
+  <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <h2>Ehliyet 2026</h2>
+
+</header>
+
+
 
     <div class="container">
       <!-- BİLGİ -->
@@ -203,7 +383,7 @@
       </div>
 
       <!-- LİSTE -->
-      <div class="list">
+      <div class="list" >
         <a href="trafikkonuanlatimi.html" class="item">
           <div>
             🚦 Trafik Konu Anlatımı<br />
@@ -252,6 +432,27 @@ if(d && !d.konu){
   d.konu=true;
   localStorage.setItem("dailyTasks",JSON.stringify(d));
 }
+
+
+
+/* DARK MODE AUTO LOAD */
+
+(function(){
+
+  if(localStorage.getItem("theme") === "true"){
+    document.body.classList.add("dark");
+  }
+
+})();
+
+
+
+
+
+
+
+
+
 
     </script>
   </body>
