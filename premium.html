@@ -1,220 +1,231 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Premium</title>
+    <title>Premium</title>
 
-<style>
-:root {
-  --bg: #0f1220;
-  --card: #171a2f;
-  --gold: #f5c46b;
-  --text: #ffffff;
-  --muted: #b5b8ff;
-}
+    <style>
+        :root {
+          --bg: #0f1220;
+          --card: #171a2f;
+          --gold: #f5c46b;
+          --text: #ffffff;
+          --muted: #b5b8ff;
+        }
 
-* {
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
+        * {
+          box-sizing: border-box;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-body {
-  margin: 0;
-  background: linear-gradient(180deg, #0f1220, #12152b);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        body {
+          margin: 0;
+          background: linear-gradient(180deg, #0f1220, #12152b);
+          color: var(--text);
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
-/* ANA KART */
-.premium-container {
-  width: 92%;
-  max-width: 420px;
-  background: var(--card);
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.5);
-  animation: fadeUp .6s ease;
-}
+        /* ANA KART */
+        .premium-container {
+          width: 92%;
+          max-width: 420px;
+          background: var(--card);
+          border-radius: 20px;
+          padding: 22px;
+          box-shadow: 0 20px 50px rgba(0,0,0,.5);
+          animation: fadeUp .6s ease;
+        }
 
-/* BAŞLIK */
-.header {
-  text-align: center;
-  margin-bottom: 20px;
-}
+        /* BAŞLIK */
+        .header {
+          text-align: center;
+          margin-bottom: 20px;
+        }
 
-.header h1 {
-  margin: 0;
-  font-size: 26px;
-  color: var(--gold);
-}
+        .header h1 {
+          margin: 0;
+          font-size: 26px;
+          color: var(--gold);
+        }
 
-.header p {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
-}
+        .header p {
+          margin-top: 6px;
+          color: var(--muted);
+          font-size: 14px;
+        }
 
-/* ÖZELLİKLER */
-.features {
-  margin: 20px 0;
-}
+        /* ÖZELLİKLER */
+        .features {
+          margin: 20px 0;
+        }
 
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.04);
-  margin-bottom: 10px;
-  animation: slideIn .5s ease forwards;
-}
+        .feature {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px;
+          border-radius: 14px;
+          background: rgba(255,255,255,0.04);
+          margin-bottom: 10px;
+          animation: slideIn .5s ease forwards;
+        }
 
-.feature span {
-  font-size: 22px;
-}
+        .feature span {
+          font-size: 22px;
+        }
 
-.feature p {
-  margin: 0;
-  font-size: 15px;
-}
+        .feature p {
+          margin: 0;
+          font-size: 15px;
+        }
 
-/* SATIN AL BUTONU */
-.buy-btn {
-  margin-top: 20px;
-  width: 100%;
-  padding: 16px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #f5c46b, #ffdd9a);
-  color: #000;
-  font-size: 18px;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-  transition: transform .15s ease, box-shadow .15s ease;
-  box-shadow: 0 10px 25px rgba(245,196,107,.4);
-}
+        /* SATIN AL BUTONU */
+        .buy-btn {
+          margin-top: 20px;
+          width: 100%;
+          padding: 16px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, #f5c46b, #ffdd9a);
+          color: #000;
+          font-size: 18px;
+          font-weight: 700;
+          text-align: center;
+          cursor: pointer;
+          transition: transform .15s ease, box-shadow .15s ease;
+          box-shadow: 0 10px 25px rgba(245,196,107,.4);
+        }
 
-.buy-btn:active {
-  transform: scale(.97);
-}
+        .buy-btn:active {
+          transform: scale(.97);
+        }
 
-/* ALT BİLGİ */
-.footer {
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 14px;
-}
+        /* ALT BİLGİ */
+        .footer {
+          text-align: center;
+          font-size: 12px;
+          color: var(--muted);
+          margin-top: 14px;
+        }
 
-/* GERİ BUTONU */
-.back {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 14px;
-  opacity: .8;
-  cursor: pointer;
-}
+        /* GERİ BUTONU */
+        .back {
+          margin-top: 12px;
+          text-align: center;
+          font-size: 14px;
+          opacity: .8;
+          cursor: pointer;
+        }
 
-/* ANİMASYONLAR */
-@keyframes fadeUp {
-  from {opacity: 0; transform: translateY(30px);}
-  to {opacity: 1; transform: translateY(0);}
-}
+        /* ANİMASYONLAR */
+        @keyframes fadeUp {
+          from {opacity: 0; transform: translateY(30px);}
+          to {opacity: 1; transform: translateY(0);}
+        }
 
-@keyframes slideIn {
-  from {opacity: 0; transform: translateX(-20px);}
-  to {opacity: 1; transform: translateX(0);}
-}
+        @keyframes slideIn {
+          from {opacity: 0; transform: translateX(-20px);}
+          to {opacity: 1; transform: translateX(0);}
+        }
 
-.price-box {
-  text-align: center;
-  margin: 18px 0 10px;
-}
+        .price-box {
+          text-align: center;
+          margin: 18px 0 10px;
+        }
 
-.old-price {
-  font-size: 15px;
-  color: #ff8c8c;
-  text-decoration: line-through;
-  opacity: .8;
-}
+        .old-price {
+          font-size: 15px;
+          color: #ff8c8c;
+          text-decoration: line-through;
+          opacity: .8;
+        }
 
-.new-price {
-  font-size: 30px;
-  font-weight: 800;
-  color: #f5c46b;
-  margin-top: 4px;
-}
+        .new-price {
+          font-size: 30px;
+          font-weight: 800;
+          color: #f5c46b;
+          margin-top: 4px;
+        }
 
-.discount-badge {
-  display: inline-block;
-  margin-top: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(245,196,107,.15);
-  color: #f5c46b;
-  font-size: 13px;
-  font-weight: 600;
-}
+        .discount-badge {
+          display: inline-block;
+          margin-top: 6px;
+          padding: 6px 12px;
+          border-radius: 999px;
+          background: rgba(245,196,107,.15);
+          color: #f5c46b;
+          font-size: 13px;
+          font-weight: 600;
+        }
 
-</style>
+    </style>
 </head>
 
 <body>
 
 <div class="premium-container">
 
-  <div class="header">
-    <h1>💎 Premium</h1>
-    <p>Tüm özelliklerin kilidini aç</p>
-  </div>
-
-  <div class="features">
-    <div class="feature">
-      <span>🚫</span>
-      <p>Reklamsız kullanım</p>
+    <div class="header">
+        <h1>💎 Premium</h1>
+        <p>Tüm özelliklerin kilidini aç</p>
     </div>
 
-    <div class="feature">
-      <span>⚡</span>
-      <p>Testlere anında giriş</p>
+    <div class="features">
+        <div class="feature">
+            <span>🚫</span>
+            <p>Reklamsız kullanım</p>
+        </div>
+
+        <div class="feature">
+            <span>⚡</span>
+            <p>Testlere anında giriş</p>
+        </div>
+
+        <div class="feature">
+            <span>🔓</span>
+            <p>Tüm testler ve denemeler açık</p>
+        </div>
+
+        <div class="feature">
+            <span>♾️</span>
+            <p>Ömür boyu premium erişim</p>
+        </div>
     </div>
 
-    <div class="feature">
-      <span>🔓</span>
-      <p>Tüm testler ve denemeler açık</p>
+    <div class="price-box">
+        <div class="old-price">179 TL</div>
+        <div class="new-price">109 TL</div>
+        <div class="discount-badge">Sınırlı süreli indirim</div>
     </div>
 
-    <div class="feature">
-      <span>♾️</span>
-      <p>Ömür boyu premium erişim</p>
+    <div class="buy-btn" onclick="Android.buyPremium()">
+        💳 Premium Satın Al
     </div>
-  </div>
 
-  <div class="price-box">
-  <div class="old-price">179 TL</div>
-  <div class="new-price">109 TL</div>
-  <div class="discount-badge">Sınırlı süreli indirim</div>
+    <div class="footer">
+        Tek seferlik ödeme • Google Play güvencesi
+    </div>
+
+    <div class="back" onclick="history.back()">
+        ⬅️ Geri dön
+    </div>
+
 </div>
 
-  <div class="buy-btn" onclick="Android.buyPremium()">
-    💳 Premium Satın Al
-  </div>
+<script>
+    let isPremium = localStorage.getItem("isPremium") === "true";
 
-  <div class="footer">
-    Tek seferlik ödeme • Google Play güvencesi
-  </div>
+    function setPremium(value) {
+      isPremium = value;
+      localStorage.setItem("isPremium", value);
+      console.log("PREMIUM AKTİF:", value);
+    }
+</script>
 
-  <div class="back" onclick="history.back()">
-    ⬅️ Geri dön
-  </div>
-
-</div>
 
 </body>
 </html>
