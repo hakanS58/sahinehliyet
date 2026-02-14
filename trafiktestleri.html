@@ -871,36 +871,40 @@ function buyPremium(){
 
 
 </div>
-<script>
-function watchAd() {
-  Android.showRewardedAd(selectedTest);
-}
+   <script>
+        function watchAd() {
+          Android.showRewardedAd(selectedTest);
+        }
 
-function goPremium() {
-  window.location.href = "premium.html";
-}
+        function goPremium() {
+          window.location.href = "premium.html";
+        }
+
 
   let isPremium = false;
 
   function setPremium(value) {
-    isPremium = value;
-    console.log("PREMIUM AKTİF:", value);
+    isPremium = value === true;
+    console.log("HTML PREMIUM:", isPremium);
+  }
 
+  function openTest(url) {
     if (isPremium) {
-      // reklam / premium seçim alanlarını gizle
-      document.querySelectorAll('.choice-card.ad')
-        .forEach(e => e.style.display = 'none');
-
-      // testler direkt açılsın
-      document.querySelectorAll('.choice-card.test')
-        .forEach(e => e.onclick = function () {
-          openTestDirectly();
-        });
+      // 🔥 Premium ise direkt teste gir
+      window.location.href = url;
+    } else {
+      // Premium değilse popup göster
+      showChoicePopup(url);
     }
   }
 
 
-</script>
+
+
+
+
+
+    </script>
 
   </body>
 </html>
