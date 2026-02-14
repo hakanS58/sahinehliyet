@@ -1259,48 +1259,49 @@ setInterval(() => {
 
 
 
-
-
-
-function updatePremiumUI(){
+function updatePremiumUI() {
 
   const status = document.getElementById("userStatus");
   const btn = document.getElementById("premiumBtn");
 
-  if(user.isPremium){
+  // 🔥 GERÇEK KAYNAK
+  const isPremium = localStorage.getItem("isPremium") === "true";
+
+  // user objesini senkronla
+  user.isPremium = isPremium;
+  localStorage.setItem("user", JSON.stringify(user));
+
+  if (isPremium) {
 
     status.innerHTML = "⭐ Premium Kullanıcı";
     status.style.color = "#f59e0b";
 
     btn.style.display = "none";
 
-  }else{
+  } else {
 
     status.innerHTML = "🧑 Normal Kullanıcı";
     status.style.color = "#64748b";
 
     btn.style.display = "inline-block";
   }
-
 }
+
+window.addEventListener("focus", updatePremiumUI);
+
 
 function goPremium(){
-
-  if(confirm("Premium üyeliğe geçmek istiyor musun? ⭐")){
-
-    user.isPremium = true;
-
-    localStorage.setItem("user",JSON.stringify(user));
-
-    updatePremiumUI();
-
-    alert("Tebrikler! Artık Premiumsun 🎉");
-
-  }
-
+  window.location.assign("premium.html");
 }
-updatePremiumUI();
 
+
+
+
+  // DARK MODE AUTO LOAD (Tüm sayfalarda geçerli)
+
+  if (localStorage.getItem("theme") === "true") {
+    document.body.classList.add("dark");
+  }
 
 
     </script>
