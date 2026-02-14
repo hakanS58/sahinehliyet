@@ -823,6 +823,16 @@ body.dark .chart-card{
 }
 
 
+.nick-error{
+  font-size:13px;
+  color:#ef4444;
+  margin-top:6px;
+  min-height:16px;
+  transition:0.3s;
+}
+
+
+
     </style>
   </head>
 
@@ -902,8 +912,8 @@ body.dark .chart-card{
         <div class="modal-box">
           <h3>✏️ Takma Ad</h3>
 
-          <input type="text" id="nicknameInput" maxlength="30" />
-
+          <input type="text" id="nicknameInput" maxlength="20" />
+<p id="nickError" class="nick-error"></p>
           <div class="modal-buttons">
             <button class="cancel" onclick="closeNickname()">Vazgeç</button>
             <button class="save" onclick="saveNickname()">Kaydet</button>
@@ -913,6 +923,7 @@ body.dark .chart-card{
   
         </div>
       </div>
+
 
 
  
@@ -963,7 +974,12 @@ let user = JSON.parse(localStorage.getItem("user")) || {
 
 
 
-      nickText.textContent = user.nickname;
+      if(user.nickname && user.nickname.trim().length >= 3){
+  nickText.textContent = user.nickname;
+} else {
+  nickText.textContent = "✏️ Kullanıcı adı girin";
+}
+
 
       function openNickname() {
         nicknameModal.style.display = "flex";
@@ -974,16 +990,42 @@ let user = JSON.parse(localStorage.getItem("user")) || {
         nicknameModal.style.display = "none";
       }
 
-      function saveNickname() {
-        let n = nicknameInput.value.trim();
-        if (!n) return alert("Boş olamaz");
-        if (n.length > 30) return alert("Max 30 karakter");
+function saveNickname() {
 
-        user.nickname = n;
-        localStorage.setItem("user", JSON.stringify(user));
-        nickText.textContent = n;
-        closeNickname();
-      }
+  let n = nicknameInput.value.trim();
+  let error = document.getElementById("nickError");
+
+  // Hata temizle
+  error.textContent = "";
+
+  // Boş mu
+  if (!n) {
+    error.textContent = "Kullanıcı adı boş olamaz";
+    return;
+  }
+
+  // Min 2
+  if (n.length < 3) {
+    error.textContent = "En az 3 karakter girmelisin";
+    return;
+  }
+
+  // Max 20
+  if (n.length > 20) {
+    error.textContent = "En fazla 20 karakter girebilirsin";
+    return;
+  }
+
+  // Kaydet
+  user.nickname = n;
+  localStorage.setItem("user", JSON.stringify(user));
+
+  nickText.textContent = n;
+
+  closeNickname();
+}
+
+
 
  function loadTests() {
   testBox.innerHTML = "";
@@ -1189,8 +1231,8 @@ if(!user.gender){
 /* AVATAR URLS */
 
 const avatars = {
-  male: "pngtree-user-profile-avatar-png-image_13369991.png",
-  female: "iconfinder-4-avatar-2754580_120522.png"
+  male: "erkek.png",
+  female: "kadin.png"
 };
 
 /* LOAD AVATAR */
