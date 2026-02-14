@@ -746,62 +746,64 @@ body.dark .header p{
     </div>
 
 
+<script>
+    let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
 
+    function loadStatus() {
+      if (!user.tests) return;
 
-    
-    <script>
-      let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
+      Object.keys(user.tests).forEach((key) => {
+        const btn = document.getElementById(key);
 
-      function loadStatus() {
-        if (!user.tests) return;
-
-        Object.keys(user.tests).forEach((key) => {
-          const btn = document.getElementById(key);
-
-          if (btn) {
-            btn.classList.add("completed");
-          }
-        });
-      }
-      loadStatus();
+        if (btn) {
+          btn.classList.add("completed");
+        }
+      });
+    }
+    loadStatus();
 
 
 
-      let selectedTest = "";
+    let selectedTest = "";
 
 function openPremium(url){
 
-  // Premium varsa direkt gir
-  if(localStorage.getItem("premium")==="true"){
-    location.href = url;
-    return;
-  }
-
-  selectedTest = url;
-
-  document.getElementById("premiumModal").style.display="flex";
+// ✅ Premium varsa direkt gir
+if(isPremium === true){
+  location.href = url;
+  return;
 }
 
+selectedTest = url;
+document.getElementById("premiumModal").style.display="flex";
+}
+
+
 function closePremium(){
-  document.getElementById("premiumModal").style.display="none";
+document.getElementById("premiumModal").style.display="none";
 }
 
 //test-reklam
 function watchAd(){
-  closePremium();
-  Android.showRewardedAd(selectedTest);
+if(isPremium){
+  location.href = selectedTest;
+  return;
 }
+closePremium();
+Android.showRewardedAd(selectedTest);
+}
+
 // Android’den geri dönüş
 function adCompleted(url){
-  location.href = url;
+location.href = url;
 }
 
 
 
 // Premium alma (Firebase bağlıysa çalışır)
 function buyPremium(){
-  alert("Premium sayfası açılıyor ⭐");
-  // Buraya Firebase premium kodu bağlanır
+alert("Premium sayfası açılıyor ⭐");
+// Buraya Firebase premium kodu bağlanır
 }
 
 
@@ -812,99 +814,101 @@ function buyPremium(){
 
 (function(){
 
-  if(localStorage.getItem("theme") === "true"){
-    document.body.classList.add("dark");
-  }
+if(localStorage.getItem("theme") === "true"){
+  document.body.classList.add("dark");
+}
 
 })();
-    </script>
+</script>
 
 
 <!-- PREMIUM MODAL -->
 
 <div id="premiumModal" class="premium-modal">
 
-  <div class="premium-box-modern">
+    <div class="premium-box-modern">
 
-    <h3>Bir Seçenek Seç</h3>
+        <h3>Bir Seçenek Seç</h3>
 
-    <p class="desc">
-      Teste devam etmek için aşağıdan bir yöntem seç.
-    </p>
+        <p class="desc">
+            Teste devam etmek için aşağıdan bir yöntem seç.
+        </p>
 
-    <!-- AD -->
+        <!-- REKLAM -->
 
-    <div class="choice-card ad" onclick="watchAd()">
+        <div class="choice-card ad" onclick="watchAd()">
 
-      <div class="choice-head">
-        🎬 Reklam İzle
-      </div>
+            <div class="choice-head">
+                🎬 Reklam İzle
+            </div>
 
-      <p>
-        Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
-        Reklamdan sonra teste devam edebilirsin.
-      </p>
+            <p>
+                Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
+                Reklamdan sonra teste devam edebilirsin.
+            </p>
+
+        </div>
+
+        <!-- PREMIUM -->
+
+        <div class="choice-card premium" onclick="goPremium()">
+
+            <div class="choice-head">
+                ⭐ Premium Al
+            </div>
+
+            <p>
+                Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
+                Sınırsız erişim elde et.
+            </p>
+
+        </div>
+
+        <button class="cancel-btn" onclick="closePremium()">
+            Vazgeç
+        </button>
+
 
     </div>
-
-    <!-- PREMIUM -->
-
-    <div class="choice-card premium" onclick="buyPremium()">
-
-      <div class="choice-head">
-        ⭐ Premium Al
-      </div>
-
-      <p>
-        Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
-        Sınırsız erişim elde et.
-      </p>
-
-    </div>
-
-    <button class="cancel-btn" onclick="closePremium()">
-      Vazgeç
-    </button>
-
-  </div>
-
-</div>
 
 
 <script>
-function watchAd() {
-  Android.showRewardedAd(selectedTest);
-}
+        function watchAd() {
+          Android.showRewardedAd(selectedTest);
+        }
 
-function goPremium() {
-  window.location.href = "premium.html";
-}
+        function goPremium() {
+          window.location.href = "premium.html";
+        }
+
 
   let isPremium = false;
 
   function setPremium(value) {
-    isPremium = value;
-    console.log("PREMIUM AKTİF:", value);
+    isPremium = value === true;
+    console.log("HTML PREMIUM:", isPremium);
+  }
 
+  function openTest(url) {
     if (isPremium) {
-      // reklam / premium seçim alanlarını gizle
-      document.querySelectorAll('.choice-card.ad')
-        .forEach(e => e.style.display = 'none');
-
-      // testler direkt açılsın
-      document.querySelectorAll('.choice-card.test')
-        .forEach(e => e.onclick = function () {
-          openTestDirectly();
-        });
+      // 🔥 Premium ise direkt teste gir
+      window.location.href = url;
+    } else {
+      // Premium değilse popup göster
+      showChoicePopup(url);
     }
   }
 
 
-</script>
 
 
 
 
+
+    </script>
+
+
+</div>
 
   </body>
 </html>
