@@ -832,18 +832,123 @@ body.dark .chart-card{
 }
 
 
+/* ================= MODERN HEADER ================= */
+
+.app-header{
+
+  margin-top: 10px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:14px 18px;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6,
+    #06b6d4
+  );
+
+  border-radius:0 0 22px 22px;
+
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* SOL TARAF */
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.app-logo{
+  font-size:22px;
+}
+
+.app-title{
+  font-size:18px;
+  font-weight:700;
+  color:white;
+  letter-spacing:.5px;
+}
+
+
+/* SAĞ TARAF */
+
+.header-right{
+  display:flex;
+  gap:8px;
+}
+
+.header-btn{
+  width:34px;
+  height:34px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+  color:white;
+
+  font-size:16px;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:.25s;
+}
+
+.header-btn:hover{
+  background:rgba(255,255,255,.35);
+  transform:scale(1.1);
+}
+
+
+/* DARK MODE */
+
+body.dark .app-header{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
+
+
+.app-header{
+  position: relative;
+}
+
+.app-title{
+  margin-left: 45px; /* Ok kadar boşluk bırakır */
+  font-weight: 600;
+  font-size: 17px;
+}
 
     </style>
   </head>
 
   <body>
-<header class="top-bar">
+<header class="app-header">
 
-  <button class="back-btn" onclick="history.back()">
+  <div class="header-left">
+    <span class="app-title">Ehliyet 2026</span>
+  </div>
+
+  <div class="header-right">
+ <button class="back-btn" onclick="history.back()">
     <i class="fa-solid fa-chevron-left"></i>
   </button>
-
-  <h2>Ehliyet 2026</h2>
+  </div>
 
 </header>
 
