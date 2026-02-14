@@ -819,6 +819,65 @@ body.dark .app-header{
 }
 
 
+.notify-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.notify-box{
+  background:#fff;
+  width:90%;
+  max-width:320px;
+  padding:25px;
+  border-radius:16px;
+  text-align:center;
+  animation:scaleIn .3s;
+}
+
+.notify-box h3{
+  margin-bottom:10px;
+}
+
+.notify-box p{
+  font-size:14px;
+  opacity:.8;
+}
+
+.notify-btns{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+}
+
+.notify-btns button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+}
+
+.notify-btns button:first-child{
+  background:#2563eb;
+  color:#fff;
+}
+
+.notify-btns button:last-child{
+  background:#e5e7eb;
+}
+
+@keyframes scaleIn{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+
+
 </style>
 
   </head>
@@ -828,7 +887,7 @@ body.dark .app-header{
 
   <div class="header-left">
  <span class="app-title">Ehliyet 2026 / Şahin Ehliyet</span>
-
+  </div>
 </header>
 
 
@@ -941,6 +1000,26 @@ body.dark .app-header{
 </div>
 
 
+<!-- ANDROİD BİLDİRİM POPUP -->
+
+<div class="notify-popup" id="notifyPopup">
+  <div class="notify-box">
+
+    <h3>🔔 Bildirimleri Aç</h3>
+
+    <p>
+      Her gün test çözmeyi unutmamak için
+      sana hatırlatma gönderelim mi?
+    </p>
+
+    <div class="notify-btns">
+
+      <button onclick="enableNotify()">Evet</button>
+      <button onclick="closeNotify()">Hayır</button>
+
+    </div>
+  </div>
+</div>
 
 
  
@@ -1275,6 +1354,32 @@ setInterval(() => {
   updateTasksUI();
 }, 1000); // 1 saniyede bir kontrol eder
 
+
+
+if(!localStorage.getItem("notifyAsked")){
+  setTimeout(()=>{
+    document.getElementById("notifyPopup").style.display="flex";
+  },1500);
+}
+
+
+function enableNotify(){
+
+  localStorage.setItem("notifyAsked","true");
+
+  if(window.Android){
+    Android.askNotificationPermission();
+  }
+
+  closeNotify();
+}
+
+function closeNotify(){
+
+  localStorage.setItem("notifyAsked","true");
+
+  document.getElementById("notifyPopup").style.display="none";
+}
 
 
 
