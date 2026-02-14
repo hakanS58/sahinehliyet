@@ -4,18 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title>İlkyardım Testleri</title>
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
      crossorigin="anonymous"></script>
-
-    <title>İlk Yardım Testleri</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
+       <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
-      /* === AYNI TASARIM === */
       * {
         margin: 0;
         padding: 0;
@@ -23,27 +28,53 @@
         font-family: "Poppins", sans-serif;
       }
 
-      body {
-        background: linear-gradient(135deg, #f6f9fc, #eef3f8);
-        min-height: 100vh;
-        color: #222;
-      }
+     body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: .3s;
+padding-top: 20px;
+  padding-top: env(safe-area-inset-top);
 
-      /* HEADER */
-      .top-bar {
-        background: linear-gradient(135deg, #1f4037, #99f2c8);
-        color: white;
-        padding: 18px;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
 
-      .top-bar h2 {
-        font-size: 26px;
-      }
+}
+
+/* ================= TOP BAR ================= */
+
+.top-bar {
+  background: linear-gradient(135deg,var(--primary),#3b5bfd);
+  color: white;
+
+  padding: 15px 18px;
+  padding-top: calc(15px + env(safe-area-inset-top));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 0 0 25px 25px;
+  box-shadow: var(--shadow);
+
+  margin-top: 15px;
+}
+
+
+.top-bar h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.task-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.top-icons {
+  display: flex;
+  gap: 15px;
+}
 
       .top-bar a {
         display: inline-block;
@@ -115,7 +146,275 @@
         text-align: center;
       }
 
+      /* LIST */
+      .list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      /* CARD */
+      .item {
+        background: white;
+        border-radius: 18px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-decoration: none;
+        color: #222;
+        font-weight: 600;
+        font-size: 17px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        transition: 0.35s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #99f2c8, #1f4037);
+        opacity: 0;
+        transition: 0.3s;
+      }
+
+      .item * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .item:hover::before {
+        opacity: 0.12;
+      }
+
+      .item:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+      }
+
+      /* ICON */
+      .icon {
+        font-size: 26px;
+      }
+
+      /* MOBILE */
+      @media (max-width: 600px) {
+        .top-bar h2 {
+          font-size: 22px;
+        }
+
+        .header p {
+          font-size: 14px;
+        }
+
+        .item {
+          font-size: 15px;
+        }
+      }
+
+      /* GLOBAL SAFE AREA */
+body {
+  margin: 0;
+  padding-top: env(safe-area-inset-top);
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* HEADER */
+.top-bar {
+  background: linear-gradient(135deg,var(--primary),#3b5bfd);
+  color: white;
+
+  padding: 15px 18px;
+  padding-top: calc(15px + env(safe-area-inset-top));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 0 0 25px 25px;
+  box-shadow: var(--shadow);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+/* THEME COLORS */
+
+:root {
+  --primary: #2563eb;
+
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+
+  --shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* DARK MODE */
+
+body.dark {
+
+  /* Ana Arkaplan */
+  --bg: linear-gradient(135deg,#020617,#020b2a);
+
+  /* Kartlar */
+  --card: #0b1220;
+
+  /* Yazılar */
+  --text: #f1f5f9;
+
+  /* Gölgeler */
+  --shadow: 0 8px 30px rgba(0,0,0,0.8);
+}
+
+/* DARK MODE CARD FIX */
+
+body.dark .item,
+body.dark .header {
+  background: var(--card);
+  color: var(--text);
+}
+
+body.dark .item span {
+  color: #cbd5f5 !important;
+}
+
+/* HEADER TEXT DARK MODE FIX */
+
+.header h2,
+.header p{
+  color: var(--text);
+}
+
+body.dark .header h2{
+  color: #f8fafc;
+}
+
+body.dark .header p{
+  color: #cbd5f5;
+}
+
+/* BACK BUTTON */
+
+/* HEADER FIX */
+
+.top-bar{
+  position: relative;
+  justify-content: center;
+}
+
+/* BACK BUTTON FIXED */
+
+.back-btn{
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: .25s;
+  backdrop-filter: blur(6px);
+}
+
+.back-btn:hover{
+  background: rgba(255,255,255,0.28);
+}
+
+.back-btn:active{
+  transform: translateY(-50%) scale(.9);
+}
+
+
+
+
+
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+     
+      /* CONTAINER */
+
+      .container {
+        max-width: 540px;
+        margin: auto;
+        padding: 18px;
+        animation: fadeIn 0.7s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* HEADER BOX */
+
+      .header {
+        background: white;
+        border-radius: 20px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        animation: slideDown 0.7s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .header h2 {
+        text-align: center;
+        margin-bottom: 12px;
+        color: #1f4037;
+      }
+
+      .header p {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #444;
+        text-align: center;
+      }
+
       /* TEST LIST */
+
       .test-list {
         display: flex;
         flex-direction: column;
@@ -123,6 +422,7 @@
       }
 
       /* TEST CARD */
+
       .test-btn {
         background: white;
         border-radius: 18px;
@@ -149,6 +449,12 @@
         transition: 0.3s;
       }
 
+      .test-btn span {
+        font-size: 13px;
+        color: #666;
+        font-weight: 400;
+      }
+
       .test-btn * {
         position: relative;
         z-index: 2;
@@ -164,6 +470,7 @@
       }
 
       /* COMPLETED */
+
       .test-btn.completed {
         background: #e9f7ec;
         border: 2px solid #2ecc71;
@@ -197,7 +504,25 @@
         }
       }
 
-      /* === TEST TEKRAR KARTI === */
+      /* MOBILE */
+
+      @media (max-width: 600px) {
+        .top-bar h2 {
+          font-size: 22px;
+        }
+
+        .header p {
+          font-size: 14px;
+        }
+
+        .test-btn {
+          font-size: 15px;
+        }
+      }
+
+      
+
+/* === TEST TEKRAR KARTI === */
 
 .repeat-card {
   margin: 25px 15px;
@@ -249,17 +574,137 @@
   background: #e6fff5;
   transform: scale(1.05);
 }
+
+
+/* MODERN TEXT PREMIUM */
+
+.premium-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(6px);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.premium-box-modern{
+  width:92%;
+  max-width:360px;
+  background:white;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:pop .35s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.premium-box-modern h3{
+  text-align:center;
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.premium-box-modern .desc{
+  text-align:center;
+  font-size:13px;
+  color:#64748b;
+  margin-bottom:14px;
+}
+
+/* CHOICES */
+
+.choice-card{
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
+  cursor:pointer;
+  transition:.25s;
+  border:1px solid #e5e7eb;
+}
+
+.choice-card:hover{
+  transform:scale(1.03);
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+
+/* HEAD */
+
+.choice-head{
+  font-weight:700;
+  font-size:15px;
+  margin-bottom:6px;
+}
+
+/* AD */
+
+.choice-card.ad{
+  background:#f0f9ff;
+  border-color:#3b82f6;
+}
+
+.choice-card.ad .choice-head{
+  color:#1d4ed8;
+}
+
+/* PREMIUM */
+
+.choice-card.premium{
+  background:linear-gradient(135deg,#fff7cc,#fde047);
+  border-color:#eab308;
+}
+
+.choice-card.premium .choice-head{
+  color:#92400e;
+}
+
+/* TEXT */
+
+.choice-card p{
+  font-size:13px;
+  color:#475569;
+  line-height:1.4;
+}
+
+/* CANCEL */
+
+.cancel-btn{
+  width:100%;
+  margin-top:8px;
+  padding:11px;
+  border:none;
+  border-radius:12px;
+  background:#f1f5f9;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.cancel-btn:hover{
+  background:#e2e8f0;
+}
+
+
     </style>
   </head>
 
   <body>
-    <header class="top-bar">
-      <h2>Şahin Ehliyet</h2>
-      <a href="katagoriler.html">Kategoriler</a>
-      <a href="hesabim.html">Hesabım</a>
-    </header>
 
-    <div class="container">
+<header class="top-bar">
+
+  <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <h2>Ehliyet 2026</h2>
+
+</header>
+
+ <div class="container">
       <div class="header">
         <h2>🩹 İlk Yardım Testleri</h2>
 
@@ -270,15 +715,15 @@
       </div>
 
       <div class="test-list">
-        <a href="ilkyardimtest1.html" class="test-btn" id="ilkyardim-test-1">
+        <a href="javascript:void(0)" class="test-btn" onclick="openPremium('ilkyardimtest1.html')" id="ilkyardim-test-1">
           🩹 Test 1
         </a>
 
-        <a href="ilkyardimtest2.html" class="test-btn" id="ilkyardim-test-2">
+        <a href="javascript:void(0)" class="test-btn" onclick="openPremium('ilkyardimtest2.html')" id="ilkyardim-test-2">
           🩹 Test 2
         </a>
 
-        <a href="ilkyardimtest3.html" class="test-btn" id="ilkyardim-test-3">
+        <a href="javascript:void(0)" class="test-btn" onclick="openPremium('ilkyardimtest3.html')" id="ilkyardim-test-3">
           🩹 Test 3
         </a>
       </div>
@@ -294,6 +739,11 @@
       </div>
     </div>
 
+
+ 
+
+
+    
     <script>
       let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
 
@@ -308,8 +758,143 @@
           }
         });
       }
-
       loadStatus();
+
+
+
+      let selectedTest = "";
+
+function openPremium(url){
+
+  // Premium varsa direkt gir
+  if(localStorage.getItem("premium")==="true"){
+    location.href = url;
+    return;
+  }
+
+  selectedTest = url;
+
+  document.getElementById("premiumModal").style.display="flex";
+}
+
+function closePremium(){
+  document.getElementById("premiumModal").style.display="none";
+}
+
+//test-reklam
+function watchAd(){
+  closePremium();
+  Android.showRewardedAd(selectedTest);
+}
+// Android’den geri dönüş
+function adCompleted(url){
+  location.href = url;
+}
+
+
+
+// Premium alma (Firebase bağlıysa çalışır)
+function buyPremium(){
+  alert("Premium sayfası açılıyor ⭐");
+  // Buraya Firebase premium kodu bağlanır
+}
+
+
+
+
+
+/* DARK MODE AUTO LOAD */
+
+(function(){
+
+  if(localStorage.getItem("theme") === "true"){
+    document.body.classList.add("dark");
+  }
+
+})();
     </script>
+
+
+<!-- PREMIUM MODAL -->
+
+<div id="premiumModal" class="premium-modal">
+
+  <div class="premium-box-modern">
+
+    <h3>Bir Seçenek Seç</h3>
+
+    <p class="desc">
+      Teste devam etmek için aşağıdan bir yöntem seç.
+    </p>
+
+    <!-- AD -->
+
+    <div class="choice-card ad" onclick="watchAd()">
+
+      <div class="choice-head">
+        🎬 Reklam İzle
+      </div>
+
+      <p>
+        Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
+        Reklamdan sonra teste devam edebilirsin.
+      </p>
+
+    </div>
+
+    <!-- PREMIUM -->
+
+    <div class="choice-card premium" onclick="buyPremium()">
+
+      <div class="choice-head">
+        ⭐ Premium Al
+      </div>
+
+      <p>
+        Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
+        Sınırsız erişim elde et.
+      </p>
+
+    </div>
+
+    <button class="cancel-btn" onclick="closePremium()">
+      Vazgeç
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+function watchAd() {
+  Android.showRewardedAd(selectedTest);
+}
+
+function goPremium() {
+  window.location.href = "premium.html";
+}
+
+  let isPremium = false;
+
+  function setPremium(value) {
+    isPremium = value;
+    console.log("PREMIUM AKTİF:", value);
+
+    if (isPremium) {
+      // reklam / premium seçim alanlarını gizle
+      document.querySelectorAll('.choice-card.ad')
+        .forEach(e => e.style.display = 'none');
+
+      // testler direkt açılsın
+      document.querySelectorAll('.choice-card.test')
+        .forEach(e => e.onclick = function () {
+          openTestDirectly();
+        });
+    }
+  }
+
+
+</script>
   </body>
 </html>
