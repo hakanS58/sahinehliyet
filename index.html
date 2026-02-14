@@ -1,160 +1,323 @@
 <!doctype html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Şahin Ehliyet</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="manifest" href="/manifest.json" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
-     crossorigin="anonymous"></script>
+<title>Şahin Ehliyet</title>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins,Segoe UI,sans-serif;
+}
+
+/* BODY */
+body{
+  height:100vh;
+  background:linear-gradient(180deg,#020617,#020617);
+  color:white;
+  overflow:hidden;
+}
+
+/* ROAD */
+.road{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:130px;
+  height:100%;
+  background:#111827;
+  box-shadow:inset 0 0 0 3px #1f2933;
+  z-index:1;
+}
+
+.road::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:6px;
+  height:100%;
+  background:repeating-linear-gradient(
+    to bottom,
+    #fff 0 25px,
+    transparent 25px 45px
+  );
+  animation:roadMove 1.5s linear infinite;
+}
+
+@keyframes roadMove{
+  from{background-position:0 0}
+  to{background-position:0 100px}
+}
+
+/* MOTIVATION FLOW */
+.flow{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:100px;
+  overflow:hidden;
+  z-index:1;
+}
+
+.flow.left{ left:10px; }
+.flow.right{ right:10px; }
+
+.flow span{
+  position:absolute;
+  width:100%;
+  text-align:center;
+
+  font-size:13px;
+  font-weight:600;
+  opacity:.35;
+
+  animation:flowMove 12s linear infinite;
+}
+
+@keyframes flowMove{
+  from{ top:100% }
+  to{ top:-200px }
+}
+
+/* MAIN */
+.main{
+  position:relative;
+  z-index:5;
+
+  height:100%;
+  padding:20px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* GLASS PANEL */
+.panel{
+  background:rgba(15,23,42,.75);
+  backdrop-filter:blur(12px);
+
+  border-radius:24px;
+  padding:35px 28px;
+
+  max-width:340px;
+  width:100%;
+
+  text-align:center;
+
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+
+  animation:fade 1.2s ease;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(40px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* LOGO */
+.logo{
+  font-size:38px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.logo span{
+  color:#22c55e;
+}
+
+/* TEXT */
+.tagline{
+  font-size:14px;
+  line-height:1.6;
+  opacity:.9;
+  margin-bottom:28px;
+}
+
+/* BUTTON */
+.start-btn{
+  text-decoration:none;
+
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:white;
+
+  padding:14px 45px;
+  border-radius:40px;
+
+  font-size:16px;
+  font-weight:600;
+
+  display:inline-block;
+
+  box-shadow:0 10px 30px rgba(34,197,94,.5);
+
+  transition:.3s;
+}
+
+.start-btn:hover{
+  transform:scale(1.05);
+}
+
+/* MOBILE */
+@media(max-width:500px){
+
+  .panel{
+    padding:28px 22px;
+  }
+
+  .logo{
+    font-size:34px;
+  }
+
+}
 
 
 
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/service-worker.js");
-      }
-    </script>
-  </head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-    }
 
-    body {
-      height: 100vh;
-      overflow: hidden;
-      background: #0f2027;
-    }
+/* ===== FEATURES ===== */
 
-    /* Arka plan animasyonu */
-    .background {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
-      background-size: 300% 300%;
-      animation: bgMove 10s infinite alternate;
-      z-index: -1;
-    }
+.features{
+  display:flex;
+  flex-direction:column;   /* ALT ALTA */
+  gap:10px;
+  margin-bottom:18px;
+  font-size:14px;
+  align-items:center;      /* ORTALA */
+}
 
-    @keyframes bgMove {
-      0% {
-        background-position: left top;
-      }
-      100% {
-        background-position: right bottom;
-      }
-    }
+.features div{
+  background:rgba(255,255,255,0.18);
+  padding:8px 20px;
+  border-radius:25px;
+  backdrop-filter: blur(8px);
+  min-width:220px;
+  text-align:center;
+}
 
-    /* Ana container */
-    .container {
-      height: 100vh;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-      animation: fadeIn 1.2s ease;
-    }
+.user-count{
+  font-size:14px;
+  font-weight:600;
+  color:#d2ff0a;
+  margin-bottom:25px;
+  letter-spacing:.5px;
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  background:rgba(0,234,255,0.12);
+  padding:6px 18px;
+  border-radius:20px;
 
-    /* Başlık */
-    .title {
-      font-size: 3.2rem;
-      font-weight: 800;
-      letter-spacing: 3px;
-      margin-bottom: 20px;
-    }
-
-    /* Alt yazı */
-    .subtitle {
-      font-size: 1.1rem;
-      max-width: 500px;
-      line-height: 1.6;
-      opacity: 0.9;
-      margin-bottom: 40px;
-    }
-
-    .subtitle span {
-      color: #00eaff;
-      font-weight: 600;
-    }
-
-    /* Buton */
-    .start-btn {
-      text-decoration: none;
-      background: linear-gradient(135deg, #00eaff, #0077ff);
-      color: #fff;
-      padding: 14px 36px;
-      border-radius: 40px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      transition:
-        transform 0.3s,
-        box-shadow 0.3s;
-      box-shadow: 0 10px 25px rgba(0, 234, 255, 0.35);
-    }
-
-    .start-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 35px rgba(0, 234, 255, 0.6);
-    }
-
-    /* Mobil uyum */
-    @media (max-width: 600px) {
-      .title {
-        font-size: 2.5rem;
-      }
-
-      .subtitle {
-        font-size: 1rem;
-      }
-
-      .start-btn {
-        width: 100%;
-        max-width: 280px;
-      }
-    }
-  </style>
-  <body>
-    <div class="background"></div>
-
-    <main class="container">
-      <h1 class="title">ŞAHİN<br />EHLİYET</h1>
-
-      <p class="subtitle">
-        En güncel ehliyet sınavları, deneme testleri ve konu anlatımları ile
-        sınava <span>hazır ol!</span>
-      </p>
+  display:inline-block;
+}
 
 
 
-      <a href="katagoriler.html" class="start-btn">Hemen Başla</a>
-    </main>
+</style>
+</head>
+
+<body>
+
+<!-- MOTIVATION FLOWS -->
+<div class="flow left" id="leftFlow"></div>
+<div class="flow right" id="rightFlow"></div>
+
+<!-- ROAD -->
+<div class="road"></div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="panel">
+
+    <div class="logo">
+       Şahin <span>Ehliyet</span>
+    </div>
+
+    <div class="tagline">
+
+     Güncel müfredata uygun içeriklerle<br>
+ehliyet sınavına eksiksiz hazırlan.
 
 
- 
+    </div>
+
+    <!-- Özellikler -->
+<div class="features">
+
+  <div>📘 Güncel Konular</div>
+  <div>📝 Deneme Sınavları</div>
+  <div>🏆 Başarı Takibi</div>
+
+</div>
+
+<!-- Kullanıcı Sayısı -->
+<div class="user-count">
+  👥 Tiktokta 25.000+ Öğrenci Bizimle
+</div>
 
 
-  </body>
+    <a href="katagoriler.html" class="start-btn">
+      Hemen Başla 🎯
+    </a>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* MOTIVATION TEXTS */
+
+const texts = [
+
+  "🚦 Kurallara Uyan Kazanır",
+  "🏁 Hedefine Az Kaldı",
+  "💪 Vazgeçmek Yok",
+  "📘 Her Gün Bir Adım",
+  "🚗 Güvenli Sürüş",
+  "🎯 Başarı Yakın",
+  "🌟 Disiplin = Ehliyet",
+  "🔥 Devam Et",
+  "🏆 Sen Başaracaksın"
+
+];
+
+function createFlow(container){
+
+  setInterval(()=>{
+
+    const span = document.createElement("span");
+
+    span.textContent =
+      texts[Math.floor(Math.random()*texts.length)];
+
+    span.style.left = "0";
+    span.style.top = "100%";
+
+    span.style.animationDuration =
+      (8 + Math.random()*6) + "s";
+
+    container.appendChild(span);
+
+    setTimeout(()=>{
+      span.remove();
+    },15000);
+
+  },2000);
+
+}
+
+createFlow(document.getElementById("leftFlow"));
+createFlow(document.getElementById("rightFlow"));
+
+</script>
+
+</body>
 </html>
