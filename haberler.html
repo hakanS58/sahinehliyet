@@ -289,31 +289,40 @@ document.body.classList.add("dark");
 
 
 const API_KEY = "7d0da8296124428e84423d2e97428d9e";
-const URL = `https://newsapi.org/v2/everything?q=ehliyet OR trafik OR sürücü&language=tr&sortBy=publishedAt&apiKey=${API_KEY}`;
 
+const url = `https://newsapi.org/v2/everything?q=ehliyet OR trafik OR sürücü&language=tr&apiKey=${API_KEY}`;
 
-async function fetchNews(){
+const proxy = "https://corsproxy.io/?";
 
-  try{
+fetch(proxy + encodeURIComponent(url))
 
-    const res = await fetch(URL);
-    const data = await res.json();
+.then(res => res.json())
 
-    if(data.status !== "ok"){
-      throw "API Hatası";
-    }
+.then(data => {
 
-    renderNews(data.articles);
-
-  }catch(err){
-
+  if(data.status !== "ok"){
     document.getElementById("newsList").innerHTML =
-    "<div class='empty'>⚠️ Haberler yüklenemedi</div>";
-
-    console.log(err);
+      "❌ Haberler alınamadı";
+    return;
   }
 
-}
+  document.getElementById("newsList").innerHTML =
+    data.articles.map(n => `
+      <div class="news-card">
+        <img src="${n.urlToImage || 'noimg.png'}">
+        <h3>${n.title}</h3>
+        <p>${n.description || ""}</p>
+        <a href="${n.url}" target="_blank">Haberi Oku →</a>
+      </div>
+    `).join("");
+
+})
+
+.catch(err=>{
+  console.log(err);
+  alert("Bağlantı hatası!");
+});
+
 
 
 function renderNews(list){
@@ -397,3 +406,4 @@ fetchNews();
 
 </body>
 </html>
+
