@@ -1,6 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ehliyet Haberleri | Şahin Ehliyet</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== THEME ===== */
+
+:root{
+--bg:#f4f6fb;
+--card:#fff;
+--text:#0f172a;
+--primary:#2563eb;
+--shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+body.dark{
+--bg:#020617;
+--card:#020617;
+--text:#e5e7eb;
+--shadow:0 10px 25px rgba(0,0,0,.5);
+}
+
+/* ===== RESET ===== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,system-ui;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+}
+
+/* ===== HEADER ===== */
+
+.app-header{
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+color:white;
+
+padding:16px 18px;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+border-radius:0 0 25px 25px;
+box-shadow:var(--shadow);
+}
+
+.app-title{
+font-size:18px;
+font-weight:600;
+}
+
+.back-btn{
+background:none;
+border:none;
+color:white;
+font-size:20px;
+cursor:pointer;
+}
+
+/* ===== CONTAINER ===== */
+
+.container{
+padding:18px;
+max-width:720px;
+margin:auto;
+}
+
+/* ===== INFO BOX ===== */
+
+.info-box{
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+color:white;
+padding:16px;
+border-radius:20px;
+text-align:center;
+font-weight:600;
+margin-bottom:18px;
+box-shadow:0 6px 18px rgba(37,99,235,.4);
+
+animation:float 3s infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+}
+
+/* ===== NEWS CARD ===== */
+
+.news-card{
+background:var(--card);
+border-radius:20px;
+padding:16px;
+margin-bottom:16px;
+
+box-shadow:var(--shadow);
+
+cursor:pointer;
+
+transition:.3s;
+
+animation:fadeUp .5s;
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(15px)}
+to{opacity:1;transform:none}
+}
+
+.news-card:hover{
+transform:scale(1.02);
+}
+
+.news-title{
+font-size:16px;
+font-weight:600;
+margin-bottom:6px;
+}
+
+.news-date{
+font-size:12px;
+opacity:.6;
+margin-bottom:6px;
+}
+
+.news-desc{
+font-size:13px;
+line-height:1.5;
+opacity:.9;
+}
+
+/* ===== MODAL ===== */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+
+display:none;
+justify-content:center;
+align-items:center;
+
+z-index:999;
+}
+
+.modal.active{
+display:flex;
+}
+
+.modal-box{
+background:var(--card);
+padding:22px;
+border-radius:22px;
+width:90%;
+max-width:360px;
+
+animation:pop .3s;
+}
+
+@keyframes pop{
+from{transform:scale(.7);opacity:0}
+to{transform:scale(1);opacity:1}
+}
+
+.modal-box h3{
+margin-bottom:8px;
+}
+
+.modal-box p{
+font-size:14px;
+line-height:1.6;
+opacity:.9;
+margin-bottom:12px;
+}
+
+.modal-box button{
+width:100%;
+background:#2563eb;
+color:white;
+border:none;
+
+padding:10px;
+border-radius:14px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* ===== EMPTY ===== */
+
+.empty{
+text-align:center;
+opacity:.6;
+padding:30px;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:600px){
+
+.app-title{
+font-size:17px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="app-header">
+
+<button class="back-btn" onclick="history.back()">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+
+<span class="app-title">Ehliyet Haberleri</span>
+
+<span></span>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- INFO -->
+
+<div class="info-box">
+📰 Ehliyetle ilgili en güncel haberler burada
+</div>
+
+
+<!-- NEWS LIST -->
+
+<div id="newsList"></div>
+
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="newsModal">
+
+<div class="modal-box">
+
+<h3 id="mTitle"></h3>
+
+<p id="mText"></p>
+
+<button onclick="closeModal()">Kapat</button>
+
+</div>
+
+</div>
+
+
 <script>
 
-const API_KEY = "BURAYA_GNEWS_KEYİNİ_YAZ";
+const API_KEY = "6c66695354eecd5837f1aa91f79805ea";
 
 const apiUrl = `
 https://gnews.io/api/v4/search
@@ -52,3 +329,7 @@ fetch(proxy + encodeURIComponent(apiUrl))
 });
 
 </script>
+
+
+</body>
+</html>
