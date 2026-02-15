@@ -878,6 +878,57 @@ body.dark .app-header{
 
 
 
+
+#askBtn{
+  position:relative;
+}
+
+.answered-glow{
+  animation:glow 1.5s infinite;
+}
+
+@keyframes glow{
+  0%{box-shadow:0 0 0 0 rgba(34,197,94,.7);}
+  70%{box-shadow:0 0 0 15px rgba(34,197,94,0);}
+  100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}
+}
+
+.answer-info{
+  position:absolute;
+
+  top:-22px;   /* Yukarı alıyoruz */
+  right:50%;
+  transform:translateX(50%);
+
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#fff;
+
+  font-size:11px;
+  font-weight:600;
+
+  padding:4px 10px;
+  border-radius:14px;
+
+  box-shadow:0 4px 12px rgba(34,197,94,.4);
+
+  white-space:nowrap;
+
+  animation:floatBadge 1.5s infinite;
+}
+
+/* Hafif yukarı aşağı hareket */
+@keyframes floatBadge{
+  0%{transform:translateX(50%) translateY(0)}
+  50%{transform:translateX(50%) translateY(-4px)}
+  100%{transform:translateX(50%) translateY(0)}
+}
+
+
+
+
+
+
+
 </style>
 
   </head>
@@ -886,9 +937,24 @@ body.dark .app-header{
 <header class="app-header">
 
   <div class="header-left">
- <span class="app-title">Ehliyet 2026 / Şahin Ehliyet</span>
+    <span class="app-title">Ehliyet 2026 / Şahin Ehliyet</span>
   </div>
+
+  <div class="header-right">
+
+    <!-- Haberler Butonu -->
+    <button class="header-btn"
+      onclick="location.href='haberler.html'"
+      title="Ehliyet Haberleri">
+
+      <i class="fa-solid fa-newspaper"></i>
+
+    </button>
+
+  </div>
+
 </header>
+
 
 
 
@@ -1383,6 +1449,77 @@ function closeNotify(){
 
 
 
+checkAnswered();
+
+function checkAnswered(){
+
+  let data =
+    JSON.parse(localStorage.getItem("questions")) || [];
+
+  // Cevaplanmış var mı?
+  let hasAnswer = data.some(q => q.answer && q.answer !== "");
+
+  const btn = document.getElementById("askBtn");
+
+  if(!btn) return;
+
+  // Temizle
+  btn.classList.remove("notify-answer");
+
+  const old = btn.querySelector(".answer-badge");
+  if(old) old.remove();
+
+  // Varsa göster
+  if(hasAnswer){
+
+    btn.classList.add("notify-answer");
+
+    const badge = document.createElement("div");
+    badge.className = "answer-badge";
+
+    badge.innerHTML = "➡️ Cevaplandı";
+
+    btn.appendChild(badge);
+  }
+
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  let data =
+    JSON.parse(localStorage.getItem("questions")) || [];
+
+  let hasAnswer = data.some(q=> q.answer && q.answer !== "");
+
+  let btn = document.getElementById("askBtn");
+
+  if(!btn){
+    console.log("askBtn bulunamadı!");
+    return;
+  }
+
+  // Eski efektleri temizle
+  btn.classList.remove("answered-glow");
+
+  let old = btn.querySelector(".answer-info");
+  if(old) old.remove();
+
+  // Eğer cevap varsa
+  if(hasAnswer){
+
+    btn.classList.add("answered-glow");
+
+    let badge = document.createElement("div");
+    badge.className = "answer-info";
+    badge.innerHTML = "➡️ Cevaplandı";
+
+    btn.appendChild(badge);
+  }
+
+});
+
+
 
 
     </script>
@@ -1441,6 +1578,11 @@ function closeNotify(){
     <button class="premium-btn" onclick="location.href='premium.html'">
     <i class="fa-solid fa-crown"></i>
     <span>Premium</span>
+  </button>
+
+    <button id="askBtn" onclick="location.href='soru.html'">
+    <i class="fa-solid fa-circle-question"></i>
+    <span>Sor</span>
   </button>
 
   <button onclick="toggleTheme()">
