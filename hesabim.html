@@ -934,24 +934,6 @@ body.dark .app-header{
   font-size: 17px;
 }
 
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.modal-box {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-}
-
-
     </style>
   </head>
 
@@ -1075,21 +1057,6 @@ body.dark .app-header{
         </div>
       </div>
     </div>
-
-
-<div id="premiumModal" class="modal">
-  <div class="modal-box">
-    <h3>🔒 Premium Gerekli</h3>
-    <p>Devam etmek için reklam izle veya premium ol</p>
-
-    <div class="modal-buttons">
-      <button onclick="watchAdFromAccount()">🎬 Reklam İzle</button>
-      <button onclick="goPremium()">⭐ Premium Al</button>
-    </div>
-  </div>
-</div>
-
-
 
     <script>
 const nicknameModal = document.getElementById("nicknameModal");
@@ -1253,9 +1220,7 @@ function saveNickname() {
       const btn = document.createElement("button");
       btn.className = "retry-btn";
       btn.textContent = "Tekrar Çöz";
-      btn.onclick = () => openPremiumFromAccount(k);
-
-
+      btn.onclick = () => openConfirm(k);
 
       div.appendChild(btn);
       list.appendChild(div);
@@ -1502,53 +1467,7 @@ function goPremium(){
 }
 
 
-
-let selectedTestKey = null;
-
-function openPremiumFromAccount(testKey) {
-  alert("butona basıldı: " + testKey);
-
-  selectedTestKey = testKey;
-
-  const isPremium = localStorage.getItem("isPremium") === "true";
-
-  if (isPremium) {
-    restartAndGo(testKey);
-  } else {
-    document.getElementById("premiumModal").style.display = "flex";
-  }
-}
-
-
-
-function restartAndGo(testKey) {
-
-  // sonucu sil
-  delete user.tests[testKey];
-  localStorage.setItem("user", JSON.stringify(user));
-
-  const url = testMap[testKey];
-  if (!url) {
-    alert("Test bulunamadı");
-    return;
-  }
-
-  location.href = url;
-}
-
-
-function watchAdFromAccount() {
-  if (!selectedTestKey) return;
-
-  Android.showRewardedAd(selectedTestKey);
-}
-
-function adCompleted(testKey) {
-  restartAndGo(testKey);
-}
-
-
-
     </script>
   </body>
 </html>
+
