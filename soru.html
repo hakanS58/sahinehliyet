@@ -24,6 +24,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <style>
 
 /* ================= RESET ================= */
@@ -766,47 +770,36 @@ function updateQuota(){
 
 /* SEND */
 
+
 function sendQuestion(){
 
-  const text = input.value.trim();
+  const text = document.getElementById("qInput").value.trim();
 
   if(text.length < 10){
-
-    errorBox.style.display = "block";
+    showPopup("❌ En az 10 karakter yaz");
     return;
   }
 
-  let data = getQuestions();
-
-  if(countActive() >= MAX_QUOTA){
-
-    showPopup("❗ Soru hakkın dolu");
-    return;
-  }
-
-
-  errorBox.style.display = "none";
-
-
-  data.unshift({
-    id: Date.now(),
+  db.collection("questions").add({
     question: text,
-    answer: ""
+    answer: "",
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  })
+  .then(()=>{
+
+    document.getElementById("qInput").value = "";
+
+    showPopup("✅ Sorun gönderildi");
+
+  })
+  .catch(err=>{
+    console.log(err);
+    showPopup("❌ Hata oluştu");
   });
 
-
-  saveQuestions(data);
-
-  input.value = "";
-
-  renderQuestions();
-
-  updateQuota();
-
-  showPopup("Sorun gönderildi ✔️");
-
-  document.getElementById("modal").classList.add("active");
 }
+
+
 
 
 /* DELETE */
@@ -938,6 +931,17 @@ function checkAnswered(){
 
 }
 
+const firebaseConfig = {
+  apiKey: "AIzaSyADUE7MKvWQLKh3kU4RgF2Xn_CFGV0bXN4",
+  authDomain: "sahinehliyetsoru.firebaseapp.com",
+  projectId: "sahinehliyetsoru",
+  storageBucket: "sahinehliyetsoru.firebasestorage.app",
+  messagingSenderId: "239399083549",
+  appId: "1:239399083549:web:bc00cb1671802fccbb70f4"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 
 
@@ -945,4 +949,3 @@ function checkAnswered(){
 
 </body>
 </html>
-
