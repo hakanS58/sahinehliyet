@@ -700,6 +700,15 @@ Tamam
 
 <script>
 
+    // USER ID (Her cihaza özel)
+let userId = localStorage.getItem("userId");
+
+if(!userId){
+  userId = "user_" + Date.now() + "_" + Math.random().toString(36).substr(2,9);
+  localStorage.setItem("userId", userId);
+}
+
+
 // DARK MODE
 if(localStorage.getItem("theme")==="true"){
   document.body.classList.add("dark");
@@ -752,11 +761,13 @@ async function sendQuestion(){
 
   errorBox.style.display="none";
 
-  await db.collection("questions").add({
-    question: text,
-    answer: "",
-    time: Date.now()
-  });
+ await db.collection("questions").add({
+  userId: userId,   // 👈 Kime ait
+  question: text,
+  answer: "",
+  time: Date.now()
+});
+
 
   input.value="";
 
@@ -772,9 +783,11 @@ async function loadMyQuestions(){
   listBox.innerHTML="";
 
   const snap = await db
-    .collection("questions")
-    .orderBy("time","desc")
-    .get();
+  .collection("questions")
+  .where("userId","==",userId) // 👈 Sadece benimkiler
+  .orderBy("time","desc")
+  .get();
+
 
   if(snap.empty){
 
@@ -837,4 +850,5 @@ loadMyQuestions();
 
 </body>
 </html>
+
 
