@@ -18,7 +18,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 :root{
 --bg:#f4f6fb;
 --card:#fff;
---text:#0f172a;
+--text:#000000;
 --primary:#2563eb;
 --shadow:0 10px 25px rgba(0,0,0,.1);
 }
@@ -26,7 +26,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 body.dark{
 --bg:#020617;
 --card:#020617;
---text:#e5e7eb;
+--text:#413788;
 --shadow:0 10px 25px rgba(0,0,0,.5);
 }
 
@@ -39,10 +39,15 @@ box-sizing:border-box;
 font-family:Poppins,system-ui;
 }
 
-body{
-background:var(--bg);
-color:var(--text);
-min-height:100vh;
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: .3s;
+padding-top: 20px;
+  padding-top: env(safe-area-inset-top);
+
+
 }
 
 /* ===== HEADER ===== */
@@ -220,6 +225,326 @@ font-size:17px;
 
 }
 
+.news-section {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,.1);
+  transition: 0.4s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.15);
+}
+
+.news-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: 14px 18px;
+}
+
+.news-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #1b2faf;
+}
+
+.news-content small {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.news-content p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.news-content a {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.news-content a:hover {
+  text-decoration: underline;
+  color: #1b2faf;
+}
+
+.highlight-card {
+  transform: scale(1.02);
+  border: 2px solid #06b6d4;
+}
+
+@media (min-width: 720px) {
+  .news-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ================= NEWS ================= */
+
+.news-section{
+  display:grid;
+  gap:18px;
+  margin:20px;
+}
+
+.news-card{
+  background:white;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,.1);
+  transition:.4s;
+}
+
+.news-card:hover{
+  transform:translateY(-4px);
+}
+
+.news-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.news-content{
+  padding:15px 18px;
+}
+
+.news-content h3{
+  font-size:17px;
+  color:#1e3a8a;
+  margin-bottom:5px;
+}
+
+.news-content small{
+  color:#64748b;
+  font-size:12px;
+}
+
+.news-content p{
+  font-size:14px;
+  margin:8px 0;
+  line-height:1.5;
+}
+
+.news-content button{
+  border:none;
+  background:#2563eb;
+  color:white;
+  padding:7px 14px;
+  border-radius:20px;
+  font-size:13px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.news-content button:hover{
+  background:#1d4ed8;
+}
+
+/* ================= MODAL ================= */
+
+.news-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.news-modal.active{
+  display:flex;
+}
+
+.news-modal-box{
+  background:white;
+  width:90%;
+  max-width:500px;
+  border-radius:18px;
+  overflow:hidden;
+  animation:pop .3s;
+}
+
+.news-modal-box img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.news-modal-box h2{
+  padding:12px;
+  font-size:20px;
+}
+
+.news-modal-box p{
+  padding:0 12px;
+  font-size:12px;
+  color:#64748b;
+}
+
+.news-modal-box div{
+  padding:12px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.close-btn{
+  position:absolute;
+  top:12px;
+  right:18px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+@keyframes pop{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+@media(min-width:700px){
+  .news-section{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+
+
+/* ===== NEWS BUTTON ===== */
+
+.read-btn{
+  margin-top:10px;
+  width:100%;
+
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:white;
+
+  border:none;
+  padding:10px;
+
+  border-radius:14px;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.read-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(37,99,235,.5);
+}
+
+
+/* ===== NEWS MODAL ===== */
+
+.news-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;        /* aktif değilken gizle */
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.news-modal.active{
+  display:flex;        /* aktifken göster */
+  animation:fade .3s;
+}
+
+
+
+.news-modal-box h2{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.news-modal-box p{
+  font-size:14px;
+  line-height:1.6;
+  opacity:.9;
+}
+
+
+
+.close-btn:hover{
+  opacity:1;
+}
+
+
+
+.close-btn:hover{
+  opacity:1;
+  color:#ff3b3b; /* kırmızı hover */
+}
+
+
+
+.news-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.news-modal.active{
+  display:flex;
+}
+
+
+.news-modal-box{
+  background:var(--card);
+  width:90%;
+  max-width:500px;
+  max-height:80vh;
+  overflow-y:auto; /* sadece içerik scroll olsun, overflow:hidden değil */
+  padding:22px;
+  border-radius:25px;
+  animation:pop .4s ease;
+  position:relative; /* close-btn için gerekli */
+}
+
+.close-btn{
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:28px;
+  font-weight:bold;
+  color:#2563eb; /* kontrastlı renk */
+  cursor:pointer;
+  z-index:1000;  /* modal-box içinde üstte kalır */
+}
+
+
 </style>
 </head>
 
@@ -240,96 +565,243 @@ font-size:17px;
 </header>
 
 
-<div class="container">
-
 
 <!-- INFO -->
 
-<div class="info-box">
-📰 Ehliyetle ilgili en güncel haberler burada
+<div class="container">
+
+  <!-- INFO -->
+  <div class="info-box">
+    📰 Ehliyetle ilgili en güncel haberler burada
+  </div>
+
+  <!-- HABERLER BURAYA GELECEK -->
+  <div class="news-section" id="newsList"></div>
+
+  <!-- HABER DETAY MODAL -->
+<div class="news-modal" id="newsModal">
+  <div class="news-modal-box">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <h2 id="mTitle"></h2>
+    <div class="news-date" id="mDate"></div>
+    <p id="mText"></p>
+  </div>
 </div>
 
 
-<!-- NEWS LIST -->
-
-<div id="newsList"></div>
-
 
 </div>
 
 
-<!-- MODAL -->
-
-<div class="modal" id="newsModal">
-
-<div class="modal-box">
-
-<h3 id="mTitle"></h3>
-
-<p id="mText"></p>
-
-<button onclick="closeModal()">Kapat</button>
-
-</div>
-
-</div>
 
 
 <script>
 
-const API_KEY = "6c66695354eecd5837f1aa91f79805ea";
+/* DARK MODE */
 
-const apiUrl = `
-https://gnews.io/api/v4/search
-?q=ehliyet trafik
-&lang=tr
-&country=tr
-&max=10
-&apikey=${API_KEY}
-`.replace(/\s+/g,"");
+if(localStorage.getItem("theme")==="true"){
+document.body.classList.add("dark");
+}
 
-const proxy = "https://api.allorigins.win/raw?url=";
+const newsData = [
 
-fetch(proxy + encodeURIComponent(apiUrl))
+{
+  id:1,
+  title:"B Sınıfı Ehliyette Geçme Puanı Tartışması Sürüyor",
+  date:"2026-01-12",
+  image:"h1.jpg",
+  summary:"SRC sınavlarında baraj düşerken B sınıfı ehliyette 70 puan şartı devam ediyor.",
+  content:`2026 yılında yapılan düzenlemelerle SRC sınavlarında geçme puanı 60’a düşürüldi. 
+Ancak B sınıfı ehliyet adayları için baraj hâlâ 70 puan olarak uygulanıyor.
 
-.then(res => res.json())
+Uzmanlara göre bu durum, ticari sürücüler için kolaylık sağlarken bireysel adayların daha disiplinli çalışmasını gerektiriyor.
 
-.then(data => {
+Adaylar özellikle trafik ve ilk yardım konularında daha dikkatli hazırlanmak zorunda kalıyor.`
+},
 
-  const box = document.getElementById("newsList");
+{
+  id:2,
+  title:"Video Sınavı Resmen Kaldırıldı",
+  date:"2026-02-03",
+  image:"h2.jpg",
+  summary:"Trafik senaryosu videoları artık sınavda sorulmuyor.",
+  content:`Daha önce adaylara trafik videoları izletilip yorum yapmaları isteniyordu.
 
-  if(!data.articles){
-    box.innerHTML = "❌ Haber bulunamadı";
-    return;
+2026 itibarıyla bu uygulama tamamen kaldırıldı. 
+Bu değişiklik sınav süresini kısalttı ve adayların stres seviyesini düşürdü.
+
+Yetkililer, yeni sistemin daha adil olduğunu belirtiyor.`
+},
+
+{
+  id:3,
+  title:"Ehliyet Yenileme Yönetmeliği Güncellendi",
+  date:"2026-01-29",
+  image:"h3.webp",
+  summary:"Resmi Gazete’de yayımlanan yeni düzenleme yürürlüğe girdi.",
+  content:`29 Ocak 2026’da yayımlanan yönetmelikle ehliyetlerin geçerlilik süresi güncellendi.
+
+Yeni sistemle birlikte belgeler dijital ortamda takip edilebiliyor.
+Vatandaşlar artık e-Devlet üzerinden yenileme durumlarını görebiliyor.
+
+Bu sayede yoğunluk büyük ölçüde azaldı.`
+},
+
+{
+  id:4,
+  title:"SRC Barajının Düşmesi Ticari Sürücüleri Rahatlattı",
+  date:"2026-02-10",
+  image:"h4.jpg",
+  summary:"Otobüs ve kamyon şoförleri için büyük kolaylık.",
+  content:`SRC sınavındaki puan düşüşü özellikle şehirlerarası taşımacılık yapan sürücülere yaradı.
+
+Firmalar artık daha hızlı personel bulabiliyor.
+Şoför adayları da kısa sürede belge alabiliyor.
+
+Sektör temsilcileri düzenlemeyi olumlu karşıladı.`
+},
+
+{
+  id:5,
+  title:"Ehliyet Kurslarında Yanlış Bilgi Sorunu",
+  date:"2026-01-20",
+  image:"h5.jpg",
+  summary:"Bazı kurslar adayları yanlış yönlendiriyor.",
+  content:`Bazı sürücü kurslarının “herkes için baraj düştü” şeklinde yanlış bilgi verdiği tespit edildi.
+
+Bu durum adayların hazırlıksız sınava girmesine neden oluyor.
+Yetkililer kurslara denetimlerin artırılacağını açıkladı.`
+},
+
+{
+  id:6,
+  title:"Paralel Park Hâlâ Zorunlu",
+  date:"2026-02-18",
+  image:"h6.jpg",
+  summary:"Sosyal medya iddiaları gerçeği yansıtmıyor.",
+  content:`Sosyal medyada “paralel park kaldırıldı” iddiaları yayılmıştı.
+
+Ancak yönetmelikte paralel park hâlâ kırmızı hata olarak geçiyor.
+Adaylar bu manevrayı yapmadan sınavı geçemiyor.
+
+Uzmanlar park çalışmasının ihmal edilmemesini öneriyor.`
+},
+
+{
+  id:7,
+  title:"Direksiyon Sınavlarında Sabit Parkur Kalktı",
+  date:"2026-03-02",
+  image:"h7.webp",
+  summary:"Sınavlar artık gerçek trafikte yapılıyor.",
+  content:`2026 itibarıyla sabit parkur uygulaması sona erdi.
+
+Sınavlar gerçek trafik ortamında gerçekleştiriliyor.
+Bu sayede adayların günlük hayata daha iyi hazırlanması hedefleniyor.
+
+Yeni sistem daha gerçekçi bulunuyor.`
+},
+
+{
+  id:8,
+  title:"Esnek Güzergâh Uygulaması Başladı",
+  date:"2026-02-25",
+  image:"h8.jpg",
+  summary:"Sınav yoğunluğu azalıyor.",
+  content:`İl ve ilçelerde farklı güzergâhlar kullanılmaya başlandı.
+
+Bu uygulama sayesinde sınav bekleme süresi kısaldı.
+Adaylar daha hızlı direksiyon sınavına girebiliyor.`
+},
+
+{
+  id:9,
+  title:"Direksiyon Sınavlarında Kamera Sistemi Gündemde",
+  date:"2026-01-15",
+  image:"h9.jpg",
+  summary:"Haksız değerlendirmeler için çözüm olabilir.",
+  content:`Kamu Denetçiliği Kurumu, sınavların kamera ile kaydedilmesini önerdi.
+
+Uygulama hayata geçerse adaylar görüntülerle itiraz edebilecek.
+Bu sistem şeffaflığı artırmayı hedefliyor.`
+},
+
+{
+  id:10,
+  title:"Aday Mağduriyetleri Artıyor",
+  date:"2026-02-28",
+  image:"h10.webp",
+  summary:"Başarısız sayılan adaylar tepkili.",
+  content:`Bazı adaylar ciddi hata yapmadıkları halde başarısız sayıldıklarını iddia ediyor.
+
+Bu durum tekrar sınav ücreti ve zaman kaybına yol açıyor.
+Yetkililer şikâyetleri incelemeye aldı.`
+}
+
+];
+
+const listBox = document.getElementById("newsList");
+const modal = document.getElementById("newsModal");
+
+function renderNews(){
+
+  listBox.innerHTML = "";
+
+  newsData.forEach(item=>{
+
+    const div = document.createElement("div");
+
+    div.className = "news-card";
+
+    div.innerHTML = `
+      <img src="${item.image}">
+      <h3>${item.title}</h3>
+      <p>${item.summary}</p>
+
+      <button class="read-btn"
+        onclick="openNews(${item.id})">
+        📖 Devamını Oku
+      </button>
+    `;
+
+    listBox.appendChild(div);
+
+  });
+
+}
+
+
+function openNews(id){
+
+  const data = newsData.find(n=>n.id===id);
+
+  document.getElementById("mTitle").textContent = data.title;
+  document.getElementById("mDate").textContent = data.date;
+  document.getElementById("mText").textContent = data.content;
+
+  document.getElementById("newsModal")
+    .classList.add("active");
+}
+
+function closeModal(){
+
+  document.getElementById("newsModal")
+    .classList.remove("active");
+}
+renderNews();
+
+// Modal kutusu dışında tıklayınca kapanma
+modal.addEventListener("click", function(e){
+  if(e.target === modal){
+    closeModal();
   }
-
-  box.innerHTML = data.articles.map(n => `
-
-    <div class="news-card">
-
-      <img src="${n.image || 'noimg.png'}">
-
-      <h3>${n.title}</h3>
-
-      <p>${n.description || ""}</p>
-
-      <a href="${n.url}" target="_blank">
-        Haberi Oku →
-      </a>
-
-    </div>
-
-  `).join("");
-
-})
-
-.catch(err=>{
-  console.log(err);
-  alert("Bağlantı hatası!");
 });
+function closeModal(){
+  modal.classList.remove("active");
+}
 
 </script>
 
 
+</div>
 </body>
 </html>
