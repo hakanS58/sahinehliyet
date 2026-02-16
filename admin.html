@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel | Şahin Ehliyet</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,system-ui;
+}
+
+/* ================= THEME ================= */
+
+:root{
+--bg:#f4f6fb;
+--card:#fff;
+--text:#020617;
+--primary:#2563eb;
+--shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+}
+
+
+/* ================= LOGIN ================= */
+
+.login-box{
+
+max-width:340px;
+margin:100px auto;
+
+background:var(--card);
+padding:25px;
+
+border-radius:20px;
+box-shadow:var(--shadow);
+
+text-align:center;
+
+animation:fade .5s;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1}
+}
+
+.login-box h2{
+margin-bottom:15px;
+}
+
+.login-box input{
+
+width:100%;
+padding:12px;
+
+border-radius:14px;
+border:1px solid #cbd5f5;
+
+margin-bottom:12px;
+font-size:15px;
+}
+
+.login-box button{
+
+width:100%;
+padding:12px;
+
+background:#2563eb;
+color:white;
+
+border:none;
+border-radius:14px;
+
+font-weight:600;
+cursor:pointer;
+}
+
+
+/* ================= PANEL ================= */
+
+.panel{
+display:none;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.panel h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+
+/* CARD */
+
+.admin-card{
+
+background:var(--card);
+border-radius:18px;
+
+padding:18px;
+margin-bottom:15px;
+
+box-shadow:var(--shadow);
+
+animation:fade .4s;
+}
+
+.admin-card p{
+margin:6px 0;
+}
+
+
+/* TEXTAREA */
+
+.admin-card textarea{
+
+width:100%;
+min-height:80px;
+
+border-radius:14px;
+border:1px solid #cbd5f5;
+
+padding:10px;
+
+resize:none;
+
+margin-top:8px;
+font-size:14px;
+}
+
+
+/* BUTTON */
+
+.admin-card button{
+
+margin-top:8px;
+
+background:#16a34a;
+color:white;
+
+border:none;
+
+padding:8px 14px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:13px;
+}
+
+.admin-card button:hover{
+opacity:.85;
+}
+
+.empty{
+text-align:center;
+opacity:.6;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="login-box" id="loginBox">
+
+<h2>🔐 Admin Girişi</h2>
+
+<input type="password" id="pass"
+placeholder="Admin Şifresi">
+
+<button onclick="login()">Giriş</button>
+
+<p id="loginErr"
+style="color:red;font-size:13px;display:none">
+Hatalı şifre
+</p>
+
+</div>
+
+
+<!-- PANEL -->
+
+<div class="panel" id="panel">
+
+<h2>📩 Gelen Sorular</h2>
+
+<div id="adminList"></div>
+
+<p class="empty" id="empty">
+Hiç soru yok.
+</p>
+
+</div>
+
+
+
+<script>
+
+/* ==== ŞİFRE ==== */
+const ADMIN_PASS = "1234"; // BURAYI DEĞİŞTİR
+
+
+function login(){
+
+  const pass =
+    document.getElementById("pass").value;
+
+  if(pass === ADMIN_PASS){
+
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("panel").style.display="block";
+
+    loadQuestions();
+
+  }else{
+
+    document.getElementById("loginErr").style.display="block";
+  }
+}
+
+
+/* ==== LOAD ==== */
+
+function getQuestions(){
+
+  return JSON.parse(
+    localStorage.getItem("questions") || "[]"
+  );
+}
+
+
+/* ==== RENDER ==== */
+
+function loadQuestions(){
+
+  const data = getQuestions();
+
+  const box = document.getElementById("adminList");
+  const empty = document.getElementById("empty");
+
+  box.innerHTML="";
+
+  if(data.length===0){
+
+    empty.style.display="block";
+    return;
+
+  }else{
+
+    empty.style.display="none";
+  }
+
+
+  data.forEach(q=>{
+
+    let div = document.createElement("div");
+
+    div.className="admin-card";
+
+
+    div.innerHTML = `
+
+      <p><b>Soru:</b> ${q.question}</p>
+
+      <p>
+        <b>Cevap:</b>
+        ${q.answer || "<i>Henüz cevap yok</i>"}
+      </p>
+
+      <textarea
+        placeholder="Cevap yaz..."
+        id="a${q.id}"
+      >${q.answer||""}</textarea>
+
+      <button onclick="saveAnswer(${q.id})">
+        Kaydet
+      </button>
+
+    `;
+
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+/* ==== SAVE ==== */
+
+function saveAnswer(id){
+
+  let data = getQuestions();
+
+  let text =
+    document.getElementById("a"+id).value;
+
+  data = data.map(q=>{
+
+    if(q.id === id){
+
+      q.answer = text;
+    }
+
+    return q;
+  });
+
+
+  localStorage.setItem(
+    "questions",
+    JSON.stringify(data)
+    
+  );
+
+
+  alert("Kaydedildi ✔️");
+
+  loadQuestions();
+  checkAnswered();
+
+}
+
+
+
+
+</script>
+
+</body>
+</html>
