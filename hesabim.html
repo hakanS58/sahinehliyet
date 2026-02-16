@@ -934,6 +934,137 @@ body.dark .app-header{
   font-size: 17px;
 }
 
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+
+ /* MODERN TEXT PREMIUM */
+
+  .premium-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+  }
+
+  .premium-box-modern{
+    width:92%;
+    max-width:360px;
+    background:white;
+    border-radius:22px;
+    padding:22px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    animation:pop .35s ease;
+  }
+
+  @keyframes pop{
+    from{transform:scale(.85);opacity:0}
+    to{transform:scale(1);opacity:1}
+  }
+
+  .premium-box-modern h3{
+    text-align:center;
+    font-size:18px;
+    margin-bottom:6px;
+  }
+
+  .premium-box-modern .desc{
+    text-align:center;
+    font-size:13px;
+    color:#64748b;
+    margin-bottom:14px;
+  }
+
+  /* CHOICES */
+
+  .choice-card{
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:12px;
+    cursor:pointer;
+    transition:.25s;
+    border:1px solid #e5e7eb;
+  }
+
+  .choice-card:hover{
+    transform:scale(1.03);
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+  }
+
+  /* HEAD */
+
+  .choice-head{
+    font-weight:700;
+    font-size:15px;
+    margin-bottom:6px;
+  }
+
+  /* AD */
+
+  .choice-card.ad{
+    background:#f0f9ff;
+    border-color:#3b82f6;
+  }
+
+  .choice-card.ad .choice-head{
+    color:#1d4ed8;
+  }
+
+  /* PREMIUM */
+
+  .choice-card.premium{
+    background:linear-gradient(135deg,#fff7cc,#fde047);
+    border-color:#eab308;
+  }
+
+  .choice-card.premium .choice-head{
+    color:#92400e;
+  }
+
+  /* TEXT */
+
+  .choice-card p{
+    font-size:13px;
+    color:#475569;
+    line-height:1.4;
+  }
+
+  /* CANCEL */
+
+  .cancel-btn{
+    width:100%;
+    margin-top:8px;
+    padding:11px;
+    border:none;
+    border-radius:12px;
+    background:#f1f5f9;
+    font-weight:600;
+    cursor:pointer;
+  }
+
+  .cancel-btn:hover{
+    background:#e2e8f0;
+  }
+
+
     </style>
   </head>
 
@@ -995,11 +1126,6 @@ body.dark .app-header{
   </button>
 </div>
 
-
-
-
-
-
       <div class="level-box">
         <div class="level-info">
           <span id="levelText"></span>
@@ -1029,39 +1155,76 @@ body.dark .app-header{
         </div>
       </div>
 
-
-
- 
-
-       
-
+      <div class="card">
+  <h4>🏆 Rozetlerin</h4>
+  <div id="rozetler"></div>
+</div>
 
 <div class="card">
-  <h4>🏆 Rozetlerin</h4>
-<div id="rozetler"></div>
+  <h3 style="margin-bottom: 20px;">📘 Çözülen Testler</h3>
+  <div id="testResults"></div>
 </div>
-      <div class="card">
-        <h3 style="margin-bottom: 20px;">📘 Çözülen Testler</h3>
-        <div id="testResults"></div>
-      </div>
-    </div>
 
-    <div id="confirmModal" class="modal">
-      <div class="modal-box">
-        <h3>Tekrar Çöz</h3>
-        <p>Sonuç silinecek. Devam?</p>
+      <!-- PREMIUM MODAL -->
 
-        <div class="modal-buttons">
-          <button class="cancel" onclick="closeConfirm()">Vazgeç</button>
-          <button class="confirm" onclick="confirmRestart()">Başla</button>
+<div id="premiumModal" class="premium-modal">
+
+    <div class="premium-box-modern">
+
+        <h3>Bir Seçenek Seç</h3>
+
+        <p class="desc">
+            Teste devam etmek için aşağıdan bir yöntem seç.
+        </p>
+
+        <!-- REKLAM -->
+
+        <div class="choice-card ad" onclick="watchAd()">
+
+
+            <div class="choice-head">
+                🎬 Reklam İzle
+            </div>
+
+            <p>
+                Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
+                Reklamdan sonra teste devam edebilirsin.
+            </p>
+
         </div>
-      </div>
+
+        <!-- PREMIUM -->
+
+        <div class="choice-card premium" onclick="goPremium()">
+
+            <div class="choice-head">
+                ⭐ Premium Al
+            </div>
+
+            <p>
+                Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
+                Sınırsız erişim elde et.
+            </p>
+
+        </div>
+
+        <button class="cancel-btn" onclick="closePremium()">
+            Vazgeç
+        </button>
+
+
     </div>
+
+
+</div>
+</div> <!-- premiumModal tamamen kapandı -->
+
+
+
 
     <script>
 const nicknameModal = document.getElementById("nicknameModal");
 const nicknameInput = document.getElementById("nicknameInput");
-const confirmModal = document.getElementById("confirmModal");
 const rozetler = document.getElementById("rozetler");
 const levelText = document.getElementById("levelText");
 const xpText = document.getElementById("xpText");
@@ -1131,156 +1294,6 @@ function saveNickname() {
 }
 
 
-
- function loadTests() {
-  testBox.innerHTML = "";
-
-  if (!user.tests || Object.keys(user.tests).length === 0) {
-    testBox.innerHTML = "Henüz test çözülmedi.";
-    return;
-  }
-
-  const categories = {
-    trafik: [],
-    motor: [],
-    ilkyardim: [],
-    trafikadabi: [],
-    deneme: []
-  };
-
-  // Testleri kategoriye ayır
-  Object.keys(user.tests).forEach((key) => {
-
-    const k = key.toLowerCase();
-
-    if (k.startsWith("trafik-")) {
-      categories.trafik.push(key);
-    }
-
-    else if (k.startsWith("motor-")) {
-      categories.motor.push(key);
-    }
-
-    else if (k.startsWith("ilkyardim-")) {
-      categories.ilkyardim.push(key);
-    }
-
-    else if (
-      k.startsWith("adab-") ||
-      k.startsWith("adap-") ||
-      k.startsWith("trafikadab") ||
-      k.startsWith("trafikadap")
-    ) {
-      categories.trafikadabi.push(key);
-    }
-
-    else if (k.startsWith("deneme-")) {
-      categories.deneme.push(key);
-    }
-
-  });
-
-  const titles = {
-  trafik: "🚦 Trafik Testleri",
-  motor: "⚙️ Motor Testleri",
-  ilkyardim: "🩹 İlk Yardım Testleri",
-  trafikadabi: "🤝 Trafik Adabı Testleri",
-  deneme: "📝 Deneme Sınavları"
-};
-
-
-  // Ekrana bas
-  Object.keys(categories).forEach((cat) => {
-
-    if (categories[cat].length === 0) return;
-
-    const wrap = document.createElement("div");
-    wrap.className = "test-category";
-
-    const title = document.createElement("h4");
-    title.textContent = titles[cat];
-
-    const list = document.createElement("div");
-    list.className = "test-list";
-
-    categories[cat].forEach((k) => {
-
-      const t = user.tests[k];
-
-      const div = document.createElement("div");
-      div.className = "test-item";
-
-      div.innerHTML = `
-        <div>
-          ✅ ${k.toUpperCase()}<br>
-          Başarı: %${t.percent}
-        </div>
-      `;
-
-      const btn = document.createElement("button");
-      btn.className = "retry-btn";
-      btn.textContent = "Tekrar Çöz";
-      btn.onclick = () => openConfirm(k);
-
-      div.appendChild(btn);
-      list.appendChild(div);
-    });
-
-    wrap.appendChild(title);
-    wrap.appendChild(list);
-    testBox.appendChild(wrap);
-  });
-}
-
-
-
-      let selected = null;
-
-      function openConfirm(k) {
-        selected = k;
-        confirmModal.style.display = "flex";
-      }
-
-      function closeConfirm() {
-        selected = null;
-        confirmModal.style.display = "none";
-      }
-
-      function confirmRestart() {
-        if (!selected) return;
-
-        delete user.tests[selected];
-        localStorage.setItem("user", JSON.stringify(user));
-
-        const map = {
-          "trafik-test-1": "trafiktest1.html",
-          "trafik-test-2": "trafiktest2.html",
-          "trafik-test-3": "trafiktest3.html",
-
-          "motor-test-1": "motortest1.html",
-          "motor-test-2": "motortest2.html",
-          "motor-test-3": "motortest3.html",
-
-          "ilkyardim-test-1": "ilkyardimtest1.html",
-          "ilkyardim-test-2": "ilkyardimtest2.html",
-          "ilkyardim-test-3": "ilkyardimtest3.html",
-
-          "trafikadabı-test-1": "trafikadabıtest1.html",
-          "trafikadabı-test-2": "trafikadabıtest2.html",
-          "trafikadabı-test-3": "trafikadabıtest3.html",
-
-          "deneme-test-1": "deneme1.html",
-          "deneme-test-2": "deneme2.html",
-          "deneme-test-3": "deneme3.html",
-        };
-
-        if (!map[selected]) {
-          alert("Dosya bulunamadı!");
-          return;
-        }
-
-        location.href = map[selected];
-      }
 
       if (localStorage.getItem("dark") === "1")
         document.body.classList.add("dark");
@@ -1418,34 +1431,23 @@ function updatePremiumUI() {
   const status = document.getElementById("userStatus");
   const btn = document.getElementById("premiumBtn");
 
-  // 🔥 GERÇEK KAYNAK
-  const isPremium = localStorage.getItem("isPremium") === "true";
+  const savedUser = JSON.parse(localStorage.getItem("user")) || {};
+  user.isPremium = savedUser.isPremium === true;
 
-  // user objesini senkronla
-  user.isPremium = isPremium;
   localStorage.setItem("user", JSON.stringify(user));
 
-  if (isPremium) {
+  if (user.isPremium) {
 
     status.innerHTML = "⭐ Premium Kullanıcı";
     status.style.color = "#f59e0b";
-
     btn.style.display = "none";
 
   } else {
 
     status.innerHTML = "🧑 Normal Kullanıcı";
     status.style.color = "#64748b";
-
     btn.style.display = "inline-block";
   }
-}
-
-window.addEventListener("focus", updatePremiumUI);
-
-
-function goPremium(){
-  window.location.assign("premium.html");
 }
 
 
@@ -1466,8 +1468,158 @@ function goPremium(){
   updatePremiumUI();
 }
 
+function loadTests() {
+
+  testBox.innerHTML = "";
+
+  if (!user.tests || Object.keys(user.tests).length === 0) {
+    testBox.innerHTML = "Henüz test çözülmedi.";
+    return;
+  }
+
+  Object.keys(user.tests).forEach((k) => {
+
+    const t = user.tests[k];
+
+    const div = document.createElement("div");
+    div.className = "test-item";
+
+    div.innerHTML = `
+      <div>
+        ✅ ${k.toUpperCase()}<br>
+        Başarı: %${t.percent}
+      </div>
+    `;
+
+    const btn = document.createElement("button");
+    btn.className = "retry-btn";
+    btn.textContent = "Tekrar Çöz";
+
+    // 🔥 YENİ AKIŞ BURADA
+    btn.onclick = () => retryTest(k);
+
+    div.appendChild(btn);
+    testBox.appendChild(div);
+  });
+}
+
+
+const testMap = {
+  "trafik-test-1": "trafiktest1.html",
+  "trafik-test-2": "trafiktest2.html",
+  "trafik-test-3": "trafiktest3.html",
+
+  "motor-test-1": "motortest1.html",
+  "motor-test-2": "motortest2.html",
+  "motor-test-3": "motortest3.html",
+
+  "ilkyardim-test-1": "ilkyardimtest1.html",
+  "ilkyardim-test-2": "ilkyardimtest2.html",
+  "ilkyardim-test-3": "ilkyardimtest3.html",
+
+  "trafikadabi-test-1": "trafikadabitest1.html",
+  "trafikadabi-test-2": "trafikadabitest2.html",
+  "trafikadabi-test-3": "trafikadabitest3.html",
+
+  "deneme-test-1": "deneme1.html",
+  "deneme-test-2": "deneme2.html",
+  "deneme-test-3": "deneme3.html",
+};
+
+
+let selectedTestKey = null;
+
+function retryTest(testKey) {
+
+  selectedTestKey = testKey;
+
+  if (user.isPremium) {
+    // Premium ise direkt teste gir
+    goToTest(testKey);
+  } else {
+    // Premium değilse popup göster
+    document.getElementById("premiumModal").style.display = "flex";
+  }
+}
+
+
+
+/* ================================
+   TESTE GİT (Sonuç Sil + Yönlendir)
+================================ */
+
+function goToTest(testKey) {
+
+  delete user.tests[testKey];
+  localStorage.setItem("user", JSON.stringify(user));
+
+  const url = testMap[testKey];
+
+  if (!url) {
+    alert("Test bulunamadı");
+    return;
+  }
+
+  location.href = url;
+}
+
+
+/* ================================
+   REKLAM İZLE
+================================ */
+
+function watchAd() {
+
+  if (!selectedTestKey) return;
+
+  document.getElementById("premiumModal").style.display = "none";
+
+  Android.showRewardedAd(selectedTestKey);
+}
+
+
+/* ================================
+   ANDROID REKLAM BİTTİ CALLBACK
+================================ */
+
+function adCompleted(testKey) {
+
+  selectedTestKey = testKey;
+
+  goToTest(testKey);
+}
+
+
+/* ================================
+   PREMIUM SAYFASI
+================================ */
+
+function goPremium() {
+  window.location.href = "premium.html";
+}
+
+
+/* ================================
+   BAŞLAT
+================================ */
+
+loadTests();
+
+
+
+function closePremium(){
+document.getElementById("premiumModal").style.display="none";
+}
+
+
+
+
+
+
+
+
+
 
     </script>
   </body>
 </html>
-
