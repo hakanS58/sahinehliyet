@@ -695,146 +695,94 @@ Tamam
 </div>
 
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <script>
 
-/* DARK MODE */
-
+// DARK MODE
 if(localStorage.getItem("theme")==="true"){
-document.body.classList.add("dark");
+  document.body.classList.add("dark");
 }
 
 
-/* CLOSE MODAL */
+// FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyADUE7MKvWQLKh3kU4RgF2Xn_CFGV0bXN4",
+  authDomain: "sahinehliyetsoru.firebaseapp.com",
+  projectId: "sahinehliyetsoru",
+  storageBucket: "sahinehliyetsoru.appspot.com",
+  messagingSenderId: "239399083549",
+  appId: "1:239399083549:web:bc00cb1671802fccbb70f4"
+};
 
-function closeModal(){
-document.getElementById("modal").classList.remove("active");
-}
-
-/* FAQ */
-
-document.querySelectorAll(".faq-item").forEach(item=>{
-
-item.addEventListener("click",()=>{
-
-item.classList.toggle("active");
-
-});
-
-});
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 
-
-const MAX_QUOTA = 2;
-
-const errorBox = document.getElementById("formError");
-const listBox = document.getElementById("questionList");
+// ELEMENTS
 const input = document.getElementById("qInput");
-const quotaText = document.getElementById("quotaText");
+const listBox = document.getElementById("questionList");
+const errorBox = document.getElementById("formError");
+const popup = document.getElementById("popup");
+const emptyText = document.getElementById("emptyText");
 
 
-/* GET QUESTIONS */
+// POPUP
+function showPopup(msg){
 
-function getQuestions(){
-  return JSON.parse(localStorage.getItem("questions")) || [];
+  popup.textContent = msg;
+  popup.style.display="block";
+
+  setTimeout(()=>{
+    popup.style.display="none";
+  },2000);
 }
 
 
-/* SAVE */
-
-function saveQuestions(data){
-  localStorage.setItem("questions",JSON.stringify(data));
-}
-
-
-/* COUNT ACTIVE */
-
-function countActive(){
-
-  let data = getQuestions();
-
-  return data.filter(q=>!q.answer).length;
-}
-
-
-/* UPDATE QUOTA */
-
-function updateQuota(){
-
-  let active = countActive();
-
-  let remain = MAX_QUOTA - active;
-
-  quotaText.textContent = remain;
-}
-
-
-/* SEND */
-
-
+// SEND QUESTION
 async function sendQuestion(){
 
-  let text = document.getElementById("qInput").value.trim();
+  const text = input.value.trim();
 
   if(text.length < 10){
-    document.getElementById("formError").style.display="block";
+    errorBox.style.display="block";
     return;
   }
 
-  document.getElementById("formError").style.display="none";
+  errorBox.style.display="none";
 
-  await addDoc(collection(db,"questions"),{
-    question:text,
-    answer:"",
-    time:Date.now()
+  await db.collection("questions").add({
+    question: text,
+    answer: "",
+    time: Date.now()
   });
 
-  document.getElementById("qInput").value="";
+  input.value="";
 
   showPopup("✔️ Sorun gönderildi");
 
-  loadMyQuestions(); // tekrar yükle
+  loadMyQuestions();
 }
 
 
-
-
-
-/* DELETE */
-
-function deleteQuestion(id){
-
-  let data = getQuestions();
-
-  data = data.filter(q=>q.id !== id);
-
-  saveQuestions(data);
-
-  renderQuestions();
-
-  updateQuota();
-
-  showPopup("Soru silindi 🗑️");
-}
-
-
-/* RENDER */
-
+// LOAD QUESTIONS
 async function loadMyQuestions(){
 
-  const box = document.getElementById("questionList");
-  box.innerHTML="";
+  listBox.innerHTML="";
 
-  const q = query(
-    collection(db,"questions"),
-    orderBy("time","desc")
-  );
-
-  const snap = await getDocs(q);
+  const snap = await db
+    .collection("questions")
+    .orderBy("time","desc")
+    .get();
 
   if(snap.empty){
-    box.innerHTML="<p class='empty-text'>Henüz soru sormadın.</p>";
+
+    emptyText.style.display="block";
     return;
   }
+
+  emptyText.style.display="none";
 
   snap.forEach(doc=>{
 
@@ -843,95 +791,50 @@ async function loadMyQuestions(){
     const div = document.createElement("div");
     div.className="question-item";
 
-    div.innerHTML=`
+    div.innerHTML = `
 
       <p><b>Soru:</b> ${d.question}</p>
 
       ${
         d.answer
-        ? `<div class="answer"><b>Cevap:</b> ${d.answer}</div>`
+        ? `<div class="answer">
+            <b>✅ Cevaplandı:</b><br>${d.answer}
+          </div>`
         : `<small>⏳ Cevap bekleniyor</small>`
       }
 
     `;
 
-    box.appendChild(div);
+    listBox.appendChild(div);
   });
 
 }
-+
 
 
+// FAQ
+document.querySelectorAll(".faq-item").forEach(item=>{
 
-/* INIT */
+  item.addEventListener("click",()=>{
 
-renderQuestions();
-updateQuota();
+    item.classList.toggle("active");
 
-function showPopup(msg){
+  });
 
-  const box = document.getElementById("popup");
+});
 
-  box.textContent = msg;
-  box.style.display = "block";
 
-  setTimeout(()=>{
-    box.style.display="none";
-  },2000);
-
+// MODAL
+function closeModal(){
+  document.getElementById("modal").classList.remove("active");
 }
 
 
-checkAnswered();
-function checkAnswered(){
-
-  let data =
-    JSON.parse(localStorage.getItem("questions")) || [];
-
-  // Cevaplanmış soru var mı?
-  let hasAnswer = data.some(q => q.answer && q.answer !== "");
-
-  const btn = document.getElementById("askBtn");
-
-  if(!btn) return;
-
-  // Önce temizle
-  btn.classList.remove("notify-answer");
-
-  const oldBadge = btn.querySelector(".answer-badge");
-  if(oldBadge) oldBadge.remove();
-
-  // Eğer cevap varsa efekt ekle
-  if(hasAnswer){
-
-    btn.classList.add("notify-answer");
-
-    const badge = document.createElement("div");
-    badge.className = "answer-badge";
-
-    badge.innerHTML = "➡️ Cevaplandı";
-
-    btn.appendChild(badge);
-  }
-
-}
-
-const firebaseConfig = {
-  apiKey: "AIzaSyADUE7MKvWQLKh3kU4RgF2Xn_CFGV0bXN4",
-  authDomain: "sahinehliyetsoru.firebaseapp.com",
-  projectId: "sahinehliyetsoru",
-  storageBucket: "sahinehliyetsoru.firebasestorage.app",
-  messagingSenderId: "239399083549",
-  appId: "1:239399083549:web:bc00cb1671802fccbb70f4"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
+// INIT
 loadMyQuestions();
-
 
 </script>
 
+
 </body>
 </html>
+
