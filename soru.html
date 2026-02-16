@@ -771,33 +771,30 @@ function updateQuota(){
 /* SEND */
 
 
-function sendQuestion(){
+async function sendQuestion(){
 
-  const text = document.getElementById("qInput").value.trim();
+  let text = document.getElementById("qInput").value.trim();
 
   if(text.length < 10){
-    showPopup("❌ En az 10 karakter yaz");
+    document.getElementById("formError").style.display="block";
     return;
   }
 
-  db.collection("questions").add({
-    question: text,
-    answer: "",
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  })
-  .then(()=>{
+  document.getElementById("formError").style.display="none";
 
-    document.getElementById("qInput").value = "";
-
-    showPopup("✅ Sorun gönderildi");
-
-  })
-  .catch(err=>{
-    console.log(err);
-    showPopup("❌ Hata oluştu");
+  await addDoc(collection(db,"questions"),{
+    question:text,
+    answer:"",
+    time:Date.now()
   });
 
+  document.getElementById("qInput").value="";
+
+  showPopup("✔️ Sorun gönderildi");
+
+  loadMyQuestions(); // tekrar yükle
 }
+
 
 
 
@@ -822,59 +819,47 @@ function deleteQuestion(id){
 
 /* RENDER */
 
-function renderQuestions(){
+async function loadMyQuestions(){
 
-  let data = getQuestions();
+  const box = document.getElementById("questionList");
+  box.innerHTML="";
 
-  const empty = document.getElementById("emptyText");
+  const q = query(
+    collection(db,"questions"),
+    orderBy("time","desc")
+  );
 
-  listBox.innerHTML = "";
+  const snap = await getDocs(q);
 
-
-  // Hiç soru yoksa
-  if(data.length === 0){
-
-    empty.style.display = "block";
+  if(snap.empty){
+    box.innerHTML="<p class='empty-text'>Henüz soru sormadın.</p>";
     return;
-
-  }else{
-
-    empty.style.display = "none";
   }
 
+  snap.forEach(doc=>{
 
-  data.forEach(item=>{
+    const d = doc.data();
 
-    let div = document.createElement("div");
+    const div = document.createElement("div");
+    div.className="question-item";
 
-    div.className = "question-item";
+    div.innerHTML=`
 
-
-    div.innerHTML = `
-
-      <button class="delete-btn"
-        onclick="deleteQuestion(${item.id})">
-        Sil
-      </button>
-
-      <p><b>Soru:</b> ${item.question}</p>
+      <p><b>Soru:</b> ${d.question}</p>
 
       ${
-        item.answer
-        ? `<div class="answer">
-            <b>Cevap:</b> ${item.answer}
-          </div>`
+        d.answer
+        ? `<div class="answer"><b>Cevap:</b> ${d.answer}</div>`
         : `<small>⏳ Cevap bekleniyor</small>`
       }
 
     `;
 
-
-    listBox.appendChild(div);
-
+    box.appendChild(div);
   });
 
 }
++
 
 
 
@@ -943,6 +928,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+loadMyQuestions();
 
 
 </script>
