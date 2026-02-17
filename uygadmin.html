@@ -8,6 +8,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <style>
+
 body{
   font-family:Arial;
   background:#f4f6fb;
@@ -19,12 +20,13 @@ body{
   padding:15px;
   border-radius:10px;
   margin-bottom:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,.1);
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
 textarea{
   width:100%;
   height:60px;
+  margin-top:5px;
 }
 
 button{
@@ -34,23 +36,32 @@ button{
   padding:6px 12px;
   border-radius:6px;
   cursor:pointer;
+  margin-top:5px;
 }
+
+small{
+  color:#555;
+}
+
 </style>
 </head>
 
 <body>
 
-<h2>📋 Soru Paneli</h2>
+<h2>📋 Admin Panel</h2>
 
 <div id="list"></div>
 
+
 <script>
+
+// ================= FIREBASE =================
 
 const firebaseConfig = {
   apiKey: "AIzaSyADUE7MKvWQLKh3kU4RgF2Xn_CFGV0bXN4",
   authDomain: "sahinehliyetsoru.firebaseapp.com",
   projectId: "sahinehliyetsoru",
-  storageBucket: "sahinehliyetsoru.firebasestorage.app",
+  storageBucket: "sahinehliyetsoru.appspot.com",
   messagingSenderId: "239399083549",
   appId: "1:239399083549:web:bc00cb1671802fccbb70f4"
 };
@@ -59,67 +70,66 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 
-function load(){
+// ================= LOAD =================
 
-  db.collection("questions")
-  .onSnapshot(snap=>{
+db.collection("questions")
+.orderBy("time","desc")
+.onSnapshot(snap=>{
 
-    const box = document.getElementById("list");
+  const box = document.getElementById("list");
 
-    box.innerHTML = "";
+  box.innerHTML="";
 
-    snap.forEach(doc=>{
+  snap.forEach(doc=>{
 
-      const d = doc.data();
+    const d = doc.data();
 
-      box.innerHTML += `
+    box.innerHTML += `
 
       <div class="card">
 
-        <p><b>Soru:</b> ${d.question}</p>
+        <b>Soru:</b> ${d.question}<br>
 
-        <p><b>Cevap:</b> ${d.answer || "Yok"}</p>
+        <small>Kullanıcı: ${d.userId}</small><br><br>
+
+        <b>Cevap:</b> ${d.answer || "Yok"}
 
         <textarea id="a_${doc.id}"
         placeholder="Cevap yaz..."></textarea>
 
-        <br><br>
-
         <button onclick="reply('${doc.id}')">
-          Cevapla
+          Gönder
         </button>
 
       </div>
 
-      `;
+    `;
+
+  });
+
+});
+
+
+// ================= REPLY =================
+
+async function reply(id){
+
+  const val =
+    document.getElementById("a_"+id).value.trim();
+
+  if(!val) return;
+
+  await db.collection("questions")
+    .doc(id)
+    .update({
+
+      answer: val
 
     });
 
-  });
-
 }
-
-
-function reply(id){
-
-  const val =
-    document.getElementById("a_"+id).value;
-
-  if(!val.trim()) return;
-
-  db.collection("questions")
-  .doc(id)
-  .update({
-    answer: val
-  });
-
-}
-
-
-load();
 
 </script>
 
 </body>
 </html>
-
