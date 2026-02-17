@@ -604,8 +604,8 @@ placeholder="Örnek: Direksiyon sınavında kaç hata yapılabilir?"></textarea>
 
   <h3>📩 Sorduğum Sorular</h3>
 
-  <div id="loadMyQuestions"></div>
-
+  <div id="questionList"></div>
+    
 </div>
 
 <div id="emptyText" class="empty-text">
@@ -700,6 +700,9 @@ Tamam
 
 <script type="module">
 
+const MAX_QUOTA = 2;
+const quotaText = document.getElementById("quotaText");
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import {
   getFirestore,
@@ -766,7 +769,7 @@ function showPopup(msg){
 // SEND QUESTION
 async function sendQuestion(){
 
-  let text = qInput.value.trim();
+  let text = input.value.trim();
 
   if(text.length < 10){
     errorBox.style.display="block";
@@ -775,7 +778,6 @@ async function sendQuestion(){
 
   errorBox.style.display="none";
 
-  // Kota kontrol
   const snap = await getDocs(collection(db,"questions"));
 
   if(snap.size >= 2){
@@ -786,15 +788,17 @@ async function sendQuestion(){
   await addDoc(collection(db,"questions"),{
     question: text,
     answer: "",
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    userId: userId
   });
 
-  qInput.value="";
+  input.value="";
 
   showPopup("✔️ Sorun gönderildi");
 
   loadMyQuestions();
 }
+
 
 
 // LOAD QUESTIONS
@@ -891,12 +895,14 @@ function closeModal(){
 
 // INIT
 loadMyQuestions();
-
+window.sendQuestion = sendQuestion;
+window.deleteQuestion = deleteQuestion;
 </script>
 
 
 </body>
 </html>
+
 
 
 
