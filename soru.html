@@ -698,7 +698,20 @@ Tamam
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-<script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
 
     // USER ID (Her cihaza özel)
 let userId = localStorage.getItem("userId");
@@ -725,8 +738,9 @@ const firebaseConfig = {
   appId: "1:239399083549:web:bc00cb1671802fccbb70f4"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 
 
 // ELEMENTS
@@ -752,7 +766,7 @@ function showPopup(msg){
 // SEND QUESTION
 async function sendQuestion(){
 
-  const text = input.value.trim();
+  let text = qInput.value.trim();
 
   if(text.length < 10){
     errorBox.style.display="block";
@@ -761,15 +775,21 @@ async function sendQuestion(){
 
   errorBox.style.display="none";
 
- await db.collection("questions").add({
-  userId: userId,   // 👈 Kime ait
-  question: text,
-  answer: "",
-  time: Date.now()
-});
+  // Kota kontrol
+  const snap = await getDocs(collection(db,"questions"));
 
+  if(snap.size >= 2){
+    alert("En fazla 2 soru sorabilirsin");
+    return;
+  }
 
-  input.value="";
+  await addDoc(collection(db,"questions"),{
+    question: text,
+    answer: "",
+    createdAt: Date.now()
+  });
+
+  qInput.value="";
 
   showPopup("✔️ Sorun gönderildi");
 
@@ -782,46 +802,73 @@ async function loadMyQuestions(){
 
   listBox.innerHTML="";
 
-  const snap = await db
-  .collection("questions")
-  .where("userId","==",userId) // 👈 Sadece benimkiler
-  .orderBy("time","desc")
-  .get();
+  const q = query(
+    collection(db,"questions"),
+    orderBy("createdAt","desc")
+  );
 
+  const snap = await getDocs(q);
 
   if(snap.empty){
-
-    emptyText.style.display="block";
+    document.getElementById("emptyText").style.display="block";
     return;
   }
 
-  emptyText.style.display="none";
+  document.getElementById("emptyText").style.display="none";
 
-  snap.forEach(doc=>{
+  snap.forEach(docu=>{
 
-    const d = doc.data();
+    const d = docu.data();
 
     const div = document.createElement("div");
     div.className="question-item";
 
-    div.innerHTML = `
+    div.innerHTML=`
+
+      <button class="delete-btn"
+        onclick="deleteQuestion('${docu.id}')">
+        Sil
+      </button>
 
       <p><b>Soru:</b> ${d.question}</p>
 
       ${
         d.answer
-        ? `<div class="answer">
-            <b>✅ Cevaplandı:</b><br>${d.answer}
-          </div>`
-        : `<small>⏳ Cevap bekleniyor</small>`
+        ? `<div class="answer">${d.answer}</div>`
+        : `<small>⏳ Bekleniyor</small>`
       }
-
     `;
 
     listBox.appendChild(div);
   });
 
+  updateQuota();
 }
+
+    async function deleteQuestion(id){
+
+  await deleteDoc(doc(db,"questions",id));
+
+  loadMyQuestions();
+
+  showPopup("Soru silindi 🗑️");
+}
+
+    async function updateQuota(){
+
+  const snap = await getDocs(collection(db,"questions"));
+
+  let active = 0;
+
+  snap.forEach(d=>{
+    if(!d.data().answer){
+      active++;
+    }
+  });
+
+  quotaText.textContent = MAX_QUOTA - active;
+}
+
 
 
 // FAQ
@@ -850,6 +897,7 @@ loadMyQuestions();
 
 </body>
 </html>
+
 
 
 
