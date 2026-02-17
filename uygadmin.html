@@ -62,7 +62,6 @@ const db = firebase.firestore();
 function load(){
 
   db.collection("questions")
-  .orderBy("createdAt","desc")
   .onSnapshot(snap=>{
 
     const box = document.getElementById("list");
@@ -123,3 +122,4 @@ load();
 
 </body>
 </html>
+
