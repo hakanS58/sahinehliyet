@@ -698,40 +698,10 @@ Tamam
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-<script type="module">
+<script>
 
-const MAX_QUOTA = 2;
-const quotaText = document.getElementById("quotaText");
+// ================= FIREBASE =================
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  deleteDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
-
-    // USER ID (Her cihaza özel)
-let userId = localStorage.getItem("userId");
-
-if(!userId){
-  userId = "user_" + Date.now() + "_" + Math.random().toString(36).substr(2,9);
-  localStorage.setItem("userId", userId);
-}
-
-
-// DARK MODE
-if(localStorage.getItem("theme")==="true"){
-  document.body.classList.add("dark");
-}
-
-
-// FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyADUE7MKvWQLKh3kU4RgF2Xn_CFGV0bXN4",
   authDomain: "sahinehliyetsoru.firebaseapp.com",
@@ -741,24 +711,38 @@ const firebaseConfig = {
   appId: "1:239399083549:web:bc00cb1671802fccbb70f4"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 
+// ================= AYAR =================
 
-// ELEMENTS
+const MAX_QUOTA = 2;
+
 const input = document.getElementById("qInput");
 const listBox = document.getElementById("questionList");
+const quotaText = document.getElementById("quotaText");
 const errorBox = document.getElementById("formError");
 const popup = document.getElementById("popup");
 const emptyText = document.getElementById("emptyText");
 
 
-// POPUP
+// ================= USER ID =================
+
+let userId = localStorage.getItem("userId");
+
+if(!userId){
+  userId = "user_" + Date.now();
+  localStorage.setItem("userId", userId);
+}
+
+
+// ================= POPUP =================
+
 function showPopup(msg){
 
   popup.textContent = msg;
-  popup.style.display="block";
+  popup.style.display = "block";
 
   setTimeout(()=>{
     popup.style.display="none";
@@ -766,7 +750,8 @@ function showPopup(msg){
 }
 
 
-// SEND QUESTION
+// ================= SEND =================
+
 async function sendQuestion(){
 
   let text = input.value.trim();
@@ -778,19 +763,30 @@ async function sendQuestion(){
 
   errorBox.style.display="none";
 
-  const snap = await getDocs(collection(db,"questions"));
 
-  if(snap.size >= 2){
+  // Kota kontrol
+  const snap = await db
+    .collection("questions")
+    .where("userId","==",userId)
+    .where("answer","==","")
+    .get();
+
+
+  if(snap.size >= MAX_QUOTA){
     alert("En fazla 2 soru sorabilirsin");
     return;
   }
 
-  await addDoc(collection(db,"questions"),{
+
+  await db.collection("questions").add({
+
     question: text,
     answer: "",
     createdAt: Date.now(),
     userId: userId
+
   });
+
 
   input.value="";
 
@@ -800,37 +796,47 @@ async function sendQuestion(){
 }
 
 
+// ================= LOAD =================
 
-// LOAD QUESTIONS
 async function loadMyQuestions(){
 
   listBox.innerHTML="";
 
-  const q = query(
-    collection(db,"questions"),
-    orderBy("createdAt","desc")
-  );
+  const snap = await db
+    .collection("questions")
+    .where("userId","==",userId)
+    .orderBy("createdAt","desc")
+    .get();
 
-  const snap = await getDocs(q);
 
   if(snap.empty){
-    document.getElementById("emptyText").style.display="block";
+
+    emptyText.style.display="block";
     return;
+
   }
 
-  document.getElementById("emptyText").style.display="none";
+  emptyText.style.display="none";
 
-  snap.forEach(docu=>{
 
-    const d = docu.data();
+  let active = 0;
+
+
+  snap.forEach(doc=>{
+
+    const d = doc.data();
+
+    if(!d.answer) active++;
+
 
     const div = document.createElement("div");
     div.className="question-item";
 
-    div.innerHTML=`
+
+    div.innerHTML = `
 
       <button class="delete-btn"
-        onclick="deleteQuestion('${docu.id}')">
+        onclick="deleteQuestion('${doc.id}')">
         Sil
       </button>
 
@@ -841,37 +847,42 @@ async function loadMyQuestions(){
         ? `<div class="answer">${d.answer}</div>`
         : `<small>⏳ Bekleniyor</small>`
       }
+
     `;
 
     listBox.appendChild(div);
+
   });
 
-  updateQuota();
+
+  quotaText.textContent = MAX_QUOTA - active;
 }
 
-    async function deleteQuestion(id){
 
-  await deleteDoc(doc(db,"questions",id));
+// ================= DELETE =================
+
+async function deleteQuestion(id){
+
+  await db.collection("questions").doc(id).delete();
 
   loadMyQuestions();
 
   showPopup("Soru silindi 🗑️");
 }
 
-    async function updateQuota(){
 
-  const snap = await getDocs(collection(db,"questions"));
+// ================= INIT =================
 
-  let active = 0;
+loadMyQuestions();
 
-  snap.forEach(d=>{
-    if(!d.data().answer){
-      active++;
-    }
-  });
 
-  quotaText.textContent = MAX_QUOTA - active;
+    // DARK MODE
+if(localStorage.getItem("theme")==="true"){
+  document.body.classList.add("dark");
 }
+
+
+
 
 
 
@@ -886,22 +897,16 @@ document.querySelectorAll(".faq-item").forEach(item=>{
 
 });
 
-
-// MODAL
-function closeModal(){
-  document.getElementById("modal").classList.remove("active");
-}
-
-
-// INIT
-loadMyQuestions();
-window.sendQuestion = sendQuestion;
-window.deleteQuestion = deleteQuestion;
 </script>
+
+
+
+
 
 
 </body>
 </html>
+
 
 
 
