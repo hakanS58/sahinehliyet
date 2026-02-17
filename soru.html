@@ -25,8 +25,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <!-- Firebase CDN -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 
 <style>
 
@@ -841,7 +840,7 @@ docs.sort((a,b)=> b.createdAt - a.createdAt);
   emptyText.style.display="none";
 
 
-  let active = 0;
+  
 
 
  docs.forEach(d=>{
@@ -915,6 +914,10 @@ document.querySelectorAll(".faq-item").forEach(item=>{
 
 });
 
+
+    window.sendQuestion = sendQuestion;
+window.deleteQuestion = deleteQuestion;
+
 </script>
 
 
@@ -924,6 +927,7 @@ document.querySelectorAll(".faq-item").forEach(item=>{
 
 </body>
 </html>
+
 
 
 
