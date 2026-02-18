@@ -33,6 +33,7 @@
     background: var(--bg);
     color: var(--text);
     transition: .3s;
+  padding-top: 20px;
     padding-top: env(safe-area-inset-top);
 
 
@@ -691,6 +692,7 @@
 
 .app-header{
 
+  margin-top: 10px;
 
   display:flex;
   justify-content:space-between;
@@ -944,7 +946,7 @@ if(localStorage.getItem("theme") === "true"){
 
         <!-- REKLAM -->
 
-        <div class="choice-card ad" onclick="Android.showRewardedAd('test1')">
+        <div class="choice-card ad" onclick="watchAd()">
 
             <div class="choice-head">
                 🎬 Reklam İzle
@@ -980,7 +982,7 @@ if(localStorage.getItem("theme") === "true"){
     </div>
     <script>
         function watchAd() {
-          Android.showRewardedAd("test1");
+          Android.showRewardedAd(selectedTest);
         }
 
         function goPremium() {
@@ -1015,6 +1017,3 @@ if(localStorage.getItem("theme") === "true"){
 </div>
 </body>
 </html>
-
-
-
