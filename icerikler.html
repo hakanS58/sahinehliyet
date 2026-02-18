@@ -351,9 +351,7 @@ body.dark .app-header{
 
     <!-- Bizi Değerlendir -->
 
-<a href="https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak"
-   target="_blank"
-   class="card">
+<a href="javascript:void(0)" onclick="openPlayStore()" class="card">
 
   <div class="icon-box">
     <i class="fa-solid fa-star"></i>
@@ -369,5 +367,27 @@ body.dark .app-header{
 
 </div>
 
+    <script>
+
+function openPlayStore(){
+
+  const url = "https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet";
+
+  if(window.Android){
+
+    Android.openExternal(url);
+
+  }else{
+
+    window.open(url, "_blank");
+
+  }
+
+}
+
+</script>
+
+
 </body>
 </html>
+
