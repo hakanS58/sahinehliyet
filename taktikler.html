@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sınav Taktikleri</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Animate On Scroll -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
+}
+
+/* Ana Alan */
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+/* Kart */
+.tip{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius:18px;
+    padding:22px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border:1px solid rgba(255,255,255,0.15);
+    transition: all .3s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Parlama efekti */
+.tip::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent
+    );
+    transition:.6s;
+}
+
+.tip:hover::before{
+    left:100%;
+}
+
+/* Hover animasyonu */
+.tip:hover{
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* Başlık */
+.tip h4{
+    margin:0 0 10px;
+    font-size:18px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+/* Metin */
+.tip p{
+    margin:0;
+    font-size:15px;
+    line-height:1.6;
+    opacity:.9;
+}
+
+/* Mobil uyum */
+@media(max-width:600px){
+
+    .container{
+        grid-template-columns:1fr;
+        padding:15px;
+    }
+
+    .tip{
+        padding:18px;
+    }
+
+}
+
+
+/* Header */
+
+.app-header{
+    position:sticky;
+    top:0;
+    z-index:999;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 15px;
+
+    background: linear-gradient(
+        135deg,
+        #00c6ff,
+        #0072ff
+    );
+
+    box-shadow:0 6px 20px rgba(0,0,0,.35);
+}
+
+/* Sol taraf (Geri tuşu) */
+
+.header-left button{
+    background: rgba(255,255,255,0.15);
+    border:none;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    color:#fff;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.header-left button:hover{
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.05);
+}
+
+/* Orta başlık */
+
+.header-center{
+    flex:1;
+    text-align:center;
+}
+
+.header-center h1{
+    margin:0;
+    font-size:19px;
+    font-weight:600;
+}
+
+.header-center span{
+    font-size:12px;
+    opacity:.9;
+}
+
+/* Sağ taraf boşluk */
+
+.header-right{
+    width:38px;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<header class="app-header">
+
+  <!-- Geri Butonu -->
+  <div class="header-left">
+    <button onclick="history.back()">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+  </div>
+
+  <!-- Başlık -->
+  <div class="header-center">
+    <h1>Sınav Taktikleri</h1>
+    <span>Ehliyet sınavına akıllı hazırlan</span>
+  </div>
+
+  <!-- Sağ boşluk (denge için) -->
+  <div class="header-right"></div>
+
+</header>
+
+
+
+
+<div class="container">
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🎯 Önce Kolay Sorular</h4>
+<p>İlk önce emin olduğun soruları çöz, zorları sona bırak.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>⏱️ Zamanı Kontrol Et</h4>
+<p>Bir soruya 1 dakikadan fazla takılma.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>❌ Şıkları Ele</h4>
+<p>Yanlış olduğunu bildiğin şıkları hemen sil.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📖 Soruyu Sonuna Kadar Oku</h4>
+<p>Acele edip sorunun sonunu atlama.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🧠 Anahtar Kelimelere Dikkat</h4>
+<p>"Daima", "hiçbir zaman", "en uygun" gibi kelimeleri fark et.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📝 Boş Bırakma</h4>
+<p>Emin olmasan bile mutlaka işaretle.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🔄 İşaretleyip Geç</h4>
+<p>Kararsız kaldığın soruları sona bırak.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🚦 Levhaları Ezberle</h4>
+<p>Özellikle yasak ve uyarı levhalarını iyi bil.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🚑 İlk Yardımı Hafife Alma</h4>
+<p>İlk yardım soruları genelde kolaydır, kaçırma.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📊 Deneme Analizi Yap</h4>
+<p>Yanlışlarını mutlaka tekrar incele.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🛑 Acele Etme</h4>
+<p>Hız değil, doğruluk önemlidir.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📅 Son Gün Yeni Konu Çalışma</h4>
+<p>Son gün sadece tekrar yap.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>💤 Uykusuz Girme</h4>
+<p>Sınavdan önce iyi uyu.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>💧 Su İç</h4>
+<p>Sınavdan önce yeterince su iç.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🎧 Sakin Kal</h4>
+<p>Panik yaparsan bildiklerini unutursun.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📱 Telefonu Düşünme</h4>
+<p>Sınav sırasında dikkatini dağıtacak şeylerden uzaklaş.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📈 Güçlü Olduğun Konularla Başla</h4>
+<p>Moral kazanmak için bildiklerinden başla.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🚘 Trafik Mantığını Düşün</h4>
+<p>Kuralları ezber değil, mantıkla çöz.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🔍 Şıkları Karşılaştır</h4>
+<p>Benzer cevaplar arasında farkı bul.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📌 Soru Köküne Dön</h4>
+<p>Şıklar kafanı karıştırırsa soruya tekrar bak.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🧩 Görsellere Dikkat Et</h4>
+<p>Resimli sorularda detayları incele.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>⚠️ "Her Zaman" Tuzakları</h4>
+<p>Kesinlik bildiren şıklara temkinli yaklaş.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>📚 Kısa Tekrar Yap</h4>
+<p>Sınavdan önce notlarını gözden geçir.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>⭐ Kendine Güven</h4>
+<p>Çalıştıysan başaracaksın.</p>
+</div>
+
+<div class="tip" data-aos="fade-up">
+
+<h4>🏁 Son Kontrol Yap</h4>
+<p>Bitince cevaplarını tekrar gözden geçir.</p>
+</div>
+
+</div>
+
+
+
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 700,
+    easing: "ease-in-out",
+    once: true
+  });
+</script>
+
+
+</body>
+</html>

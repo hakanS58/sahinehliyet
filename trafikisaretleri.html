@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trafik Uyarı İşaretleri</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
+}
+
+/* Header */
+
+.header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    box-shadow:0 4px 15px rgba(0,0,0,.4);
+}
+
+.header button{
+    background:rgba(255,255,255,.2);
+    border:none;
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    color:#fff;
+    font-size:16px;
+}
+
+.header h1{
+    flex:1;
+    text-align:center;
+    margin:0;
+    font-size:18px;
+}
+
+/* Kart */
+
+.image-card{
+    margin:20px;
+    background:rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:15px;
+    backdrop-filter:blur(12px);
+    box-shadow:0 10px 25px rgba(0,0,0,.5);
+}
+
+/* Resim Alanı */
+
+.image-box{
+    overflow:auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* Resim */
+
+.image-box img{
+    width:100%;
+    height:auto;
+    max-width:100%;
+    display:block;
+}
+
+
+/* Bilgi */
+
+.info{
+    margin-top:12px;
+    font-size:13px;
+    opacity:.9;
+    text-align:center;
+}
+
+/* Zoom Efekti */
+
+.image-box img{
+    transition:.3s;
+}
+
+.image-box img:active{
+    transform:scale(1.4);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="header">
+
+  <button onclick="history.back()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+
+  <h1>Trafik Levhaları Ve İşaretleri</h1>
+
+  <div style="width:38px"></div>
+
+</div>
+
+<!-- Kart -->
+<div class="image-card">
+  <div class="info">
+    🔍 Yakınlaştırmak için resme dokun veya kaydır
+  </div>
+  <div class="image-box">
+
+    <!-- BURAYA RESMİNİ KOY -->
+    <img src="Trafik Uyarı İşaretleri.png" alt="Trafik Uyarı İşaretleri">
+
+  </div>
+</div>
+
+
+<!-- Kart -->
+<div class="image-card">
+  <div class="info">
+    🔍 Yakınlaştırmak için resme dokun veya kaydır
+  </div>
+  <div class="image-box">
+
+    <!-- BURAYA RESMİNİ KOY -->
+    <img src="Trafik Tanzim İşaretleri  Şahin Ehliyet.png" alt="Trafik Uyarı İşaretleri">
+
+  </div>
+</div>
+
+<!-- Kart -->
+<div class="image-card">
+  <div class="info">
+    🔍 Yakınlaştırmak için resme dokun veya kaydır
+  </div>
+  <div class="image-box">
+
+    <!-- BURAYA RESMİNİ KOY -->
+    <img src="Trafik Bilgi İşaretleri  Şahin Ehliyet.png" alt="Trafik Uyarı İşaretleri">
+
+  </div>
+</div>
+
+<!-- Kart -->
+<div class="image-card">
+  <div class="info">
+    🔍 Yakınlaştırmak için resme dokun veya kaydır
+  </div>
+  <div class="image-box">
+
+    <!-- BURAYA RESMİNİ KOY -->
+    <img src="Trafik Yol İşaretleri  Şahin Ehliyet.png" alt="Trafik Uyarı İşaretleri">
+
+  </div>
+</div>
+
+</body>
+</html>

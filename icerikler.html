@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İçerikler</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
+     crossorigin="anonymous"></script>
+       <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* Genel */
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  transition: .3s;
+  padding-top: env(safe-area-inset-top);
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #790808, #ff15d87c);
+
+
+}
+
+/* Üst Alan */
+
+.header {
+  padding: 25px 20px 35px;
+  color: white;
+
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.header p {
+  margin-top: 5px;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+/* Ana Kart Alanı */
+
+.container {
+  background: #f5f7fa;
+  border-radius: 25px 25px 0 0;
+  padding: 25px 20px;
+  min-height: 80vh;
+  animation: slideUp 0.6s ease;
+}
+
+/* Kartlar */
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px 15px;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+
+  box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+
+  transition: 0.3s;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.card:nth-child(1){animation-delay:0.1s;}
+.card:nth-child(2){animation-delay:0.2s;}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+}
+
+.icon-box {
+  width: 55px;
+  height: 55px;
+  margin: auto;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg,#00b4db,#0083b0);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.card p {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+/* Animasyonlar */
+
+@keyframes slideUp {
+  from {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* ================= MODERN HEADER ================= */
+
+.app-header{
+
+
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:14px 18px;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6,
+    #06b6d4
+  );
+
+  border-radius:0 0 22px 22px;
+
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* SOL TARAF */
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.app-logo{
+  font-size:22px;
+}
+
+.app-title{
+  font-size:18px;
+  font-weight:700;
+  color:white;
+  letter-spacing:.5px;
+}
+
+
+/* SAĞ TARAF */
+
+.header-right{
+  display:flex;
+  gap:8px;
+}
+
+.header-btn{
+  width:34px;
+  height:34px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+  color:white;
+
+  font-size:16px;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:.25s;
+}
+
+.header-btn:hover{
+  background:rgba(255,255,255,.35);
+  transform:scale(1.1);
+}
+
+
+/* DARK MODE */
+
+body.dark .app-header{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
+
+
+.app-header{
+  position: relative;
+}
+
+.app-title{
+  margin-left: 45px; /* Ok kadar boşluk bırakır */
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.top-bar{
+  position: relative;
+  justify-content: center;
+}
+
+/* BACK BUTTON FIXED */
+
+.back-btn{
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: .25s;
+  backdrop-filter: blur(6px);
+}
+
+.back-btn:hover{
+  background: rgba(255,255,255,0.28);
+}
+
+.back-btn:active{
+  transform: translateY(-50%) scale(.9);
+}
+
+.card:nth-child(3) .icon-box {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+
+</style>
+</head>
+
+<body>
+
+    <header class="app-header">
+
+  <div class="header-left">
+    <span class="app-title">Ehliyet 2026</span>
+  </div>
+
+  <div class="header-right">
+ <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  </div>
+
+</header>
+
+<!-- ÜST KISIM -->
+<div class="header">
+  <h1>Yardımcı İçerikler</h1>
+  <p>Burada Ehliyet Sınavıyla İle İlgili Yardımcı İçeriklere Ulaşabilirsiniz.</p>
+</div>
+
+
+<!-- ALT KART ALANI -->
+<div class="container">
+
+  <div class="menu">
+
+    <!-- TikTok -->
+
+<a href="taktikler.html" class="card">
+
+  <div class="icon-box">
+    <i class="fa-solid fa-lightbulb"></i>
+  </div>
+
+  <h3>Sınav Taktikleri</h3>
+  <p>Kazanma ipuçları</p>
+
+</a>
+
+
+    <!-- Levhalar -->
+
+    <a href="trafikisaretleri.html" class="card">
+
+      <div class="icon-box">
+        <i class="fa-solid fa-traffic-light"></i>
+      </div>
+
+      <h3>Trafik Levhaları</h3>
+      <p>İşaretler ve anlamları</p>
+
+    </a>
+
+
+    <!-- Bizi Değerlendir -->
+
+<a href="https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak"
+   target="_blank"
+   class="card">
+
+  <div class="icon-box">
+    <i class="fa-solid fa-star"></i>
+  </div>
+
+  <h3>Uygulamayı Değerlendir</h3>
+  <p>Daha Fazla Gelişebilmemiz İçin Yardımınıza İhtiyacımız Var. Uygulamaya 5 Yıldız Vererek Bize Destek Olabilirsiniz.</p>
+
+</a>
+
+
+  </div>
+
+</div>
+
+</body>
+</html>
