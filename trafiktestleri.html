@@ -946,11 +946,10 @@ if(localStorage.getItem("theme") === "true"){
 
         <!-- REKLAM -->
 
-<div class="choice-card ad" onclick="watchAd()">
+<div class="choice-card ad" onclick="watchAdAndGo('trafiktest1.html')">
+  🎬 Reklam İzle
+</div>
 
-            <div class="choice-head">
-                🎬 Reklam İzle
-            </div>
 
 
             <p>
@@ -1013,7 +1012,22 @@ if(localStorage.getItem("theme") === "true"){
   }
 
 
+  // Reklam izleme butonu burayı çağırır
+  function watchAdAndGo(url) {
+    console.log("REKLAM TIKLANDI:", url);
 
+    if (typeof Android !== "undefined") {
+      Android.showRewardedAd(url);
+    } else {
+      alert("Android bağlantısı yok (tarayıcıda test ediyorsan normal)");
+    }
+  }
+
+  // Android reklam bitince burayı çağırır
+  function adCompleted(url) {
+    console.log("REKLAM TAMAMLANDI, GİDİLİYOR:", url);
+    window.location.href = url;
+  }
 
 
 
@@ -1022,5 +1036,6 @@ if(localStorage.getItem("theme") === "true"){
 </div>
 </body>
 </html>
+
 
 
