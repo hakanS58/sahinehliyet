@@ -1029,13 +1029,26 @@ if(localStorage.getItem("theme") === "true"){
     window.location.href = url;
   }
 
+ let adReady = false;
 
+  function setAdReady() {
+    adReady = true;
+  }
+
+  function watchAdAndGo(url) {
+    if (!adReady) {
+      alert("Reklam hazırlanıyor, 2-3 saniye sonra tekrar dene");
+      return;
+    }
+    Android.showRewardedAd(url);
+  }
 
 
     </script>
 </div>
 </body>
 </html>
+
 
 
 
