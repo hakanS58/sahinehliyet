@@ -1042,12 +1042,48 @@ if(localStorage.getItem("theme") === "true"){
     }
     Android.showRewardedAd(url);
   }
+  function watchAdAndGo(url) {
+    console.log("REKLAM BUTONUNA BASILDI:", url);
+
+    if (window.Android) {
+      Android.showRewardedAd(url);
+    } else {
+      alert("Android bağlantısı yok");
+    }
+  }
+
+  function adCompleted(url) {
+    window.location.href = url;
+  }
+
+        <script>
+  let adReady = false;
+
+  function setAdReady() {
+    adReady = true;
+    console.log("REKLAM HAZIR");
+  }
+
+  function watchAdAndGo(url) {
+    if (!adReady) {
+      alert("Reklam hazırlanıyor, lütfen 2 saniye bekle");
+      return;
+    }
+
+    Android.showRewardedAd(url);
+  }
+
+  function adCompleted(url) {
+    window.location.href = url;
+  }
+</script>
 
 
     </script>
 </div>
 </body>
 </html>
+
 
 
 
