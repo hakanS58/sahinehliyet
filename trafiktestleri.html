@@ -850,10 +850,30 @@ body.dark .app-header{
         </p>
         <a href="hesabim.html">👤 Hesabıma Git</a>
     </div>
+</div>
 
 
 
+<div id="premiumModal" class="premium-modal">
 
+  <div class="premium-box-modern">
+
+    <h3>Bir Seçenek Seç</h3>
+    <p class="desc">Teste devam etmek için aşağıdan bir yöntem seç.</p>
+
+    <div class="choice-card ad" onclick="watchAdAndGo()">
+      <div class="choice-head">🎬 Reklam İzle</div>
+      <p>Reklamdan sonra teste devam edebilirsin.</p>
+    </div>
+
+    <div class="choice-card premium" onclick="goPremium()">
+      <div class="choice-head">⭐ Premium Al</div>
+      <p>Reklamsız ve sınırsız erişim.</p>
+    </div>
+
+    <button class="cancel-btn" onclick="closePremium()">Vazgeç</button>
+
+  </div>
 </div>
 
 <script>
@@ -873,53 +893,6 @@ body.dark .app-header{
     loadStatus();
 
 
-
-    let selectedTest = "";
-
-function openPremium(url){
-
-// ✅ Premium varsa direkt gir
-if(isPremium === true){
-  location.href = url;
-  return;
-}
-
-selectedTest = url;
-document.getElementById("premiumModal").style.display="flex";
-}
-
-
-function closePremium(){
-document.getElementById("premiumModal").style.display="none";
-}
-
-//test-reklam
-function watchAd(){
-if(isPremium){
-  location.href = selectedTest;
-  return;
-}
-closePremium();
-Android.showRewardedAd(selectedTest);
-}
-
-// Android’den geri dönüş
-function adCompleted(url){
-location.href = url;
-}
-
-
-
-// Premium alma (Firebase bağlıysa çalışır)
-function buyPremium(){
-alert("Premium sayfası açılıyor ⭐");
-// Buraya Firebase premium kodu bağlanır
-}
-
-
-
-
-
 /* DARK MODE AUTO LOAD */
 
 (function(){
@@ -929,55 +902,9 @@ if(localStorage.getItem("theme") === "true"){
 }
 
 })();
-</script>
 
 
-<!-- PREMIUM MODAL -->
 
-<div id="premiumModal" class="premium-modal">
-
-    <div class="premium-box-modern">
-
-        <h3>Bir Seçenek Seç</h3>
-
-        <p class="desc">
-            Teste devam etmek için aşağıdan bir yöntem seç.
-        </p>
-
-        <!-- REKLAM -->
-
-      <div class="choice-card ad" onclick="watchAdAndGo(selectedTest)">
-  🎬 Reklam İzle
-    </div>
-            <p>
-                Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
-                Reklamdan sonra teste devam edebilirsin.
-            </p>
-
-        </div>
-
-        <!-- PREMIUM -->
-
-        <div class="choice-card premium" onclick="goPremium()">
-
-            <div class="choice-head">
-                ⭐ Premium Al
-            </div>
-
-            <p>
-                Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
-                Sınırsız erişim elde et.
-            </p>
-
-        </div>
-
-        <button class="cancel-btn" onclick="closePremium()">
-            Vazgeç
-        </button>
-
-
-    </div>
-   <script>
 /* ===== GLOBAL STATE ===== */
 let isPremium = false;
 let adReady = false;
@@ -1039,9 +966,10 @@ function goPremium() {
 }
 </script>
 
-</div>
+
 </body>
 </html>
+
 
 
 
