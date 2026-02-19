@@ -290,6 +290,36 @@ body.dark .app-header{
   background: linear-gradient(135deg, #f7971e, #ffd200);
 }
 
+    /* DARK MODE GENEL */
+
+body.dark {
+  background: linear-gradient(135deg, #020617, #020b2a);
+  color: #eee;
+}
+
+body.dark .container {
+  background: #0f172a;
+}
+
+body.dark .card {
+  background: #020617;
+  color: #eee;
+  box-shadow: 0 5px 12px rgba(255,255,255,0.05);
+}
+
+body.dark .card p {
+  color: #aaa;
+}
+
+body.dark .header {
+  color: #eee;
+}
+
+body.dark .icon-box {
+  filter: brightness(0.9);
+}
+
+
 </style>
 </head>
 
@@ -385,9 +415,18 @@ function openPlayStore(){
 
 }
 
+  // Ana sayfadan gelen dark mode bilgisini oku
+  const isDark = localStorage.getItem("darkMode");
+
+  if (isDark === "true") {
+    document.body.classList.add("dark");
+  }
+
+
 </script>
 
 
 </body>
 </html>
+
 
