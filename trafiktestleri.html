@@ -946,10 +946,11 @@ if(localStorage.getItem("theme") === "true"){
 
         <!-- REKLAM -->
 
-        <div class="choice-card ad"
-     onclick="watchAdAndGo('trafiktestleri.html')">
-  🎬 Reklam İzle
-</div>
+<div class="choice-card ad" onclick="watchAd()">
+
+            <div class="choice-head">
+                🎬 Reklam İzle
+            </div>
 
 
             <p>
@@ -997,6 +998,10 @@ if(localStorage.getItem("theme") === "true"){
     console.log("HTML PREMIUM:", isPremium);
   }
 
+          function watchAdAndGo(url) {
+      Android.showRewardedAd(url);
+  }
+
   function openTest(url) {
     if (isPremium) {
       // 🔥 Premium ise direkt teste gir
@@ -1007,15 +1012,7 @@ if(localStorage.getItem("theme") === "true"){
     }
   }
 
-  function watchAdAndGo(url) {
-    console.log("REKLAM TIKLANDI", url);
 
-    if (typeof Android !== "undefined" && Android.showRewardedAd) {
-      Android.showRewardedAd(url);
-    } else {
-      alert("Android bağlantısı yok (tarayıcıdan açılmış olabilir)");
-    }
-  }
 
 
 
@@ -1025,4 +1022,5 @@ if(localStorage.getItem("theme") === "true"){
 </div>
 </body>
 </html>
+
 
