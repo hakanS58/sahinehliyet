@@ -946,12 +946,9 @@ if(localStorage.getItem("theme") === "true"){
 
         <!-- REKLAM -->
 
-<div class="choice-card ad" onclick="watchAdAndGo('trafiktest1.html')">
+      <div class="choice-card ad" onclick="watchAdAndGo(selectedTest)">
   🎬 Reklam İzle
-</div>
-
-
-
+    </div>
             <p>
                 Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
                 Reklamdan sonra teste devam edebilirsin.
@@ -980,108 +977,71 @@ if(localStorage.getItem("theme") === "true"){
 
 
     </div>
-    <script>
-        function watchAd() {
-          Android.showRewardedAd(selectedTest);
-        }
+   <script>
+/* ===== GLOBAL STATE ===== */
+let isPremium = false;
+let adReady = false;
+let selectedTest = "";
 
-        function goPremium() {
-          window.location.href = "premium.html";
-        }
+/* ===== ANDROID → HTML ===== */
+function setPremium(value) {
+  isPremium = value === true;
+  console.log("PREMIUM:", isPremium);
+}
 
+function setAdReady() {
+  adReady = true;
+  console.log("REKLAM HAZIR");
+}
 
-  let isPremium = false;
+/* ===== PREMIUM MODAL ===== */
+function openPremium(url) {
+  if (isPremium) {
+    location.href = url;
+    return;
+  }
+  selectedTest = url;
+  document.getElementById("premiumModal").style.display = "flex";
+}
 
-  function setPremium(value) {
-    isPremium = value === true;
-    console.log("HTML PREMIUM:", isPremium);
+function closePremium() {
+  document.getElementById("premiumModal").style.display = "none";
+}
+
+/* ===== REKLAM ===== */
+function watchAdAndGo(url) {
+  if (!adReady) {
+    alert("Reklam hazırlanıyor, lütfen 2 saniye bekle");
+    return;
   }
 
-          function watchAdAndGo(url) {
-      Android.showRewardedAd(url);
-  }
-
-  function openTest(url) {
-    if (isPremium) {
-      // 🔥 Premium ise direkt teste gir
-      window.location.href = url;
-    } else {
-      // Premium değilse popup göster
-      showChoicePopup(url);
-    }
-  }
-
-
-  // Reklam izleme butonu burayı çağırır
-  function watchAdAndGo(url) {
-    console.log("REKLAM TIKLANDI:", url);
-
-    if (typeof Android !== "undefined") {
-      Android.showRewardedAd(url);
-    } else {
-      alert("Android bağlantısı yok (tarayıcıda test ediyorsan normal)");
-    }
-  }
-
-  // Android reklam bitince burayı çağırır
-  function adCompleted(url) {
-    console.log("REKLAM TAMAMLANDI, GİDİLİYOR:", url);
-    window.location.href = url;
-  }
-
- let adReady = false;
-
-  function setAdReady() {
-    adReady = true;
-  }
-
-  function watchAdAndGo(url) {
-    if (!adReady) {
-      alert("Reklam hazırlanıyor, 2-3 saniye sonra tekrar dene");
-      return;
-    }
+  if (window.Android) {
     Android.showRewardedAd(url);
+  } else {
+    alert("Tarayıcıda test ediyorsan reklam çıkmaz");
   }
-  function watchAdAndGo(url) {
-    console.log("REKLAM BUTONUNA BASILDI:", url);
+}
 
-    if (window.Android) {
-      Android.showRewardedAd(url);
-    } else {
-      alert("Android bağlantısı yok");
-    }
+/* ===== REKLAM BİTİNCE ===== */
+function adCompleted(url) {
+  console.log("REKLAM BİTTİ →", url);
+  window.location.href = url;
+}
+
+/* ===== PREMIUM ===== */
+function goPremium() {
+  if (window.Android) {
+    Android.buyPremium();
+  } else {
+    alert("Premium sadece uygulamada çalışır");
   }
+}
+</script>
 
-  function adCompleted(url) {
-    window.location.href = url;
-  }
-
-  let adReady = false;
-
-  function setAdReady() {
-    adReady = true;
-    console.log("REKLAM HAZIR");
-  }
-
-  function watchAdAndGo(url) {
-    if (!adReady) {
-      alert("Reklam hazırlanıyor, lütfen 2 saniye bekle");
-      return;
-    }
-
-    Android.showRewardedAd(url);
-  }
-
-  function adCompleted(url) {
-    window.location.href = url;
-  }
-
-
-
-    </script>
 </div>
 </body>
 </html>
+
 
 
 
