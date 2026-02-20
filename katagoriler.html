@@ -920,6 +920,46 @@ body.dark .app-header{
   100%{transform:translateX(50%) translateY(0)}
 }
 
+/* Günün Denemesi özel tasarım */
+.daily-test {
+    position: relative;
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+    color: white;;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    transform: scale(1);
+    transition: 0.3s;
+    padding: 10px 14px;
+    min-height: 55px;
+    margin-bottom: 10px;
+}
+
+.daily-test h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.daily-test p {
+    margin-top: 3px;
+    font-size: 12px;
+}
+
+.daily-test:hover {
+    transform: scale(1.01);
+}
+
+/* BUGÜN etiketi */
+.daily-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #4caf50;
+    color: white;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
 
 
 
@@ -1019,10 +1059,20 @@ body.dark .app-header{
 
 
 
+        <!-- Günün Denemesi -->
+<div class="card daily-test" onclick="goDailyTest()">
+    <div class="daily-badge">BUGÜN</div>
 
+
+
+    <h3>Günün Denemesi</h3>
+    <p style="color: #ffffff;">Her gün yeni deneme çözerek kendini test et!</p>
+</div>
 
 
       <div class="category-grid">
+
+
         <a class="card"  href="konuanlatimlari.html">
           <h4>Konu Anlatımları</h4>
           <p>Güncel konu anlatımları.</p>
@@ -1530,6 +1580,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 }
 
 
+function goDailyTest() {
+    window.location.href = "gunundenemesi.html";
+}
 
 
 
@@ -1614,4 +1667,5 @@ document.addEventListener("DOMContentLoaded",()=>{
 
   </body>
 </html>
+
 
