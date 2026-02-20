@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Günün Denemesi</title>
+
+
+<style>
+body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:#f4f6fb;
+    margin:0;
+    padding:15px;
+}
+
+/* Başlık */
+.header{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+/* Soru Kartı */
+.question-card{
+    background:#fff;
+    border-radius:15px;
+    padding:18px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* Soru */
+.question-title{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+/* Şıklar */
+.option{
+    border:2px solid #e1e4ea;
+    padding:12px 14px;
+    border-radius:10px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.option:hover{
+    background:#f1f5ff;
+}
+
+.option input{
+    display:none;
+}
+
+/* Seçili Şık */
+.option.selected{
+    background:#e7efff;
+    border-color:#3b82f6;
+    color:#1e40af;
+    font-weight:600;
+}
+
+/* Bitir Butonu */
+.finish-btn{
+    width:100%;
+    background:#3b82f6;
+    color:#fff;
+    border:none;
+    padding:15px;
+    font-size:16px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.finish-btn:hover{
+    background:#2563eb;
+}
+</style>
+</head>
+
+<body>
+
+<body>
+
+<div class="header">📅 Günün Denemesi</div>
+
+<div id="quiz"></div>
+
+<button class="finish-btn" onclick="finish()">
+Testi Bitir
+</button>
+
+<!-- Sonuç Ekranı -->
+<div id="resultBox" style="display:none;">
+
+    <div class="question-card">
+        <h3>📊 Sonuçların</h3>
+
+        <p>✅ Doğru: <span id="correct"></span></p>
+        <p>❌ Yanlış: <span id="wrong"></span></p>
+        <p>⚪ Boş: <span id="empty"></span></p>
+        <p>🎯 Başarı: <span id="percent"></span>%</p>
+    </div>
+
+    <div class="question-card">
+        <h3>❌ Yanlış Sorular</h3>
+        <div id="wrongList"></div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<script src="sorular.js"></script>
+<script>
+
+
+let currentQuestions = checkTodayTest();
+const questions = currentQuestions;
+const quiz = document.getElementById("quiz");
+
+questions.forEach((item,i)=>{
+
+    let card = document.createElement("div");
+    card.className = "question-card";
+
+    let title = document.createElement("div");
+    title.className = "question-title";
+    title.innerText = (i+1)+". "+item.question;
+
+    card.appendChild(title);
+
+    if(item.image){
+
+    let img = document.createElement("img");
+    img.src = item.image;
+
+    img.style.width = "100%";
+    img.style.maxWidth = "300px";
+    img.style.display = "block";
+    img.style.margin = "10px auto";
+    img.style.borderRadius = "10px";
+
+    card.appendChild(img);
+}
+
+    Object.entries(item.options).forEach(([key,opt],j)=>{
+value="${key}"
+        let label = document.createElement("div");
+        label.className = "option";
+
+        label.innerHTML = `
+  <input type="radio" name="q${i}" value="${Object.keys(item.options)[j]}">
+  <span>${Object.values(item.options)[j]}</span>
+`;
+
+        label.onclick = ()=>{
+
+            // Aynı sorudaki diğerlerini sil
+            document
+              .querySelectorAll(`input[name="q${i}"]`)
+              .forEach(x=>{
+                  x.parentElement.classList.remove("selected");
+              });
+
+            label.classList.add("selected");
+            label.querySelector("input").checked = true;
+        };
+
+        card.appendChild(label);
+
+    });
+
+    quiz.appendChild(card);
+
+});
+
+function finish(){
+
+    let correct = 0;
+    let wrong = 0;
+    let empty = 0;
+
+    let wrongHtml = "";
+
+    currentQuestions.forEach((q,i)=>{
+
+        let selected = document.querySelector(`input[name="q${i}"]:checked`);
+
+        if(!selected){
+            empty++;
+            return;
+        }
+
+        let answer = selected.value; // A B C D
+
+        if(answer === q.answer){
+            correct++;
+        }else{
+            wrong++;
+
+            wrongHtml += `
+            <p>
+            ${i+1}. ${q.question}<br>
+            ✔ Doğru: ${q.options[q.answer]}
+            </p>
+            `;
+        }
+
+    });
+
+    let total = currentQuestions.length;
+    let percent = Math.round((correct / total) * 100);
+
+    document.getElementById("correct").innerText = correct;
+    document.getElementById("wrong").innerText = wrong;
+    document.getElementById("empty").innerText = empty;
+    document.getElementById("percent").innerText = percent;
+
+    document.getElementById("wrongList").innerHTML =
+        wrongHtml || "Tebrikler 🎉 Hiç yanlış yok";
+
+    document.getElementById("quiz").style.display="none";
+    document.getElementById("resultBox").style.display="block";
+
+    saveScore(percent);
+}
+
+
+
+
+function getDailyQuestions() {
+
+  let used = JSON.parse(localStorage.getItem("usedQuestions")) || [];
+
+  // Kullanılmamış sorular
+  let available = questionBank.filter(q => !used.includes(q.id));
+
+  // Hepsi bittiyse sıfırla
+  if (available.length < 50) {
+    used = [];
+    localStorage.setItem("usedQuestions", JSON.stringify([]));
+    available = questionBank;
+  }
+
+  // Karıştır
+  available.sort(() => Math.random() - 0.5);
+
+  // 50 tane seç
+  let selected = available.slice(0, 50);
+
+  // Kullanılanlara ekle
+  selected.forEach(q => used.push(q.id));
+
+  localStorage.setItem("usedQuestions", JSON.stringify(used));
+
+  return selected;
+}
+
+function checkTodayTest(){
+
+  const today = new Date().toDateString();
+  const savedDate = localStorage.getItem("lastTestDate");
+
+  if(savedDate === today){
+    return JSON.parse(localStorage.getItem("todayQuestions"));
+  }
+
+  const newTest = getDailyQuestions();
+
+  localStorage.setItem("lastTestDate", today);
+  localStorage.setItem("todayQuestions", JSON.stringify(newTest));
+
+  return newTest;
+}
+</script>
+
+</body>
+</html>
