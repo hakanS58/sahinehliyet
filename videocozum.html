@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Ders Videoları</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
+     crossorigin="anonymous"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+       <!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#141e30,#243b55);
+    min-height:100vh;
+    color:#fff;
+}
+
+.container{
+    max-width:420px;
+    margin:auto;
+    padding:20px;
+    padding-bottom:90px;
+}
+
+header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+header i{
+    font-size:22px;
+    cursor:pointer;
+}
+
+header h1{
+    font-size:22px;
+    font-weight:600;
+}
+
+.banner{
+    background:linear-gradient(135deg,#f7971e,#ffd200);
+    color:#000;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+.banner h3{
+    font-size:16px;
+}
+
+.video-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.video-card{
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(15px);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.3);
+    animation:fadeUp .6s ease;
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+.video-card iframe{
+    width:100%;
+    height:210px;
+    border:none;
+}
+
+.video-info{
+    padding:12px;
+}
+
+.video-info h4{
+    font-size:14px;
+    margin-bottom:4px;
+}
+
+.video-info p{
+    font-size:12px;
+    opacity:.8;
+}
+
+.locked{
+    text-align:center;
+    padding:50px 20px;
+}
+
+.locked i{
+    font-size:45px;
+    color:gold;
+    margin-bottom:15px;
+}
+
+.locked h2{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.locked button{
+    background:gold;
+    color:#000;
+    border:none;
+    padding:10px 25px;
+    border-radius:20px;
+    font-weight:500;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.bottom-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+}
+
+.bottom-bar a{
+    color:#fff;
+    text-decoration:none;
+    font-size:11px;
+    text-align:center;
+}
+
+.bottom-bar i{
+    display:block;
+    font-size:18px;
+    margin-bottom:3px;
+}
+
+
+.app-header{
+
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:14px 18px;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6,
+    #06b6d4
+  );
+
+  border-radius:0 0 22px 22px;
+
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* SOL TARAF */
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.app-logo{
+  font-size:22px;
+}
+
+.app-title{
+  font-size:18px;
+  font-weight:700;
+  color:white;
+  letter-spacing:.5px;
+}
+
+
+/* SAĞ TARAF */
+
+.header-right{
+  display:flex;
+  gap:8px;
+}
+
+.header-btn{
+  width:34px;
+  height:34px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+  color:white;
+
+  font-size:16px;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:.25s;
+}
+
+.header-btn:hover{
+  background:rgba(255,255,255,.35);
+  transform:scale(1.1);
+}
+
+
+/* DARK MODE */
+
+body.dark .app-header{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
+
+/* ÜST BANNER KODLARI BAŞLANGIÇ */
+.app-header{
+  position: relative;
+}
+
+.app-title{
+  margin-left: 45px; /* Ok kadar boşluk bırakır */
+  font-weight: 600;
+  font-size: 17px;
+}
+
+      /* HEADER BOX */
+      .header {
+        background: white;
+        border-radius: 20px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        animation: slideDown 0.7s ease;
+      }
+
+      /* BACK BUTTON FIXED */
+
+.back-btn{
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: .25s;
+  backdrop-filter: blur(6px);
+}
+
+.back-btn:hover{
+  background: rgba(255,255,255,0.28);
+}
+
+.back-btn:active{
+  transform: translateY(-50%) scale(.9);
+}
+/* ÜST BANNER KODLARI BİTİŞ */
+
+
+
+/* PROFESYONEL PREMIUM TANITIM */
+
+.premium-card{
+    background:linear-gradient(180deg,
+        rgba(255,255,255,0.18),
+        rgba(255,255,255,0.08)
+    );
+    backdrop-filter:blur(18px);
+    border-radius:24px;
+    padding:28px 22px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,0.15);
+    animation:fadeUp .6s ease;
+}
+
+.premium-icon{
+    width:68px;
+    height:68px;
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    color:white;
+    margin:auto;
+    margin-bottom:16px;
+    box-shadow:0 8px 25px rgba(59,130,246,.5);
+}
+
+.premium-card h2{
+    font-size:19px;
+    font-weight:600;
+    margin-bottom:8px;
+    color:#fff;
+}
+
+.premium-desc{
+    font-size:13.5px;
+    color:rgba(255,255,255,.9);
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+.premium-list{
+    list-style:none;
+    margin-bottom:24px;
+}
+
+.premium-list li{
+    font-size:13.5px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    color:#fff;
+}
+
+.premium-list i{
+    color:#22c55e;
+    font-size:14px;
+}
+
+.premium-btn{
+    width:100%;
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    border:none;
+    padding:13px;
+    border-radius:28px;
+    font-size:14.5px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+    color:white;
+    letter-spacing:.3px;
+}
+
+.premium-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(59,130,246,.5);
+}
+
+.premium-btn:active{
+    transform:scale(.97);
+}
+
+
+
+/* PREMIUM AKTİF KART */
+
+.premium-active{
+    background:linear-gradient(135deg,
+        #0f172a,
+        #020617
+    );
+    border-radius:24px;
+    padding:25px 22px;
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
+    border:1px solid rgba(59,130,246,.4);
+    animation:fadeUp .6s ease;
+}
+
+.premium-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.premium-badge{
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    color:white;
+    padding:6px 14px;
+    border-radius:16px;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.3px;
+}
+
+.premium-user{
+    font-size:14px;
+    opacity:.9;
+}
+
+.premium-stats{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.stat-box{
+    background:rgba(255,255,255,.05);
+    border-radius:14px;
+    padding:12px 8px;
+    text-align:center;
+    width:32%;
+}
+
+.stat-box h3{
+    font-size:16px;
+    color:#3b82f6;
+    margin-bottom:3px;
+}
+
+.stat-box p{
+    font-size:11px;
+    opacity:.8;
+}
+
+.premium-message{
+    background:rgba(59,130,246,.08);
+    border-left:3px solid #3b82f6;
+    padding:12px;
+    border-radius:10px;
+    font-size:12.5px;
+    line-height:1.6;
+    margin-bottom:18px;
+}
+
+.premium-action{
+    display:flex;
+    gap:10px;
+}
+
+.premium-action button{
+    flex:1;
+    border:none;
+    padding:10px;
+    border-radius:18px;
+    font-size:13px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn-watch{
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+    color:white;
+}
+
+.btn-watch:hover{
+    box-shadow:0 5px 15px rgba(59,130,246,.4);
+}
+
+.btn-support{
+    background:rgba(255,255,255,.08);
+    color:white;
+}
+
+.btn-support:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.video-card{
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  margin: 20px 0;
+  transition: 0.3s;
+}
+
+.video-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+/* Video alanı */
+.video-box{
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+
+.video-box video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Bilgi alanı */
+.video-info{
+  padding: 15px;
+  position: relative;
+}
+
+.video-info h3{
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.video-info p{
+  font-size: 13px;
+  color: #ccc;
+}
+
+/* Premium etiketi */
+.premium-badge{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  background: linear-gradient(135deg,#FFD700,#FF9800);
+  color: #000;
+
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+
+  box-shadow: 0 0 10px rgba(255,200,0,0.6);
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+
+  <div class="header-left">
+    <span class="app-title">Ehliyet 2026</span>
+  </div>
+
+  <div class="header-right">
+ <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  </div>
+
+</header> 
+<div class="container">
+
+
+
+<div id="icerik"></div>
+
+</div>
+
+
+<script>
+let premium = localStorage.getItem("premium");
+let alan = document.getElementById("icerik");
+
+if(premium === "true"){
+
+    alan.innerHTML = `
+
+    <!-- PREMIUM AKTİF PANEL -->
+
+    <div class="premium-active">
+
+        <div class="premium-top">
+            <span class="premium-badge">PREMIUM AKTİF</span>
+            <span class="premium-user">
+                Hoş geldin 👋
+            </span>
+        </div>
+
+        <div class="premium-stats">
+
+            <div class="stat-box">
+                <h3>15+</h3>
+                <p>Video</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>95%</h3>
+                <p>Başarı</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>%100</h3>
+                <p>Güncel</p>
+            </div>
+
+        </div>
+
+        <div class="premium-message">
+            Premium üyeliğin aktif.
+            Tüm ders çözüm videolarına sınırsız
+            erişimin bulunuyor.
+            Başarılar 🚀
+        </div>
+
+        <div class="premium-action">
+
+            <button class="btn-watch"
+            onclick="scrollToVideos()">
+            Videolara Git
+            </button>
+
+           
+
+        </div>
+
+    </div>
+
+
+    <!-- VIDEO LIST -->
+
+    <div class="banner" style="margin-top:20px">
+        <h3>Premium Video Kütüphanesi</h3>
+        <p>Tüm içerikler açık</p>
+    </div>
+
+    <div class="video-list" id="videoArea">
+
+<div class="video-card">
+  <div class="video-box">
+    <video controls playsinline controlsList="nodownload">
+      <source src="videos/ders1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-info">
+    <h3>Video 1</h3>
+    <p>Güncel soru çözümleri</p>
+    <span class="premium-badge">PREMIUM</span>
+  </div>
+</div>
+
+<div class="video-card">
+  <div class="video-box">
+    <video controls playsinline controlsList="nodownload">
+      <source src="videos/ders1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-info">
+    <h3>Video 2</h3>
+    <p>Güncel soru çözümleri</p>
+    <span class="premium-badge">PREMIUM</span>
+  </div>
+</div>
+
+<div class="video-card">
+  <div class="video-box">
+    <video controls playsinline controlsList="nodownload">
+      <source src="videos/ders1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-info">
+    <h3>Video 3</h3>
+    <p>Güncel soru çözümleri</p>
+    <span class="premium-badge">PREMIUM</span>
+  </div>
+</div>
+
+        
+
+    </div>
+    `;
+
+}
+else{
+
+    alan.innerHTML = `
+
+    <div class="premium-card">
+
+        <div class="premium-icon">
+            <i class="fa-solid fa-crown"></i>
+        </div>
+
+        <h2>Premium Video Paketine Geç</h2>
+
+        <p class="premium-desc">
+        Ehliyet sınavına özel hazırlanmış,
+        güncel soru çözümlerini uzman anlatımıyla izle.
+        Başarı şansını artır.
+        </p>
+
+        <ul class="premium-list">
+            <li> Güncel sınav soru çözümleri <i class="fa-solid fa-check"></i></li>
+            <li>Trafik – Motor – İlk Yardım <i class="fa-solid fa-check"></i> </li>
+            <li> Reklamsız video izleme <i class="fa-solid fa-check"></i></li>
+            <li> Sınırsız erişim <i class="fa-solid fa-check"></i></li>
+        </ul>
+
+        <button class="premium-btn"
+        onclick="location.href='premium.html'">
+        Premium’a Geç
+        </button>
+
+    </div>
+
+    `;
+
+}
+
+
+function scrollToVideos(){
+    document
+    .getElementById("videoArea")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+}
+</script>
+
+</body>
+</html>
