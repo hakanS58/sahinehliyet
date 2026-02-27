@@ -73,6 +73,10 @@ body {
   transition: .3s;
   padding-top: env(safe-area-inset-top);
 
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 
 }
       /* ÜST BAR */
@@ -999,7 +1003,37 @@ body.dark .motivation-card{
   color: white;
 }
 
+/* Header sağ ikon alanı */
+.header-icons {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 12px;
+}
 
+/* Yuvarlak şeffaf buton */
+.header-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18); /* Şeffaf mavi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  backdrop-filter: blur(2px);
+  transition: 0.2s;
+}
+
+/* Hover */
+.header-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.05);
+}
 
 
 
@@ -1024,6 +1058,11 @@ body.dark .motivation-card{
       title="Ehliyet Haberleri">
 
       <i class="fa-solid fa-newspaper"></i>
+    </button>
+  <!-- Shop -->
+  <a href="ehliyetshop.html" class="header-btn">
+    <i class="fa-solid fa-cart-shopping"></i>
+  </a>
 
     </button>
 <!-- İçerikler Butonu -->
