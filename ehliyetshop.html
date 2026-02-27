@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ehliyet Shop</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* Arkaplan */
+body{
+  background:#f2f6fa;
+  min-height:100vh;
+}
+
+/* HEADER */
+.shop-header{
+  background:linear-gradient(135deg,#1ea7d7,#0f6f96);
+  color:#fff;
+  padding:20px;
+  text-align:center;
+  border-bottom-left-radius:25px;
+  border-bottom-right-radius:25px;
+  animation:slideDown 0.6s ease;
+}
+
+@keyframes slideDown{
+  from{transform:translateY(-50px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+
+.shop-header h1{
+  font-size:24px;
+}
+
+.shop-header p{
+  font-size:13px;
+  opacity:0.9;
+  margin-top:5px;
+}
+
+/* CONTAINER */
+.container{
+  padding:20px;
+  max-width:500px;
+  margin:auto;
+}
+
+/* ÜRÜN GRID */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+/* ÜRÜN KART */
+.product-card{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  text-align:center;
+  animation:fadeUp 0.7s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* PDF ikon */
+.product-icon{
+  font-size:45px;
+  color:#e74c3c;
+  margin-bottom:10px;
+}
+
+/* Ürün adı */
+.product-card h3{
+  font-size:17px;
+  margin-bottom:8px;
+}
+
+/* Açıklama */
+.product-desc{
+  font-size:13px;
+  color:#666;
+  margin-bottom:12px;
+}
+
+/* Özellikler */
+.product-features{
+  text-align:left;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.product-features li{
+  list-style:none;
+  margin-bottom:5px;
+}
+
+.product-features i{
+  color:#27ae60;
+  margin-right:5px;
+}
+
+/* Fiyat */
+.price{
+  background:#fff3cd;
+  border:1px solid #ffeeba;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:12px;
+}
+
+.old{
+  text-decoration:line-through;
+  color:#888;
+  font-size:12px;
+}
+
+.new{
+  color:#e74c3c;
+  font-size:22px;
+  font-weight:600;
+}
+
+/* Satın Al */
+.buy-btn{
+  display:block;
+  background:linear-gradient(135deg,#1ea7d7,#0f6f96);
+  color:#fff;
+  padding:10px;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.buy-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 5px 15px rgba(30,167,215,0.4);
+}
+
+/* Footer güven */
+.shop-footer{
+  text-align:center;
+  font-size:12px;
+  color:#666;
+  padding:20px;
+}
+
+.shop-footer i{
+  color:#27ae60;
+}
+
+
+
+/* ================= MODERN HEADER ================= */
+
+.app-header{
+
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:14px 18px;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6,
+    #06b6d4
+  );
+
+  border-radius:0 0 22px 22px;
+
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* SOL TARAF */
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.app-logo{
+  font-size:22px;
+}
+
+.app-title{
+  font-size:18px;
+  font-weight:700;
+  color:white;
+  letter-spacing:.5px;
+}
+
+
+/* SAĞ TARAF */
+
+.header-right{
+  display:flex;
+  gap:8px;
+}
+
+.header-btn{
+  width:34px;
+  height:34px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.18);
+  color:white;
+
+  font-size:16px;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:.25s;
+}
+
+.header-btn:hover{
+  background:rgba(255,255,255,.35);
+  transform:scale(1.1);
+}
+
+
+/* DARK MODE */
+
+body.dark .app-header{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
+
+
+.app-header{
+  position: relative;
+}
+
+.app-title{
+  margin-left: 45px; /* Ok kadar boşluk bırakır */
+  font-weight: 600;
+  font-size: 17px;
+}
+
+
+.back-btn{
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: .25s;
+  backdrop-filter: blur(6px);
+}
+
+.back-btn:hover{
+  background: rgba(255,255,255,0.28);
+}
+
+.back-btn:active{
+  transform: translateY(-50%) scale(.9);
+}
+
+
+/* DARK MODE */
+
+body.dark .shop-header{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
+
+body.dark .product-card{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+
+body.dark .price{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+
+body.dark{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
+
+</style>
+</head>
+
+<body>
+
+
+  <header class="app-header">
+
+  <div class="header-left">
+    <span class="app-title">Ehliyet 2026</span>
+  </div>
+
+  <div class="header-right">
+ <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  </div>
+
+</header>
+
+<!-- HEADER -->
+<div style="margin-top: 30px;" class="shop-header">
+  <h1>Şahin Ehliyet Shop</h1>
+  <p>Dijital Eğitim Ürünleri Mağazası</p>
+</div>
+
+
+<!-- İÇERİK -->
+<div class="container">
+
+  <div class="products">
+
+    <!-- ÜRÜN 1 -->
+    <div class="product-card">
+
+      <div class="product-icon">
+        <i class="fa-solid fa-file-pdf"></i>
+      </div>
+
+      <h3>Ehliyet Sınav PDF Paketi</h3>
+
+      <div class="product-desc">
+        25 soruluk konu anlatımlı özel PDF
+      </div>
+
+      <ul class="product-features">
+
+        <li><i class="fa-solid fa-check"></i>25 Özgün Soru</li>
+        <li><i class="fa-solid fa-check"></i>Konu Anlatımı</li>
+        <li><i class="fa-solid fa-check"></i>Çözüm Teknikleri</li>
+        <li><i class="fa-solid fa-check"></i>Güncel İçerik</li>
+
+      </ul>
+
+      <div class="price">
+
+        <div class="old">129 TL</div>
+        <div class="new">59 TL</div>
+
+    <div class="discount-text">
+      ⚡ Sınırlı Süreli İndirim
+    </div>
+
+      </div>
+
+      <a href="https://www.shopier.com/sahinehliyet/44680460" target="_blank" class="buy-btn">
+        <i class="fa-solid fa-cart-shopping"></i> Satın Al
+      </a>
+
+    </div>
+
+
+    <!-- YENİ ÜRÜN BURAYA EKLENECEK -->
+
+
+  </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<div class="shop-footer">
+
+  <p>
+    <i class="fa-solid fa-shield-halved"></i>
+    Güvenli Alışveriş • Anında Teslimat
+  </p>
+
+</div>
+
+
+<script>
+  /* DARK MODE AUTO LOAD */
+
+(function(){
+
+if(localStorage.getItem("theme") === "true"){
+  document.body.classList.add("dark");
+}
+
+})();
+</script>
+</body>
+</html>
