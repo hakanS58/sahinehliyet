@@ -340,6 +340,55 @@ body.dark .app-header{
   font-weight: 600;
   font-size: 17px;
 }
+
+body.dark .topic{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+
+body.dark .topic p{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+
+body.dark .main-title{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+
+body.dark .example{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+
+body.dark{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
     </style>
   </head>
 
@@ -463,6 +512,16 @@ body.dark .app-header{
         </div>
       </div>
     </div>
+        <script>
+      /* DARK MODE AUTO LOAD */
+
+(function(){
+
+if(localStorage.getItem("theme") === "true"){
+  document.body.classList.add("dark");
+}
+
+})();
+    </script>
   </body>
 </html>
-
