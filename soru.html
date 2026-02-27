@@ -66,38 +66,7 @@ min-height:100vh;
 padding-top: env(safe-area-inset-top);
 }
 
-/* ================= HEADER ================= */
 
-.app-header{
-background:linear-gradient(135deg,#2563eb,#3b82f6);
-color:white;
-
-padding:12px 16px;
-height:56px;
-
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-border-radius:0 0 20px 20px;
-box-shadow:var(--shadow);
-}
-
-
-.app-title{
-font-size:18px;
-font-weight:600;
-letter-spacing:.3px;
-margin-left: 20px;
-}
-
-.back-btn{
-background:none;
-border:none;
-color:white;
-font-size:20px;
-cursor:pointer;
-}
 
 /* ================= CONTAINER ================= */
 
@@ -614,7 +583,6 @@ textarea:focus{
 }
 
 /* BUTTON */
-/* BUTTON */
 button{
   width:100%;
   margin-top:12px;
@@ -622,8 +590,7 @@ button{
   border:none;
   border-radius:16px;
   background:linear-gradient(135deg,var(--primary),var(--primary2));
- background-color:black;
-  color: white;
+  color:white;
   font-weight:600;
   font-size:15px;
   cursor:pointer;
@@ -803,65 +770,35 @@ button:disabled{
   border-left:4px solid #ef4444;
 }
 
+/* ================= MODERN HEADER ================= */
 
+.app-header{
 
-/* HEADER */
-
-.header{
-  display:flex;
-  align-items:center;
-
-background:linear-gradient(135deg,#2563eb,#3b82f6);
-color:white;
-padding:16px 18px;
-border-radius:0 0 25px 25px;
-  margin-bottom:18px;
-
-  box-shadow:0 6px 20px rgba(59,130,246,.4);
-}
-
-/* Geri Butonu */
-
-.back-btn{
-  background:rgba(255,255,255,.2);
-
-  border:none;
-
-  width:36px;
-  height:36px;
-
-  border-radius:50%;
-
-  color:white;
-
-  font-size:18px;
-
-  cursor:pointer;
 
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  justify-content:center;
 
-  flex-shrink:0; /* Ortaya kaymasını engeller */
+  padding:14px 18px;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6,
+    #06b6d4
+  );
+
+  border-radius:0 0 22px 22px;
+
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+  backdrop-filter: blur(10px);
 }
 
-/* Yazılar */
 
-.header-text{
-  flex:1;
-}
+/* SOL TARAF */
 
-.header-text h3{
-  font-size:15px;
-  font-weight:600;
-}
-
-.header-text p{
-  font-size:12px;
-  opacity:.9;
-}
-
-    .header-left{
+.header-left{
   display:flex;
   align-items:center;
   gap:10px;
@@ -886,49 +823,126 @@ border-radius:0 0 25px 25px;
   gap:8px;
 }
 
+.header-btn{
+  width:34px;
+  height:34px;
 
-    .app-header{
-background:linear-gradient(135deg,#2563eb,#3b82f6);
-color:white;
+  border:none;
+  border-radius:50%;
 
-padding:16px 18px;
+  background:rgba(255,255,255,.18);
+  color:white;
 
-display:flex;
-align-items:center;
-justify-content:space-between;
+  font-size:16px;
+  cursor:pointer;
 
-border-radius:0 0 25px 25px;
-box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:.25s;
+}
+
+
+
+
+/* DARK MODE */
+
+body.dark .app-header{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+}
+
+
+.app-header{
+  position: relative;
 }
 
 .app-title{
-font-size:18px;
-font-weight:600;
+  margin-left: 45px; /* Ok kadar boşluk bırakır */
+  font-weight: 600;
+  font-size: 17px;
 }
+
 
 .back-btn{
-background:none;
-border:none;
-color:white;
-font-size:20px;
-cursor:pointer;
+  position: absolute;
+  left: 15px;
+  top: 30%;
+  transform: translateY(-50%);
+
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: .25s;
+  backdrop-filter: blur(6px);
 }
 
+.back-btn:hover{
+  background: rgba(255,255,255,0.28);
+}
+
+
+body.dark .app{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+body.dark .list-title{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
+body.dark .list{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
+}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="app-header">
+  <header class="app-header">
 
-<button class="back-btn" onclick="history.back()">
-<i class="fa-solid fa-chevron-left"></i>
-</button>
+  <div class="header-left">
+    <span class="app-title">Ehliyet 2026</span>
+  </div>
 
-<span class="app-title">Soru Sor</span>
-
-<span></span>
+  <div class="header-right">
+ <button class="back-btn" onclick="history.back()">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  </div>
 
 </header>
 
@@ -1036,6 +1050,12 @@ Yazılı sınavdan en az 70 puan alman gerekir.
 <div id="toast" class="toast"></div>
 
 <script>
+
+  /* DARK MODE */
+
+if(localStorage.getItem("theme")==="true"){
+document.body.classList.add("dark");
+}
 
 /* ================= FIREBASE ================= */
 
@@ -1254,12 +1274,3 @@ load();
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
