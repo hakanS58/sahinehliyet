@@ -290,36 +290,53 @@ body.dark .app-header{
   background: linear-gradient(135deg, #f7971e, #ffd200);
 }
 
-    /* DARK MODE GENEL */
+/* DARK MODE */
 
-body.dark {
-  background: linear-gradient(135deg, #020617, #020b2a);
-  color: #eee;
+body.dark .app-header{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
 }
 
-body.dark .container {
-  background: #0f172a;
+body.dark .menu{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
 }
 
-body.dark .card {
-  background: #020617;
-  color: #eee;
-  box-shadow: 0 5px 12px rgba(255,255,255,0.05);
+body.dark .container{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
 }
 
-body.dark .card p {
-  color: #aaa;
+body.dark .card{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
+  color: white;
 }
 
-body.dark .header {
-  color: #eee;
+body.dark{
+  background:linear-gradient(
+    135deg,
+    #020617,
+    #020b2a,
+    #020f3a
+  );
 }
-
-body.dark .icon-box {
-  filter: brightness(0.9);
-}
-
-
 </style>
 </head>
 
@@ -381,7 +398,9 @@ body.dark .icon-box {
 
     <!-- Bizi Değerlendir -->
 
-<a href="javascript:void(0)" onclick="openPlayStore()" class="card">
+<a href="https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak"
+   target="_blank"
+   class="card">
 
   <div class="icon-box">
     <i class="fa-solid fa-star"></i>
@@ -397,36 +416,17 @@ body.dark .icon-box {
 
 </div>
 
-    <script>
+<script>
+    /* DARK MODE AUTO LOAD */
 
-function openPlayStore(){
+(function(){
 
-  const url = "https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet";
-
-  if(window.Android){
-
-    Android.openExternal(url);
-
-  }else{
-
-    window.open(url, "_blank");
-
-  }
-
+if(localStorage.getItem("theme") === "true"){
+  document.body.classList.add("dark");
 }
 
-  // Ana sayfadan gelen dark mode bilgisini oku
-  const isDark = localStorage.getItem("darkMode");
-
-  if (isDark === "true") {
-    document.body.classList.add("dark");
-  }
-
-
+})();
 </script>
-
 
 </body>
 </html>
-
-
