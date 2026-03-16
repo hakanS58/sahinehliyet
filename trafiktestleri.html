@@ -886,18 +886,19 @@ body.dark .repeat-card{
 
 
 
-    let selectedTest = "";
+let selectedTest = "";
 
 function openPremium(url){
 
-// ✅ Premium varsa direkt gir
-if(isPremium === true){
+// 🔥 localStorage'dan kontrol et
+if(localStorage.getItem("premium") === "true"){
   location.href = url;
   return;
 }
 
 selectedTest = url;
 document.getElementById("premiumModal").style.display="flex";
+
 }
 
 
