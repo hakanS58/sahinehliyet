@@ -1013,18 +1013,19 @@ if(localStorage.getItem("theme") === "true"){
 
 function openTest(url) {
 
-  if (localStorage.getItem("premium") === "true") {
+  const premium = localStorage.getItem("premium");
 
-    // 🔥 Premium ise direkt teste gir
+  if (premium === "true") {
+
+    // Premium kullanıcı → direkt teste gir
     window.location.href = url;
 
   } else {
 
-    // Premium değilse popup göster
+    // Normal kullanıcı → popup göster
     showChoicePopup(url);
 
   }
-
 }
 
 
