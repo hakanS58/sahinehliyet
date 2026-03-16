@@ -1011,15 +1011,21 @@ if(localStorage.getItem("theme") === "true"){
     console.log("HTML PREMIUM:", isPremium);
   }
 
-  function openTest(url) {
-    if (isPremium) {
-      // 🔥 Premium ise direkt teste gir
-      window.location.href = url;
-    } else {
-      // Premium değilse popup göster
-      showChoicePopup(url);
-    }
+function openTest(url) {
+
+  if (localStorage.getItem("premium") === "true") {
+
+    // 🔥 Premium ise direkt teste gir
+    window.location.href = url;
+
+  } else {
+
+    // Premium değilse popup göster
+    showChoicePopup(url);
+
   }
+
+}
 
 
 
