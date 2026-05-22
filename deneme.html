@@ -872,7 +872,7 @@ body.dark .repeat-card{
 
 
     
-   <script>
+ <script>
     let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
 
     function loadStatus() {
@@ -890,18 +890,19 @@ body.dark .repeat-card{
 
 
 
-    let selectedTest = "";
+let selectedTest = "";
 
 function openPremium(url){
 
-// ✅ Premium varsa direkt gir
-if(isPremium === true){
+// 🔥 localStorage'dan kontrol et
+if(localStorage.getItem("premium") === "true"){
   location.href = url;
   return;
 }
 
 selectedTest = url;
 document.getElementById("premiumModal").style.display="flex";
+
 }
 
 
@@ -996,10 +997,10 @@ if(localStorage.getItem("theme") === "true"){
 
 
     </div>
-    <script>
-        function watchAd() {
-          Android.showRewardedAd(selectedTest);
-        }
+
+
+<script>
+
 
         function goPremium() {
           window.location.href = "premium.html";
@@ -1013,15 +1014,22 @@ if(localStorage.getItem("theme") === "true"){
     console.log("HTML PREMIUM:", isPremium);
   }
 
-  function openTest(url) {
-    if (isPremium) {
-      // 🔥 Premium ise direkt teste gir
-      window.location.href = url;
-    } else {
-      // Premium değilse popup göster
-      showChoicePopup(url);
-    }
+function openTest(url) {
+
+  const premium = localStorage.getItem("premium");
+
+  if (premium === "true") {
+
+    // Premium kullanıcı → direkt teste gir
+    window.location.href = url;
+
+  } else {
+
+    // Normal kullanıcı → popup göster
+    showChoicePopup(url);
+
   }
+}
 
 
 
@@ -1030,6 +1038,7 @@ if(localStorage.getItem("theme") === "true"){
 
 
     </script>
+
     </div>
   </body>
 </html>
