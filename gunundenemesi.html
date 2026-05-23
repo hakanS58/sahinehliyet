@@ -126,6 +126,29 @@ Testi Bitir
 <script>
 
 
+const today = new Date().toDateString();
+
+if(localStorage.getItem("completedTestDate") === today){
+
+document.body.innerHTML = `
+<div style="
+padding:40px;
+text-align:center;
+font-family:Segoe UI;
+">
+
+<h2>✅ Bugünkü denemenizi çözdünüz</h2>
+
+<p>
+Yeni deneme 00:00'dan sonra yenilenecek.
+</p>
+
+</div>
+`;
+
+throw new Error("Bugünkü test çözüldü");
+}
+
 let currentQuestions = checkTodayTest();
 const questions = currentQuestions;
 const quiz = document.getElementById("quiz");
@@ -235,54 +258,89 @@ function finish(){
     document.getElementById("resultBox").style.display="block";
 
     saveScore(percent);
+
+    localStorage.setItem(
+"completedTestDate",
+new Date().toDateString()
+);
 }
 
+function getDailyQuestions(){
 
+let used =
+JSON.parse(localStorage.getItem("usedQuestions")) || [];
 
+// seçilmemişler
+let available =
+questionBank.filter(q => !used.includes(q.id));
 
-function getDailyQuestions() {
+// hepsi bittiyse sıfırla
+if(available.length < 50){
 
-  let used = JSON.parse(localStorage.getItem("usedQuestions")) || [];
+used = [];
+localStorage.setItem(
+"usedQuestions",
+JSON.stringify([])
+);
 
-  // Kullanılmamış sorular
-  let available = questionBank.filter(q => !used.includes(q.id));
-
-  // Hepsi bittiyse sıfırla
-  if (available.length < 50) {
-    used = [];
-    localStorage.setItem("usedQuestions", JSON.stringify([]));
-    available = questionBank;
-  }
-
-  // Karıştır
-  available.sort(() => Math.random() - 0.5);
-
-  // 50 tane seç
-  let selected = available.slice(0, 50);
-
-  // Kullanılanlara ekle
-  selected.forEach(q => used.push(q.id));
-
-  localStorage.setItem("usedQuestions", JSON.stringify(used));
-
-  return selected;
+available = [...questionBank];
 }
+
+// karıştır
+for(let i=available.length-1;i>0;i--){
+
+let j=Math.floor(Math.random()*(i+1));
+
+[available[i],available[j]]=
+[available[j],available[i]];
+}
+
+// 50 seç
+let selected = available.slice(0,50);
+
+// kaydet
+used.push(...selected.map(q=>q.id));
+
+localStorage.setItem(
+"usedQuestions",
+JSON.stringify(used)
+);
+
+return selected;
+}
+
 
 function checkTodayTest(){
 
-  const today = new Date().toDateString();
-  const savedDate = localStorage.getItem("lastTestDate");
+const today = new Date().toDateString();
 
-  if(savedDate === today){
-    return JSON.parse(localStorage.getItem("todayQuestions"));
-  }
+const savedDate =
+localStorage.getItem("lastTestDate");
 
-  const newTest = getDailyQuestions();
+if(savedDate === today){
 
-  localStorage.setItem("lastTestDate", today);
-  localStorage.setItem("todayQuestions", JSON.stringify(newTest));
+return JSON.parse(
+localStorage.getItem("todayQuestions")
+);
+}
 
-  return newTest;
+const newTest = getDailyQuestions();
+
+localStorage.setItem(
+"lastTestDate",
+today
+);
+
+localStorage.setItem(
+"todayQuestions",
+JSON.stringify(newTest)
+);
+
+localStorage.removeItem(
+"completedTestDate"
+);
+
+return newTest;
 }
 </script>
 
