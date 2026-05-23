@@ -7,80 +7,102 @@
 
 <style>
 body{
-    font-family: "Segoe UI", Arial, sans-serif;
-    background:#f4f6fb;
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
     margin:0;
     padding:15px;
+    color:#fff;
 }
 
-/* Başlık */
+/* Header */
 .header{
     text-align:center;
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:20px;
+    font-size:28px;
+    font-weight:900;
+    margin-bottom:10px;
+    color:#facc15;
+    text-shadow:0 0 15px rgba(250,204,21,.35);
 }
 
-/* Soru Kartı */
-.question-card{
-    background:#fff;
-    border-radius:15px;
-    padding:18px;
+/* Timer */
+.timer-box{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.12);
+    padding:14px;
+    border-radius:16px;
+    text-align:center;
+    font-size:22px;
+    font-weight:800;
     margin-bottom:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    color:#fff;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+/* Kartlar */
+.question-card{
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:22px;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
 }
 
 /* Soru */
 .question-title{
-    font-size:16px;
-    font-weight:600;
-    margin-bottom:15px;
+    font-size:17px;
+    font-weight:700;
+    margin-bottom:18px;
+    color:#fff;
 }
 
-/* Şıklar */
+/* Şık */
 .option{
-    border:2px solid #e1e4ea;
-    padding:12px 14px;
-    border-radius:10px;
-    margin-bottom:10px;
+    border:2px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    padding:14px;
+    border-radius:14px;
+    margin-bottom:12px;
     display:flex;
     align-items:center;
     cursor:pointer;
-    transition:0.2s;
+    transition:.25s;
 }
 
 .option:hover{
-    background:#f1f5ff;
+    transform:translateY(-2px);
+    border-color:#facc15;
+    background:rgba(250,204,21,.12);
 }
 
-.option input{
-    display:none;
-}
-
-/* Seçili Şık */
 .option.selected{
-    background:#e7efff;
-    border-color:#3b82f6;
-    color:#1e40af;
-    font-weight:600;
+    background:#facc15;
+    border-color:#facc15;
+    color:#111827;
+    font-weight:700;
 }
 
-/* Bitir Butonu */
+/* Buton */
 .finish-btn{
     width:100%;
-    background:#3b82f6;
-    color:#fff;
+    background:linear-gradient(135deg,#facc15,#eab308);
+    color:#111827;
     border:none;
-    padding:15px;
-    font-size:16px;
-    border-radius:12px;
-    font-weight:bold;
+    padding:17px;
+    font-size:17px;
+    border-radius:16px;
+    font-weight:900;
     cursor:pointer;
-    margin-top:10px;
+    margin-top:12px;
+    box-shadow:0 8px 25px rgba(250,204,21,.25);
+    transition:.25s;
 }
 
 .finish-btn:hover{
-    background:#2563eb;
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(250,204,21,.35);
 }
 </style>
 </head>
@@ -90,7 +112,9 @@ body{
 <body>
 
 <div class="header">📅 Günün Denemesi</div>
-
+<div class="timer-box">
+⏳ Kalan Süre: <span id="timer">50:00</span>
+</div>
 <div id="quiz"></div>
 
 <button class="finish-btn" onclick="finish()">
@@ -137,16 +161,90 @@ document.body.innerHTML = `
 padding:40px;
 text-align:center;
 font-family:Segoe UI;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:80vh;
 ">
 
-<h2>✅ Bugünkü denemenizi çözdünüz</h2>
+<h2 style="
+color:#facc15;
+font-size:28px;
+margin-bottom:15px;
+">
+✅ Bugünkü denemenizi çözdünüz
+</h2>
 
-<p>
-Yeni deneme 00:00'dan sonra yenilenecek.
+<p style=" font-size:18px; color:#white; margin-bottom:30px; "> Denemeler Her gün 00.00'dan Sonra Sıfırlanır. Yeni Sorular İçin Lütfen Bekleyin :) </p>
+
+<p style="
+font-size:18px;
+color:#eab308;
+margin-bottom:10px;
+">
+Yeni denemeye kalan süre: 
 </p>
+
+<div id="resetTimer"
+style="
+font-size:32px;
+font-weight:900;
+color:#white;
+margin-bottom:30px;
+">
+00:00:00
+</div>
+
+<button onclick="window.location.href='katagoriler.html'"
+style="
+background:linear-gradient(135deg,#facc15,#eab308);
+color:#111827;
+border:none;
+padding:16px 35px;
+border-radius:14px;
+font-size:17px;
+font-weight:800;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(250,204,21,.25);
+">
+Tamam
+</button>
 
 </div>
 `;
+
+function updateResetTimer(){
+
+const now = new Date();
+
+const midnight = new Date();
+
+midnight.setHours(24,0,0,0);
+
+const diff = midnight - now;
+
+const hours =
+Math.floor(diff / (1000*60*60));
+
+const minutes =
+Math.floor((diff % (1000*60*60)) / (1000*60));
+
+const seconds =
+Math.floor((diff % (1000*60))/1000);
+
+document.getElementById("resetTimer").innerText =
+`${String(hours).padStart(2,"0")}:${
+String(minutes).padStart(2,"0")
+}:${
+String(seconds).padStart(2,"0")
+}`;
+
+}
+
+updateResetTimer();
+
+setInterval(updateResetTimer,1000);
 
 throw new Error("Bugünkü test çözüldü");
 }
@@ -216,7 +314,7 @@ function finish(){
     let correct = 0;
     let wrong = 0;
     let empty = 0;
-
+clearInterval(countdown);
     let wrongHtml = "";
 
     currentQuestions.forEach((q,i)=>{
@@ -363,36 +461,41 @@ localStorage.setItem(
 new Date().toDateString()
 );
 
-window.location.href="katagoriler.html";
-
-}
-
-
-
-history.pushState(null,null,location.href);
-
-window.onpopstate = function () {
-
-let confirmExit = confirm(
-"Çıkmak istediğinize emin misiniz?\n\nDeneme sonlandırılacak ve bugünkü hakkınız bitecek."
-);
-
-if(confirmExit){
-
-localStorage.setItem(
-"completedTestDate",
-new Date().toDateString()
-);
-
 window.location.href = "katagoriler.html";
 
-}else{
+}
 
-history.pushState(null,null,location.href);
+let totalSeconds = 3000;
+
+const timerElement =
+document.getElementById("timer");
+
+const countdown = setInterval(()=>{
+
+let minutes =
+Math.floor(totalSeconds/60);
+
+let seconds =
+totalSeconds%60;
+
+timerElement.innerText =
+`${minutes}:${
+seconds<10?"0":""
+}${seconds}`;
+
+if(totalSeconds<=0){
+
+clearInterval(countdown);
+
+alert("Süre doldu. Deneme otomatik bitirildi.");
+
+finish();
 
 }
 
-};
+totalSeconds--;
+
+},1000);
 </script>
 
 </body>
