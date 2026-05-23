@@ -114,7 +114,9 @@ Testi Bitir
         <div id="wrongList"></div>
     </div>
 
-
+<button class="finish-btn" onclick="goCategory()">
+Denemeyi Bitir
+</button>
 </div>
 
 
@@ -211,42 +213,38 @@ value="${key}"
 
 function finish(){
 
-let correct = 0;
-let wrong = 0;
-let empty = 0;
+    let correct = 0;
+    let wrong = 0;
+    let empty = 0;
 
-currentQuestions.forEach((q,i)=>{
+    let wrongHtml = "";
 
-let selected =
-document.querySelector(`input[name="q${i}"]:checked`);
+    currentQuestions.forEach((q,i)=>{
 
-if(!selected){
-empty++;
-return;
-}
+        let selected =
+        document.querySelector(`input[name="q${i}"]:checked`);
 
-let answer = selected.value;
+        if(!selected){
+            empty++;
+            return;
+        }
 
-if(answer === q.answer){
-correct++;
-}else{
-wrong++;
-}
+        let answer = selected.value;
 
-});
+        if(answer === q.answer){
+            correct++;
+        }else{
+            wrong++;
 
-// bugünü çözüldü diye işaretle
-localStorage.setItem(
-"completedTestDate",
-new Date().toDateString()
-);
+            wrongHtml += `
+            <p>
+            ${i+1}. ${q.question}<br>
+            ✔ Doğru: ${q.options[q.answer]}
+            </p>
+            `;
+        }
 
-// kategori sayfasına dön
-window.location.href = "katagoriler.html";
-
-}
-
-
+    });
 
     let total = currentQuestions.length;
     let percent = Math.round((correct / total) * 100);
@@ -257,10 +255,11 @@ window.location.href = "katagoriler.html";
     document.getElementById("percent").innerText = percent;
 
     document.getElementById("wrongList").innerHTML =
-        wrongHtml || "Tebrikler 🎉 Hiç yanlış yok";
+    wrongHtml || "Tebrikler 🎉 Hiç yanlış yok";
 
-    document.getElementById("quiz").style.display="none";
-    document.getElementById("resultBox").style.display="block";
+    document.getElementById("quiz").style.display = "none";
+    document.querySelector(".finish-btn").style.display = "none";
+    document.getElementById("resultBox").style.display = "block";
 
     saveScore(percent);
 
@@ -268,6 +267,10 @@ window.location.href = "katagoriler.html";
 "completedTestDate",
 new Date().toDateString()
 );
+
+}
+
+
 
 
 function getDailyQuestions(){
@@ -346,6 +349,17 @@ localStorage.removeItem(
 );
 
 return newTest;
+}
+
+function goCategory(){
+
+localStorage.setItem(
+"completedTestDate",
+new Date().toDateString()
+);
+
+window.location.href = "katagoriler.html";
+
 }
 </script>
 
