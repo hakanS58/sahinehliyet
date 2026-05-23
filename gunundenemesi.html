@@ -130,7 +130,10 @@ Denemeyi Bitir
 
 const today = new Date().toDateString();
 
-if(localStorage.getItem("completedTestDate") === today){
+if(
+localStorage.getItem("completedTestDate") === today ||
+localStorage.getItem("startedTestDate") === today
+){
 
 document.body.innerHTML = `
 <div style="
@@ -139,16 +142,17 @@ text-align:center;
 font-family:Segoe UI;
 ">
 
-<h2>✅ Bugünkü denemenizi çözdünüz</h2>
+<h2>✅ Bugünkü deneme aktif / çözüldü</h2>
 
 <p>
+Bugünkü denemeye tekrar giriş yapılamaz.<br>
 Yeni deneme 00:00'dan sonra yenilenecek.
 </p>
 
 </div>
 `;
 
-throw new Error("Bugünkü test çözüldü");
+throw new Error("Bugünkü test kilitli");
 }
 
 let currentQuestions = checkTodayTest();
@@ -317,7 +321,6 @@ JSON.stringify(used)
 return selected;
 }
 
-
 function checkTodayTest(){
 
 const today = new Date().toDateString();
@@ -327,10 +330,36 @@ localStorage.getItem("lastTestDate");
 
 if(savedDate === today){
 
+localStorage.setItem(
+"startedTestDate",
+today
+);
+
 return JSON.parse(
 localStorage.getItem("todayQuestions")
 );
 }
+
+const newTest = getDailyQuestions();
+
+localStorage.setItem("lastTestDate", today);
+
+localStorage.setItem(
+"todayQuestions",
+JSON.stringify(newTest)
+);
+
+localStorage.setItem(
+"startedTestDate",
+today
+);
+
+localStorage.removeItem("completedTestDate");
+
+return newTest;
+}
+
+
 
 const newTest = getDailyQuestions();
 
@@ -349,7 +378,7 @@ localStorage.removeItem(
 );
 
 return newTest;
-}
+
 
 function goCategory(){
 
@@ -358,7 +387,9 @@ localStorage.setItem(
 new Date().toDateString()
 );
 
-window.location.href = "katagoriler.html";
+localStorage.removeItem("startedTestDate");
+
+window.location.href="katagoriler.html";
 
 }
 </script>
