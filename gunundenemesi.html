@@ -211,37 +211,42 @@ value="${key}"
 
 function finish(){
 
-    let correct = 0;
-    let wrong = 0;
-    let empty = 0;
+let correct = 0;
+let wrong = 0;
+let empty = 0;
 
-    let wrongHtml = "";
+currentQuestions.forEach((q,i)=>{
 
-    currentQuestions.forEach((q,i)=>{
+let selected =
+document.querySelector(`input[name="q${i}"]:checked`);
 
-        let selected = document.querySelector(`input[name="q${i}"]:checked`);
+if(!selected){
+empty++;
+return;
+}
 
-        if(!selected){
-            empty++;
-            return;
-        }
+let answer = selected.value;
 
-        let answer = selected.value; // A B C D
+if(answer === q.answer){
+correct++;
+}else{
+wrong++;
+}
 
-        if(answer === q.answer){
-            correct++;
-        }else{
-            wrong++;
+});
 
-            wrongHtml += `
-            <p>
-            ${i+1}. ${q.question}<br>
-            ✔ Doğru: ${q.options[q.answer]}
-            </p>
-            `;
-        }
+// bugünü çözüldü diye işaretle
+localStorage.setItem(
+"completedTestDate",
+new Date().toDateString()
+);
 
-    });
+// kategori sayfasına dön
+window.location.href = "katagoriler.html";
+
+}
+
+
 
     let total = currentQuestions.length;
     let percent = Math.round((correct / total) * 100);
@@ -263,7 +268,7 @@ function finish(){
 "completedTestDate",
 new Date().toDateString()
 );
-}
+
 
 function getDailyQuestions(){
 
