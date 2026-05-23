@@ -366,6 +366,33 @@ new Date().toDateString()
 window.location.href="katagoriler.html";
 
 }
+
+
+
+history.pushState(null,null,location.href);
+
+window.onpopstate = function () {
+
+let confirmExit = confirm(
+"Çıkmak istediğinize emin misiniz?\n\nDeneme sonlandırılacak ve bugünkü hakkınız bitecek."
+);
+
+if(confirmExit){
+
+localStorage.setItem(
+"completedTestDate",
+new Date().toDateString()
+);
+
+window.location.href = "katagoriler.html";
+
+}else{
+
+history.pushState(null,null,location.href);
+
+}
+
+};
 </script>
 
 </body>
