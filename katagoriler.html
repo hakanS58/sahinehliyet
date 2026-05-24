@@ -1148,6 +1148,116 @@ body.dark .motivation-card{
 }
 
 
+.premium-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(6px);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.premium-box-modern{
+  width:92%;
+  max-width:360px;
+  background:white;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:pop .35s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.premium-box-modern h3{
+  text-align:center;
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.premium-box-modern .desc{
+  text-align:center;
+  font-size:13px;
+  color:#64748b;
+  margin-bottom:14px;
+}
+
+/* CHOICES */
+
+.choice-card{
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
+  cursor:pointer;
+  transition:.25s;
+  border:1px solid #e5e7eb;
+}
+
+.choice-card:hover{
+  transform:scale(1.03);
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+
+/* HEAD */
+
+.choice-head{
+  font-weight:700;
+  font-size:15px;
+  margin-bottom:6px;
+}
+
+/* AD */
+
+.choice-card.ad{
+  background:#f0f9ff;
+  border-color:#3b82f6;
+}
+
+.choice-card.ad .choice-head{
+  color:#1d4ed8;
+}
+
+/* PREMIUM */
+
+.choice-card.premium{
+  background:linear-gradient(135deg,#fff7cc,#fde047);
+  border-color:#eab308;
+}
+
+.choice-card.premium .choice-head{
+  color:#92400e;
+}
+
+/* TEXT */
+
+.choice-card p{
+  font-size:13px;
+  color:#475569;
+  line-height:1.4;
+}
+
+/* CANCEL */
+
+.cancel-btn{
+  width:100%;
+  margin-top:8px;
+  padding:11px;
+  border:none;
+  border-radius:12px;
+  background:#f1f5f9;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.cancel-btn:hover{
+  background:#e2e8f0;
+}
+
 
 </style>
 
@@ -1774,8 +1884,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 }
 
 
+
+
+
+
+
 function goDailyTest() {
-    window.location.href = "gunundenemesi.html";
+    openPremium("gunundenemesi.html");
 }
 
 
@@ -1855,8 +1970,165 @@ function goDailyTest() {
 
 </nav>
 
+<script>
+    let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
+
+    function loadStatus() {
+      if (!user.tests) return;
+
+      Object.keys(user.tests).forEach((key) => {
+        const btn = document.getElementById(key);
+
+        if (btn) {
+          btn.classList.add("completed");
+        }
+      });
+    }
+    loadStatus();
 
 
+
+    let selectedTest = "";
+
+function openPremium(url){
+
+// ✅ Premium varsa direkt gir
+if(isPremium === true){
+  location.href = url;
+  return;
+}
+
+selectedTest = url;
+document.getElementById("premiumModal").style.display="flex";
+}
+
+
+function closePremium(){
+document.getElementById("premiumModal").style.display="none";
+}
+
+//test-reklam
+function watchAd(){
+if(isPremium){
+  location.href = selectedTest;
+  return;
+}
+closePremium();
+Android.showRewardedAd(selectedTest);
+}
+
+// Android’den geri dönüş
+function adCompleted(url){
+location.href = url;
+}
+
+
+
+// Premium alma (Firebase bağlıysa çalışır)
+function buyPremium(){
+alert("Premium sayfası açılıyor ⭐");
+// Buraya Firebase premium kodu bağlanır
+}
+
+
+
+
+
+/* DARK MODE AUTO LOAD */
+
+(function(){
+
+if(localStorage.getItem("theme") === "true"){
+  document.body.classList.add("dark");
+}
+
+})();
+</script>
+
+
+<!-- PREMIUM MODAL -->
+
+<div id="premiumModal" class="premium-modal">
+
+    <div class="premium-box-modern">
+
+        <h3>Bir Seçenek Seç</h3>
+
+        <p class="desc">
+            Teste devam etmek için aşağıdan bir yöntem seç.
+        </p>
+
+        <!-- REKLAM -->
+
+        <div class="choice-card ad" onclick="watchAd()">
+
+            <div class="choice-head">
+                🎬 Reklam İzle
+            </div>
+
+            <p>
+                Uygulamayı ücretsiz sunabilmemiz için kısa bir reklam izle.
+                Reklamdan sonra teste devam edebilirsin.
+            </p>
+
+        </div>
+
+        <!-- PREMIUM -->
+
+        <div class="choice-card premium" onclick="goPremium()">
+
+            <div class="choice-head">
+                ⭐ Premium Al
+            </div>
+
+            <p>
+                Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
+                Sınırsız erişim elde et.
+            </p>
+
+        </div>
+
+        <button class="cancel-btn" onclick="closePremium()">
+            Vazgeç
+        </button>
+
+
+    </div>
+
+
+<script>
+        function watchAd() {
+          Android.showRewardedAd(selectedTest);
+        }
+
+        function goPremium() {
+          window.location.href = "premium.html";
+        }
+
+
+  let isPremium = false;
+
+  function setPremium(value) {
+    isPremium = value === true;
+    console.log("HTML PREMIUM:", isPremium);
+  }
+
+  function openTest(url) {
+    if (isPremium) {
+      // 🔥 Premium ise direkt teste gir
+      window.location.href = url;
+    } else {
+      // Premium değilse popup göster
+      showChoicePopup(url);
+    }
+  }
+
+
+
+
+
+
+</script>
 
 
   </body>
