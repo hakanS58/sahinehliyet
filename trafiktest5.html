@@ -608,7 +608,7 @@ if(d && !window.testCounted){
 
               localStorage.setItem("user", JSON.stringify(user));
             }
-            saveTestResult("trafik-test-4", correct, wrong, empty, successRate);
+            saveTestResult("trafik-test-5", correct, wrong, empty, successRate);
           }
 
           function finishTest(result) {
@@ -616,8 +616,8 @@ if(d && !window.testCounted){
             user.tests = user.tests || {};
             user.inProgress = user.inProgress || {};
 
-            user.tests["trafik-test-4"] = result; // yeni sonuç
-            delete user.inProgress["trafik-test-4"]; // yarım kalma durumu silinir
+            user.tests["trafik-test-5"] = result; // yeni sonuç
+            delete user.inProgress["trafik-test-5"]; // yarım kalma durumu silinir
 
             localStorage.setItem("user", JSON.stringify(user));
           }
