@@ -1,0 +1,1039 @@
+<!doctype html>
+    <html lang="tr">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Deneme Sınavı</title>
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
+     crossorigin="anonymous"></script>
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+        <style>
+          :root {
+            --primary: #2563eb;
+            --secondary: #1e3a8a;
+            --bg1: #020617;
+            --bg2: #0f172a;
+            --card: #ffffff;
+            --text: #0f172a;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #facc15;
+          }
+
+          * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          }
+
+          body {
+            font-family: "Poppins", sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(
+              135deg,
+              var(--secondary),
+              var(--primary)
+            );
+            animation: bgMove 12s infinite alternate;
+          }
+
+          @keyframes bgMove {
+            0% {
+              background-position: 0% 50%;
+            }
+            100% {
+              background-position: 100% 50%;
+            }
+          }
+
+          /* HEADER */
+
+          .top-bar {
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+          }
+
+          .top-bar h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+          }
+
+          .top-bar a {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 6px 12px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+          }
+
+          .top-bar a:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+          }
+
+          /* CONTAINER */
+
+          .quiz-container {
+            max-width: 540px;
+            margin: auto;
+            padding: 18px;
+            animation: fadeUp 0.6s ease;
+          }
+
+          @keyframes fadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          /* AD */
+
+          .ad-area {
+            background: white;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+          }
+
+          /* CARD */
+
+          .card {
+            background: white;
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: cardPop 0.4s ease;
+          }
+
+          @keyframes cardPop {
+            from {
+              transform: scale(0.9);
+              opacity: 0;
+            }
+            to {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+
+          .card h2 {
+            font-size: 17px;
+            margin-bottom: 12px;
+            text-align: center;
+          }
+
+          /* IMAGE */
+
+          .question-img {
+            width: 100%;
+            border-radius: 14px;
+            margin: 12px 0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          /* OPTIONS */
+
+          #options button {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            background: #f1f5f9;
+            cursor: pointer;
+            transition: 0.25s;
+          }
+
+          #options button:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+          }
+
+          .correct {
+            background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+            color: white;
+          }
+
+          .wrong {
+            background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+            color: white;
+          }
+
+          /* INFO */
+
+          #infoBox {
+            display: none;
+            background: #fffbeb;
+            border-left: 5px solid var(--warning);
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 10px;
+            font-size: 14px;
+            animation: fadeUp 0.4s;
+          }
+
+          /* NAV */
+
+          .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+          }
+
+          .nav-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(
+              135deg,
+              var(--secondary),
+              var(--primary)
+            );
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+          }
+
+          .nav-buttons button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+          }
+
+
+
+
+          /* QUIZ TOP BAR */
+
+.quiz-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.quiz-stats {
+  display: flex;
+  gap: 10px;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.exit-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.exit-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* EXIT MODAL */
+
+.exit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.exit-box {
+  background: white;
+  width: 85%;
+  max-width: 320px;
+  padding: 22px;
+  border-radius: 18px;
+  text-align: center;
+  animation: fadeUp 0.3s ease;
+}
+
+.exit-box h3 {
+  margin-bottom: 8px;
+}
+
+.exit-box p {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 15px;
+}
+
+.exit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.exit-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-no {
+  background: #e5e7eb;
+}
+
+.btn-yes {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-yes:hover {
+  opacity: 0.9;
+}
+
+
+.option-img {
+  width: 90px;
+  max-width: 100%;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.option-img:hover {
+  transform: scale(1.05);
+}
+
+
+
+        </style>
+      </head>
+
+      <body>
+
+        <!-- EXIT MODAL -->
+
+<div id="exitModal" class="exit-modal">
+
+  <div class="exit-box">
+
+    <h3>Testten Çıkmak İstiyor musun?</h3>
+
+    <p>İlerlemen kaybolabilir.</p>
+
+    <div class="exit-actions">
+
+      <button class="btn-no" onclick="closeExit()">Vazgeç</button>
+
+      <button class="btn-yes" onclick="exitTest()">Evet, Çık</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TIME MODAL -->
+
+<div id="timeModal" class="exit-modal">
+
+  <div class="exit-box">
+
+    <h3>⏰ Süre Bitti</h3>
+
+    <p>Maalesef kaldınız.</p>
+
+    <div class="exit-actions">
+
+      <button class="btn-yes"
+      onclick="location.href='katagoriler.html'">
+      Tamam
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+        <div class="quiz-container">
+         
+
+          <div class="card">
+
+            <div class="quiz-top-bar">
+
+  <div class="quiz-stats">
+    <span id="statCorrect">✅ 0</span>
+    <span id="statWrong">❌ 0</span>
+    <span id="statEmpty">⚪ 50</span>
+  </div>
+<div id="timer"
+style="font-weight:700;color:#2563eb">
+45:00
+</div>
+
+  <button class="exit-btn" onclick="confirmExit()">✖</button>
+
+</div>
+
+            <h2 id="questionText"></h2>
+
+            <img id="questionImg" class="question-img" style="display: none" />
+
+            <div id="options"></div>
+
+            <div id="infoBox"></div>
+
+            <div class="nav-buttons">
+              <button id="prevBtn">⬅ Geri</button>
+              <button id="nextBtn">İleri ➡</button>
+            </div>
+          </div>
+        </div>
+
+        <script>
+
+            // TIMER
+
+let time = 45 * 60;
+
+const timerEl = document.getElementById("timer");
+
+const timerInterval = setInterval(() => {
+
+  let m = Math.floor(time / 60);
+  let s = time % 60;
+
+  timerEl.textContent =
+    m + ":" + (s < 10 ? "0" + s : s);
+
+  time--;
+
+  if (time < 0) {
+    clearInterval(timerInterval);
+
+    document.getElementById("timeModal")
+    .style.display = "flex";
+  }
+
+}, 1000);
+
+
+
+
+
+
+
+
+          let currentQuestion = 0;
+          let userAnswers = Array(50).fill(null);
+
+   
+const questions = [
+
+{
+    text: "Aksine bir işaret yoksa, yerleşim yeri dışındaki bölünmüş yollarda otomobiller için azami hız sınırı saatte kaç kilometredir?",
+    options: ["90", "110", "120", "130"],
+    correct: 1,
+    explanation: "Karayolları Trafik Yönetmeliğine göre, aksine bir levha bulunmadıkça otomobillerin bölünmüş yollardaki azami hız sınırı 110 km/s'dir."
+  },
+  {
+    text: "Trafik uygun olsa bile sürücülerin geçme yasağı olan yerlerde öndeki aracı geçmeye çalışması hangi kusur sayılır?",
+    options: ["Hafif kusur", "Asli kusur", "İdari kusur", "Kusursuzluk"],
+    correct: 1,
+    explanation: "Geçme yasağı olan yerlerde (tepe üstleri, virajlar, devamlı çizgiler) sollama yapmak trafik kanununda doğrudan 'Asli Kusur' (kesin hata) kabul edilir."
+  },
+  {
+    text: "Sürücülerin arkalarından gelen itfaiye veya ambulans gibi araçlara yol vermek için sağa ve sola yanaşarak ortada boş koridor açmalarına ne ad verilir?",
+    options: ["Fermuar yöntemi", "Makas yöntemi", "Turnike yöntemi", "Kör nokta yöntemi"],
+    correct: 0,
+    explanation: "Çok şeritli yollarda acil durum araçlarının hızla ilerlemesi için şeridin dış kenarlarına yanaşılarak ortada güvenli bir hat açılmasına fermuar yöntemi denir."
+  },
+  {
+    text: "Şehirler arası yollarda kavşaklara yaklaşırken en az kaç metre kala şerit değiştirmek yasaktır?",
+    options: ["30", "50", "100", "150"],
+    correct: 3,
+    explanation: "Trafik güvenliği nedeniyle kavşak yaklaşımlarında şerit değiştirmek şehir içinde 30 metre, şehirler arası (yerleşim yeri dışı) yollarda ise 150 metre kala yasaktır."
+  },
+  {
+    text: "Otoyolda seyir halindeyken arıza yapan bir aracın sürücüsü, reflektörü aracın arkasına en az kaç metre mesafeye koymalıdır?",
+    options: ["15", "30", "100", "150"],
+    correct: 3,
+    explanation: "Hızlı akan trafikte diğer sürücülerin arızalı aracı erken fark edebilmesi için reflektörün en az 150 metre geriye yerleştirilmesi zorunludur."
+  },
+  {
+    text: "Aşağıdakilerden hangisi sürücü belgesinin geri alınmasını gerektiren trafik suçlarından biridir?",
+    options: ["Aracı kirli kullanmak", "Uyuşturucu veya uyarıcı madde alarak araç kullanmak", "Emniyet kemeri takmamak", "Yüksek sesle müzik dinlemek"],
+    correct: 1,
+    explanation: "Uyuşturucu veya uyarıcı madde alarak araç kullandığı tespit edilen sürücülerin ehliyetlerine doğrudan 5 yıl süreyle el konulur."
+  },
+  {
+    text: "Aksine bir işaret yoksa, eğimsiz iki yönlü dar yolda kamyonet ile otomobilin karşılaşması halinde hangisi diğerine yol vermelidir?",
+    options: ["Otomobil kamyonete", "Kamyonet otomobile", "Hızlı gelen yavaş gelene", "Yaşı büyük olan sürücü diğerine"],
+    correct: 1,
+    explanation: "Dar yollardaki geçiş önceliği kurallarına göre, hantal ve büyük araçlar (kamyonet vb.) daha seri hareket edebilen küçük araçlara (otomobil) yol vermelidir."
+  },
+  {
+    text: "Sürücülerin gece sürüşünde önündeki aracı yakından takip ederken veya yan yana gelirken hangi farları yakması zorunludur?",
+    options: ["Uzun hüzmeli farlar", "Kısa hüzmeli farlar", "Sis farları", "Park lambaları"],
+    correct: 1,
+    explanation: "Öndeki veya yan şeritteki sürücünün dikiz aynalarından gözünün kamaşmasını önlemek amacıyla bu durumlarda kısa farlar kullanılmalıdır."
+  },
+  {
+    text: "Trafik kazası sonrasında olay yerinden kaçan bir sürücüye, mevzuat gereği ne tür bir yasal yaptırım uygulanır?",
+    options: ["Sadece sözlü uyarı", "İdari para cezası ve ceza puanı uygulanır, sigorta kapsamı dışında kalabilir", "Aracına kalıcı olarak el konulur", "Hiçbir cezai işlem yapılmaz"],
+    correct: 1,
+    explanation: "Kazaya karışıp olay yerini terk etmek cezai sorumluluk doğurur; sürücüye para cezası ve ceza puanı kesilir, rücu davalarına sebep olur."
+  },
+  {
+    text: "Ticari amaçla yük ve yolcu taşımacılığı yapan sürücülerin, 24 saatlik bir süre içinde toplamda en fazla kaç saat araç kullanmaları yasaldır?",
+    options: ["5 saat", "7 saat", "9 saat", "12 saat"],
+    correct: 2,
+    explanation: "Uluslararası ve ulusal yasalara göre ticari sürücüler, 24 saat içinde toplamda en fazla 9 saat, kesintisiz olarak ise en fazla 4.5 saat araç sürebilir."
+  },
+  {
+    text: "Emniyet şeritleri aşağıdakilerden hangisi amacıyla kullanılabilir?",
+    options: ["Trafik sıkışıkken hızlıca ilerlemek için", "Kaza, arıza gibi acil durumlar ve görevli araçların geçişi için", "Yol kenarında durup telefonla konuşmak için", "Yük boşaltmak için"],
+    correct: 1,
+    explanation: "Emniyet şeridi bir seyir şeridi değildir; sadece arıza, kaza ve ambulans/itfaiye gibi geçiş üstünlüğü olan araçların kullanımı için ayrılmıştır."
+  },
+  {
+    text: "Sürücülerin kavşaklara yaklaşırken hızlarını azaltmaları kuralının temel amacı nedir?",
+    options: ["Yakıt tasarrufu sağlamak", "Farklı yönlerden gelebilecek araç ve yayaların emniyetini gözetmek", "Lastiklerin aşınmasını önlemek", "Polis cezasından kaçınmak"],
+    correct: 1,
+    explanation: "Kavşaklar kesişim noktalarıdır. Hızı azaltmak, olası bir tehlikede durmayı kolaylaştırır ve geçiş haklarına uyulmasını sağlar."
+  },
+  {
+    text: "Aşağıdakilerden hangisi çevre kirliliğini önleyici tedbirlerden biri değildir?",
+    options: ["Araç bakımlarının zamanında yaptırılması", "Kurşunsuz veya kaliteli yakıt kullanılması", "Uzun beklemelerde motorun sürekli çalışır durumda bırakılması", "Gereksiz yere kornaya basılmaması"],
+    correct: 2,
+    explanation: "Aracı rölantide gereksiz yere çalıştırmak, atmosfere fazladan egzoz gazı salınmasına neden olarak çevre kirliliğini artırır."
+  },
+  {
+    text: "Karayolunda konvoy (arka arkaya) halinde seyreden araçlar arasındaki mesafe en az ne kadar olmalıdır?",
+    options: ["Sadece 5 metre", "Kendilerini geçmek isteyen araçların güvenle girebileceği kadar", "Araç boyunun üç katı kadar", "Mesafe bırakılması zorunlu değildir"],
+    correct: 1,
+    explanation: "Konvoylar trafiği engellememelidir. Arkadan gelip sollama yapacak araçların aralara güvenle sığınabilmesi için yeterli mesafe bırakılmalıdır."
+  },
+  {
+    text: "Haritalarda ve navigasyon ekranlarında kullanılan 'yeşil' renk genel olarak hangi alanları temsil eder?",
+    options: ["Deniz ve gölleri", "Orman, park ve ağaçlık alanları", "Sanayi bölgelerini", "Otoyolları"],
+    correct: 1,
+    explanation: "Uluslararası haritacılık standartlarına göre yeşil renk tonları her zaman ormanları, milli parkları ve bitki örtüsünü simgeler."
+  },
+  {
+    text: "Aday sürücülük (stajyer ehliyet) dönemi içerisinde toplam kaç ceza puanına ulaşılması durumunda sürücü belgesi iptal edilir?",
+    options: ["50", "75", "100", "150"],
+    correct: 1,
+    explanation: "2 yıllık aday sürücülük süresi boyunca toplamda 75 ceza puanı sınırını aşan kişilerin sürücü belgeleri tamamen iptal edilir."
+  },
+  {
+    text: "Sürücülerin öndeki aracı geçme (sollama) işlemi bittikten sonra kendi şeritlerine emniyetle geçebilmeleri için ölçüt ne olmalıdır?",
+    options: ["Geçilen aracın sürücüsü selektör yapınca", "Dikiz aynasından, geçilen aracın ön farları tamamen görüldüğünde", "Geçilen aracın hizasına gelir gelmez", "İstediği an geçebilir"],
+    correct: 1,
+    explanation: "Sollanan aracı dikiz aynasından tam görmeden önüne kırmak takip mesafesini ihlal eder. Farlar aynada göründüğünde sağa geçiş güvenlidir."
+  },
+  {
+    text: "Aşağıdaki araç türlerinden hangisinin otoyollara (otoban) girmesi kesinlikle yasaktır?",
+    options: ["Motosiklet", "Kamyon", "Traktör (Lastik tekerlekli)", "Otobüs"],
+    correct: 2,
+    explanation: "Otoyollar yüksek hızlı trafik için tasarlanmıştır. Belirli bir hız sınırına ulaşamayan traktör, iş makinesi ve bisiklet gibi araçların girmesi yasaktır."
+  },
+  {
+    text: "Sürücülerin sürüş esnasında bir şeyler yiyip içmesi trafik güvenliği açısından neden sakıncalıdır?",
+    options: ["Araç içi kirlendiği için", "Sürücünün dikkatini dağıtarak direksiyon hakimiyetini azalttığı için", "Yasal bir kural olmadığı için", "Aracın hızını düşürdüğü için"],
+    correct: 1,
+    explanation: "Yeme-içme eylemleri sürücünün tek elini meşgul eder ve zihinsel odağını yoldan ayırarak ani reaksiyon verme süresini geciktirir."
+  },
+  {
+    text: "Trafikte 'geçiş hakkı' kavramının yasal tanımı aşağıdakilerden hangisidir?",
+    options: ["Yolun tamamen sahibi olma hakkı", "Yayaların ve araç kullananların yolu kullanmadaki öncelik sırası", "İstediği yerde durabilme özgürlüğü", "Hızlı gidenin yolu ilk kullanması"],
+    correct: 1,
+    explanation: "Geçiş hakkı, araçların veya yayaların kavşak ve yollarda birbirlerine göre öncelikli olarak yolu kullanma sırasını belirleyen kuraldır."
+  },
+  {
+    text: "Sürücülerin şerit değiştirmeden önce yapması zorunlu olan iki temel adım hangi seçenekte doğru verilmiştir?",
+    options: ["Korna çalmak ve hızlanmak", "Aynaları kontrol etmek ve niyetini sinyalle bildirmek", "Selektör yapmak ve yavaşlamak", "Camı açıp el sallamak"],
+    correct: 1,
+    explanation: "Şerit değiştirirken önce dikiz ve yan aynalardan yolun boşluğu kontrol edilir, ardından geçilecek yöne doğru sinyal verilerek manevra tamamlanır."
+  },
+  {
+    text: "Trafikte tünellere yaklaşırken sürücülerin aşağıdakilerden hangisini yapması zorunludur?",
+    options: ["Farlarını yakmak ve hız sınırlarına uymak", "Müziğin sesini sonuna kadar açmak", "Dörtlü flaşörleri yakarak ilerlemek", "Hızını en üst seviyeye çıkarmak"],
+    correct: 0,
+    explanation: "Tüneller görüşün azaldığı kapalı alanlardır. Tünel girişinde farların açılması görünürlüğü artırır; hız sınırlarına uymak ise takipleri güvenli kılar."
+  },
+  {
+    text: "Geri vitese takılan bir aracın arkasında yanan geri vites lambaları ne renk ışık verir?",
+    options: ["Kırmızı", "Sarı", "Beyaz", "Mavi"],
+    correct: 2,
+    explanation: "Trafik standartlarına göre, aracın geriye doğru hareket edeceğini arkadaki şoförlere bildiren lambaların rengi beyazdır."
+  },
+
+  // ==========================================
+  // MOTOR VE ARAÇ TEKNİĞİ (9 SORU)
+  // ==========================================
+  {
+    text: "Motor çalışır durumdayken gösterge panelinde 'yağ ikaz ışığı' yanarsa sürücü ne yapmalıdır?",
+    options: ["Hızını artırmalıdır", "Aracı hemen güvenli bir yere çekip motoru stop etmelidir", "Farları yakıp söndürmelidir", "Yoluna hiç durmadan devam etmelidir"],
+    correct: 1,
+    explanation: "Yağ ışığı motor yağ basıncının bittiğini gösterir. Motor stop edilmezse metal parçalar birbirine kaynar ve motor tamamen kullanılmaz hale gelir (yatak sarar)."
+  },
+  {
+    text: "Dizel motorlu araçların gösterge panelinde bulunan ve marş yapmadan önce sönmesi beklenen yay şeklindeki sarı ışık neyi ifade eder?",
+    options: ["Motor yağ seviyesini", "Isıtma (Kızdırma) bujisi ikazını", "Fren balata aşınmasını", "Şarj sistemini"],
+    correct: 1,
+    explanation: "Dizel motorlarda silindir içindeki soğuk havayı ısıtarak yanmayı kolaylaştıran kızdırma bujilerinin aktif olduğunu ve sönmesinin beklenmesi gerektiğini bildirir."
+  },
+  {
+    text: "Motor soğutma sisteminde suyun donmasını, paslanmayı ve kireç oluşumunu önlemek amacıyla suya ne ilave edilir?",
+    options: ["Asit", "Saf alkol", "Antifriz", "Çamaşır suyu"],
+    correct: 2,
+    explanation: "Antifriz, kışın motor suyunun donmasını engellerken yaz ve kış aylarında motor bloklarında korozyon ve kireç oluşumunun önüne geçer."
+  },
+  {
+    text: "Aracın elektrik devresini yüksek akıma ve kısa devrelere karşı koruyan, akım aşırı yükseldiğinde eriyerek güvenliği sağlayan parça hangisidir?",
+    options: ["Akü", "Sigorta", "Buji", "Alternatör"],
+    correct: 1,
+    explanation: "Sigortalar, araçtaki elektrikli sistemlerin zarar görmesini ve kablo tesisatının yanarak yangın çıkarmasını engelleyen emniyet elemanlarıdır."
+  },
+  {
+    text: "Vantes veya vantilatör kayışı kopan bir araçta ilk olarak hangi iki sistemde arıza veya aksama meydana gelir?",
+    options: ["Fren ve direksiyon sistemi", "Şarj ve soğutma sistemi", "Yakıt ve egzoz sistemi", "Aydınlatma ve silecek sistemi"],
+    correct: 1,
+    explanation: "Vantilatör kayışı alternatör (şarj) ve devridaim pompasını (soğutma) çalıştırır. Koparsa akü şarj olmaz ve motor çok hızlı hararet yapar."
+  },
+  {
+    text: "Aracın lastik hava basıncı fabrikasyon değerinden 'daha az' olduğunda ne tür bir olumsuzluk yaşanır?",
+    options: ["Aracın hızı artar", "Fren mesafesi kısalır", "Yakıt tüketimi artar ve lastikler yanaklardan aşınır", "Motor daha az ısınır"],
+    correct: 2,
+    explanation: "Lastik havası az olunca yere temas eden yüzey genişler, sürtünme artar. Motor aracı yürütmek için daha çok yakıt harcar ve lastik kenarları ezilir."
+  },
+  {
+    text: "Vites değiştirileceği zaman motorun hareketini şanzımandan (vites kutusundan) tamamen kesen pedal hangisidir?",
+    options: ["Fren pedalı", "Gaz pedalı", "Debriyaj pedalı", "El freni"],
+    correct: 2,
+    explanation: "Debriyaj (kavrama) sistemi, motor mili ile vites kutusu dişlilerini birbirinden ayırarak sarsıntısız ve kolay vites değişimi sağlar."
+  },
+  {
+    text: "Benzinli ve LPG'li motorlarda silindirin içine alınan yakıt-hava karışımını kıvılcım çıkararak ateşleyen parça hangisidir?",
+    options: ["Buji", "Enjektör", "Karbüratör", "Distribütör"],
+    correct: 0,
+    explanation: "Benzinli motorlarda yanma odasındaki sıkıştırılmış gaz, bujinin tırnakları arasında çakan elektrik kıvılcımı ile patlatılır."
+  },
+  {
+    text: "Yeni takılan lastiklerden sonra tekerleğin her yöne dengeli dönmesini sağlamak amacıyla yapılan ayar hangisidir?",
+    options: ["Rot ayarı", "Balans ayarı", "Far ayarı", "Kamber ayarı"],
+    correct: 1,
+    explanation: "Balans ayarı tekerleğin ağırlık dengesini eşitler. Yapılmazsa yüksek hızlarda direksiyonda ve araç gövdesinde ciddi titremeler oluşur."
+  },
+
+  // ==========================================
+  // İLK YARDIM BİLGİSİ (12 SORU)
+  // ==========================================
+  {
+    text: "İlk yardım uygulamalarında 'Bildirme' aşaması neyi ifade eder?",
+    options: ["Yaralının yakınlarına haber vermeyi", "Kaza detaylarının ve adresinin 112 Acil Çağrı Merkezine doğru şekilde iletilmesini", "Olayı sosyal medyada paylaşmayı", "Polise şikayette bulunmayı"],
+    correct: 1,
+    explanation: "İlk yardımın temel adımlarından Bildirme (B), kazanın ardından profesyonel ekiplerin (112) olay yerine en hızlı şekilde çağrılması sürecidir."
+  },
+  {
+    text: "Solunum yolu tamamen yabancı bir cisimle tıkanmış, nefes alamayan ve moraran bir kazazedeye hangi manevra uygulanır?",
+    options: ["Rentek Manevrası", "Heimlich Manevrası", "Şok Pozisyonu", "Koma Pozisyonu"],
+    correct: 1,
+    explanation: "Tam tıkanmalarda diyaframa baskı uygulayarak akciğerdeki havayla cismi dışarı fırlatmayı amaçlayan teknik Heimlich manevrasıdır."
+  },
+  {
+    text: "Yetişkin bir kişide uygulanan temel yaşam desteğinde kalp masajı ve suni solunum döngüsü oranları sırasıyla ne olmalıdır?",
+    options: ["15 masaj - 1 solunum", "30 masaj - 2 solunum", "5 masaj - 5 solunum", "10 masaj - 2 solunum"],
+    correct: 1,
+    explanation: "Uluslararası standart ilkyardım kılavuzlarına göre tüm yaş gruplarında canlandırma döngüsü 30 Kalp Masajı, 2 Suni Solunum (30:2) olarak yürütülür."
+  },
+  {
+    text: "Kaza yerinde yaralıyı araç içinden omuriliğine (baş-boyun-gövde çizgisine) hiç zarar vermeden çıkarma yöntemine ne ad verilir?",
+    options: ["Rentek Manevrası", "Heimlich Manevrası", "İtfaiyeci Yöntemi", "Altın Beşik"],
+    correct: 0,
+    explanation: "Rentek manevrası, yaralının patlama riski olan araçtan felç kalmasını önleyecek şekilde omurgasını sabitleyerek çıkarılması işlemidir."
+  },
+  {
+    text: "Şok pozisyonu verilen bir kazazedenin bacakları vücut seviyesine göre yaklaşık kaç santimetre yukarı kaldırılmalıdır?",
+    options: ["10 cm", "20 cm", "30 cm", "50 cm"],
+    correct: 2,
+    explanation: "Şok pozisyonunda hayati organların (özellikle beynin) kansız kalmasını önlemek için bacaklar 30 cm kadar yukarı kaldırılır."
+  },
+  {
+    text: "Bilinci kapalı fakat solunumu devam eden bir kazazedeye, kusma veya dil kaçması riskine karşı hangi ilk yardım pozisyonu verilir?",
+    options: ["Şok Pozisyonu", "Koma (Sabit yan yatış) Pozisyonu", "Yarı oturuş pozisyonu", "Sırtüstü düz yatış"],
+    correct: 1,
+    explanation: "Solunumu olan bilinci kapalı kazazedeler, hava yolunun kendi kendine açık kalabilmesi amacıyla yan yatış yani koma pozisyonuna alınır."
+  },
+  {
+    text: "Atardamar kanamalarının toplardamar kanamalarından en belirgin farkı aşağıdakilerden hangisidir?",
+    options: ["Kanın koyu renkli olması", "Kanın yavaş ve sızıntı şeklinde akması", "Kanın açık kırmızı renkli olması ve kalp atımlarıyla uyumlu fışkırması", "Kanamanın kendiliğinden durması"],
+    correct: 2,
+    explanation: "Atardamarlar oksijenli temiz kan taşır (açık kırmızıdır) ve yüksek basınçlı olduğundan kalp attıkça fışkırarak dışarı çıkar."
+  },
+  {
+    text: "İlk yardımda baskıyla durdurulamayan büyük kanamalarda veya uzuv kopmalarında kan akışını tamamen kesmek için uygulanan yöntem hangisidir?",
+    options: ["Turnike (Boğucu sargı)", "Heimlich manevrası", "Atelle sabitleme", "Tampon uygulaması"],
+    correct: 0,
+    explanation: "Turnike, çok ağır kanamalarda veya uzuv kopmasında kanı durdurmak amacıyla tek kemikli bölgeye sıkıca sarılan boğma yöntemidir."
+  },
+  {
+    text: "Burun kanaması olan bir hastaya ilk yardım olarak aşağıdakilerden hangisinin yapılması doğrudur?",
+    options: ["Başı geriye doğru atıp sırtüstü yatırmak", "Başı hafifçe öne eğerek oturtmak ve burun kanatlarını 5 dakika sıkmak", "Burnunu sertçe temizlemesini söylemek", "Soğuk su içirmek"],
+    correct: 1,
+    explanation: "Baş geriye atılırsa kan yutağa akar. Doğru müdahale; başı öne eğerek oturur pozisyonda burun kanatlarına baskı uygulamaktır."
+  },
+  {
+    text: "İlk yardım çantasında aşağıdakilerden hangisinin bulundurulması yasal olarak zorunlu değildir?",
+    options: ["Üçgen sargı bezi", "Steril gazlı bez ve makas", "Ağrı kesici ilaç ve merhemler", "Plastik eldiven"],
+    correct: 2,
+    explanation: "İlk yardım kesinlikle ilaçsız müdahaledir. Bu nedenle çanta içinde hiçbir tıbbi ilaç (ağrı kesici, şurup) veya merhem bulunmaz."
+  },
+  {
+    text: "Kırık şüphesi olan bir bölgeye ilk yardımcının uygulayacağı en doğru müdahale hangisidir?",
+    options: ["Kemiği çekerek yerine oturtmaya çalışmak", "Kırık bölgeyi hareket ettirmeden atel yardımıyla sabitlemek (tespit etmek)", "Bölgeye sıcak masaj yapmak", "Yaralıyı yürütmeye zorlamak"],
+    correct: 1,
+    explanation: "Kırık uçlarının iç dokulara, damarlara zarar vermesini önlemek için kırık bölgenin alt ve üst eklemleri kapsayacak biçimde sabitlenmesi gerekir."
+  },
+  {
+    text: "İlk yardımın ABC'si adımlarında yer alan 'A' harfi (Airway) neyi kontrol etmeyi amaçlar?",
+    options: ["Solunum durumunu", "Hava yolu açıklığını", "Dolaşım durumunu", "Bilinç seviyesini"],
+    correct: 1,
+    explanation: "İlk yardımın ABC döngüsünde 'A' (Airway) hava yolu açıklığının sağlanmasını (ağız içi kontrolü ve baş-çene pozisyonu) ifade eder."
+  },
+
+  // ==========================================
+  // TRAFİK ADABI (6 SORU)
+  // ==========================================
+  {
+    text: "Trafikte kırmızı ışıkta beklerken yeşil yanar yanmaz önündeki araca hiç zaman tanımadan korna çalan sürücü hangi değerden yoksundur?",
+    options: ["Sabır", "Sorumluluk", "Bencillik", "Öfke"],
+    correct: 0,
+    explanation: "Yeşilin yandığı salisede kornaya basmak trafikteki empati ve sabır eksikliğinin en net göstergelerinden biridir."
+  },
+  {
+    text: "S Sürücünün dar yolda karşıdan gelen araca geçiş önceliği kendi hakkı olduğu halde yol vermesi, hangi trafik adabı erdemidir?",
+    options: ["Bencillik", "Fedakarlık ve feragat", "İnatlaşma", "Sorumsuzluk"],
+    correct: 1,
+    explanation: "Kendi yasal hakkı bulunmasına rağmen trafiği rahatlatmak adına bu haktan vazgeçme davranışı fedakarlık ve feragattir."
+  },
+  {
+    text: "Trafikte bir sürücünün başka bir sürücü hata yaptığında ona bağırmak yerine durumu anlayışla karşılaması hangi kavramla açıklanır?",
+    options: ["Bencillik", "Hoşgörü ve sabır", "İnatlaşma", "Savurganlık"],
+    correct: 1,
+    explanation: "Hatalara karşı agresif tepki vermeyip, hoşgörü çerçevesinde sükuneti korumak medeni bir trafik adabı kuralıdır."
+  },
+  {
+    text: "Yağmurlu günlerde yol kenarındaki su birikintilerine bilerek hızlı girip yayaları ıslatan bir sürücü hangi temel değeri çiğnemiştir?",
+    options: ["Nezaket ve saygı", "Sorumluluk", "Yardımlaşma", "Sabır"],
+    correct: 0,
+    explanation: "Çevredeki yayaların mağduriyetini önemsememek, toplumsal nezaket, görgü ve insani saygı kurallarına tamamen aykırıdır."
+  },
+  {
+    text: "Engeli olmadığı halde sırf boş yer bulamadığı için engelli otopark alanına aracını park eden sürücünün yaptığı davranış nedir?",
+    options: ["Pratik zekalılık", "Hak gaspı ve saygısızlık", "Yardımseverlik", "Kurallara bağlılık"],
+    correct: 1,
+    explanation: "Özel gereksinimli bireylerin alanlarını işgal etmek toplumsal bir hak gaspıdır ve empati yoksunluğunu gösterir."
+  },
+  {
+    text: "Trafikte hata yaptıktan sonra diğer sürücü ile göz teması kurup el işaretiyle özür dileyen bir sürücü ortamda neyi sağlar?",
+    options: ["Gerginliğin anında azalmasını ve hoşgörüyü", "Kavganın daha da büyümesini", "Aracın hızlanmasını", "Ceza puanı silinmesini"],
+    correct: 0,
+    explanation: "Küçük bir özür ve pişmanlık jesti, trafikteki olası tüm yol kavgalarını ve agresifliği anında sönümleyen en medeni harekettir."
+  }
+          ];
+
+          const questionText = document.getElementById("questionText");
+          const optionsDiv = document.getElementById("options");
+          const infoBox = document.getElementById("infoBox");
+          const questionImg = document.getElementById("questionImg");
+
+          function loadQuestion() {
+            const q = questions[currentQuestion];
+            questionText.textContent = `${currentQuestion + 1}. ${q.text}`;
+            optionsDiv.innerHTML = "";
+            infoBox.style.display = "none";
+
+            if (q.image) {
+              questionImg.src = q.image;
+              questionImg.style.display = "block";
+            } else {
+              questionImg.style.display = "none";
+            }
+
+            q.options.forEach((opt, i) => {
+              const btn = document.createElement("button");
+              btn.textContent = opt;
+
+              if (userAnswers[currentQuestion] !== null) {
+                btn.disabled = true;
+                if (i === q.correct) btn.classList.add("correct");
+                if (i === userAnswers[currentQuestion] && i !== q.correct)
+                  btn.classList.add("wrong");
+              }
+
+              btn.onclick = () => selectAnswer(i, btn);
+              optionsDiv.appendChild(btn);
+            });
+          }
+
+          function selectAnswer(i, btn) {
+            if (userAnswers[currentQuestion] !== null) return;
+            userAnswers[currentQuestion] = i;
+            const q = questions[currentQuestion];
+
+            document
+              .querySelectorAll("#options button")
+              .forEach((b) => (b.disabled = true));
+
+            if (i === q.correct) {
+              btn.classList.add("correct");
+              setTimeout(nextQuestion, 700);
+            } else {
+              btn.classList.add("wrong");
+              document
+                .querySelectorAll("#options button")
+                [q.correct].classList.add("correct");
+              infoBox.textContent = q.explanation;
+              infoBox.style.display = "block";
+            }
+            updateStats();
+
+          }
+
+          function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+              currentQuestion++;
+              loadQuestion();
+            } else {
+              showResult();
+            }
+          }
+          function prevQuestion() {
+            if (currentQuestion > 0) {
+              currentQuestion--;
+              loadQuestion();
+            }
+          }
+          function showResult() {
+
+clearInterval(timerInterval);
+updateDailyDeneme(); // deneme görevini artır
+
+
+function updateDailyDeneme(){
+
+  let d = JSON.parse(localStorage.getItem("dailyTasks"));
+  if(!d) return;
+
+  d.deneme++;
+
+  localStorage.setItem("dailyTasks",JSON.stringify(d));
+}
+
+
+
+            let correct = 0;
+            let wrong = 0;
+            let empty = 0;
+
+            userAnswers.forEach((answer, i) => {
+              if (answer === null) {
+                empty++;
+              } else if (answer === questions[i].correct) {
+                correct++;
+              } else {
+                wrong++;
+              }
+
+
+
+            });
+
+            const total = questions.length;
+            const successRate = Math.round((correct / total) * 100);
+            const passed = correct >= 35;
+
+
+            document.querySelector(".quiz-container").innerHTML = `
+    <div class="card" style="text-align:center">
+      <h2>Test Sonucu</h2>
+
+      <h3 style="
+margin:10px;
+color:${passed ? '#22c55e' : '#ef4444'};
+">
+
+${
+passed
+? "🎉 Tebrikler, Geçtiniz!"
+: "❌ Maalesef Kaldınız<br>En az 35 doğru yapmanız gerekiyordu"
+}
+
+</h3>
+
+
+      <p>✅ Doğru: <strong>${correct}</strong></p>
+      <p>❌ Yanlış: <strong>${wrong}</strong></p>
+      <p>⚪ Boş: <strong>${empty}</strong></p>
+
+      <hr>
+
+      <p>Başarı Oranı: <strong>%${successRate}</strong></p>
+      <p>Tebrikler bu testi çözerek XP kazandınız! Seviyenizi hesabınızda görebilirsiniz.</p>
+
+      <button 
+        onclick="window.location.href='katagoriler.html'"
+        style="
+          margin-top:15px;
+          padding:12px 25px;
+          border:none;
+          border-radius:12px;
+          background:#2a5298;
+          color:white;
+          font-size:16px;
+          cursor:pointer;
+        ">
+        Bitir
+      </button>
+    </div>
+  `;
+            function saveTestResult(testKey, correct, wrong, empty, success) {
+              let user = JSON.parse(localStorage.getItem("user"));
+
+              if (!user) {
+                user = {
+                  nickname: "Misafir",
+                  xp:0,
+      level:1,
+      solved:0,
+      tests:{}
+                };
+              }
+
+              const percent = Math.round((correct / 10) * 100);
+              let scorePercent = Math.round((correct / total) * 100);
+
+              user.xp += scorePercent;
+  if(!user.tests) user.tests = {};
+
+  user.solved++;
+
+  user.xp += successRate;
+              localStorage.setItem("user", JSON.stringify(user));
+
+              user.tests[testKey] = {
+                correct,
+                wrong,
+                empty,
+                percent: successRate
+              };
+
+              localStorage.setItem("user", JSON.stringify(user));
+            }
+            saveTestResult("deneme-test-3", correct, wrong, empty, successRate);
+          }
+
+          function finishTest(result) {
+            const user = JSON.parse(localStorage.getItem("user")) || {};
+            user.tests = user.tests || {};
+            user.inProgress = user.inProgress || {};
+
+            user.tests["deneme-test-3"] = result; // yeni sonuç
+            delete user.inProgress["deneme-test-3"]; // yarım kalma durumu silinir
+
+            localStorage.setItem("user", JSON.stringify(user));
+          }
+
+          document.getElementById("nextBtn").onclick = nextQuestion;
+          document.getElementById("prevBtn").onclick = prevQuestion;
+
+
+
+
+
+
+function updateStats() {
+
+  let correct = 0;
+  let wrong = 0;
+  let empty = 0;
+
+  userAnswers.forEach((answer, i) => {
+
+    if (answer === null) {
+      empty++;
+    } 
+    else if (answer === questions[i].correct) {
+      correct++;
+    } 
+    else {
+      wrong++;
+    }
+
+  });
+
+  document.getElementById("statCorrect").textContent = "✅ " + correct;
+  document.getElementById("statWrong").textContent = "❌ " + wrong;
+  document.getElementById("statEmpty").textContent = "⚪ " + empty;
+}
+
+function confirmExit() {
+  document.getElementById("exitModal").style.display = "flex";
+}
+
+function closeExit() {
+  document.getElementById("exitModal").style.display = "none";
+}
+
+function exitTest() {
+  window.location.href = "katagoriler.html";
+}
+
+
+
+          loadQuestion();
+        </script>
+      </body>
+    </html>
+  </head>
+</html>
