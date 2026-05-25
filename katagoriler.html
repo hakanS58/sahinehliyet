@@ -1258,7 +1258,17 @@ body.dark .motivation-card{
   background:#e2e8f0;
 }
 
+/* TÜM KOPYALAMA / SEÇMEYİ KAPAT */
 
+*{
+  -webkit-user-select:none !important;
+  -moz-user-select:none !important;
+  -ms-user-select:none !important;
+  user-select:none !important;
+
+  -webkit-touch-callout:none !important;
+  -webkit-tap-highlight-color:transparent !important;
+}
 </style>
 
   </head>
@@ -2124,7 +2134,19 @@ if(localStorage.getItem("theme") === "true"){
   }
 
 
+/* SAĞ TIK KAPAT */
+document.addEventListener("contextmenu", e => e.preventDefault());
 
+/* UZUN BASMA MENÜSÜ KAPAT */
+document.addEventListener("selectstart", e => e.preventDefault());
+
+/* KOPYALA / KES / YAPIŞTIR KISAYOLLARI KAPAT */
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("paste", e => e.preventDefault());
+
+/* MOBİL UZUN BASMA */
+document.addEventListener("touchstart", function(){}, {passive:true});
 
 
 
