@@ -298,7 +298,7 @@ ehliyet sınavına eksiksiz hazırlan.
 </div>
 
 
-    <a href="katagoriler.html" class="start-btn">
+    <a href="katagoriler.html" onclick="openKategori(event)" class="start-btn">
       Hemen Başla 🎯
     </a>
 
@@ -367,6 +367,14 @@ document.addEventListener("paste", e => e.preventDefault());
 /* MOBİL UZUN BASMA */
 document.addEventListener("touchstart", function(){}, {passive:true});
 
+
+function openKategori(e){
+   e.preventDefault();
+
+   sessionStorage.setItem("fromIndex","1");
+
+   location.href="katagoriler.html";
+}
 </script>
 
 </body>
