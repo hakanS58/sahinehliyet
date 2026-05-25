@@ -229,7 +229,20 @@ body{
   -webkit-tap-highlight-color:transparent !important;
 }
 
+body{
+animation:pageIn .35s ease;
+}
 
+@keyframes pageIn{
+from{
+opacity:0;
+transform:translateX(18px);
+}
+to{
+opacity:1;
+transform:none;
+}
+}
 </style>
 </head>
 
