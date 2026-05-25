@@ -218,34 +218,33 @@ cursor:pointer;
 <div class="header">
 <h2>👑 Premium Trafik Testleri</h2>
 <p>
-Sadece premium üyeler için hazırlanmış gelişmiş trafik testleri.  
-Daha zor sorular, gerçek sınav kalitesi ve ekstra başarı analizi.
+Sadece premium üyeler için hazırlanmış gelişmiş trafik testleri.
 </p>
 </div>
 
 <div class="test-list">
 
-<a class="test-btn" href="premiumtrafik1.html" id="premium-test-1">
+<a class="test-btn" href="premiumtrafiktest1.html" id="premium-test-1">
 Premium Test 1
 <i class="fa-solid fa-crown"></i>
 </a>
 
-<a class="test-btn" href="premiumtrafik2.html" id="premium-test-2">
+<a class="test-btn" href="premiumtrafiktest2.html" id="premium-test-2">
 Premium Test 2
 <i class="fa-solid fa-crown"></i>
 </a>
 
-<a class="test-btn" href="premiumtrafik3.html" id="premium-test-3">
+<a class="test-btn" href="premiumtrafiktest3.html" id="premium-test-3">
 Premium Test 3
 <i class="fa-solid fa-crown"></i>
 </a>
 
-<a class="test-btn" href="premiumtrafik4.html" id="premium-test-4">
+<a class="test-btn" href="premiumtrafiktest4.html" id="premium-test-4">
 Premium Test 4
 <i class="fa-solid fa-crown"></i>
 </a>
 
-<a class="test-btn" href="premiumtrafik5.html" id="premium-test-5">
+<a class="test-btn" href="premiumtrafiktest5.html" id="premium-test-5">
 Premium Test 5
 <i class="fa-solid fa-crown"></i>
 </a>
@@ -257,29 +256,8 @@ Premium Test 5
 
 <script>
 
-/* PREMIUM KONTROL */
-/* PREMIUM KONTROL */
 
-const isPremium = localStorage.getItem("premium") === "true";
 
-if(!isPremium){
-    window.location.href = "premium.html";
-}
-
-/* PREMIUM SAYFASI */
-
-function goPremium(){
-location.href="premium.html";
-}
-
-/* ÇÖZÜLDÜ */
-
-let user = JSON.parse(localStorage.getItem("user")) || {tests:{}};
-
-Object.keys(user.tests || {}).forEach(id=>{
-let btn=document.getElementById(id);
-if(btn) btn.classList.add("completed");
-});
 
 
 /* PREMIUM SAYFASI */
