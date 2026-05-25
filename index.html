@@ -216,8 +216,7 @@ body{
   display:inline-block;
 }
 
-
-  /* TÜM KOPYALAMA / SEÇMEYİ KAPAT */
+/* TÜM KOPYALAMA / SEÇMEYİ KAPAT */
 
 *{
   -webkit-user-select:none !important;
@@ -228,6 +227,7 @@ body{
   -webkit-touch-callout:none !important;
   -webkit-tap-highlight-color:transparent !important;
 }
+
 
 body{
 animation:pageIn .35s ease;
@@ -242,6 +242,17 @@ to{
 opacity:1;
 transform:none;
 }
+}
+
+button,a,.start-btn{
+transition:.15s ease;
+}
+
+button:active,
+a:active,
+.start-btn:active{
+transform:scale(.96);
+opacity:.85;
 }
 </style>
 </head>
@@ -342,8 +353,7 @@ function createFlow(container){
 createFlow(document.getElementById("leftFlow"));
 createFlow(document.getElementById("rightFlow"));
 
-
-  /* SAĞ TIK KAPAT */
+/* SAĞ TIK KAPAT */
 document.addEventListener("contextmenu", e => e.preventDefault());
 
 /* UZUN BASMA MENÜSÜ KAPAT */
@@ -356,6 +366,7 @@ document.addEventListener("paste", e => e.preventDefault());
 
 /* MOBİL UZUN BASMA */
 document.addEventListener("touchstart", function(){}, {passive:true});
+
 </script>
 
 </body>
