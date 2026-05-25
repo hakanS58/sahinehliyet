@@ -904,6 +904,252 @@ body.dark .repeat-card{
   -webkit-tap-highlight-color:transparent !important;
 }
 
+
+
+
+.premium-special{
+position:relative;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+
+padding:20px;
+margin-top:18px;
+
+border-radius:24px;
+cursor:pointer;
+text-decoration:none;
+
+background:
+linear-gradient(135deg,
+#0f0f0f 0%,
+#1a1a1a 35%,
+#262626 70%,
+#facc15 180%);
+
+border:1px solid rgba(250,204,21,.25);
+
+box-shadow:
+0 10px 35px rgba(0,0,0,.28),
+inset 0 1px rgba(255,255,255,.08);
+
+transition:.35s ease;
+}
+
+.premium-special:hover{
+transform:translateY(-6px) scale(1.015);
+box-shadow:
+0 18px 45px rgba(250,204,21,.25);
+}
+
+/* ışık efekti */
+.premium-glow{
+position:absolute;
+top:-40%;
+left:-30%;
+
+width:180px;
+height:180px;
+
+background:radial-gradient(
+circle,
+rgba(250,204,21,.35),
+transparent 70%
+);
+
+animation:floatGlow 4s infinite linear;
+}
+
+@keyframes floatGlow{
+0%{transform:translateX(0)}
+50%{transform:translateX(80px)}
+100%{transform:translateX(0)}
+}
+
+/* icon */
+.premium-icon{
+width:58px;
+height:58px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:18px;
+
+font-size:26px;
+
+background:rgba(250,204,21,.12);
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(250,204,21,.25);
+
+color:#facc15;
+
+z-index:2;
+}
+
+/* içerik */
+.premium-content{
+flex:1;
+z-index:2;
+}
+
+.premium-content h4{
+margin:0;
+font-size:18px;
+font-weight:800;
+color:#fff;
+letter-spacing:.3px;
+}
+
+.premium-content p{
+margin:6px 0 0;
+font-size:13px;
+color:rgba(255,255,255,.72);
+line-height:1.45;
+}
+
+/* ok */
+.premium-arrow{
+font-size:24px;
+font-weight:700;
+color:#facc15;
+z-index:2;
+transition:.3s;
+}
+
+.premium-special:hover .premium-arrow{
+transform:translateX(6px);
+}
+
+
+/* ORTAK MODERN KART */
+
+.modern-card{
+position:relative;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+
+padding:22px;
+margin-top:18px;
+
+min-height:130px;
+border-radius:26px;
+
+text-decoration:none;
+cursor:pointer;
+
+background:
+linear-gradient(135deg,
+#0a0a0a 0%,
+#141414 35%,
+#1f1f1f 70%,
+#facc15 180%);
+
+border:1px solid rgba(250,204,21,.18);
+
+box-shadow:
+0 14px 40px rgba(0,0,0,.22),
+0 0 35px rgba(250,204,21,.06),
+inset 0 1px rgba(255,255,255,.06);
+
+transition:.35s ease;
+}
+
+.modern-card:hover{
+transform:translateY(-6px);
+box-shadow:
+0 20px 50px rgba(250,204,21,.18);
+}
+
+/* glow */
+
+.modern-card::before{
+content:'';
+position:absolute;
+top:-40%;
+left:-25%;
+
+width:220px;
+height:220px;
+
+background:radial-gradient(
+circle,
+rgba(250,204,21,.18),
+transparent 70%
+);
+
+animation:glowMove 6s linear infinite;
+}
+
+@keyframes glowMove{
+0%{transform:translateX(0)}
+50%{transform:translateX(90px)}
+100%{transform:translateX(0)}
+}
+
+/* icon */
+
+.card-icon{
+width:68px;
+height:68px;
+border-radius:22px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:28px;
+
+background:rgba(250,204,21,.08);
+border:1px solid rgba(250,204,21,.15);
+
+color:#facc15;
+z-index:2;
+}
+
+/* content */
+
+.card-content{
+flex:1;
+z-index:2;
+}
+
+.card-content h4{
+font-size:22px;
+font-weight:800;
+color:#fff;
+margin-bottom:8px;
+}
+
+.card-content p{
+font-size:14px;
+line-height:1.6;
+color:rgba(255,255,255,.72);
+}
+
+/* arrow */
+
+.card-arrow{
+font-size:26px;
+color:#facc15;
+font-weight:700;
+z-index:2;
+transition:.3s;
+}
+
+.modern-card:hover .card-arrow{
+transform:translateX(8px);
+}
+
     </style>
   </head>
 
@@ -953,18 +1199,42 @@ body.dark .repeat-card{
         <a href="javascript:void(0)" class="test-btn" onclick="openPremium('ilkyardimtest5.html')" id="ilkyardim-test-5">
           🩹 Test 5
         </a>
-      </div>
+        
+       <a href="javascript:void(0)" class="premium-special" onclick="openPremium2('premiumtrafik.html')">
+<div class="card-icon">
+<i class="fa-solid fa-crown"></i>
+</div>
+
+<div class="card-content">
+<h4>Premium Özel Testler</h4>
+<p>Sadece premium üyeler için hazırlanmış gelişmiş testler</p>
+</div>
+
+<div class="card-arrow">
+<i class="fa-solid fa-arrow-right"></i>
+</div>
+
+</a>
+</div>
          <!-- TEST TEKRAR BİLGİ KARTI -->
-<div class="repeat-card">
-  <h3>🎯 Tekrar Et, Daha İyi Öğren</h3>
-  <p>
-    Çözdüğün testleri <b>Hesabım</b> menüsünden tekrar çözerek
-    bilgilerini pekiştirebilirsin.  
-    Düzenli tekrar = Başarı 🚀
-  </p>
-  <a href="hesabim.html">👤 Hesabıma Git</a>
-      </div>
-    </div>
+<a href="hesabim.html" class="modern-card">
+
+<div class="card-icon">
+<i class="fa-solid fa-rotate-right"></i>
+</div>
+
+<div class="card-content">
+<h4>Tekrar Et, Daha İyi Öğren</h4>
+<p>
+Çözdüğün testleri Hesabım menüsünden tekrar çözerek
+bilgilerini pekiştirebilirsin.
+</p>
+</div>
+
+<div class="card-arrow">
+<i class="fa-solid fa-arrow-right"></i>
+</div>
+</a>
 
 
  <script>
@@ -1144,11 +1414,51 @@ document.addEventListener("touchstart", function(){}, {passive:true});
 
 
 
+function openPremium2(url){
+
+// 🔥 localStorage'dan kontrol et
+if(localStorage.getItem("premium") === "true"){
+  location.href = url;
+  return;
+}
+
+selectedTest = url;
+document.getElementById("premiumModal2").style.display="flex";
+
+}
+
 
 
     </script>
 
+</div>
+<div id="premiumModal2" class="premium-modal">
 
+    <div class="premium-box-modern">
+
+        <h3>Daha Fazla Test Çözmek İçin Hemen Premiumlu OL!</h3>
+
+        <!-- PREMIUM -->
+
+        <div class="choice-card premium" onclick="goPremium()">
+
+            <div class="choice-head">
+                ⭐ Premium Al
+            </div>
+
+            <p>
+                Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
+                Sınırsız erişim elde et.
+            </p>
+
+        </div>
+
+        <button class="cancel-btn" onclick="closePremium2()">
+            Vazgeç
+        </button>
+
+
+    </div>
 
 </div>
 
