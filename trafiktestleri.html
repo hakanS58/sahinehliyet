@@ -1067,7 +1067,7 @@ transform:translateX(6px);
           🚗 Test 5
         </a>
 
-        <a href="javascript:void(0)" class="premium-special" onclick="openPremium('premiumtrafik.html')">
+        <a href="javascript:void(0)" class="premium-special" onclick="openPremium2('premiumtrafik.html')">
     <div class="premium-glow"></div>
     <div class="premium-icon">👑</div>
     <div class="premium-content">
@@ -1253,14 +1253,74 @@ function openTest(url) {
 
 
 
+function openPremiumPage(url){
 
+if(isPremium){
+location.href = url;
+return;
+}
+
+selectedTest = url;
+
+document.querySelector("#premiumModal h3").innerText =
+"⭐ Premium Gerekli";
+
+document.querySelector("#premiumModal .desc").innerText =
+"Bu alana erişmek için premium üyelik satın almalısın.";
+
+document.querySelector(".choice-card.ad").style.display="none";
+
+document.getElementById("premiumModal").style.display="flex";
+}
+
+
+
+
+function openPremium2(url){
+
+// 🔥 localStorage'dan kontrol et
+if(localStorage.getItem("premium") === "true"){
+  location.href = url;
+  return;
+}
+
+selectedTest = url;
+document.getElementById("premiumModal2").style.display="flex";
+
+}
 
 
     </script>
 
 
 </div>
+<div id="premiumModal2" class="premium-modal">
 
+    <div class="premium-box-modern">
+
+        <h3>Daha Fazla Test Çözmek İçin Hemen Premiumlu OL!</h3>
+
+        <!-- PREMIUM -->
+
+        <div class="choice-card premium" onclick="goPremium()">
+
+            <div class="choice-head">
+                ⭐ Premium Al
+            </div>
+
+            <p>
+                Premium olarak tüm testlerde ve denemelerde reklamları kaldır.
+                Sınırsız erişim elde et.
+            </p>
+
+        </div>
+
+        <button class="cancel-btn" onclick="closePremium()">
+            Vazgeç
+        </button>
+
+
+    </div>
   </body>
 </html>
 
