@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <title>Şahin Ehliyet</title>
 
 <style>
@@ -254,11 +255,373 @@ a:active,
 transform:scale(.96);
 opacity:.85;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.panel{
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:28px;
+  padding:42px 28px;
+
+  max-width:360px;
+  width:100%;
+
+  text-align:center;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.55),
+    inset 0 1px rgba(255,255,255,.08);
+
+  animation:fade 1.2s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.panel::before{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background:radial-gradient(
+    circle at top right,
+    rgba(34,197,94,.14),
+    transparent 35%
+  );
+
+  pointer-events:none;
+}
+.logo{
+font-size:42px;
+font-weight:900;
+letter-spacing:1px;
+margin-bottom:14px;
+color:white;
+text-shadow:0 0 25px rgba(34,197,94,.18);
+
+animation:floatLogo 3s ease-in-out infinite;
+}
+
+.logo span{
+color:#22c55e;
+}
+
+@keyframes floatLogo{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+}
+.tagline{
+font-size:15px;
+line-height:1.8;
+opacity:.82;
+margin-bottom:30px;
+color:#e2e8f0;
+}
+.features div{
+background:rgba(255,255,255,.05);
+padding:11px 20px;
+border-radius:18px;
+backdrop-filter:blur(10px);
+min-width:230px;
+text-align:center;
+border:1px solid rgba(255,255,255,.05);
+transition:.25s;
+}
+
+.features div:hover{
+transform:translateY(-3px);
+background:rgba(34,197,94,.08);
+}
+.user-count{
+font-size:14px;
+font-weight:700;
+color:#22c55e;
+margin-bottom:28px;
+
+background:rgba(34,197,94,.08);
+padding:9px 18px;
+border-radius:30px;
+
+display:inline-block;
+
+border:1px solid rgba(34,197,94,.18);
+}
+.start-btn{
+text-decoration:none;
+
+background:linear-gradient(
+135deg,
+#22c55e,
+#16a34a
+);
+
+color:white;
+
+padding:16px 55px;
+border-radius:50px;
+
+font-size:16px;
+font-weight:700;
+
+display:inline-block;
+
+box-shadow:
+0 14px 35px rgba(34,197,94,.35);
+
+transition:.3s;
+position:relative;
+overflow:hidden;
+}
+
+.start-btn::before{
+content:'';
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.28),
+transparent
+);
+
+transition:.8s;
+}
+
+.start-btn:hover::before{
+left:100%;
+}
+
+.start-btn:hover{
+transform:translateY(-4px) scale(1.03);
+}
+.bg-glow{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:500px;
+height:500px;
+
+background:radial-gradient(
+circle,
+rgba(34,197,94,.08),
+transparent 70%
+);
+
+filter:blur(60px);
+z-index:0;
+
+animation:pulseGlow 5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow{
+0%,100%{transform:translate(-50%,-50%) scale(1)}
+50%{transform:translate(-50%,-50%) scale(1.15)}
+}
+
+
+
+
+
+
+
+
+
+body{
+height:100vh;
+background:
+linear-gradient(
+180deg,
+#050505 0%,
+#0b0b0b 35%,
+#111 70%,
+#1a1a1a 100%
+);
+color:white;
+overflow:hidden;
+}
+.road{
+background:#111;
+box-shadow:
+inset 0 0 0 2px rgba(250,204,21,.08),
+0 0 50px rgba(250,204,21,.04);
+}
+.panel{
+background:rgba(18,18,18,.82);
+backdrop-filter:blur(22px);
+
+border:1px solid rgba(250,204,21,.14);
+
+border-radius:28px;
+padding:42px 28px;
+
+max-width:370px;
+width:100%;
+
+text-align:center;
+
+box-shadow:
+0 25px 80px rgba(0,0,0,.65),
+0 0 45px rgba(250,204,21,.06);
+
+position:relative;
+overflow:hidden;
+}
+.panel::before{
+content:'';
+position:absolute;
+inset:0;
+
+background:
+radial-gradient(
+circle at top right,
+rgba(250,204,21,.12),
+transparent 35%
+);
+
+pointer-events:none;
+}
+.logo{
+font-size:44px;
+font-weight:900;
+color:#fff;
+letter-spacing:.5px;
+margin-bottom:16px;
+
+text-shadow:0 0 22px rgba(250,204,21,.08);
+}
+
+.logo span{
+color:#facc15;
+}
+.tagline{
+font-size:15px;
+line-height:1.8;
+color:#d1d5db;
+margin-bottom:28px;
+}
+.features div{
+display:flex;
+align-items:center;
+gap:12px;
+justify-content:center;
+
+background:rgba(255,255,255,.04);
+
+padding:12px 18px;
+border-radius:18px;
+
+border:1px solid rgba(250,204,21,.08);
+
+min-width:240px;
+
+color:#eee;
+font-weight:500;
+}
+
+.features i{
+color:#facc15;
+font-size:15px;
+}
+.user-count{
+display:inline-flex;
+align-items:center;
+gap:10px;
+
+padding:12px 22px;
+
+border-radius:40px;
+
+background:
+linear-gradient(
+135deg,
+rgba(250,204,21,.12),
+rgba(250,204,21,.04)
+);
+
+border:1px solid rgba(250,204,21,.14);
+
+color:#facc15;
+
+font-weight:700;
+font-size:14px;
+
+box-shadow:
+0 8px 25px rgba(250,204,21,.08);
+
+margin-bottom:28px;
+}
+
+.user-count i{
+font-size:15px;
+}
+.start-btn{
+text-decoration:none;
+
+background:linear-gradient(
+135deg,
+#facc15,
+#eab308
+);
+
+color:black;
+
+padding:16px 58px;
+border-radius:50px;
+
+font-size:16px;
+font-weight:800;
+
+display:inline-block;
+
+box-shadow:
+0 15px 40px rgba(250,204,21,.25);
+
+transition:.3s;
+}
+
+.start-btn:hover{
+transform:translateY(-4px) scale(1.03);
+box-shadow:
+0 18px 50px rgba(250,204,21,.35);
+}
+.btn-icon{
+margin-left:10px;
+font-size:18px;
+font-weight:700;
+display:inline-block;
+transition:.3s;
+color:#111;
+}
+
+.start-btn:hover .btn-icon{
+transform:translateX(6px);
+}
 </style>
 </head>
 
 <body>
-
+<div class="bg-glow"></div>
 <!-- MOTIVATION FLOWS -->
 <div class="flow left" id="leftFlow"></div>
 <div class="flow right" id="rightFlow"></div>
@@ -286,21 +649,25 @@ ehliyet sınavına eksiksiz hazırlan.
     <!-- Özellikler -->
 <div class="features">
 
-  <div>📘 Güncel Konular</div>
-  <div>📝 Deneme Sınavları</div>
-  <div>🏆 Başarı Takibi</div>
+<div><i class="fa-solid fa-book-open"></i> Güncel Konular</div>
+
+<div><i class="fa-solid fa-file-pen"></i> Deneme Sınavları</div>
+
+<div><i class="fa-solid fa-chart-line"></i> Başarı Takibi</div>
 
 </div>
 
 <!-- Kullanıcı Sayısı -->
 <div class="user-count">
-  👥 Tiktokta 25.000+ Öğrenci Bizimle
+<i class="fa-solid fa-users"></i>
+<span>25.000+ Öğrenci Bizimle</span>
 </div>
 
 
     <a href="katagoriler.html" onclick="openKategori(event)" class="start-btn">
-      Hemen Başla 🎯
-    </a>
+   Hemen Başla
+   <span class="btn-icon">→</span>
+</a>
 
   </div>
 
