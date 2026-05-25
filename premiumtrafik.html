@@ -258,7 +258,28 @@ Premium Test 5
 <script>
 
 /* PREMIUM KONTROL */
+/* PREMIUM KONTROL */
 
+const isPremium = localStorage.getItem("premium") === "true";
+
+if(!isPremium){
+    window.location.href = "premium.html";
+}
+
+/* PREMIUM SAYFASI */
+
+function goPremium(){
+location.href="premium.html";
+}
+
+/* ÇÖZÜLDÜ */
+
+let user = JSON.parse(localStorage.getItem("user")) || {tests:{}};
+
+Object.keys(user.tests || {}).forEach(id=>{
+let btn=document.getElementById(id);
+if(btn) btn.classList.add("completed");
+});
 
 
 /* PREMIUM SAYFASI */
