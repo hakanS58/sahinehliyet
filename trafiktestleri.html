@@ -1012,16 +1012,129 @@ transition:.3s;
 transform:translateX(6px);
 }
 
-      /* TÜM KOPYALAMA / SEÇMEYİ KAPAT */
 
-*{
-  -webkit-user-select:none !important;
-  -moz-user-select:none !important;
-  -ms-user-select:none !important;
-  user-select:none !important;
 
-  -webkit-touch-callout:none !important;
-  -webkit-tap-highlight-color:transparent !important;
+/* ORTAK MODERN KART */
+
+.modern-card{
+position:relative;
+overflow:hidden;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+
+padding:22px;
+margin-top:18px;
+
+min-height:130px;
+border-radius:26px;
+
+text-decoration:none;
+cursor:pointer;
+
+background:
+linear-gradient(135deg,
+#0a0a0a 0%,
+#141414 35%,
+#1f1f1f 70%,
+#facc15 180%);
+
+border:1px solid rgba(250,204,21,.18);
+
+box-shadow:
+0 14px 40px rgba(0,0,0,.22),
+0 0 35px rgba(250,204,21,.06),
+inset 0 1px rgba(255,255,255,.06);
+
+transition:.35s ease;
+}
+
+.modern-card:hover{
+transform:translateY(-6px);
+box-shadow:
+0 20px 50px rgba(250,204,21,.18);
+}
+
+/* glow */
+
+.modern-card::before{
+content:'';
+position:absolute;
+top:-40%;
+left:-25%;
+
+width:220px;
+height:220px;
+
+background:radial-gradient(
+circle,
+rgba(250,204,21,.18),
+transparent 70%
+);
+
+animation:glowMove 6s linear infinite;
+}
+
+@keyframes glowMove{
+0%{transform:translateX(0)}
+50%{transform:translateX(90px)}
+100%{transform:translateX(0)}
+}
+
+/* icon */
+
+.card-icon{
+width:68px;
+height:68px;
+border-radius:22px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:28px;
+
+background:rgba(250,204,21,.08);
+border:1px solid rgba(250,204,21,.15);
+
+color:#facc15;
+z-index:2;
+}
+
+/* content */
+
+.card-content{
+flex:1;
+z-index:2;
+}
+
+.card-content h4{
+font-size:22px;
+font-weight:800;
+color:#fff;
+margin-bottom:8px;
+}
+
+.card-content p{
+font-size:14px;
+line-height:1.6;
+color:rgba(255,255,255,.72);
+}
+
+/* arrow */
+
+.card-arrow{
+font-size:26px;
+color:#facc15;
+font-weight:700;
+z-index:2;
+transition:.3s;
+}
+
+.modern-card:hover .card-arrow{
+transform:translateX(8px);
 }
     </style>
   </head>
@@ -1080,28 +1193,46 @@ transform:translateX(6px);
         </a>
 
         <a href="javascript:void(0)" class="premium-special" onclick="openPremium2('premiumtrafik.html')">
-    <div class="premium-glow"></div>
-    <div class="premium-icon">👑</div>
-    <div class="premium-content">
-        <h4>Premium Özel Testler</h4>
-        <p>Sadece premium üyeler için hazırlanmış gelişmiş testler</p>
-    </div>
-    <div class="premium-arrow">→</div>
+<div class="card-icon">
+<i class="fa-solid fa-crown"></i>
+</div>
+
+<div class="card-content">
+<h4>Premium Özel Testler</h4>
+<p>Sadece premium üyeler için hazırlanmış gelişmiş testler</p>
+</div>
+
+<div class="card-arrow">
+<i class="fa-solid fa-arrow-right"></i>
+</div>
+
 </a>
+
 
 
       </div>
          <!-- TEST TEKRAR BİLGİ KARTI -->
-<div class="repeat-card">
-  <h3>🎯 Tekrar Et, Daha İyi Öğren</h3>
-  <p>
-    Çözdüğün testleri <b>Hesabım</b> menüsünden tekrar çözerek
-    bilgilerini pekiştirebilirsin.  
-    Düzenli tekrar = Başarı 🚀
-  </p>
-  <a href="hesabim.html">👤 Hesabıma Git</a>
-      </div>
-    </div>
+<a href="hesabim.html" class="modern-card">
+
+<div class="card-icon">
+<i class="fa-solid fa-rotate-right"></i>
+</div>
+
+<div class="card-content">
+<h4>Tekrar Et, Daha İyi Öğren</h4>
+<p>
+Çözdüğün testleri Hesabım menüsünden tekrar çözerek
+bilgilerini pekiştirebilirsin.
+</p>
+</div>
+
+<div class="card-arrow">
+<i class="fa-solid fa-arrow-right"></i>
+</div>
+
+</a>
+
+ 
 
 
 <script>
@@ -1334,21 +1465,7 @@ document.getElementById("premiumModal2").style.display="flex";
         <button class="cancel-btn" onclick="closePremium2()">
             Vazgeç
         </button>
-<script>
-/* SAĞ TIK KAPAT */
-document.addEventListener("contextmenu", e => e.preventDefault());
 
-/* UZUN BASMA MENÜSÜ KAPAT */
-document.addEventListener("selectstart", e => e.preventDefault());
-
-/* KOPYALA / KES / YAPIŞTIR KISAYOLLARI KAPAT */
-document.addEventListener("copy", e => e.preventDefault());
-document.addEventListener("cut", e => e.preventDefault());
-document.addEventListener("paste", e => e.preventDefault());
-
-/* MOBİL UZUN BASMA */
-document.addEventListener("touchstart", function(){}, {passive:true});
-</script>
 
     </div>
   </body>
