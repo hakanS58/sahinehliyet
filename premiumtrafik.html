@@ -201,6 +201,27 @@ border-radius:14px;
 font-weight:700;
 cursor:pointer;
 }
+
+.test-btn.completed {
+        background: #e9f7ec;
+        border: 2px solid #2ecc71;
+        color: #1b5e20;
+        pointer-events: none;
+      }
+
+      .test-btn.completed::after {
+        content: "✓ ÇÖZÜLDÜ";
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #2ecc71;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        animation: pulse 1.5s infinite;
+      }
 </style>
 </head>
 <body>
@@ -256,7 +277,20 @@ Premium Test 5
 
 <script>
 
+    let user = JSON.parse(localStorage.getItem("user")) || { tests: {} };
 
+    function loadStatus() {
+      if (!user.tests) return;
+
+      Object.keys(user.tests).forEach((key) => {
+        const btn = document.getElementById(key);
+
+        if (btn) {
+          btn.classList.add("completed");
+        }
+      });
+    }
+    loadStatus();
 
 
 
@@ -266,14 +300,7 @@ function goPremium(){
 location.href="premium.html";
 }
 
-/* ÇÖZÜLDÜ */
 
-let user = JSON.parse(localStorage.getItem("user")) || {tests:{}};
-
-Object.keys(user.tests || {}).forEach(id=>{
-let btn=document.getElementById(id);
-if(btn) btn.classList.add("completed");
-});
 
 </script>
 
