@@ -2276,6 +2276,30 @@ if(sessionStorage.getItem("fromIndex") === "1"){
 });
 
 
+/* İNTERNET KONTROLU */
+function checkInternet(){
+
+   if(!navigator.onLine){
+      window.location.href="nointernet.html";
+   }
+
+}
+
+/* sayfa açılırken kontrol */
+checkInternet();
+
+/* internet giderse */
+window.addEventListener("offline",()=>{
+   window.location.href="nointernet.html";
+});
+
+/* internet gelirse */
+window.addEventListener("online",()=>{
+   location.reload();
+});
+
+/* sürekli kontrol (opsiyonel ekstra güvenlik) */
+setInterval(checkInternet,2000);
 
 </script>
 
