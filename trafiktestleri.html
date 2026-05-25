@@ -1253,25 +1253,6 @@ function openTest(url) {
 
 
 
-function openPremiumPage(url){
-
-if(isPremium){
-location.href = url;
-return;
-}
-
-selectedTest = url;
-
-document.querySelector("#premiumModal h3").innerText =
-"⭐ Premium Gerekli";
-
-document.querySelector("#premiumModal .desc").innerText =
-"Bu alana erişmek için premium üyelik satın almalısın.";
-
-document.querySelector(".choice-card.ad").style.display="none";
-
-document.getElementById("premiumModal").style.display="flex";
-}
 
 
 
