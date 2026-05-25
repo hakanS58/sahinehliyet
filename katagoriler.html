@@ -1269,10 +1269,110 @@ body.dark .motivation-card{
   -webkit-touch-callout:none !important;
   -webkit-tap-highlight-color:transparent !important;
 }
+
+
+#loader{
+position:fixed;
+inset:0;
+background:#050505;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.spinner{
+width:55px;
+height:55px;
+border:4px solid rgba(255,255,255,.08);
+border-top:4px solid #facc15;
+border-radius:50%;
+animation:spin .8s linear infinite;
+box-shadow:0 0 25px rgba(250,204,21,.25);
+}
+
+#loader p{
+margin-top:18px;
+font-size:15px;
+font-weight:600;
+color:#facc15;
+letter-spacing:.5px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+
+
+
+#loader{
+position:fixed;
+inset:0;
+background:#050505;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+.spinner{
+position:relative;
+width:95px;
+height:95px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* dönen sarı halka */
+
+.spinner::before{
+content:"";
+position:absolute;
+inset:0;
+border:4px solid rgba(255,255,255,.08);
+border-top:4px solid #facc15;
+border-radius:50%;
+animation:spin .2.2s linear infinite;
+box-shadow:0 0 25px rgba(250,204,21,.25);
+}
+
+/* logo */
+
+.spinner img{
+width:58px;
+height:58px;
+border-radius:18px;
+object-fit:cover;
+background:#111;
+padding:6px;
+box-shadow:0 0 20px rgba(0,0,0,.35);
+z-index:2;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
 </style>
 
   </head>
   <body>
+
+ <!-- YÜKLENİYOR ANİMASYONU -->
+<div id="loader">
+   <div class="spinner">
+      <img src="ic_launcher.png" alt="logo">
+   </div>
+</div>
+<div id="content" style="display:none;">
+   <!-- sayfanın tüm içeriği -->
+</div>
 
 <header class="app-header">
 
@@ -2147,6 +2247,33 @@ document.addEventListener("paste", e => e.preventDefault());
 
 /* MOBİL UZUN BASMA */
 document.addEventListener("touchstart", function(){}, {passive:true});
+
+
+
+
+window.addEventListener("pageshow", function () {
+
+const loader = document.getElementById("loader");
+const content = document.getElementById("content");
+
+if(sessionStorage.getItem("fromIndex") === "1"){
+
+    sessionStorage.removeItem("fromIndex");
+
+    loader.style.display = "flex";
+    content.style.display = "none";
+
+    setTimeout(()=>{
+        loader.style.display = "none";
+        content.style.display = "block";
+    },700);
+
+}else{
+    loader.style.display = "none";
+    content.style.display = "block";
+}
+
+});
 
 
 
