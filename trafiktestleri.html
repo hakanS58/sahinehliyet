@@ -893,6 +893,20 @@ body.dark .repeat-card{
     box-shadow:0 8px 20px rgba(255,200,0,.35);
 }
 
+      /* TÜM KOPYALAMA / SEÇMEYİ KAPAT */
+
+*{
+  -webkit-user-select:none !important;
+  -moz-user-select:none !important;
+  -ms-user-select:none !important;
+  user-select:none !important;
+
+  -webkit-touch-callout:none !important;
+  -webkit-tap-highlight-color:transparent !important;
+}
+
+
+
 .premium-special{
 position:relative;
 overflow:hidden;
@@ -1011,7 +1025,6 @@ transition:.3s;
 .premium-special:hover .premium-arrow{
 transform:translateX(6px);
 }
-
 
 
 /* ORTAK MODERN KART */
@@ -1207,10 +1220,7 @@ transform:translateX(8px);
 </div>
 
 </a>
-
-
-
-      </div>
+</div>
          <!-- TEST TEKRAR BİLGİ KARTI -->
 <a href="hesabim.html" class="modern-card">
 
@@ -1229,7 +1239,6 @@ bilgilerini pekiştirebilirsin.
 <div class="card-arrow">
 <i class="fa-solid fa-arrow-right"></i>
 </div>
-
 </a>
 
  
@@ -1273,9 +1282,6 @@ function closePremium(){
 document.getElementById("premiumModal").style.display="none";
 }
 
-function closePremium2(){
-document.getElementById("premiumModal2").style.display="none";
-}
 
 //test-reklam
 function watchAd(){
@@ -1398,8 +1404,6 @@ function openTest(url) {
   }
 }
 
-
-
 function openPremiumPage(url){
 
 if(isPremium){
@@ -1420,6 +1424,23 @@ document.querySelector(".choice-card.ad").style.display="none";
 document.getElementById("premiumModal").style.display="flex";
 }
 
+/* SAĞ TIK KAPAT */
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* UZUN BASMA MENÜSÜ KAPAT */
+document.addEventListener("selectstart", e => e.preventDefault());
+
+/* KOPYALA / KES / YAPIŞTIR KISAYOLLARI KAPAT */
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("paste", e => e.preventDefault());
+
+/* MOBİL UZUN BASMA */
+document.addEventListener("touchstart", function(){}, {passive:true});
+
+
+
+
 
 
 
@@ -1436,6 +1457,9 @@ document.getElementById("premiumModal2").style.display="flex";
 
 }
 
+function closePremium2(){
+document.getElementById("premiumModal2").style.display="none";
+}
 
     </script>
 
