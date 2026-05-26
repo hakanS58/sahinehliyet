@@ -265,6 +265,121 @@ body{
   -webkit-touch-callout:none !important;
   -webkit-tap-highlight-color:transparent !important;
 }
+
+
+body{
+    margin:0;
+    font-family:"Poppins",sans-serif;
+    background:linear-gradient(180deg,#f8fafc,#eef2ff);
+    color:#111827;
+}
+
+/* ANA ALAN */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:24px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+/* KART */
+
+.tip{
+    background:#fff;
+    border-radius:26px;
+    padding:24px;
+
+    border:1px solid #eef2f7;
+
+    box-shadow:
+        0 10px 25px rgba(15,23,42,.06);
+
+    transition:.28s cubic-bezier(.22,1,.36,1);
+
+    position:relative;
+    overflow:hidden;
+}
+
+/* premium ışık */
+
+.tip::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(250,204,21,.08),
+        transparent 55%
+    );
+    pointer-events:none;
+}
+
+/* hover */
+
+.tip:hover{
+    transform:translateY(-8px);
+    box-shadow:
+        0 18px 35px rgba(15,23,42,.12);
+}
+
+/* BAŞLIK */
+
+.tip h4{
+    margin:0 0 12px;
+    font-size:18px;
+    font-weight:700;
+    color:#111827;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* METİN */
+
+.tip p{
+    margin:0;
+    font-size:14px;
+    line-height:1.7;
+    color:#64748b;
+}
+
+/* DARK MODE */
+
+body.dark{
+    background:linear-gradient(180deg,#020617,#0f172a);
+}
+
+body.dark .tip{
+    background:#111827;
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:none;
+}
+
+body.dark .tip h4{
+    color:#fff;
+}
+
+body.dark .tip p{
+    color:#94a3b8;
+}
+
+/* MOBİL */
+
+@media(max-width:600px){
+    .container{
+        grid-template-columns:1fr;
+        padding:16px;
+    }
+
+    .tip{
+        padding:20px;
+    }
+}
 </style>
 
 </head>
