@@ -1,64 +1,299 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Gizlilik Politikası - Şahin Ehliyet</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-body{
-  font-family: Arial, sans-serif;
-  max-width:800px;
-  margin:auto;
-  padding:20px;
-  line-height:1.6;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
-h1,h2{color:#2563eb;}
+
+:root{
+  --bg:#0f172a;
+  --card:#111827;
+  --card2:#1e293b;
+  --primary:#3b82f6;
+  --primary2:#60a5fa;
+  --text:#f8fafc;
+  --muted:#cbd5e1;
+  --border:rgba(255,255,255,0.08);
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:
+    radial-gradient(circle at top left,#1d4ed8 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#2563eb 0%,transparent 30%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:40px 20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.badge{
+  display:inline-block;
+  padding:10px 18px;
+  background:rgba(59,130,246,0.15);
+  border:1px solid rgba(96,165,250,0.3);
+  color:#93c5fd;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:20px;
+  backdrop-filter:blur(10px);
+}
+
+.header h1{
+  font-size:clamp(32px,5vw,52px);
+  font-weight:800;
+  margin-bottom:14px;
+  line-height:1.1;
+}
+
+.header p{
+  color:var(--muted);
+  font-size:17px;
+  max-width:650px;
+  margin:auto;
+  line-height:1.7;
+}
+
+.card{
+  background:rgba(17,24,39,0.78);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:35px;
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.section{
+  background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015));
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:22px;
+  padding:24px;
+  margin-bottom:18px;
+  transition:0.3s ease;
+}
+
+.section:hover{
+  transform:translateY(-3px);
+  border-color:rgba(96,165,250,0.25);
+}
+
+.section h2{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-size:22px;
+  margin-bottom:14px;
+}
+
+.icon{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  font-size:18px;
+  flex-shrink:0;
+}
+
+.section p{
+  color:var(--muted);
+  line-height:1.8;
+  font-size:15.8px;
+}
+
+.contact-box{
+  margin-top:10px;
+  padding:18px;
+  background:rgba(59,130,246,0.1);
+  border:1px solid rgba(96,165,250,0.2);
+  border-radius:18px;
+}
+
+.contact-box a{
+  color:#93c5fd;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.footer{
+  margin-top:30px;
+  text-align:center;
+  color:#94a3b8;
+  font-size:14px;
+}
+
+@media(max-width:768px){
+
+  body{
+    padding:20px 14px;
+  }
+
+  .card{
+    padding:20px;
+    border-radius:22px;
+  }
+
+  .section{
+    padding:18px;
+    border-radius:18px;
+  }
+
+  .section h2{
+    font-size:19px;
+  }
+
+  .icon{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    font-size:16px;
+  }
+
+  .header p{
+    font-size:15px;
+  }
+}
+
+a{
+-webkit-touch-callout:none;
+}
 </style>
 </head>
 
 <body>
 
-<h1>Gizlilik Politikası</h1>
+<div class="container">
 
-<p>Şahin Ehliyet uygulaması, kullanıcı gizliliğine önem verir.</p>
+  <div class="header">
+    <div class="badge">Şahin Ehliyet</div>
+    <h1>Gizlilik Politikası</h1>
+    <p>
+      Kullanıcı gizliliğini önemsiyoruz. Bu sayfa, uygulamamızı kullanırken
+      verilerinizin nasıl işlendiğini ve korunduğunu açıklamaktadır.
+    </p>
+  </div>
 
-<h2>1. Toplanan Veriler</h2>
+  <div class="card">
 
-<p>Uygulamamız, kullanıcıdan herhangi bir kişisel bilgi (isim, e-posta, telefon vb.) toplamaz.</p>
+    <div class="section">
+      <h2>
+        <div class="icon">🔒</div>
+        Toplanan Veriler
+      </h2>
+      <p>
+        Uygulamamız kullanıcıdan isim, telefon numarası veya e-posta gibi
+        kişisel veriler toplamaz. Uygulama içerisindeki ilerleme ve görev
+        bilgileri yalnızca kullanıcının kendi cihazında saklanır.
+      </p>
+    </div>
 
-<p>Uygulama içerisinde oluşturulan ilerleme ve görev bilgileri yalnızca kullanıcının cihazında saklanır.</p>
+    <div class="section">
+      <h2>
+        <div class="icon">💳</div>
+        Google Play Ödemeleri
+      </h2>
+      <p>
+        Premium satın alma işlemleri Google Play altyapısı üzerinden
+        gerçekleştirilmektedir. Ödeme sırasında girilen bilgiler Google
+        tarafından işlenir ve uygulamamız bu verilere erişim sağlamaz.
+      </p>
+    </div>
 
-<h2>2. Google Play Ödemeleri</h2>
+    <div class="section">
+      <h2>
+        <div class="icon">📢</div>
+        Reklamlar
+      </h2>
+      <p>
+        Uygulama içerisinde reklam gösterilebilir. Reklam sağlayıcıları kendi
+        gizlilik politikalarını uygulayabilir ve kendi veri işleme süreçlerinden
+        sorumludur.
+      </p>
+    </div>
 
-<p>Premium satın alma işlemleri Google Play üzerinden gerçekleştirilir.</p>
+    <div class="section">
+      <h2>
+        <div class="icon">🛡️</div>
+        Veri Güvenliği
+      </h2>
+      <p>
+        Kullanıcı verileri üçüncü kişilerle paylaşılmaz. Güvenlik ve gizlilik
+        standartlarını korumak için gerekli önlemler alınmaktadır.
+      </p>
+    </div>
 
-<p>Ödeme sırasında girilen bilgiler Google tarafından işlenir. Uygulamamız bu bilgilere erişmez.</p>
+    <div class="section">
+      <h2>
+        <div class="icon">👶</div>
+        Çocukların Gizliliği
+      </h2>
+      <p>
+        Uygulamamız özellikle 13 yaş altındaki çocuklara yönelik olarak
+        tasarlanmamıştır.
+      </p>
+    </div>
 
-<h2>3. Reklamlar</h2>
+    <div class="section">
+      <h2>
+        <div class="icon">🔄</div>
+        Değişiklikler
+      </h2>
+      <p>
+        Gizlilik politikamız gerektiğinde güncellenebilir. Yapılan değişiklikler
+        bu sayfa üzerinden yayınlanır.
+      </p>
+    </div>
 
-<p>Uygulama içerisinde reklamlar gösterilebilir. Reklam sağlayıcıları kendi gizlilik politikalarına sahiptir.</p>
+    <div class="section">
+      <h2>
+        <div class="icon">📩</div>
+        İletişim
+      </h2>
 
-<h2>4. Verilerin Güvenliği</h2>
+      <p>
+        Sorularınız veya geri bildirimleriniz için bizimle iletişime
+        geçebilirsiniz.
+      </p>
 
-<p>Uygulama, kullanıcı verilerini üçüncü kişilerle paylaşmaz.</p>
+      <div class="contact-box">
+        <strong>E-posta:</strong><br><br>
+        <a draggable="false" href="mailto:hakandhdh9@gmail.com">sahinehliyet@gmail.com</a>
+      </div>
+    </div>
 
-<h2>5. Çocukların Gizliliği</h2>
+    <div class="footer">
+      Son güncelleme • 2026
+    </div>
 
-<p>Uygulamamız 13 yaş altındaki çocuklara özel olarak tasarlanmamıştır.</p>
+  </div>
 
-<h2>6. Değişiklikler</h2>
-
-<p>Bu gizlilik politikası gerektiğinde güncellenebilir.</p>
-
-<h2>7. İletişim</h2>
-
-<p>Herhangi bir sorunuz için bize ulaşabilirsiniz:</p>
-
-<p><strong>E-posta:</strong> hakandhdh9@gmail.com</p>
-
-<hr>
-
-<p>Son güncelleme: 2026</p>
+</div>
 
 </body>
 </html>
