@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Uygulama Bilgisi</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+-webkit-user-select:none;
+user-select:none;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+background:
+linear-gradient(
+180deg,
+#ffffff 0%,
+#f8fafc 45%,
+#eef4ff 100%
+);
+color:#111827;
+overflow-x:hidden;
+}
+
+/* HEADER */
+
+.app-header{
+position:sticky;
+top:0;
+z-index:999;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:18px;
+
+background:linear-gradient(
+135deg,
+#050505,
+#111,
+#1c1c1c,
+#facc15 220%
+);
+
+border-radius:0 0 26px 26px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.22);
+}
+
+.app-title{
+font-size:22px;
+font-weight:800;
+color:#fff;
+}
+
+.app-title::first-letter{
+color:#facc15;
+}
+
+.back-btn{
+width:46px;
+height:46px;
+border:none;
+border-radius:50%;
+
+background:rgba(255,255,255,.08);
+color:#facc15;
+
+font-size:18px;
+cursor:pointer;
+transition:.25s;
+}
+
+.back-btn:hover{
+background:#facc15;
+color:#111;
+transform:scale(1.05);
+}
+
+/* HERO */
+
+.hero{
+padding:34px 24px 10px;
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+
+padding:10px 16px;
+
+background:#fff7d6;
+color:#b45309;
+
+border-radius:999px;
+
+font-size:13px;
+font-weight:700;
+
+margin-bottom:18px;
+}
+
+.hero h1{
+font-size:34px;
+line-height:1.15;
+font-weight:800;
+color:#111827;
+margin-bottom:14px;
+}
+
+.hero p{
+font-size:15px;
+line-height:1.8;
+color:#64748b;
+}
+
+/* CONTENT */
+
+.container{
+padding:22px;
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+/* CARD */
+
+.info-card{
+background:#fff;
+
+border-radius:28px;
+padding:24px;
+
+border:1px solid #edf2f7;
+
+box-shadow:
+0 10px 30px rgba(15,23,42,.05);
+
+transition:.25s;
+}
+
+.info-card:hover{
+transform:translateY(-4px);
+box-shadow:
+0 18px 35px rgba(15,23,42,.08);
+}
+
+.icon-box{
+width:70px;
+height:70px;
+
+border-radius:22px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:28px;
+color:#fff;
+
+margin-bottom:18px;
+}
+
+/* ICON COLORS */
+
+.blue{
+background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.yellow{
+background:linear-gradient(135deg,#facc15,#f59e0b);
+}
+
+.red{
+background:linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.green{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+/* TEXT */
+
+.info-card h3{
+font-size:20px;
+font-weight:700;
+margin-bottom:10px;
+color:#111827;
+}
+
+.info-card p{
+font-size:14px;
+line-height:1.8;
+color:#64748b;
+}
+
+/* CONTACT */
+
+.contact-box{
+margin-top:10px;
+
+display:flex;
+align-items:center;
+gap:14px;
+
+background:#f8fafc;
+
+padding:18px;
+
+border-radius:20px;
+}
+
+.contact-icon{
+width:52px;
+height:52px;
+
+border-radius:16px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:20px;
+
+background:linear-gradient(135deg,#111827,#374151);
+color:#fff;
+}
+
+.contact-box a{
+text-decoration:none;
+font-weight:700;
+color:#111827;
+font-size:15px;
+word-break:break-all;
+}
+
+/* FOOTER */
+
+.footer{
+padding:30px 22px 45px;
+text-align:center;
+color:#94a3b8;
+font-size:13px;
+line-height:1.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="app-header">
+
+<div class="app-title">
+Şahin Ehliyetim
+</div>
+
+<button class="back-btn" onclick="history.back()">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="badge">
+<i class="fa-solid fa-circle-info"></i>
+Uygulama Bilgilendirmesi
+</div>
+
+<h1>
+Uygulama Hakkında Bilmeniz Gerekenler
+</h1>
+
+<p>
+Şahin Ehliyetim uygulaması sürücü adaylarının çalışmasına yardımcı olmak amacıyla geliştirilmiştir.
+</p>
+
+</section>
+
+<!-- CONTENT -->
+
+<div class="container">
+
+<!-- AMAÇ -->
+
+<div class="info-card">
+
+<div class="icon-box blue">
+<i class="fa-solid fa-graduation-cap"></i>
+</div>
+
+<h3>Uygulamanın Amacı</h3>
+
+<p>
+Bu uygulama; ehliyet sınavına hazırlanan kullanıcıların trafik bilgilerini geliştirmesi, konu tekrarları yapabilmesi ve deneme testleri çözebilmesi amacıyla hazırlanmıştır.
+</p>
+
+</div>
+
+<!-- UYARI -->
+
+<div class="info-card">
+
+<div class="icon-box yellow">
+<i class="fa-solid fa-triangle-exclamation"></i>
+</div>
+
+<h3>Önemli Uyarı</h3>
+
+<p>
+Uygulamada bulunan sorular ve içerikler eğitim amaçlıdır. Sorular birebir gerçek sınav sorularını temsil etmeyebilir. Resmi sınav sistemi ile doğrudan bağlantısı bulunmamaktadır.
+</p>
+
+</div>
+
+<!-- PREMIUM -->
+
+<div class="info-card">
+
+<div class="icon-box red">
+<i class="fa-solid fa-crown"></i>
+</div>
+
+<h3>Premium İçerikler</h3>
+
+<p>
+Premium üyelik ile reklamsız kullanım, ekstra içerikler ve daha gelişmiş çalışma deneyimine erişebilirsiniz.
+</p>
+
+</div>
+
+<!-- İLETİŞİM -->
+
+<div class="info-card">
+
+<div class="icon-box green">
+<i class="fa-solid fa-envelope"></i>
+</div>
+
+<h3>İletişim</h3>
+
+<p>
+Öneri, hata bildirimi veya iş birlikleri için bizimle iletişime geçebilirsiniz.
+</p>
+
+<div class="contact-box">
+
+<div class="contact-icon">
+<i class="fa-solid fa-paper-plane"></i>
+</div>
+
+<div>
+<a href="mailto:sahinehliyet@gmail.com">
+sahinehliyet@gmail.com
+</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+© 2026 Şahin Ehliyetim <br>
+Tüm hakları saklıdır.
+</div>
+
+<script>
+
+/* SAĞ TIK KAPAT */
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* KOPYALAMA KAPAT */
+document.addEventListener("copy", e => e.preventDefault());
+
+/* UZUN BASMA */
+document.addEventListener("selectstart", e => e.preventDefault());
+
+</script>
+
+</body>
+</html>
