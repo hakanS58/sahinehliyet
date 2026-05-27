@@ -1360,6 +1360,64 @@ transform:rotate(360deg);
 }
 }
 
+/* SLIDER */
+
+.slider-area{
+margin:22px 18px 28px;
+overflow:hidden;
+}
+
+.slider-track{
+display:flex;
+gap:16px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+padding-bottom:4px;
+
+scrollbar-width:none;
+}
+
+.slider-track::-webkit-scrollbar{
+display:none;
+}
+
+.slide{
+min-width:92%;
+height:180px;
+border-radius:28px;
+overflow:hidden;
+position:relative;
+flex-shrink:0;
+scroll-snap-align:center;
+
+box-shadow:
+0 12px 35px rgba(0,0,0,.12);
+
+border:1px solid rgba(255,255,255,.7);
+}
+
+.slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.slide::after{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(
+180deg,
+transparent,
+rgba(0,0,0,.18)
+);
+}
+
+.slide:active{
+transform:scale(.98);
+}
+
 a{
 -webkit-touch-callout:none;
 }
@@ -1522,6 +1580,47 @@ a{
     <p>Detaylı Soru Çözüm Videoları İle Hangi Soru Nasıl Çözülür Öğren!</p>
 </a>
     </main>
+
+
+    <!-- SLIDER -->
+<div class="slider-area">
+
+  <div class="slider-track">
+
+    <!-- PREMIUM -->
+    <a href="premium.html" class="slide" draggable="false">
+      <img src="premiumduyuru.png" draggable="false">
+    </a>
+
+    <!-- TIKTOK -->
+    <a href="https://www.tiktok.com/@sahinehliyet"
+       target="_blank"
+       class="slide" draggable="false">
+      <img src="duyurutiktok.png" draggable="false">
+    </a>
+
+    <!-- INSTAGRAM -->
+    <a href="https://instagram.com/sahinehliyetoffical"
+       target="_blank"
+       class="slide" draggable="false">
+      <img src="duyuruinstagram.png" draggable="false">
+    </a>
+
+      <!-- PLAY STORE -->
+    <a href="https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak"
+       target="_blank"
+       class="slide" draggable="false">
+      <img src="duyuruplaystore.png" draggable="false">
+    </a>
+
+  </div>
+
+</div>
+
+
+
+
+
 
 
 <div class="motivation-card">
@@ -2305,6 +2404,25 @@ window.addEventListener("online",()=>{
 /* sürekli kontrol (opsiyonel ekstra güvenlik) */
 setInterval(checkInternet,2000);
 
+
+/* slider otomatik kayar */
+const slider = document.querySelector('.slider-track');
+
+let scrollAmount = 0;
+
+setInterval(() => {
+  scrollAmount += 320;
+
+  if(scrollAmount >= slider.scrollWidth - slider.clientWidth){
+    scrollAmount = 0;
+  }
+
+  slider.scrollTo({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+
+}, 3500);
 </script>
 
 
