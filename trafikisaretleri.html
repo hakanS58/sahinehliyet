@@ -229,6 +229,20 @@ a{
 
 </div>
 </div>
+  <script>
+/* SAĞ TIK KAPAT */
+document.addEventListener("contextmenu", e => e.preventDefault());
 
+/* UZUN BASMA MENÜSÜ KAPAT */
+document.addEventListener("selectstart", e => e.preventDefault());
+
+/* KOPYALA / KES / YAPIŞTIR KISAYOLLARI KAPAT */
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("paste", e => e.preventDefault());
+
+/* MOBİL UZUN BASMA */
+document.addEventListener("touchstart", function(){}, {passive:true});
+  </script>
 </body>
 </html>
