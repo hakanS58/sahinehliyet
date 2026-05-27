@@ -259,6 +259,67 @@ font-size:13px;
 line-height:1.7;
 }
 
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark{
+  background:#0f172a;
+  color:white;
+}
+
+/* CONTAINER */
+
+body.dark .container{
+  background:#111827;
+}
+
+/* KARTLAR */
+
+body.dark .card,
+body.dark .info-card,
+body.dark .tip,
+body.dark .download-card,
+body.dark .announcement-card{
+  background:#1e293b;
+  border:1px solid rgba(255,255,255,.05);
+  color:white;
+  box-shadow:none;
+}
+
+/* TEXT */
+
+body.dark p,
+body.dark .desc{
+  color:#94a3b8;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4{
+  color:white;
+}
+
+/* BUTTON */
+
+body.dark .download-btn,
+body.dark .premium-btn{
+  background:#facc15;
+  color:#111827;
+}
+
+/* HEADER */
+
+body.dark .app-header{
+  background:linear-gradient(
+    135deg,
+    #050505,
+    #111,
+    #1c1c1c,
+    #facc15 220%
+  );
+}
 </style>
 </head>
 
@@ -397,6 +458,13 @@ document.addEventListener("copy", e => e.preventDefault());
 /* UZUN BASMA */
 document.addEventListener("selectstart", e => e.preventDefault());
 
+(function () {
+
+  if(localStorage.getItem("theme") === "true"){
+    document.body.classList.add("dark");
+  }
+
+})();
 </script>
 
 </body>
