@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trafik Adabı Testi</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
+     crossorigin="anonymous"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #2563eb;
+        --secondary: #1e3a8a;
+        --bg1: #020617;
+        --bg2: #0f172a;
+        --card: #ffffff;
+        --text: #0f172a;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --warning: #facc15;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        animation: bgMove 12s infinite alternate;
+      }
+
+      @keyframes bgMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      /* HEADER */
+
+      .top-bar {
+        background: rgba(2, 6, 23, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .top-bar h2 {
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+
+      .top-bar a {
+        display: inline-block;
+        margin-top: 6px;
+        padding: 6px 12px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      .top-bar a:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+      /* CONTAINER */
+
+      .quiz-container {
+        max-width: 540px;
+        margin: auto;
+        padding: 18px;
+        animation: fadeUp 0.6s ease;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* AD */
+
+      .ad-area {
+        background: white;
+        border-radius: 14px;
+        padding: 16px;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      /* CARD */
+
+      .card {
+        background: white;
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        animation: cardPop 0.4s ease;
+      }
+
+      @keyframes cardPop {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .card h2 {
+        font-size: 17px;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      /* IMAGE */
+
+      .question-img {
+        width: 100%;
+        border-radius: 14px;
+        margin: 12px 0;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* OPTIONS */
+
+      #options button {
+        width: 100%;
+        padding: 14px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 500;
+        background: #f1f5f9;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      #options button:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .correct {
+        background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+        color: white;
+      }
+
+      .wrong {
+        background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        color: white;
+      }
+
+      /* INFO */
+
+      #infoBox {
+        display: none;
+        background: #fffbeb;
+        border-left: 5px solid var(--warning);
+        padding: 12px;
+        border-radius: 12px;
+        margin-top: 10px;
+        font-size: 14px;
+        animation: fadeUp 0.4s;
+      }
+
+      /* NAV */
+
+      .nav-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .nav-buttons button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .nav-buttons button:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+
+
+
+               /* QUIZ TOP BAR */
+
+.quiz-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.quiz-stats {
+  display: flex;
+  gap: 10px;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.exit-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.exit-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* EXIT MODAL */
+
+.exit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.exit-box {
+  background: white;
+  width: 85%;
+  max-width: 320px;
+  padding: 22px;
+  border-radius: 18px;
+  text-align: center;
+  animation: fadeUp 0.3s ease;
+}
+
+.exit-box h3 {
+  margin-bottom: 8px;
+}
+
+.exit-box p {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 15px;
+}
+
+.exit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.exit-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-no {
+  background: #e5e7eb;
+}
+
+.btn-yes {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-yes:hover {
+  opacity: 0.9;
+}
+
+/* TÜM KOPYALAMA / SEÇMEYİ KAPAT */
+
+*{
+  -webkit-user-select:none !important;
+  -moz-user-select:none !important;
+  -ms-user-select:none !important;
+  user-select:none !important;
+
+  -webkit-touch-callout:none !important;
+  -webkit-tap-highlight-color:transparent !important;
+}
+    </style>
+  </head>
+
+  <body>
+     <!-- EXIT MODAL -->
+
+<div id="exitModal" class="exit-modal">
+
+  <div class="exit-box">
+
+    <h3>Testten Çıkmak İstiyor musun?</h3>
+
+    <p>İlerlemen kaybolabilir.</p>
+
+    <div class="exit-actions">
+
+      <button class="btn-no" onclick="closeExit()">Vazgeç</button>
+
+      <button class="btn-yes" onclick="exitTest()">Evet, Çık</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <div class="quiz-container">
+     
+
+      <div class="card">
+            <div class="quiz-top-bar">
+
+  <div class="quiz-stats">
+    <span id="statCorrect">✅ 0</span>
+    <span id="statWrong">❌ 0</span>
+    <span id="statEmpty">⚪ 10</span>
+  </div>
+
+  <button class="exit-btn" onclick="confirmExit()">✖</button>
+
+</div>
+
+
+        <h2 id="questionText"></h2>
+
+        <img id="questionImg" class="question-img" style="display: none" />
+
+        <div id="options"></div>
+
+        <div id="infoBox"></div>
+
+        <div class="nav-buttons">
+          <button id="prevBtn">⬅ Geri</button>
+          <button id="nextBtn">İleri ➡</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentQuestion = 0;
+      let userAnswers = Array(10).fill(null);
+
+      const questions = [
+{
+    text: "Trafik adabı açısından, bir sürücünün trafikteki diğer paydaşlara karşı sergilediği 'empati' ne anlama gelir?",
+    options: ["Kendi haklarını her zaman ön planda tutmak", "Kendini başkasının yerine koyarak olayları onun bakış açısıyla değerlendirmek", "Hatalı sürücüleri uyarırken kaba davranmak", "Sadece tanıdığı kişilere yol vermek"],
+    correct: 1,
+    explanation: "Empati, karşıdaki sürücü veya yayanın durumunu anlamaya çalışarak hoşgörülü davranmaktır."
+  },
+  {
+    text: "Hangi tutum, trafikte nezaket ve saygı çerçevesinde değerlendirilir?",
+    options: ["Daralan yolda diğer araçların önüne geçmeye çalışmak", "Yol isteyen sürücüye uygunsa güvenli bir şekilde yol vermek", "Kırmızı ışık yanar yanmaz korna çalmak", "Yaya geçidindeki yayalara el kol hareketi yapmak"],
+    correct: 1,
+    explanation: "Yol vermek ve yardımlaşmak trafik adabının en temel unsurlarından biridir."
+  },
+  {
+    text: "Trafikte 'öfke yönetimi' aşağıdakilerden hangisini amaçlar?",
+    options: ["Diğer sürücüleri korkutmayı", "Yaşanan olumsuzluklar karşısında sakinliği koruyarak güvenli sürüşü devam ettirmeyi", "Hız sınırlarını zorlamayı", "Sürekli korna kullanarak tepki göstermeyi"],
+    correct: 1,
+    explanation: "Öfke kontrolü, sürücünün mantıklı karar verme yetisini kaybetmesini engeller."
+  },
+  {
+    text: "Aracını, engelli vatandaşlar için ayrılmış park yerine 'sadece 2 dakikalığına' bırakan bir sürücünün davranışı aşağıdakilerden hangisine örnektir?",
+    options: ["Zamanı iyi kullanmaya", "Pratik zekaya", "Hak ihlali ve saygısızlığa", "Trafik kurallarını esnetmeye"],
+    correct: 2,
+    explanation: "Engelli park yerleri sadece o hakka sahip kişiler içindir; süresine bakılmaksızın işgal edilmesi hak ihlalidir."
+  },
+  {
+    text: "Yağmurlu bir havada hızını azaltmayarak yol kenarındaki su birikintisini yayaların üzerine sıçratan bir sürücü, hangi etik değeri çiğnemiştir?",
+    options: ["Cesaret", "Öz güven", "Nezaket ve saygı", "Sorumluluk"],
+    correct: 2,
+    explanation: "Diğer insanlara zarar vermemek ve onları rahatsız etmemek nezaket gereğidir."
+  },
+  {
+    text: "Trafikte hatalı bir davranış sergileyen sürücüyü uyarırken, hangi yöntem trafik adabına uygundur?",
+    options: ["Camı açıp bağırmak", "Sürekli selektör yaparak taciz etmek", "Sakin ve yapıcı bir üslupla, hakaret etmeden durumu belirtmek", "Aracını önüne kırıp durdurmak"],
+    correct: 2,
+    explanation: "İletişim dili ne kadar yumuşak olursa, uyarının etkisi ve güvenliği o kadar artar."
+  },
+  {
+    text: "Trafik ortamında 'diğergamlık' (başkalarını düşünme) neyi ifade eder?",
+    options: ["Sadece kendi varış süresine odaklanmayı", "Kendi hakkından feragat ederek başkasına kolaylık sağlamayı", "Aracı sürekli yüksek devirde kullanmayı", "Trafik levhalarını görmezden gelmeyi"],
+    correct: 1,
+    explanation: "Diğergamlık, başkasının yararını kendi yararından üstün tutma davranışıdır."
+  },
+  {
+    text: "Trafikte hangi davranış 'iletişim engeli' olarak kabul edilir?",
+    options: ["Gerektiğinde selam vermek", "Teşekkür amaçlı el sallamak", "Diğer sürücülerle göz teması kurup kaba el hareketleri yapmak", "Dönüş sinyallerini zamanında kullanmak"],
+    correct: 2,
+    explanation: "Kaba hareketler iletişimi bozar ve çatışma riskini artırır."
+  },
+  {
+    text: "Sorumluluk sahibi bir sürücü, aracının periyodik bakımını yaptırırken aynı zamanda neyi amaçlar?",
+    options: ["Aracın dış görünüşünü güzelleştirmeyi", "Çevre kirliliğini önlemeyi ve trafik güvenliğini artırmayı", "Hız göstergesini bozmayı", "Daha yüksek sesli korna taktırmayı"],
+    correct: 1,
+    explanation: "Bakımlı araç daha az emisyon yayar ve mekanik arıza riskini azaltarak başkalarını korur."
+  },
+  {
+    text: "Hangi kişilik özelliği trafikte riskli davranışlara meyillidir?",
+    options: ["Sabırlı olmak", "Tez canlı ve öfkeli olmak", "Kuralcı olmak", "Hoşgörülü olmak"],
+    correct: 1,
+    explanation: "Tez canlılık ve öfke, sürücünün risk analizini bozar ve hata yapmasına sebep olur."
+  },
+
+      ];
+
+      const questionText = document.getElementById("questionText");
+      const optionsDiv = document.getElementById("options");
+      const infoBox = document.getElementById("infoBox");
+      const questionImg = document.getElementById("questionImg");
+
+      function loadQuestion() {
+        const q = questions[currentQuestion];
+        questionText.textContent = `${currentQuestion + 1}. ${q.text}`;
+        optionsDiv.innerHTML = "";
+        infoBox.style.display = "none";
+
+        if (q.image) {
+          questionImg.src = q.image;
+          questionImg.style.display = "block";
+        } else {
+          questionImg.style.display = "none";
+        }
+
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.textContent = opt;
+
+          if (userAnswers[currentQuestion] !== null) {
+            btn.disabled = true;
+            if (i === q.correct) btn.classList.add("correct");
+            if (i === userAnswers[currentQuestion] && i !== q.correct)
+              btn.classList.add("wrong");
+          }
+
+          btn.onclick = () => selectAnswer(i, btn);
+          optionsDiv.appendChild(btn);
+        });
+      }
+
+      function selectAnswer(i, btn) {
+        if (userAnswers[currentQuestion] !== null) return;
+        userAnswers[currentQuestion] = i;
+        const q = questions[currentQuestion];
+
+        document
+          .querySelectorAll("#options button")
+          .forEach((b) => (b.disabled = true));
+
+        if (i === q.correct) {
+          btn.classList.add("correct");
+          setTimeout(nextQuestion, 700);
+        } else {
+          btn.classList.add("wrong");
+          document
+            .querySelectorAll("#options button")
+            [q.correct].classList.add("correct");
+          infoBox.textContent = q.explanation;
+          infoBox.style.display = "block";
+        }
+        updateStats();
+      }
+
+      function nextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          loadQuestion();
+        } else {
+          showResult();
+        }
+      }
+      function prevQuestion() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          loadQuestion();
+        }
+      }
+      function showResult() {
+
+                            // Sadece test bitince görev artır
+let d = JSON.parse(localStorage.getItem("dailyTasks"));
+
+if(d && !window.testCounted){
+
+  d.tests++;
+
+  localStorage.setItem("dailyTasks", JSON.stringify(d));
+
+  window.testCounted = true; // tekrar saymasın
+}
+
+
+        let correct = 0;
+        let wrong = 0;
+        let empty = 0;
+
+        userAnswers.forEach((answer, i) => {
+          if (answer === null) {
+            empty++;
+          } else if (answer === questions[i].correct) {
+            correct++;
+          } else {
+            wrong++;
+          }
+
+
+        });
+
+        const total = questions.length;
+        const successRate = Math.round((correct / total) * 100);
+
+        document.querySelector(".quiz-container").innerHTML = `
+    <div class="card" style="text-align:center">
+      <h2>Test Sonucu</h2>
+
+      <p>✅ Doğru: <strong>${correct}</strong></p>
+      <p>❌ Yanlış: <strong>${wrong}</strong></p>
+      <p>⚪ Boş: <strong>${empty}</strong></p>
+
+      <hr>
+
+      <p>Başarı Oranı: <strong>%${successRate}</strong></p>
+<p>Tebrikler bu testi çözerek XP kazandınız! Seviyenizi hesabınızda görebilirsiniz.</p>
+      <button 
+        onclick="window.location.href='katagoriler.html'"
+        style="
+          margin-top:15px;
+          padding:12px 25px;
+          border:none;
+          border-radius:12px;
+          background:#2a5298;
+          color:white;
+          font-size:16px;
+          cursor:pointer;
+        ">
+        Bitir
+      </button>
+    </div>
+  `;
+        function saveTestResult(testKey, correct, wrong, empty, success) {
+              let user = JSON.parse(localStorage.getItem("user"));
+
+              if (!user) {
+                user = {
+                  nickname: "Misafir",
+                  xp:0,
+      level:1,
+      solved:0,
+      tests:{}
+                };
+              }
+
+              const percent = Math.round((correct / 10) * 100);
+              let scorePercent = Math.round((correct / total) * 100);
+
+              user.xp += scorePercent;
+  if(!user.tests) user.tests = {};
+
+  user.solved++;
+
+  user.xp += successRate;
+              localStorage.setItem("user", JSON.stringify(user));
+
+              user.tests[testKey] = {
+                correct,
+                wrong,
+                empty,
+                percent: successRate
+              };
+
+              localStorage.setItem("user", JSON.stringify(user));
+            }
+            saveTestResult("premium-trafikadabı-test-1", correct, wrong, empty, successRate);
+          }
+
+          function finishTest(result) {
+            const user = JSON.parse(localStorage.getItem("user")) || {};
+            user.tests = user.tests || {};
+            user.inProgress = user.inProgress || {};
+
+            user.tests["premium-trafikadabı-test-1"] = result; // yeni sonuç
+            delete user.inProgress["premium-trafikadabı-test-1"]; // yarım kalma durumu silinir
+
+            localStorage.setItem("user", JSON.stringify(user));
+          }
+
+          document.getElementById("nextBtn").onclick = nextQuestion;
+          document.getElementById("prevBtn").onclick = prevQuestion;
+
+      function updateStats() {
+
+  let correct = 0;
+  let wrong = 0;
+  let empty = 0;
+
+  userAnswers.forEach((answer, i) => {
+
+    if (answer === null) {
+      empty++;
+    } 
+    else if (answer === questions[i].correct) {
+      correct++;
+    } 
+    else {
+      wrong++;
+    }
+
+  });
+
+  document.getElementById("statCorrect").textContent = "✅ " + correct;
+  document.getElementById("statWrong").textContent = "❌ " + wrong;
+  document.getElementById("statEmpty").textContent = "⚪ " + empty;
+}
+
+function confirmExit() {
+  document.getElementById("exitModal").style.display = "flex";
+}
+
+function closeExit() {
+  document.getElementById("exitModal").style.display = "none";
+}
+
+function exitTest() {
+  window.location.href = "katagoriler.html";
+}
+
+
+
+          loadQuestion();
+
+
+/* SAĞ TIK KAPAT */
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* UZUN BASMA MENÜSÜ KAPAT */
+document.addEventListener("selectstart", e => e.preventDefault());
+
+/* KOPYALA / KES / YAPIŞTIR KISAYOLLARI KAPAT */
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("paste", e => e.preventDefault());
+
+/* MOBİL UZUN BASMA */
+document.addEventListener("touchstart", function(){}, {passive:true});
+
+    </script>
+  </body>
+</html>
