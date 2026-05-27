@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Duyurular</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+-webkit-user-select:none;
+user-select:none;
+-webkit-touch-callout:none;
+}
+
+body{
+background:
+linear-gradient(180deg,#fff,#f8fafc,#eef4ff);
+color:#111827;
+overflow-x:hidden;
+}
+
+/* HEADER */
+
+.app-header{
+position:sticky;
+top:0;
+z-index:999;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:18px;
+
+background:linear-gradient(
+135deg,
+#050505,
+#111,
+#1c1c1c,
+#facc15 220%
+);
+
+border-radius:0 0 26px 26px;
+
+box-shadow:
+0 10px 28px rgba(0,0,0,.28);
+}
+
+.app-title{
+font-size:23px;
+font-weight:800;
+color:white;
+}
+
+.app-title::first-letter{
+color:#facc15;
+}
+
+.back-btn{
+width:46px;
+height:46px;
+border:none;
+border-radius:50%;
+
+background:rgba(255,255,255,.08);
+
+color:#facc15;
+font-size:18px;
+cursor:pointer;
+
+transition:.25s;
+}
+
+.back-btn:hover{
+background:#facc15;
+color:#000;
+}
+
+/* HERO */
+
+.hero{
+padding:30px 22px 10px;
+}
+
+.hero h1{
+font-size:32px;
+font-weight:800;
+color:#111827;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.7;
+color:#64748b;
+}
+
+/* CONTAINER */
+
+.container{
+padding:22px;
+display:flex;
+flex-direction:column;
+gap:22px;
+}
+
+/* CARD */
+
+.news-card{
+background:white;
+border-radius:30px;
+overflow:hidden;
+
+box-shadow:
+0 10px 30px rgba(15,23,42,.06);
+
+border:1px solid #eef2f7;
+
+transition:.3s;
+text-decoration:none;
+
+display:block;
+color:inherit;
+
+position:relative;
+}
+
+.news-card:hover{
+transform:translateY(-6px);
+box-shadow:
+0 18px 40px rgba(15,23,42,.10);
+}
+
+/* RESİM */
+
+.news-image{
+width:100%;
+height:190px;
+object-fit:cover;
+display:block;
+}
+
+/* BADGE */
+
+.badge{
+position:absolute;
+top:14px;
+left:14px;
+
+padding:8px 14px;
+border-radius:999px;
+
+font-size:12px;
+font-weight:700;
+
+backdrop-filter:blur(10px);
+
+color:white;
+}
+
+.badge.yellow{
+background:rgba(250,204,21,.95);
+color:#111827;
+}
+
+.badge.blue{
+background:rgba(59,130,246,.95);
+}
+
+.badge.red{
+background:rgba(239,68,68,.95);
+}
+
+.badge.pink{
+background:rgba(236,72,153,.95);
+}
+
+/* CONTENT */
+
+.news-content{
+padding:22px;
+}
+
+.news-content h3{
+font-size:22px;
+font-weight:800;
+margin-bottom:10px;
+color:#111827;
+}
+
+.news-content p{
+font-size:14px;
+line-height:1.7;
+color:#64748b;
+margin-bottom:18px;
+}
+
+/* BUTTON */
+
+.news-btn{
+display:inline-flex;
+align-items:center;
+gap:10px;
+
+padding:14px 18px;
+
+border-radius:16px;
+
+background:#111827;
+color:white;
+
+font-size:14px;
+font-weight:700;
+
+transition:.25s;
+}
+
+.news-card:hover .news-btn{
+background:#facc15;
+color:#111827;
+}
+
+/* DARK MODE */
+
+body.dark{
+background:
+linear-gradient(180deg,#020617,#0f172a);
+}
+
+body.dark .hero h1{
+color:white;
+}
+
+body.dark .hero p{
+color:#94a3b8;
+}
+
+body.dark .news-card{
+background:#111827;
+border:1px solid rgba(255,255,255,.05);
+}
+
+body.dark .news-content h3{
+color:white;
+}
+
+body.dark .news-content p{
+color:#94a3b8;
+}
+
+/* MOBİL */
+
+@media(max-width:700px){
+
+.hero h1{
+font-size:28px;
+}
+
+.news-image{
+height:170px;
+}
+
+.news-content h3{
+font-size:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="app-header">
+
+<div class="app-title">
+Şahin Ehliyetim
+</div>
+
+<button class="back-btn"
+onclick="history.back()">
+
+<i class="fa-solid fa-chevron-left"></i>
+
+</button>
+
+</header>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>Duyurular</h1>
+
+<p>
+Yeni güncellemeler, kampanyalar ve sosyal medya hesaplarımızla ilgili gelişmeleri burada bulabilirsin.
+</p>
+
+</div>
+
+<!-- CARDS -->
+
+<div class="container">
+
+<!-- PREMIUM -->
+
+<a href="premium.html"
+class="news-card"
+draggable="false">
+
+<div class="badge yellow">
+🔥 Fırsat
+</div>
+
+<img src="premiumduyuru.png"
+class="news-image">
+
+<div class="news-content">
+
+<h3>Premium %30 İndirimde</h3>
+
+<p>
+219 TL yerine sadece 149 TL’ye premium üyeliğe geç,
+tüm özelliklerin kilidini aç ve reklamsız deneyimin tadını çıkar.
+</p>
+
+<div class="news-btn">
+Premium Ol
+<i class="fa-solid fa-crown"></i>
+</div>
+
+</div>
+</a>
+
+<!-- TIKTOK -->
+
+<a href="https://tiktok.com"
+target="_blank"
+class="news-card"
+draggable="false">
+
+<div class="badge blue">
+🎬 Sosyal Medya
+</div>
+
+<img src="duyurutiktok.png"
+class="news-image">
+
+<div class="news-content">
+
+<h3>TikTok Hesabımızı Takip Et</h3>
+
+<p>
+Ehliyet sınav taktikleri, kısa konu anlatımları ve çıkmış sorular için TikTok hesabımıza göz at.
+</p>
+
+<div class="news-btn">
+TikTok'a Git
+<i class="fa-brands fa-tiktok"></i>
+</div>
+
+</div>
+</a>
+
+<!-- INSTAGRAM -->
+
+<a href="https://instagram.com"
+target="_blank"
+class="news-card"
+draggable="false">
+
+<div class="badge pink">
+📸 Instagram
+</div>
+
+<img src="duyuruinstagram.png"
+class="news-image">
+
+<div class="news-content">
+
+<h3>Instagram Hesabımız Açıldı</h3>
+
+<p>
+Günlük bilgiler, hikayeler, motivasyon içerikleri ve duyurular için Instagram hesabımıza katıl.
+</p>
+
+<div class="news-btn">
+Instagram'a Git
+<i class="fa-brands fa-instagram"></i>
+</div>
+
+</div>
+</a>
+
+<!-- PLAY STORE -->
+
+<a href="https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak"
+target="_blank"
+class="news-card"
+draggable="false">
+
+<div class="badge red">
+⭐ Destek
+</div>
+
+<img src="duyuruplaystore.png"
+class="news-image">
+
+<div class="news-content">
+
+<h3>Uygulamaya 5 Yıldız Ver</h3>
+
+<p>
+Uygulamayı beğendiysen Google Play’de puan vererek
+daha fazla kişiye ulaşmamıza destek olabilirsin.
+</p>
+
+<div class="news-btn">
+Puan Ver
+<i class="fa-solid fa-star"></i>
+</div>
+
+</div>
+</a>
+
+</div>
+
+<script>
+
+/* DARK MODE */
+
+(function(){
+
+if(localStorage.getItem("theme") === "true"){
+document.body.classList.add("dark");
+}
+
+})();
+
+/* KOPYALAMA KAPAT */
+
+document.addEventListener("contextmenu",
+e => e.preventDefault());
+
+document.addEventListener("copy",
+e => e.preventDefault());
+
+document.addEventListener("cut",
+e => e.preventDefault());
+
+document.addEventListener("paste",
+e => e.preventDefault());
+
+</script>
+
+</body>
+</html>
