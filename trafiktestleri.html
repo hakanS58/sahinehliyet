@@ -470,14 +470,14 @@ body.dark .header p{
 
       /* COMPLETED */
 
-      .modern-test-card.completed {
+      .test-btn.completed {
         background: #e9f7ec;
         border: 2px solid #2ecc71;
         color: #1b5e20;
         pointer-events: none;
       }
 
-      .modern-test-card.completed::after {
+      .test-btn.completed::after {
         content: "✓ ÇÖZÜLDÜ";
         position: absolute;
         right: 15px;
@@ -1398,20 +1398,24 @@ font-size:17px;
       <!-- TESTLER -->
 
       <div class="test-list">
-
-       <a href="javascript:void(0)"
-class="modern-test-card easy-card"
+        <!-- TEST 1 -->
+<a href="javascript:void(0)"
+class="test-btn easy-card"
 id="trafik-test-1"
 draggable="false"
 onclick="openPremium('trafiktest1.html')">
+
 <div class="test-info">
+
 <div class="test-name">
 🚗 Test 1
 </div>
 
+
 <div class="difficulty easy">
 🟢 Kolay
 </div>
+
 </div>
 
 <div class="test-arrow">
