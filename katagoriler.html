@@ -1600,14 +1600,14 @@ a{
     </a>
 
     <!-- INSTAGRAM -->
-    <a href="https://instagram.com/sahinehliyetoffical"
+    <a onclick="openInstagram()"
        target="_blank"
        class="slide" draggable="false">
       <img src="duyuruinstagram.png" draggable="false">
     </a>
 
       <!-- PLAY STORE -->
-    <a href="https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak"
+    <a onclick="openPlayStore()"
        target="_blank"
        class="slide" draggable="false">
       <img src="duyuruplaystore.png" draggable="false">
@@ -2078,12 +2078,22 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 });
 
-
       function openTikTok(){
-
   const url = "https://www.tiktok.com/@sahinehliyet";
-
   // Android WebView kontrolü
+  if(window.Android){
+    window.Android.openExternal(url);
+  }else{
+
+    window.open(url, "_blank");
+  }
+}
+
+function openInstagram(){
+
+  const url =
+  "https://www.instagram.com/sahinehliyetoffical/";
+
   if(window.Android){
 
     window.Android.openExternal(url);
@@ -2093,7 +2103,17 @@ document.addEventListener("DOMContentLoaded",()=>{
     window.open(url, "_blank");
 
   }
+}
 
+      function openPlayStore(){
+  const url = "https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak";
+  // Android WebView kontrolü
+  if(window.Android){
+    window.Android.openExternal(url);
+  }else{
+
+    window.open(url, "_blank");
+  }
 }
 
 
