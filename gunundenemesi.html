@@ -147,10 +147,11 @@ Testi Bitir
 <button class="finish-btn" onclick="goCategory()">
 Denemeyi Bitir
 </button>
-    <div class="question-card">
-        <h3>❌ Yanlış Sorular</h3>
-        <div id="wrongList"></div>
-    </div>
+
+<button class="finish-btn wrong-btn"
+onclick="openWrongQuestions()">
+Yanlışlarını Gör
+</button>
 
 
 </div>
@@ -328,7 +329,7 @@ function finish(){
     let empty = 0;
 clearInterval(countdown);
     let wrongHtml = "";
-
+    let wrongQuestions = [];
     currentQuestions.forEach((q,i)=>{
 
         let selected =
@@ -344,14 +345,19 @@ clearInterval(countdown);
         if(answer === q.answer){
             correct++;
         }else{
-            wrong++;
+           wrong++;
 
-            wrongHtml += `
-            <p>
-            ${i+1}. ${q.question}<br>
-            ✔ Doğru: ${q.options[q.answer]}
-            </p>
-            `;
+wrongQuestions.push({
+    question: q.question,
+    correct: q.options[q.answer],
+    image: q.image || null
+});
+wrongHtml += `
+<p>
+${i+1}. ${q.question}<br>
+✔ Doğru: ${q.options[q.answer]}
+</p>
+`;
         }
 
     });
@@ -370,7 +376,10 @@ clearInterval(countdown);
     document.getElementById("quiz").style.display = "none";
     document.querySelector(".finish-btn").style.display = "none";
     document.getElementById("resultBox").style.display = "block";
-
+localStorage.setItem(
+    "wrongQuestions",
+    JSON.stringify(wrongQuestions)
+);
     saveScore(percent);
 
     localStorage.setItem(
@@ -524,6 +533,11 @@ document.addEventListener("paste", e => e.preventDefault());
 /* MOBİL UZUN BASMA */
 document.addEventListener("touchstart", function(){}, {passive:true});
 
+
+function openWrongQuestions(){
+    window.location.href =
+    "gunundenemesiyanlislar.html";
+}
 </script>
 
 </body>
