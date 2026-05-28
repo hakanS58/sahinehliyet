@@ -536,6 +536,17 @@ document.addEventListener("touchstart", function(){}, {passive:true});
 
 
 function openWrongQuestions(){
+
+    localStorage.setItem(
+        "completedTestDate",
+        new Date().toDateString()
+    );
+
+    localStorage.setItem(
+        "testFinished",
+        "true"
+    );
+
     window.location.href =
     "gunundenemesiyanlislar.html";
 }
