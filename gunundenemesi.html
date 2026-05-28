@@ -327,9 +327,11 @@ function finish(){
     let correct = 0;
     let wrong = 0;
     let empty = 0;
-clearInterval(countdown);
-    let wrongHtml = "";
+
+    clearInterval(countdown);
+
     let wrongQuestions = [];
+
     currentQuestions.forEach((q,i)=>{
 
         let selected =
@@ -343,21 +345,19 @@ clearInterval(countdown);
         let answer = selected.value;
 
         if(answer === q.answer){
-            correct++;
-        }else{
-           wrong++;
 
-wrongQuestions.push({
-    question: q.question,
-    correct: q.options[q.answer],
-    image: q.image || null
-});
-wrongHtml += `
-<p>
-${i+1}. ${q.question}<br>
-✔ Doğru: ${q.options[q.answer]}
-</p>
-`;
+            correct++;
+
+        }else{
+
+            wrong++;
+
+            wrongQuestions.push({
+                question: q.question,
+                correct: q.options[q.answer],
+                image: q.image || null
+            });
+
         }
 
     });
@@ -371,18 +371,22 @@ ${i+1}. ${q.question}<br>
     document.getElementById("percent").innerText = percent;
 
     document.getElementById("quiz").style.display = "none";
+
     document.querySelector(".finish-btn").style.display = "none";
+
     document.getElementById("resultBox").style.display = "block";
-localStorage.setItem(
-    "wrongQuestions",
-    JSON.stringify(wrongQuestions)
-);
+
+    localStorage.setItem(
+        "wrongQuestions",
+        JSON.stringify(wrongQuestions)
+    );
+
     saveScore(percent);
 
     localStorage.setItem(
-"completedTestDate",
-new Date().toDateString()
-);
+        "completedTestDate",
+        new Date().toDateString()
+    );
 
 }
 
