@@ -545,24 +545,127 @@ a{
 -webkit-touch-callout:none;
 }
 
+/* ŞAHİN HEADER */
+
+.seh-header-wrap{
+
+    position:sticky;
+    top:0;
+    z-index:99999;
+
+    width:100%;
+    height:78px;
+
+    display:flex;
+    align-items:flex-start;
+
+    padding:12px 18px;
+
+    background:linear-gradient(
+        135deg,
+        #050505 0%,
+        #101010 45%,
+        #1a1a1a 75%,
+        #f4b400 220%
+    );
+
+    border-bottom-left-radius:26px;
+    border-bottom-right-radius:26px;
+
+    border-bottom:2px solid rgba(255,200,0,.22);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.30),
+        inset 0 -1px rgba(255,215,0,.10);
+
+    overflow:hidden;
+}
+
+.seh-header-wrap::before{
+
+    content:'';
+
+    position:absolute;
+    inset:0;
+
+    background:radial-gradient(
+        circle at top right,
+        rgba(255,200,0,.15),
+        transparent 40%
+    );
+
+    pointer-events:none;
+}
+
+/* GERİ BUTONU */
+
+.seh-back-button{
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.05);
+
+    color:#facc15;
+
+    font-size:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    position:relative;
+    z-index:2;
+
+    outline:none;
+
+    -webkit-tap-highlight-color:transparent;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.05),
+        0 4px 12px rgba(0,0,0,.18);
+}
+
+.seh-back-button:active{
+    transform:scale(.96);
+}
+
+html,
+body{
+    margin:0 !important;
+    padding:0 !important;
+    overflow-x:hidden;
+}
+
+/* Kamera boşluğunu sıfırla */
+
+body{
+    padding-top:0 !important;
+}
+
+/* HEADER */
+
+.seh-header-wrap{
+    margin-top:0 !important;
+    top:0 !important;
+}
+
     </style>
   </head>
 
   <body>
-<header class="app-header">
 
-  <div class="header-left">
-    <span class="app-title">Şahin Ehliyetim</span>
-  </div>
+<div class="seh-header-wrap">
 
-  <div class="header-right">
- <button class="back-btn" onclick="history.back()">
-    <i class="fa-solid fa-chevron-left"></i>
-  </button>
-  </div>
-
-</header>
-
+    <button class="seh-back-button" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i>
+    </button>
 
 
 
