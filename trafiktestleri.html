@@ -470,14 +470,14 @@ body.dark .header p{
 
       /* COMPLETED */
 
-      .test-btn.completed {
+      .modern-test-card.completed {
         background: #e9f7ec;
         border: 2px solid #2ecc71;
         color: #1b5e20;
         pointer-events: none;
       }
 
-      .test-btn.completed::after {
+      .modern-test-card.completed::after {
         content: "✓ ÇÖZÜLDÜ";
         position: absolute;
         right: 15px;
@@ -1265,6 +1265,109 @@ body{
     margin-top:0 !important;
     top:0 !important;
 }
+
+.modern-test-card{
+background:#fff;
+border-radius:24px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+text-decoration:none;
+transition:.25s;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.modern-test-card:active{
+transform:scale(.98);
+}
+
+.easy-card{
+border-left:6px solid #22c55e;
+}
+
+.medium-card{
+border-left:6px solid #f59e0b;
+}
+
+.hard-card{
+border-left:6px solid #ef4444;
+}
+
+.test-info{
+display:flex;
+flex-direction:column;
+}
+
+.test-name{
+font-size:24px;
+font-weight:800;
+color:#0f172a;
+margin-bottom:6px;
+}
+
+.test-text{
+font-size:14px;
+color:#64748b;
+line-height:1.5;
+margin-bottom:12px;
+max-width:230px;
+}
+
+.difficulty{
+padding:7px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:700;
+width:max-content;
+}
+
+.easy{
+background:#dcfce7;
+color:#166534;
+}
+
+.medium{
+background:#fef3c7;
+color:#92400e;
+}
+
+.hard{
+background:#fee2e2;
+color:#991b1b;
+}
+
+.test-arrow{
+font-size:20px;
+color:#94a3b8;
+}
+
+.modern-test-card{
+padding:16px;
+border-radius:18px;
+margin-bottom:14px;
+}
+
+.test-name{
+font-size:20px;
+margin-bottom:4px;
+}
+
+.test-text{
+font-size:13px;
+margin-bottom:10px;
+max-width:200px;
+}
+
+.difficulty{
+padding:5px 12px;
+font-size:12px;
+}
+
+.test-arrow{
+font-size:17px;
+}
     </style>
   </head>
 
@@ -1295,9 +1398,27 @@ body{
       <!-- TESTLER -->
 
       <div class="test-list">
-        <a href="javascript:void(0)" class="test-btn" draggable="false" onclick="openPremium('trafiktest1.html')" id="trafik-test-1">
-          🚗 Test 1
-        </a>
+
+       <a href="javascript:void(0)"
+class="modern-test-card easy-card"
+id="trafik-test-1"
+draggable="false"
+onclick="openPremium('trafiktest1.html')">
+<div class="test-info">
+<div class="test-name">
+🚗 Test 1
+</div>
+
+<div class="difficulty easy">
+🟢 Kolay
+</div>
+</div>
+
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+
+</a>
 
         <a href="javascript:void(0)" class="test-btn" draggable="false" onclick="openPremium('trafiktest2.html')" id="trafik-test-2">
           🚗 Test 2
