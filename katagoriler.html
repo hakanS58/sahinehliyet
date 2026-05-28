@@ -2321,20 +2321,26 @@ if(localStorage.getItem("theme") === "true"){
 
   let isPremium = false;
 
-  function setPremium(value) {
-    isPremium = value === true;
-    console.log("HTML PREMIUM:", isPremium);
+function setPremium(value) {
+  isPremium = value === true;
+  console.log("HTML PREMIUM:", isPremium);
+}
+
+function openTest(url) {
+
+  if (isPremium) {
+
+    // Premium ise direkt teste gir
+    window.location.href = url;
+
+  } else {
+
+    // Premium değilse popup göster
+    showChoicePopup(url);
+
   }
 
-  function openTest(url) {
-    if (isPremium) {
-      // 🔥 Premium ise direkt teste gir
-      window.location.href = "gunundenemesi.html";
-    } else {
-      // Premium değilse popup göster
-      showChoicePopup(url);
-    }
-  }
+}
 
 
 /* SAĞ TIK KAPAT */
