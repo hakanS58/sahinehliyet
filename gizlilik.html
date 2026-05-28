@@ -402,7 +402,7 @@ body{
 
       <div class="contact-box">
         <strong>E-posta:</strong><br><br>
-        <a draggable="false" href="mailto:hakandhdh9@gmail.com">sahinehliyet@gmail.com</a>
+        <a draggable="false" onclick="openMail()">sahinehliyet@gmail.com</a>
       </div>
     </div>
 
@@ -413,6 +413,22 @@ body{
   </div>
 
 </div>
+<script>
+  function openMail(){
 
+  const mail =
+  "mailto:sahinehliyet@gmail.com";
+
+  if(window.Android){
+
+    window.Android.openExternal(mail);
+
+  }else{
+
+    window.location.href = mail;
+
+  }
+}
+</script>
 </body>
 </html>
