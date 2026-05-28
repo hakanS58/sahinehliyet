@@ -2319,27 +2319,23 @@ if(localStorage.getItem("theme") === "true"){
         }
 
 
-  let isPremium = false;
 
-function setPremium(value) {
-  isPremium = value === true;
-  console.log("HTML PREMIUM:", isPremium);
+function openPremium(url){
+
+// 🔥 localStorage'dan kontrol et
+if(localStorage.getItem("premium") === "true"){
+  location.href = url;
+  return;
 }
 
-function openTest(url) {
+selectedTest = url;
+document.getElementById("premiumModal").style.display="flex";
 
-  if (isPremium) {
+}
 
-    // Premium ise direkt teste gir
-    window.location.href = url;
 
-  } else {
-
-    // Premium değilse popup göster
-    showChoicePopup(url);
-
-  }
-
+function closePremium(){
+document.getElementById("premiumModal").style.display="none";
 }
 
 
