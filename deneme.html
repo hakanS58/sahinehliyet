@@ -1262,6 +1262,150 @@ body{
     margin-top:0 !important;
     top:0 !important;
 }
+
+.modern-test-card{
+background:#fff;
+border-radius:24px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+text-decoration:none;
+transition:.25s;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.modern-test-card:active{
+transform:scale(.98);
+}
+
+.easy-card{
+border-left:6px solid #22c55e;
+}
+
+.medium-card{
+border-left:6px solid #f59e0b;
+}
+
+.hard-card{
+border-left:6px solid #ef4444;
+}
+
+.test-info{
+display:flex;
+flex-direction:column;
+}
+
+.test-name{
+font-size:24px;
+font-weight:800;
+color:#0f172a;
+margin-bottom:6px;
+}
+
+.test-text{
+font-size:14px;
+color:#64748b;
+line-height:1.5;
+margin-bottom:12px;
+max-width:230px;
+}
+
+.difficulty{
+padding:7px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:700;
+width:max-content;
+}
+
+.easy{
+background:#dcfce7;
+color:#166534;
+}
+
+.medium{
+background:#fef3c7;
+color:#92400e;
+}
+
+.hard{
+background:#fee2e2;
+color:#991b1b;
+}
+
+.test-arrow{
+font-size:20px;
+color:#94a3b8;
+}
+
+.modern-test-card{
+padding:16px;
+border-radius:18px;
+margin-bottom:14px;
+}
+
+.test-name{
+font-size:20px;
+margin-bottom:4px;
+}
+
+.test-text{
+font-size:13px;
+margin-bottom:10px;
+max-width:200px;
+}
+
+.difficulty{
+padding:5px 12px;
+font-size:12px;
+}
+
+.test-arrow{
+font-size:17px;
+}
+
+
+.test-btn.completed{
+border:2px solid #22c55e;
+background:#ecfdf5;
+pointer-events:none;
+opacity:.9;
+}
+
+.test-btn.completed .test-name{
+color:#166534;
+}
+
+.test-btn.completed .test-text{
+color:#15803d;
+}
+
+.test-btn.completed .difficulty{
+display:none;
+}
+
+.test-btn.completed .test-arrow{
+display:flex;
+align-items:center;
+justify-content:center;
+background:#22c55e;
+color:#fff;
+width:38px;
+height:38px;
+border-radius:50%;
+font-size:14px;
+font-weight:800;
+}
+
+.test-btn.completed .test-arrow i{
+display:none;
+}
+
+.test-btn.completed .test-arrow::before{
+content:"✓";
+}
     </style>
   </head>
 
@@ -1293,25 +1437,76 @@ body{
 
       <!-- TESTLER -->
       <div class="test-list">
-        <a href="javascript:void(0)" class="test-btn" draggable="false" onclick="openPremium('deneme1.html')" id="deneme-test-1">
-          📝 Deneme 1
-        </a>
 
-        <a href="javascript:void(0)" class="test-btn" draggable="false" onclick="openPremium('deneme2.html')" id="deneme-test-2">
-          📝 Deneme 2
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="deneme-test-1" draggable="false" onclick="openPremium('deneme1.html')">
+<div class="test-info">
+<div class="test-name">
+📝 Deneme 1
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
 
-        <a href="javascript:void(0)" class="test-btn" draggable="false" onclick="openPremium('deneme3.html')" id="deneme-test-3">
-          📝 Deneme 3
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="deneme-test-2" draggable="false" onclick="openPremium('deneme2.html')">
+<div class="test-info">
+<div class="test-name">
+📝 Deneme 2
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
 
-        <a href="javascript:void(0)" class="test-btn" draggable="false" onclick="openPremium('deneme4.html')" id="deneme-test-4">
-          📝 Deneme 4
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="deneme-test-3" draggable="false" onclick="openPremium('deneme3.html')">
+<div class="test-info">
+<div class="test-name">
+📝 Deneme 3
+</div>
+<div class="difficulty easy">
+🟢 Kolay
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
 
-        <a href="javascript:void(0)" class="test-btn" draggable="false" onclick="openPremium('deneme5.html')" id="deneme-test-5">
-          📝 Deneme 5
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="deneme-test-4" draggable="false" onclick="openPremium('deneme4.html')">
+<div class="test-info">
+<div class="test-name">
+📝 Deneme 4
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
+
+<a href="javascript:void(0)" class="test-btn easy-card" id="deneme-test-5" draggable="false" onclick="openPremium('deneme5.html')">
+<div class="test-info">
+<div class="test-name">
+📝 Deneme 5
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
 
         
           <a href="javascript:void(0)" class="premium-special" draggable="false" onclick="openPremium2('premiumdeneme.html')">
