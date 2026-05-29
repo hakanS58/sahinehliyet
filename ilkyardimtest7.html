@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İlk Yardım Testi</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
+     crossorigin="anonymous"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #2563eb;
+        --secondary: #1e3a8a;
+        --bg1: #020617;
+        --bg2: #0f172a;
+        --card: #ffffff;
+        --text: #0f172a;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --warning: #facc15;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        animation: bgMove 12s infinite alternate;
+      }
+
+      @keyframes bgMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      /* HEADER */
+
+      .top-bar {
+        background: rgba(2, 6, 23, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .top-bar h2 {
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+
+      .top-bar a {
+        display: inline-block;
+        margin-top: 6px;
+        padding: 6px 12px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      .top-bar a:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+      /* CONTAINER */
+
+      .quiz-container {
+        max-width: 540px;
+        margin: auto;
+        padding: 18px;
+        animation: fadeUp 0.6s ease;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* AD */
+
+      .ad-area {
+        background: white;
+        border-radius: 14px;
+        padding: 16px;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      /* CARD */
+
+      .card {
+        background: white;
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        animation: cardPop 0.4s ease;
+      }
+
+      @keyframes cardPop {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .card h2 {
+        font-size: 17px;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      /* IMAGE */
+
+      .question-img {
+        width: 100%;
+        border-radius: 14px;
+        margin: 12px 0;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* OPTIONS */
+
+      #options button {
+        width: 100%;
+        padding: 14px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 500;
+        background: #f1f5f9;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      #options button:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .correct {
+        background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+        color: white;
+      }
+
+      .wrong {
+        background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        color: white;
+      }
+
+      /* INFO */
+
+      #infoBox {
+        display: none;
+        background: #fffbeb;
+        border-left: 5px solid var(--warning);
+        padding: 12px;
+        border-radius: 12px;
+        margin-top: 10px;
+        font-size: 14px;
+        animation: fadeUp 0.4s;
+      }
+
+      /* NAV */
+
+      .nav-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .nav-buttons button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .nav-buttons button:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+
+                /* QUIZ TOP BAR */
+
+.quiz-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.quiz-stats {
+  display: flex;
+  gap: 10px;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.exit-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.exit-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* EXIT MODAL */
+
+.exit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.exit-box {
+  background: white;
+  width: 85%;
+  max-width: 320px;
+  padding: 22px;
+  border-radius: 18px;
+  text-align: center;
+  animation: fadeUp 0.3s ease;
+}
+
+.exit-box h3 {
+  margin-bottom: 8px;
+}
+
+.exit-box p {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 15px;
+}
+
+.exit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.exit-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-no {
+  background: #e5e7eb;
+}
+
+.btn-yes {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-yes:hover {
+  opacity: 0.9;
+}
+    </style>
+  </head>
+
+  <body>
+      <!-- EXIT MODAL -->
+
+<div id="exitModal" class="exit-modal">
+
+  <div class="exit-box">
+
+    <h3>Testten Çıkmak İstiyor musun?</h3>
+
+    <p>İlerlemen kaybolabilir.</p>
+
+    <div class="exit-actions">
+
+      <button class="btn-no" onclick="closeExit()">Vazgeç</button>
+
+      <button class="btn-yes" onclick="exitTest()">Evet, Çık</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <div class="quiz-container">
+  
+
+      <div class="card">
+         <div class="quiz-top-bar">
+
+  <div class="quiz-stats">
+    <span id="statCorrect">✅ 0</span>
+    <span id="statWrong">❌ 0</span>
+    <span id="statEmpty">⚪ 10</span>
+  </div>
+
+  <button class="exit-btn" onclick="confirmExit()">✖</button>
+
+</div>
+        <h2 id="questionText"></h2>
+
+        <img id="questionImg" class="question-img" style="display: none" />
+
+        <div id="options"></div>
+
+        <div id="infoBox"></div>
+
+        <div class="nav-buttons">
+          <button id="prevBtn">⬅ Geri</button>
+          <button id="nextBtn">İleri ➡</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentQuestion = 0;
+      let userAnswers = Array(10).fill(null);
+
+      const questions = [
+
+      {
+    text: "Bebeklerde (0-1 yaş) temel yaşam desteği uygulanırken, suni solunum ve dış kalp masajı yapma tekniği yetişkinlerden hangi yönüyle farklılık gösterir?",
+    options: ["Suni solunumda bebeğin sadece ağzından üflemek yeterlidir", "Kalp masajı göğüs merkezine tek elin ayasıyla sertçe basılarak yapılır", "Ağız içi kontrol edilmeden doğrudan nefes verilir", "Suni solunum bebeklerin ağız ve burnunu birlikte içine alacak şekilde yapılır; kalp masajı ise iki parmakla uygulanır"],
+    correct: 3,
+    explanation: "Bebeklerin yüz yapısı küçük olduğu için ilkyardımcı ağzını bebeğin hem ağzı hem de burnunu örtecek şekilde yerleştirir. Göğüs kafesine yapılacak masaj ise zarar vermemek adına iki parmakla (işaret ve orta parmak) göğüs kemiğini 4 cm çöktürecek şekilde basılarak gerçekleştirir."
+  },
+  {
+    text: "Kaza yerinde burun kanaması olan bir kazazedeye uygulanması gereken en doğru ilkyardım pozisyonu ve müdahalesi aşağıdakilerden hangisidir?",
+    options: ["Baş geriye doğru atılarak sırtüstü yatırılır", "Hasta oturtulur, başı hafifçe öne eğilir ve burun kanatları 5 dakika süreyle sıkılır", "Başı yana çevrilerek koma pozisyonuna alınır", "Burun delikleri pamukla tamamen tıkanıp hastanın sırtı ovulur"],
+    correct: 1,
+    explanation: "Burun kanamalarında başı geriye atmak kanın yutağa ve mideye kaçmasına sebep olur. Doğru yöntem; hastayı oturtmak, başı hafifçe öne eğerek kanın dışarı akmasını sağlamak ve burun kanatlarını (yumuşak dokuyu) 5 dakika boyunca sıkmaktır."
+  },
+  {
+    text: "Kulaktan kan gelmesi durumuyla karşılaşılan bilinci kapalı bir kazazedede, ilkyardımcının yapması gereken en kritik müdahale hangisidir?",
+    options: ["Kanayan kulağı pamukla sıkıca tıkayıp hastayı sırtüstü yatırmak", "Kulağı temiz suyla yıkamak", "Kanayan kulak altta kalacak şekilde yan yatırmak ve kulaktan gelen sıvının rahatça akmasını sağlamak", "Hastayı hemen yürütmeye çalışmak"],
+    correct: 2,
+    explanation: "Kulaktan kan veya omurilik sıvısı gelmesi ciddi bir kafa tabanı kırığı belirtisidir. Kanama asla ötelenmemeli veya tıkanmamalıdır; aksi takdirde kafa içi basınç artar. Hasta, kanayan kulak yastığa/yere gelecek şekilde (altta kalacak şekilde) yan yatırılmalıdır."
+  },
+  {
+    text: "Kaza yerinde göğsüne delici bir cisim batan (açık göğüs yaralanması olan) ve nefes almakta güçlük çeken yaralıya hangi pozisyon verilmelidir?",
+    options: ["Sırtüstü yatırılarak ayakları 30 cm yukarı kaldırılır (Şok pozisyonu)", "Yüzüstü yatış pozisyonu", "Yarı oturuş veya oturuş pozisyonu", "Koma (yarı yan yatış) pozisyonu"],
+    correct: 2,
+    explanation: "Göğsünden yaralanan ve solunum güçlüğü çeken kazazedelerin akciğer kapasitesini en rahat kullanabileceği, nefes almasını kolaylaştıran pozisyon 'yarı oturuş' pozisyonudur."
+  },
+  {
+    text: "İlkyardımda 'Hayat Kurtarma Zinciri' (Chain of Survival) halkalarının sıralaması hangi şıkta doğru olarak verilmiştir?",
+    options: ["112'ye haber verme - Temel Yaşam Desteği - Ambulans ekiplerince müdahale - Hastane acil servisi", "Hastaneye götürme - İlaçla tedavi - 112'yi arama - Kalp masajı", "Olay yerini süpürme - Yaralıyı taşıma - Suni solunum - Ambulans çağırma", "Kalp masajı - Suni solunum - Turnike uygulama - Şok pozisyonu"],
+    correct: 0,
+    explanation: "Hayat kurtarma zinciri 4 halkadan oluşur: 1. Sağlık kuruluşuna bildirme (112), 2. Olay yerinde temel yaşam desteği, 3. Ambulans ekiplerinin müdahalesi, 4. Hastane acil servis müdahalesi."
+  },
+  {
+    text: "Vücutta bir bölgenin donması (donuk yaralanması) durumunda, kaza yerinde yapılacak ilkyardımda aşağıdakilerden hangisi kesinlikle yasaktır?",
+    options: ["Donan bölgeyi karla, alkolle ovalayarak veya masaj yaparak ısıtmaya çalışmak", "Isınmaya önce oda sıcaklığında başlamak", "Yaralının ıslak kıyafetlerini kuru olanlarla değiştirmek", "Yaralıya bilinci açık ise sıcak, şekerli içecekler vermek"],
+    correct: 0,
+    explanation: "Donmuş dokuları karla ovalamak veya sertçe masaj yapmak, buz kristallerinin hücreleri parçalamasına ve doku ölümüne (gangrene) yol açar. Donan bölge asla ovulmamalı, yavaş yavaş ve kuru ısıda (oda sıcaklığında) kendiliğinden çözülmesi sağlanmalıdır."
+  },
+  {
+    text: "Trafik kazasında bilinci açık ancak karnından yaralanmış ve organları dışarı çıkmış (açık karın yaralanması olan) bir kazazedeye hangi pozisyon verilmelidir?",
+    options: ["Yüzüstü yatırılarak başı yana çevrilir", "Sırtüstü sırtı dik olacak şekilde oturtulur", "Sırtüstü yatırılır, karın kaslarının gerilmesini önlemek için bacaklar kalçadan ve dizden bükülerek karna doğru çekilir", "Koma pozisyonuna alınır"],
+    correct: 2,
+    explanation: "Karın yaralanmalarında karın duvarının ve kaslarının gerilmemesi gerekir. Yaralı sırtüstü yatırılır ve dizleri bükülerek yukarı çekilir; böylece karın bölgesi gevşer, organların daha fazla dışarı çıkması ve ağrı önlenir."
+  },
+  {
+    text: "İlkyardımcı, olay yerinde 'Bak-Dinle-Hisset' yöntemiyle kazazedenin solunumunun olmadığını anladığı an, vakit kaybetmeden ilk olarak ne yapmalıdır?",
+    options: ["Hemen turnike uygulamasına başlamalıdır", "Hemen 30 kalp masajı ve ardından 2 suni solunum olacak şekilde Temel Yaşam Desteğine başlamalıdır", "Kazazedeyi yarı oturtarak su içirmelidir", "Kazazedenin elbiselerini tamamen keserek çıkarmalıdır"],
+    correct: 1,
+    explanation: "Solunumu durmuş bir yetişkinde zaman en büyük düşmandır. Beyin ölümü 4-6 dakika içinde başlar. Solunumun olmadığı teyit edildiği an derhal 30 kalp masajı - 2 suni solunum (30:2) döngüsü başlatılmalıdır."
+  },
+  {
+    text: "Hava yolunun yabancı bir cisimle 'kısmi tıkanması' olan (öksürebilen, nefes alabilen ve konuşabilen) bir kişiye kaza yerinde hangi ilkyardım müdahalesi uygulanır?",
+    options: ["Hemen sırtına kuvvetlice vurulur", "Heimlich manevrası uygulanarak karnı sıkıştırılır", "Dokunulmaz, sadece öksürmeye teşvik edilir", "Ağzına parmak sokularak cisim aranır"],
+    correct: 2,
+    explanation: "Kısmi tıkanmada kişi konuşabilir ve öksürebilir. Bu aşamada sırta vurmak veya Heimlich uygulamak cismin daha derine kaçarak tam tıkanmaya dönmesine sebep olabilir. Kişiye dokunulmamalı, sadece güçlü şekilde öksürmesi söylenmelidir."
+  },
+  {
+    text: "Kaza yerinde güvenliği sağlamak (koruma) amacıyla, ikinci bir kazanın oluşmasını engellemek için ilkyardımcının araçların arkasına koyması gereken reflektörler şehir içi ve şehirler arası yollarda kazadan en az kaç metre uzağa yerleştirilmelidir?",
+    options: ["Şehir içi 5 metre - Şehirler arası 10 metre", "Şehir içi 15 metre - Şehirler arası 30 metre", "Şehir içi 30 metre - Şehirler arası 150 metre", "Şehir içi 100 metre - Şehirler arası 500 metre"],
+    correct: 2,
+    explanation: "Güvenli bir fren mesafesi ve diğer sürücülerin kazayı önceden fark edebilmesi için reflektörler; şehir içi yollarda en az 30 metre, şehirler arası hızlı yollarda (otoban/ziynet yolları) ise en az 150 metre uzağa, diğer sürücülerin görebileceği şekilde yerleştirilmelidir."
+  }
+   
+      ];
+
+      const questionText = document.getElementById("questionText");
+      const optionsDiv = document.getElementById("options");
+      const infoBox = document.getElementById("infoBox");
+      const questionImg = document.getElementById("questionImg");
+
+      function loadQuestion() {
+        const q = questions[currentQuestion];
+        questionText.textContent = `${currentQuestion + 1}. ${q.text}`;
+        optionsDiv.innerHTML = "";
+        infoBox.style.display = "none";
+
+        if (q.image) {
+          questionImg.src = q.image;
+          questionImg.style.display = "block";
+        } else {
+          questionImg.style.display = "none";
+        }
+
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.textContent = opt;
+
+          if (userAnswers[currentQuestion] !== null) {
+            btn.disabled = true;
+            if (i === q.correct) btn.classList.add("correct");
+            if (i === userAnswers[currentQuestion] && i !== q.correct)
+              btn.classList.add("wrong");
+          }
+
+          btn.onclick = () => selectAnswer(i, btn);
+          optionsDiv.appendChild(btn);
+        });
+      }
+
+      function selectAnswer(i, btn) {
+        if (userAnswers[currentQuestion] !== null) return;
+        userAnswers[currentQuestion] = i;
+        const q = questions[currentQuestion];
+
+        document
+          .querySelectorAll("#options button")
+          .forEach((b) => (b.disabled = true));
+
+        if (i === q.correct) {
+          btn.classList.add("correct");
+          setTimeout(nextQuestion, 700);
+        } else {
+          btn.classList.add("wrong");
+          document
+            .querySelectorAll("#options button")
+            [q.correct].classList.add("correct");
+          infoBox.textContent = q.explanation;
+          infoBox.style.display = "block";
+        }
+        updateStats();
+      }
+
+      function nextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          loadQuestion();
+        } else {
+          showResult();
+        }
+      }
+      function prevQuestion() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          loadQuestion();
+        }
+      }
+      function showResult() {
+
+                    // Sadece test bitince görev artır
+let d = JSON.parse(localStorage.getItem("dailyTasks"));
+
+if(d && !window.testCounted){
+
+  d.tests++;
+
+  localStorage.setItem("dailyTasks", JSON.stringify(d));
+
+  window.testCounted = true; // tekrar saymasın
+}
+
+
+
+        let correct = 0;
+        let wrong = 0;
+        let empty = 0;
+
+        userAnswers.forEach((answer, i) => {
+          if (answer === null) {
+            empty++;
+          } else if (answer === questions[i].correct) {
+            correct++;
+          } else {
+            wrong++;
+          }
+
+        });
+
+        const total = questions.length;
+        const successRate = Math.round((correct / total) * 100);
+
+        document.querySelector(".quiz-container").innerHTML = `
+    <div class="card" style="text-align:center">
+      <h2>Test Sonucu</h2>
+
+      <p>✅ Doğru: <strong>${correct}</strong></p>
+      <p>❌ Yanlış: <strong>${wrong}</strong></p>
+      <p>⚪ Boş: <strong>${empty}</strong></p>
+
+      <hr>
+
+      <p>Başarı Oranı: <strong>%${successRate}</strong></p>
+<p>Tebrikler bu testi çözerek XP kazandınız! Seviyenizi hesabınızda görebilirsiniz.</p>
+      <button 
+        onclick="window.location.href='katagoriler.html'"
+        style="
+          margin-top:15px;
+          padding:12px 25px;
+          border:none;
+          border-radius:12px;
+          background:#2a5298;
+          color:white;
+          font-size:16px;
+          cursor:pointer;
+        ">
+        Bitir
+      </button>
+    </div>
+  `;
+        function saveTestResult(testKey, correct, wrong, empty, success) {
+              let user = JSON.parse(localStorage.getItem("user"));
+
+              if (!user) {
+                user = {
+                  nickname: "Misafir",
+                  xp:0,
+      level:1,
+      solved:0,
+      tests:{}
+                };
+              }
+
+              const percent = Math.round((correct / 10) * 100);
+              let scorePercent = Math.round((correct / total) * 100);
+
+              user.xp += scorePercent;
+  if(!user.tests) user.tests = {};
+
+  user.solved++;
+
+  user.xp += successRate;
+              localStorage.setItem("user", JSON.stringify(user));
+
+              user.tests[testKey] = {
+                correct,
+                wrong,
+                empty,
+                percent: successRate
+              };
+
+              localStorage.setItem("user", JSON.stringify(user));
+            }
+            saveTestResult("ilkyardim-test-7", correct, wrong, empty, successRate);
+          }
+
+      function finishTest(result) {
+        const user = JSON.parse(localStorage.getItem("user")) || {};
+        user.tests = user.tests || {};
+        user.inProgress = user.inProgress || {};
+
+        user.tests["ilkyardim-test-7"] = result; // yeni sonuç
+        delete user.inProgress["ilkyardim-test-7"]; // yarım kalma durumu silinir
+
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+
+      document.getElementById("nextBtn").onclick = nextQuestion;
+      document.getElementById("prevBtn").onclick = prevQuestion;
+
+      function updateStats() {
+
+  let correct = 0;
+  let wrong = 0;
+  let empty = 0;
+
+  userAnswers.forEach((answer, i) => {
+
+    if (answer === null) {
+      empty++;
+    } 
+    else if (answer === questions[i].correct) {
+      correct++;
+    } 
+    else {
+      wrong++;
+    }
+
+  });
+
+  document.getElementById("statCorrect").textContent = "✅ " + correct;
+  document.getElementById("statWrong").textContent = "❌ " + wrong;
+  document.getElementById("statEmpty").textContent = "⚪ " + empty;
+}
+
+function confirmExit() {
+  document.getElementById("exitModal").style.display = "flex";
+}
+
+function closeExit() {
+  document.getElementById("exitModal").style.display = "none";
+}
+
+function exitTest() {
+  window.location.href = "katagoriler.html";
+}
+
+
+
+          loadQuestion();
+    </script>
+  </body>
+</html>
