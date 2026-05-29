@@ -468,8 +468,6 @@ body.dark .header p{
         box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
       }
 
-
-
       /* COMPLETED */
 
       .test-btn.completed {
@@ -477,20 +475,6 @@ body.dark .header p{
         border: 2px solid #2ecc71;
         color: #1b5e20;
         pointer-events: none;
-      }
-
-      .test-btn.completed::after {
-        content: "✓ ÇÖZÜLDÜ";
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #2ecc71;
-        color: white;
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        animation: pulse 1.5s infinite;
       }
 
 
@@ -1393,11 +1377,26 @@ color:#15803d;
 display:none;
 }
 
+.test-btn.completed .test-arrow{
+display:flex;
+align-items:center;
+justify-content:center;
+background:#22c55e;
+color:#fff;
+width:38px;
+height:38px;
+border-radius:50%;
+font-size:14px;
+font-weight:800;
+}
+
 .test-btn.completed .test-arrow i{
 display:none;
 }
 
-
+.test-btn.completed .test-arrow::before{
+content:"✓";
+}
     </style>
   </head>
 
@@ -1491,6 +1490,48 @@ display:none;
 </div>
 <div class="difficulty hard">
 🔴 Zor
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
+
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafik-test-6" draggable="false" onclick="openPremium('trafiktest6.html')">
+<div class="test-info">
+<div class="test-name">
+🚗 Test 6
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
+
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafik-test-7" draggable="false" onclick="openPremium('trafiktest7.html')">
+<div class="test-info">
+<div class="test-name">
+🚗 Test 7
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
+
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafik-test-8" draggable="false" onclick="openPremium('trafiktest8.html')">
+<div class="test-info">
+<div class="test-name">
+🚗 Test 8
+</div>
+<div class="difficulty easy">
+🟢 Kolay
 </div>
 </div>
 <div class="test-arrow">
