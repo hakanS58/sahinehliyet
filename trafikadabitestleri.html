@@ -1264,6 +1264,151 @@ body{
     margin-top:0 !important;
     top:0 !important;
 }
+
+
+.modern-test-card{
+background:#fff;
+border-radius:24px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+text-decoration:none;
+transition:.25s;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.modern-test-card:active{
+transform:scale(.98);
+}
+
+.easy-card{
+border-left:6px solid #22c55e;
+}
+
+.medium-card{
+border-left:6px solid #f59e0b;
+}
+
+.hard-card{
+border-left:6px solid #ef4444;
+}
+
+.test-info{
+display:flex;
+flex-direction:column;
+}
+
+.test-name{
+font-size:24px;
+font-weight:800;
+color:#0f172a;
+margin-bottom:6px;
+}
+
+.test-text{
+font-size:14px;
+color:#64748b;
+line-height:1.5;
+margin-bottom:12px;
+max-width:230px;
+}
+
+.difficulty{
+padding:7px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:700;
+width:max-content;
+}
+
+.easy{
+background:#dcfce7;
+color:#166534;
+}
+
+.medium{
+background:#fef3c7;
+color:#92400e;
+}
+
+.hard{
+background:#fee2e2;
+color:#991b1b;
+}
+
+.test-arrow{
+font-size:20px;
+color:#94a3b8;
+}
+
+.modern-test-card{
+padding:16px;
+border-radius:18px;
+margin-bottom:14px;
+}
+
+.test-name{
+font-size:20px;
+margin-bottom:4px;
+}
+
+.test-text{
+font-size:13px;
+margin-bottom:10px;
+max-width:200px;
+}
+
+.difficulty{
+padding:5px 12px;
+font-size:12px;
+}
+
+.test-arrow{
+font-size:17px;
+}
+
+
+.test-btn.completed{
+border:2px solid #22c55e;
+background:#ecfdf5;
+pointer-events:none;
+opacity:.9;
+}
+
+.test-btn.completed .test-name{
+color:#166534;
+}
+
+.test-btn.completed .test-text{
+color:#15803d;
+}
+
+.test-btn.completed .difficulty{
+display:none;
+}
+
+.test-btn.completed .test-arrow{
+display:flex;
+align-items:center;
+justify-content:center;
+background:#22c55e;
+color:#fff;
+width:38px;
+height:38px;
+border-radius:50%;
+font-size:14px;
+font-weight:800;
+}
+
+.test-btn.completed .test-arrow i{
+display:none;
+}
+
+.test-btn.completed .test-arrow::before{
+content:"✓";
+}
     </style>
   </head>
 
@@ -1288,45 +1433,76 @@ body{
       </div>
 
       <div class="test-list">
-        <a
-          href="javascript:void(0)"
-          class="test-btn" draggable="false" onclick="openPremium('trafikadabitest1.html')"
-          id="trafikadabi-test-1"
-        >
-          👮‍♂️ Test 1
-        </a>
 
-        <a
-         href="javascript:void(0)"
-          class="test-btn" draggable="false" onclick="openPremium('trafikadabitest2.html')"
-          id="trafikadabi-test-2"
-        >
-          👮‍♂️ Test 2
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafikadabi-test-1" draggable="false" onclick="openPremium('trafikadabitest1.html')">
+<div class="test-info">
+<div class="test-name">
+👮‍♂️ Test 1
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
 
-        <a
-          href="javascript:void(0)"
-          class="test-btn" draggable="false" onclick="openPremium('trafikadabitest3.html')"
-          id="trafikadabi-test-3"
-        >
-          👮‍♂️ Test 3
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafikadabi-test-2" draggable="false" onclick="openPremium('trafikadabitest2.html')">
+<div class="test-info">
+<div class="test-name">
+👮‍♂️ Test 2
+</div>
+<div class="difficulty easy">
+🟢 Kolay
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
 
-        <a
-          href="javascript:void(0)"
-          class="test-btn" draggable="false" onclick="openPremium('trafikadabitest4.html')"
-          id="trafikadabi-test-4"
-        >
-          👮‍♂️ Test 4
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafikadabi-test-3" draggable="false" onclick="openPremium('trafikadabitest3.html')">
+<div class="test-info">
+<div class="test-name">
+👮‍♂️ Test 3
+</div>
+<div class="difficulty easy">
+🟢 Kolay
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
 
-        <a
-          href="javascript:void(0)"
-          class="test-btn" draggable="false" onclick="openPremium('trafikadabitest5.html')"
-          id="trafikadabi-test-5"
-        >
-          👮‍♂️ Test 5
-        </a>
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafikadabi-test-4" draggable="false" onclick="openPremium('trafikadabitest4.html')">
+<div class="test-info">
+<div class="test-name">
+👮‍♂️ Test 4
+</div>
+<div class="difficulty hard">
+🔴 Zor
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
+
+<a href="javascript:void(0)" class="test-btn easy-card" id="trafikadabi-test-5" draggable="false" onclick="openPremium('trafikadabitest5.html')">
+<div class="test-info">
+<div class="test-name">
+👮‍♂️ Test 5
+</div>
+<div class="difficulty medium">
+🟠 Orta
+</div>
+</div>
+<div class="test-arrow">
+<i class="fa-solid fa-chevron-right"></i>
+</div>
+</a>
         
         <a href="javascript:void(0)" class="premium-special" draggable="false" onclick="openPremium2('premiumadap.html')">
 <div class="card-icon">
