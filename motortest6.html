@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motor Testi</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1813888095277705"
+     crossorigin="anonymous"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #2563eb;
+        --secondary: #1e3a8a;
+        --bg1: #020617;
+        --bg2: #0f172a;
+        --card: #ffffff;
+        --text: #0f172a;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --warning: #facc15;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        animation: bgMove 12s infinite alternate;
+      }
+
+      @keyframes bgMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      /* HEADER */
+
+      .top-bar {
+        background: rgba(2, 6, 23, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .top-bar h2 {
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+
+      .top-bar a {
+        display: inline-block;
+        margin-top: 6px;
+        padding: 6px 12px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      .top-bar a:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+      /* CONTAINER */
+
+      .quiz-container {
+        max-width: 540px;
+        margin: auto;
+        padding: 18px;
+        animation: fadeUp 0.6s ease;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* AD */
+
+      .ad-area {
+        background: white;
+        border-radius: 14px;
+        padding: 16px;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      /* CARD */
+
+      .card {
+        background: white;
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        animation: cardPop 0.4s ease;
+      }
+
+      @keyframes cardPop {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .card h2 {
+        font-size: 17px;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+
+      /* IMAGE */
+
+      .question-img {
+        width: 100%;
+        border-radius: 14px;
+        margin: 12px 0;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* OPTIONS */
+
+      #options button {
+        width: 100%;
+        padding: 14px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 500;
+        background: #f1f5f9;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      #options button:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .correct {
+        background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+        color: white;
+      }
+
+      .wrong {
+        background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        color: white;
+      }
+
+      /* INFO */
+
+      #infoBox {
+        display: none;
+        background: #fffbeb;
+        border-left: 5px solid var(--warning);
+        padding: 12px;
+        border-radius: 12px;
+        margin-top: 10px;
+        font-size: 14px;
+        animation: fadeUp 0.4s;
+      }
+
+      /* NAV */
+
+      .nav-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .nav-buttons button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .nav-buttons button:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+
+                /* QUIZ TOP BAR */
+
+.quiz-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.quiz-stats {
+  display: flex;
+  gap: 10px;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.exit-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.exit-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* EXIT MODAL */
+
+.exit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.exit-box {
+  background: white;
+  width: 85%;
+  max-width: 320px;
+  padding: 22px;
+  border-radius: 18px;
+  text-align: center;
+  animation: fadeUp 0.3s ease;
+}
+
+.exit-box h3 {
+  margin-bottom: 8px;
+}
+
+.exit-box p {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 15px;
+}
+
+.exit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.exit-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-no {
+  background: #e5e7eb;
+}
+
+.btn-yes {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-yes:hover {
+  opacity: 0.9;
+}
+    </style>
+  </head>
+
+  <body>
+
+          <!-- EXIT MODAL -->
+
+<div id="exitModal" class="exit-modal">
+
+  <div class="exit-box">
+
+    <h3>Testten Çıkmak İstiyor musun?</h3>
+
+    <p>İlerlemen kaybolabilir.</p>
+
+    <div class="exit-actions">
+
+      <button class="btn-no" onclick="closeExit()">Vazgeç</button>
+
+      <button class="btn-yes" onclick="exitTest()">Evet, Çık</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+    <div class="quiz-container">
+      
+
+      <div class="card">
+                    <div class="quiz-top-bar">
+
+  <div class="quiz-stats">
+    <span id="statCorrect">✅ 0</span>
+    <span id="statWrong">❌ 0</span>
+    <span id="statEmpty">⚪ 10</span>
+  </div>
+
+  <button class="exit-btn" onclick="confirmExit()">✖</button>
+
+</div>
+        <h2 id="questionText"></h2>
+
+        <img id="questionImg" class="question-img" style="display: none" />
+
+        <div id="options"></div>
+
+        <div id="infoBox"></div>
+
+        <div class="nav-buttons">
+          <button id="prevBtn">⬅ Geri</button>
+          <button id="nextBtn">İleri ➡</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentQuestion = 0;
+      let userAnswers = Array(10).fill(null);
+
+      const questions = [
+        
+{
+    text: "Seyir halindeki aracın gösterge panelinde, aşağıdaki ikaz ışıklarından hangisinin yanıyor olması, trafik kurallarına uymak şartıyla derhal durulmasını ve kontağın kapatılmasını GEREKTİRMEZ?",
+    options: ["Şarj sistemi ikaz ışığı", "Yağ basıncı ikaz ışığı", "Düşük yakıt seviyesi ikaz ışığı", "Soğutma sıvısı sıcaklığı (hararet) ikaz ışığı"],
+    correct: 2,
+    explanation: "Şarj, yağ ve hararet ikaz lambaları motorun mekanik olarak ani ve büyük bir zarar görmesini engellemek için derhal durmayı gerektirir. Ancak yakıt seviyesinin düşmesi motor arızası değildir; sürücüye en yakın istasyona kadar gitme payı tanır."
+  },
+  {
+    text: "Dizel motorlu bir aracın gösterge panelinde, anahtar açıldığında yanan ve sönmesi beklendikten sonra marş yapılması gereken ikaz ışığı aşağıdakilerden hangisidir?",
+    options: ["Ön ısıtma (kızdırma) bujisi ikaz ışığı", "Enjeksiyon sistemi arıza lambası", "Motor arıza sinyali", "Diferansiyel kilit ikazı"],
+    correct: 0,
+    explanation: "Dizel motorlarda silindir içindeki havayı ısıtarak yanmayı kolaylaştıran kızdırma bujileri bulunur. Bu ışık sönmeden marş yapmak motorun zor çalışmasına ve yıpranmasına neden olur."
+  },
+  {
+    text: "Aracın periyodik bakımı yapılırken aşağıdaki filtrelerden hangisinin değiştirilmemesi, motorun emiş performansını düşürerek yakıt tüketiminin artmasına ve zengin karışımla çalışmasına neden olur?",
+    options: ["Yağ filtresi", "Hava filtresi", "Polen filtresi", "Yakıt filtresi"],
+    correct: 1,
+    explanation: "Hava filtresi motora giren havayı temizler. Tıkandığında motor yeterli hava ememez, çekişten düşer ve daha fazla yakıt yakarak 'zengin karışım' ile çalışır. Polen filtresi ise sadece klima/kabin içi havayla ilgilidir."
+  },
+  {
+    text: "Motoru çalıştırırken marş yapıldığında, marş motoru yavaş dönüyor veya hiç dönmüyorsa, öncelikle aşağıdaki araç parçalarından hangisinin kontrol edilmesi gerekir?",
+    options: ["Buji kablolarının", "Akümülatörün (Akünün)", "Endüksiyon bobininin", "Vantilatör kayışının"],
+    correct: 1,
+    explanation: "Marş motorunun dönmesi için gereken yüksek akımı akü sağlar. Akü zayıflamışsa (deşarj olmuşsa) veya kutup başları gevşemişse marş motoru ya hiç dönmez ya da çok yavaş döner."
+  },
+  {
+    text: "Motor çalışırken gösterge panelindeki yağ basıncı ikaz ışığı yanıyorsa, sürücünün aşağıdakilerden hangisini yapması gerekir?",
+    options: ["Motor yağını kontrol etmek için hızını artırmalıdır", "Aracı hemen durdurmalı ve motoru stop etmelidir", "Yola düşük viteste devam etmelidir", "Radyatöre soğutma suyu eklemelidir"],
+    correct: 1,
+    explanation: "Yağ lambası yanıyorsa motor yağlama yapmıyor demektir. Yağsız kalan motor parçaları aşırı sürtünmeden dolayı birbirine kaynar ve motor yatak sarar (kilitlenir). Bu yüzden araç derhal durdurulmalıdır."
+  },
+  {
+    text: "Dört zamanlı bir benzinli motorda, emilen yakıt-hava karışımının buji ile ateşlendiği ve mekanik enerjinin üretildiği zaman aşağıdakilerden hangisidir?",
+    options: ["Emme zamanı", "Sıkıştırma zamanı", "Ateşleme (İş) zamanı", "Egzoz zamanı"],
+    correct: 2,
+    explanation: "Dört zaman sırasıyla: Emme, Sıkıştırma, Ateşleme (İş) ve Egzoz şeklindedir. Gücün üretildiği, pistonu aşağı iten patlamanın gerçekleştiği zaman 3. zaman olan Ateşleme (İş) zamanıdır."
+  },
+  {
+    text: "Kışın aşırı soğuktan dolayı motor soğutma suyunun donmasını engellemek ve yazın motorun kaynama noktasını yükselterek harareti önlemek amacıyla soğutma suyuna ne katılır?",
+    options: ["Motor yağı", "Antifriz", "Akü asidi", "Hidrolik sıvısı"],
+    correct: 1,
+    explanation: "Antifriz, suyun donma noktasını düşürürken kaynama noktasını yükseltir. Ayrıca motor bloğu içinde pas, kireç ve korozyon oluşumunu da engeller."
+  },
+  {
+    text: "Aracın el freni çekili unutularak seyredilmesi ve uzun süre bu şekilde yola devam edilmesi, öncelikle aracın hangi bölümünde hasara veya aşırı ısınmaya neden olur?",
+    options: ["Debriyaj balatasında", "Fren balatalarında ve kampanalarda", "Şanzıman dişlilerinde", "Diferansiyel millerinde"],
+    correct: 1,
+    explanation: "El freni arka tekerlekleri kilitler. Çekili unutulduğunda araç gitmeye zorlanırken arka fren balataları sürekli sürrtünür, aşırı ısınır, yanar ve fren sisteminin tamamen tutmamasına yol açar."
+  },
+  {
+    text: "Aracın lastikleriyle ilgili olarak, lastik hava basıncının yasal ve fabrikasyon değerinden daha az (düşük) olması durumunda aşağıdakilerden hangisi meydana gelir?",
+    options: ["Lastikler sadece ortadan aşınır", "Yakıt tüketimi azalır", "Direksiyon sürüş esnasında hafifler", "Lastiklerin kenar kısımları aşınır ve yakıt tüketimi artırır"],
+    correct: 3,
+    explanation: "Lastik havası düşükse lastik tabanı yere tam oturmaz, kenarlardan yayılır ve kenarları aşınır. Yere sürtünme yüzeyi arttığı için de motor daha çok zorlanır ve yakıt tüketimi artar."
+  },
+  {
+    text: "Aşağıdakilerden hangisi, motorda silindir bloğu veya silindir kapağında meydana gelen çatlakların doğrudan bir sonucudur?",
+    options: ["Motor yağının vizkozitesinin (kalınlığının) kendi kendine artması", "Fren hidrolik sıvısının motor suyuna karışması", "Motor yağına soğutma suyunun karışması (Yağın bozulması)", "Akü hidrolik seviyesinin hızla azalması"],
+    correct: 2,
+    explanation: "Silindir bloğu veya kapağındaki çatlaklar, yan yana kanallardan geçen motor yağı ile motor soğutma suyunun birbirine karışmasına neden olur. Bu durum yağın yapısını (tahin kıvamına gelerek) bozar ve motora büyük zarar verir."
+  }
+  
+      ];
+
+      const questionText = document.getElementById("questionText");
+      const optionsDiv = document.getElementById("options");
+      const infoBox = document.getElementById("infoBox");
+      const questionImg = document.getElementById("questionImg");
+
+      function loadQuestion() {
+        const q = questions[currentQuestion];
+        questionText.textContent = `${currentQuestion + 1}. ${q.text}`;
+        optionsDiv.innerHTML = "";
+        infoBox.style.display = "none";
+
+        if (q.image) {
+          questionImg.src = q.image;
+          questionImg.style.display = "block";
+        } else {
+          questionImg.style.display = "none";
+        }
+
+        q.options.forEach((opt, i) => {
+          const btn = document.createElement("button");
+          btn.textContent = opt;
+
+          if (userAnswers[currentQuestion] !== null) {
+            btn.disabled = true;
+            if (i === q.correct) btn.classList.add("correct");
+            if (i === userAnswers[currentQuestion] && i !== q.correct)
+              btn.classList.add("wrong");
+          }
+
+          btn.onclick = () => selectAnswer(i, btn);
+          optionsDiv.appendChild(btn);
+        });
+      }
+
+      function selectAnswer(i, btn) {
+        if (userAnswers[currentQuestion] !== null) return;
+        userAnswers[currentQuestion] = i;
+        const q = questions[currentQuestion];
+
+        document
+          .querySelectorAll("#options button")
+          .forEach((b) => (b.disabled = true));
+
+        if (i === q.correct) {
+          btn.classList.add("correct");
+          setTimeout(nextQuestion, 700);
+        } else {
+          btn.classList.add("wrong");
+          document
+            .querySelectorAll("#options button")
+            [q.correct].classList.add("correct");
+          infoBox.textContent = q.explanation;
+          infoBox.style.display = "block";
+        }
+        updateStats();
+      }
+
+      function nextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          loadQuestion();
+        } else {
+          showResult();
+        }
+      }
+      function prevQuestion() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          loadQuestion();
+        }
+      }
+      function showResult() {
+
+                    // Sadece test bitince görev artır
+let d = JSON.parse(localStorage.getItem("dailyTasks"));
+
+if(d && !window.testCounted){
+
+  d.tests++;
+
+  localStorage.setItem("dailyTasks", JSON.stringify(d));
+
+  window.testCounted = true; // tekrar saymasın
+}
+        let correct = 0;
+        let wrong = 0;
+        let empty = 0;
+
+        userAnswers.forEach((answer, i) => {
+          if (answer === null) {
+            empty++;
+          } else if (answer === questions[i].correct) {
+            correct++;
+          } else {
+            wrong++;
+          }
+
+        });
+
+        const total = questions.length;
+        const successRate = Math.round((correct / total) * 100);
+
+        document.querySelector(".quiz-container").innerHTML = `
+    <div class="card" style="text-align:center">
+      <h2>Test Sonucu</h2>
+
+      <p>✅ Doğru: <strong>${correct}</strong></p>
+      <p>❌ Yanlış: <strong>${wrong}</strong></p>
+      <p>⚪ Boş: <strong>${empty}</strong></p>
+
+      <hr>
+
+      <p>Başarı Oranı: <strong>%${successRate}</strong></p>
+<p>Tebrikler bu testi çözerek XP kazandınız! Seviyenizi hesabınızda görebilirsiniz.</p>
+      <button 
+        onclick="window.location.href='katagoriler.html'"
+        style="
+          margin-top:15px;
+          padding:12px 25px;
+          border:none;
+          border-radius:12px;
+          background:#2a5298;
+          color:white;
+          font-size:16px;
+          cursor:pointer;
+        ">
+        Bitir
+      </button>
+    </div>
+  `;
+             function saveTestResult(testKey, correct, wrong, empty, success) {
+              let user = JSON.parse(localStorage.getItem("user"));
+
+              if (!user) {
+                user = {
+                  nickname: "Misafir",
+                  xp:0,
+      level:1,
+      solved:0,
+      tests:{}
+                };
+              }
+
+              const percent = Math.round((correct / 10) * 100);
+              let scorePercent = Math.round((correct / total) * 100);
+
+              user.xp += scorePercent;
+  if(!user.tests) user.tests = {};
+
+  user.solved++;
+
+  user.xp += successRate;
+              localStorage.setItem("user", JSON.stringify(user));
+
+              user.tests[testKey] = {
+                correct,
+                wrong,
+                empty,
+                percent: successRate
+              };
+
+              localStorage.setItem("user", JSON.stringify(user));
+            }
+            saveTestResult("motor-test-6", correct, wrong, empty, successRate);
+          }
+
+      function finishTest(result) {
+        const user = JSON.parse(localStorage.getItem("user")) || {};
+        user.tests = user.tests || {};
+        user.inProgress = user.inProgress || {};
+
+        user.tests["motor-test-6"] = result; // yeni sonuç
+        delete user.inProgress["motor-test-6"]; // yarım kalma durumu silinir
+
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+
+      document.getElementById("nextBtn").onclick = nextQuestion;
+      document.getElementById("prevBtn").onclick = prevQuestion;
+
+      function updateStats() {
+
+  let correct = 0;
+  let wrong = 0;
+  let empty = 0;
+
+  userAnswers.forEach((answer, i) => {
+
+    if (answer === null) {
+      empty++;
+    } 
+    else if (answer === questions[i].correct) {
+      correct++;
+    } 
+    else {
+      wrong++;
+    }
+
+  });
+
+  document.getElementById("statCorrect").textContent = "✅ " + correct;
+  document.getElementById("statWrong").textContent = "❌ " + wrong;
+  document.getElementById("statEmpty").textContent = "⚪ " + empty;
+}
+
+function confirmExit() {
+  document.getElementById("exitModal").style.display = "flex";
+}
+
+function closeExit() {
+  document.getElementById("exitModal").style.display = "none";
+}
+
+function exitTest() {
+  window.location.href = "katagoriler.html";
+}
+
+
+
+          loadQuestion();
+    </script>
+  </body>
+</html>
