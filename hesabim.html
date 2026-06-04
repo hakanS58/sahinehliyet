@@ -1648,6 +1648,29 @@ body{
     top:0 !important;
 }
 
+.test-category{
+  margin-bottom:15px;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.category-header{
+  padding:15px;
+  background:#f8fafc;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.category-content{
+  display:none;
+  padding:10px;
+}
+
+.category-content.active{
+  display:block;
+}
+
     </style>
   </head>
 
@@ -2054,7 +2077,72 @@ function loadTests() {
     return;
   }
 
-  Object.keys(user.tests).forEach((k) => {
+  const categories = {
+    trafik: [],
+    motor: [],
+    ilkyardim: [],
+    trafikadabi: [],
+    deneme: [],
+    premiumtrafik: [],
+    premiummotor: [],
+    premiumilkyardim: [],
+    premiumtrafikadabi: [],
+    premiumdeneme: []
+  };
+
+  Object.keys(user.tests).forEach(key => {
+
+    if(key.startsWith("premium-trafik-test"))
+      categories.premiumtrafik.push(key);
+
+    else if(key.startsWith("premium-motor-test"))
+      categories.premiummotor.push(key);
+
+    else if(key.startsWith("premium-ilkyardim-test"))
+      categories.premiumilkyardim.push(key);
+
+    else if(key.startsWith("premium-trafikadabi-test"))
+      categories.premiumtrafikadabi.push(key);
+
+    else if(key.startsWith("premium-deneme-test"))
+      categories.premiumdeneme.push(key);
+
+    else if(key.startsWith("trafik-test"))
+      categories.trafik.push(key);
+
+    else if(key.startsWith("motor-test"))
+      categories.motor.push(key);
+
+    else if(key.startsWith("ilkyardim-test"))
+      categories.ilkyardim.push(key);
+
+    else if(key.startsWith("trafikadabi-test"))
+      categories.trafikadabi.push(key);
+
+    else if(key.startsWith("deneme-test"))
+      categories.deneme.push(key);
+
+  });
+
+  function createCategory(title, tests){
+
+  if(tests.length === 0) return;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "test-category";
+
+  const header = document.createElement("div");
+  header.className = "category-header";
+  header.textContent = title;
+
+  const content = document.createElement("div");
+  content.className = "category-content";
+
+  header.onclick = () => {
+    content.classList.toggle("active");
+  };
+
+  tests.forEach(k => {
 
     const t = user.tests[k];
 
@@ -2072,12 +2160,33 @@ function loadTests() {
     btn.className = "retry-btn";
     btn.textContent = "Tekrar Çöz";
 
-    // 🔥 YENİ AKIŞ BURADA
     btn.onclick = () => retryTest(k);
 
     div.appendChild(btn);
-    testBox.appendChild(div);
+
+    content.appendChild(div);
+
   });
+
+  wrapper.appendChild(header);
+  wrapper.appendChild(content);
+
+  testBox.appendChild(wrapper);
+
+}
+
+  createCategory("🚦 Trafik Testleri (Dokun)", categories.trafik);
+  createCategory("🔧 Motor Testleri (Dokun)", categories.motor);
+  createCategory("🩺 İlk Yardım Testleri (Dokun)", categories.ilkyardim);
+  createCategory("🤝 Trafik Adabı Testleri (Dokun)", categories.trafikadabi);
+  createCategory("🏁 Deneme Sınavları (Dokun)", categories.deneme);
+
+  createCategory("⭐ Premium Trafik (Dokun)", categories.premiumtrafik);
+  createCategory("⭐ Premium Motor (Dokun)", categories.premiummotor);
+  createCategory("⭐ Premium İlk Yardım (Dokun)", categories.premiumilkyardim);
+  createCategory("⭐ Premium Trafik Adabı (Dokun)", categories.premiumtrafikadabi);
+  createCategory("⭐ Premium Deneme (Dokun)", categories.premiumdeneme);
+
 }
 
 
@@ -2087,30 +2196,45 @@ const testMap = {
   "trafik-test-3": "trafiktest3.html",
   "trafik-test-4": "trafiktest4.html",
   "trafik-test-5": "trafiktest5.html",
+  "trafik-test-6": "trafiktest6.html",
+  "trafik-test-7": "trafiktest7.html",
+  "trafik-test-8": "trafiktest8.html",
 
   "motor-test-1": "motortest1.html",
   "motor-test-2": "motortest2.html",
   "motor-test-3": "motortest3.html",
   "motor-test-4": "motortest4.html",
   "motor-test-5": "motortest5.html",
+  "motor-test-6": "motortest6.html",
+  "motor-test-7": "motortest7.html",
+  "motor-test-8": "motortest8.html",
 
   "ilkyardim-test-1": "ilkyardimtest1.html",
   "ilkyardim-test-2": "ilkyardimtest2.html",
   "ilkyardim-test-3": "ilkyardimtest3.html",
   "ilkyardim-test-4": "ilkyardimtest4.html",
   "ilkyardim-test-5": "ilkyardimtest5.html",
+  "ilkyardim-test-6": "ilkyardimtest6.html",
+  "ilkyardim-test-7": "ilkyardimtest7.html",
+  "ilkyardim-test-8": "ilkyardimtest8.html",
 
   "trafikadabi-test-1": "trafikadabitest1.html",
   "trafikadabi-test-2": "trafikadabitest2.html",
   "trafikadabi-test-3": "trafikadabitest3.html",
   "trafikadabi-test-4": "trafikadabitest4.html",
   "trafikadabi-test-5": "trafikadabitest5.html",
+  "trafikadabi-test-6": "trafikadabitest6.html",
+  "trafikadabi-test-7": "trafikadabitest7.html",
+  "trafikadabi-test-8": "trafikadabitest8.html",
 
   "deneme-test-1": "deneme1.html",
   "deneme-test-2": "deneme2.html",
   "deneme-test-3": "deneme3.html",
   "deneme-test-4": "deneme4.html",
   "deneme-test-5": "deneme5.html",
+  "deneme-test-6": "deneme6.html",
+  "deneme-test-7": "deneme7.html",
+  "deneme-test-8": "deneme8.html",
 
   "premium-deneme-test-1": "premiumdenemetest1.html",
   "premium-deneme-test-2": "premiumdenemetest2.html",
