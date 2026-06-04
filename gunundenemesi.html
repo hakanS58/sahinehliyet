@@ -403,9 +403,10 @@ let available =
 questionBank.filter(q => !used.includes(q.id));
 
 // hepsi bittiyse sıfırla
-if(available.length < 50){
+if(available.length === 0){
 
 used = [];
+
 localStorage.setItem(
 "usedQuestions",
 JSON.stringify([])
