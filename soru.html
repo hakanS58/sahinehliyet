@@ -1410,6 +1410,13 @@ function load(){
 
     });
 
+      messageDiv.innerHTML = linkify(data.answer);
+      function linkify(text) {
+  return text.replace(
+    /(https?:\/\/[^\s]+)/g,
+    '<a href="$1" target="_blank">$1</a>'
+  );
+}
 
     // HAK HESABI (ASIL ÖNEMLİ KISIM)
     const remain = MAX - active;
