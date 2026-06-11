@@ -814,9 +814,11 @@ body{
 
     <!-- Bizi Değerlendir -->
 
-<a href="https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak"
-   target="_blank"
-   class="card" draggable="false">
+    <a onclick="openPlayStore()"
+       target="_blank"
+       class="slide" draggable="false">
+      <img src="duyuruplaystore.png" draggable="false">
+   
 
   <div class="icon-box">
     <i class="fa-solid fa-star"></i>
@@ -824,8 +826,8 @@ body{
 
   <h3>Uygulamayı Değerlendir</h3>
   <p>Daha Fazla Gelişebilmemiz İçin Yardımınıza İhtiyacımız Var. Uygulamaya 5 Yıldız Vererek Bize Destek Olabilirsiniz.</p>
+ </a>
 
-</a>
 
 
   </div>
@@ -857,6 +859,17 @@ document.addEventListener("paste", e => e.preventDefault());
 
 /* MOBİL UZUN BASMA */
 document.addEventListener("touchstart", function(){}, {passive:true});
+
+function openPlayStore(){
+  const url = "https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak";
+  // Android WebView kontrolü
+  if(window.Android){
+    window.Android.openExternal(url);
+  }else{
+
+    window.open(url, "_blank");
+  }
+}
 
 </script>
 
