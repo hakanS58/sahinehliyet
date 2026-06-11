@@ -1419,7 +1419,7 @@ function load(){
   ? `
     <div class="answer">Cevap: ${d.answer}</div>
 
-    <button class="rate-btn" onclick="openPlayStore()">
+    <button class="rate-btn" draggable="false" onclick="openPlayStore()">
       ⭐ 5 Yıldız Ver
     </button>
   `
@@ -1517,10 +1517,15 @@ document.addEventListener("paste", e => e.preventDefault());
 /* MOBİL UZUN BASMA */
 document.addEventListener("touchstart", function(){}, {passive:true});
 
-
 function openPlayStore(){
   const url = "https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak";
-  window.open(url, "_blank");
+  // Android WebView kontrolü
+  if(window.Android){
+    window.Android.openExternal(url);
+  }else{
+
+    window.open(url, "_blank");
+  }
 }
 </script>
 
