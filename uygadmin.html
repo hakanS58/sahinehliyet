@@ -97,6 +97,14 @@ db.collection("questions")
         <textarea id="a_${doc.id}"
         placeholder="Cevap yaz..."></textarea>
 
+<button onclick="addRateText('${doc.id}')">
+  ⭐ 5 Yıldız Mesajı Ekle
+</button>
+
+<button onclick="addLink('${doc.id}')">
+  🔗 Play Store Linki Ekle
+</button>
+
         <button onclick="reply('${doc.id}')">
           Gönder
         </button>
@@ -127,6 +135,18 @@ async function reply(id){
 
     });
 
+}
+
+function addRateText(id){
+  const ta = document.getElementById("a_"+id);
+
+  ta.value += "\n\n⭐ Bize destek olmak için uygulamamıza 5 yıldız vermeyi unutma!";
+}
+
+function addLink(id){
+  const ta = document.getElementById("a_"+id);
+
+  ta.value += "\nhttps://play.google.com/store/apps/details?id=com.hakan.ehliyetmilyoneri";
 }
 
 </script>
