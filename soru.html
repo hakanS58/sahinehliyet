@@ -1143,6 +1143,22 @@ body{
     margin-top:0 !important;
     top:0 !important;
 }
+
+.rate-btn{
+  margin-top:8px;
+  background:#fbbf24;
+  color:black;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+  width:100%;
+}
+
+.rate-btn:hover{
+  background:#f59e0b;
+}
 </style>
 </head>
 
@@ -1400,8 +1416,14 @@ function load(){
 
         ${
           d.answer
-          ? `<div class="answer">Cevap: ${d.answer}</div>`
-          : `<div class="wait">⏳ Bekleniyor</div>`
+  ? `
+    <div class="answer">Cevap: ${d.answer}</div>
+
+    <button class="rate-btn" onclick="openPlayStore()">
+      ⭐ 5 Yıldız Ver
+    </button>
+  `
+  : `<div class="wait">⏳ Bekleniyor</div>`
         }
 
       `;
@@ -1495,6 +1517,11 @@ document.addEventListener("paste", e => e.preventDefault());
 /* MOBİL UZUN BASMA */
 document.addEventListener("touchstart", function(){}, {passive:true});
 
+
+function openPlayStore(){
+  const url = "https://play.google.com/store/apps/details?id=com.hakanokul.sahinehliyet&hl=en-US&ah=tGtxOkLIe13CFn0o23GJ5FwVrak";
+  window.open(url, "_blank");
+}
 </script>
 
 </body>
