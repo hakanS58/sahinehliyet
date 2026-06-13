@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Ehliyet Topluluğu</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body style="display:none;">
+
+<style>
+    *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f1117;
+height:100vh;
+overflow:hidden;
+color:white;
+}
+
+.app{
+height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+header{
+height:70px;
+background:#161a23;
+display:flex;
+align-items:center;
+padding:15px;
+border-bottom:1px solid #232936;
+}
+
+.logo{
+width:45px;
+height:45px;
+background:#2f6df6;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+margin-right:12px;
+}
+
+header h3{
+font-size:16px;
+}
+
+header span{
+font-size:12px;
+color:#8f97a8;
+}
+
+.chatArea{
+flex:1;
+overflow-y:auto;
+min-height:0; /* 🔥 KRİTİK FIX */
+padding:15px;
+}
+
+.message{
+display:flex;
+margin-bottom:15px;
+}
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+background:#2f6df6;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+margin-right:10px;
+flex-shrink:0;
+}
+
+.bubble{
+background:#1b202b;
+padding:12px;
+border-radius:14px;
+max-width:80%;
+}
+
+.name{
+font-size:13px;
+font-weight:bold;
+color:#5c8dff;
+margin-bottom:5px;
+}
+
+.text{
+font-size:14px;
+line-height:1.4;
+}
+
+.bottomBar{
+padding:10px;
+display:flex;
+gap:10px;
+background:#161a23;
+border-top:1px solid #232936;
+}
+
+.bottomBar input{
+flex:1;
+height:50px;
+border:none;
+outline:none;
+background:#1d2330;
+border-radius:15px;
+padding:0 15px;
+color:white;
+font-size:15px;
+}
+
+.bottomBar button{
+width:50px;
+height:50px;
+border:none;
+border-radius:15px;
+background:#2f6df6;
+color:white;
+font-size:18px;
+}
+
+#replyBox{
+display:none;
+padding:10px 15px;
+background:#1d2330;
+border-top:1px solid #2c3444;
+font-size:13px;
+color:#9db7ff;
+}
+
+#usernameModal{
+position:fixed;
+inset:0;
+background:#000000d9;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modalBox{
+width:90%;
+max-width:350px;
+background:#161a23;
+padding:25px;
+border-radius:20px;
+}
+
+.modalBox h2{
+margin-bottom:10px;
+}
+
+.modalBox p{
+color:#a6afc0;
+margin-bottom:15px;
+}
+
+.modalBox input{
+width:100%;
+height:50px;
+background:#1d2330;
+border:none;
+border-radius:12px;
+padding:0 15px;
+color:white;
+margin-bottom:15px;
+}
+
+.modalBox button{
+width:100%;
+height:50px;
+background:#2f6df6;
+border:none;
+border-radius:12px;
+color:white;
+font-size:15px;
+font-weight:bold;
+}
+
+.communityInfo{
+padding:10px 15px;
+font-size:13px;
+color:#9aa3b2;
+background:#131821;
+border-top:1px solid #232936;
+}
+
+#rulesModal{
+position:fixed;
+inset:0;
+background:#000000d8;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.rulesBox{
+width:90%;
+max-width:380px;
+background:#161a23;
+padding:25px;
+border-radius:20px;
+}
+
+.rulesBox h2{
+margin-bottom:15px;
+}
+
+.rulesBox ul{
+padding-left:20px;
+margin-bottom:20px;
+}
+
+.rulesBox li{
+margin-bottom:10px;
+color:#b7c0d0;
+font-size:14px;
+}
+
+.rulesBox button{
+width:100%;
+height:50px;
+border:none;
+border-radius:12px;
+background:#2f6df6;
+color:white;
+font-weight:bold;
+}
+
+#replyBox{
+display:none;
+align-items:center;
+justify-content:space-between;
+padding:10px 15px;
+background:#1d2330;
+border-top:1px solid #2c3444;
+}
+
+#replyText{
+font-size:13px;
+color:#9db7ff;
+}
+
+#cancelReply{
+background:none;
+border:none;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.replyBtn{
+width:34px;
+height:34px;
+border:none;
+background:#1d2330;
+color:#9db7ff;
+border-radius:10px;
+margin-left:8px;
+cursor:pointer;
+flex-shrink:0;
+}
+
+#roomPage{
+position:fixed;
+inset:0;
+background:#0f1117;
+color:white;
+display:flex;
+flex-direction:column;
+padding:20px;
+overflow:hidden; /* 🔥 değişti */
+}
+
+.roomHeader{
+text-align:left;
+margin-top:10px;
+margin-bottom:20px;
+}
+
+.roomHeader h2{
+font-size:22px;
+margin-bottom:5px;
+}
+
+.roomHeader p{
+color:#8f97a8;
+font-size:13px;
+}
+
+.roomCard{
+width:100%;
+display:flex;
+align-items:center;
+gap:15px;
+padding:15px;
+background:#161a23;
+border-radius:15px;
+cursor:pointer;
+border:1px solid #232936;
+transition:0.2s;
+margin-bottom:10px;
+}
+
+.roomCard:hover{
+transform:scale(1.02);
+}
+
+.roomCard i{
+font-size:20px;
+color:#2f6df6;
+}
+
+.roomCard h3{
+font-size:15px;
+}
+
+.roomCard span{
+font-size:12px;
+color:#8f97a8;
+}
+.exitBtn{
+width:40px;
+height:40px;
+border:none;
+background:#1d2330;
+color:white;
+border-radius:10px;
+margin-right:10px;
+}
+
+#toast{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#1d2330;
+color:white;
+padding:12px 18px;
+border-radius:12px;
+font-size:14px;
+opacity:0;
+pointer-events:none;
+transition:0.3s;
+z-index:9999;
+}
+
+#toast.show{
+opacity:1;
+transform:translateX(-50%) translateY(-10px);
+}
+
+.profileBtn{
+width:40px;
+height:40px;
+border:none;
+background:#1d2330;
+color:white;
+border-radius:10px;
+margin-left:auto;
+cursor:pointer;
+}
+
+#profileModal{
+position:fixed;
+inset:0;
+background:#000000cc;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.profileBox{
+width:90%;
+max-width:350px;
+background:#161a23;
+padding:20px;
+border-radius:20px;
+text-align:center;
+color:white;
+}
+
+.avatarBig{
+width:80px;
+height:80px;
+border-radius:50%;
+background:#2f6df6;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+margin:10px auto;
+}
+
+.avatarList{
+display:flex;
+justify-content:center;
+gap:10px;
+margin:15px 0;
+}
+
+.avatarList div{
+width:40px;
+height:40px;
+border-radius:50%;
+background:#1d2330;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+.avatarList{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+margin:15px 0;
+}
+
+.avatarList div{
+width:45px;
+height:45px;
+border-radius:50%;
+background:#1d2330;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.avatarList div:hover{
+transform:scale(1.1);
+background:#2f6df6;
+}
+
+.avatar{
+width:35px;
+height:35px;
+border-radius:50%;
+background:#2f6df6;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:16px;
+color:white;
+flex-shrink:0;
+}
+
+.profileBox button{
+width:100%;
+height:45px;
+border:none;
+border-radius:12px;
+background:#1d2330;
+color:#9db7ff;
+font-size:14px;
+font-weight:500;
+cursor:pointer;
+margin-top:10px;
+transition:0.2s;
+}
+
+.pinnedNotice{
+position:sticky;
+top:0;
+z-index:10;
+background:#1d2330;
+border:1px solid #2f6df6;
+color:#cfe1ff;
+padding:12px 14px;
+border-radius:12px;
+font-size:12.5px;
+line-height:1.4;
+margin-bottom:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+body{
+background:#0f1117;
+height:100vh;
+overflow:hidden; /* 🔥 kritik */
+color:white;
+}
+#chatApp{
+height:100vh;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
+html, body{
+height:100%;
+overflow:hidden;
+}
+
+*{
+-webkit-user-select:none;
+-ms-user-select:none;
+user-select:none;
+-webkit-touch-callout:none; /* mobil uzun basma menüsü */
+}
+
+#sendBtn{
+background:#2f6df6;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+transition:0.2s;
+}
+
+#sendBtn:active{
+transform:scale(0.92);
+}
+
+.avatarBig i,
+.avatar i{
+font-size:18px;
+color:white;
+}
+</style>
+
+<div id="usernameModal">
+
+    <div class="modalBox">
+        <h2>Topluluğa Katıl</h2>
+
+        <p>Kullanıcı adını belirle</p>
+
+        <input type="text" id="usernameInput" placeholder="Kullanıcı Adı">
+
+        <button onclick="saveUsername()">
+            Sohbete Katıl
+        </button>
+    </div>
+
+</div>
+
+<div id="rulesModal">
+
+    <div class="rulesBox">
+
+        <h2>Topluluk Kuralları</h2>
+
+        <ul>
+            <li>Saygılı olun.</li>
+            <li>Küfür ve hakaret yasaktır.</li>
+            <li>Reklam yapmak yasaktır.</li>
+            <li>Kişisel bilgilerinizi paylaşmayın.</li>
+            <li>Konu dışı spam mesaj göndermeyin.</li>
+        </ul>
+
+        <button id="acceptRules">
+            Kuralları Kabul Ediyorum
+        </button>
+
+    </div>
+
+</div>
+
+<div id="roomPage">
+ <button class="profileBtn" onclick="openProfile()">
+<i class="fa-solid fa-user"></i>
+</button>   
+<button class="exitBtn" onclick="exitRoom2()">
+<i class="fa-solid fa-arrow-left"></i>
+</button>
+
+    <div class="roomHeader">
+        <h2>Topluluk Odaları</h2>
+        <p>Sohbete katılmak için bir oda seç</p>
+    </div>
+
+    <div class="roomCard" onclick="enterRoom('ehliyet')">
+        <i class="fa-solid fa-comments"></i>
+        <div>
+            <h3>Ehliyet Topluluğu</h3>
+            <span>Genel sohbet odası</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="app" id="chatApp" style="display:none;">
+
+    <header>
+<button class="exitBtn" onclick="exitRoom()">
+<i class="fa-solid fa-arrow-left"></i>
+</button>
+        <div class="logo">
+            <i class="fa-solid fa-comments"></i>
+        </div>
+
+        <div>
+            <h3>Ehliyet Topluluğu</h3>
+            <span>Canlı Sohbet</span>
+            <span id="onlineCount">
+    Sohbette: 0 kişi
+</span>
+        </div>
+
+    </header>
+
+
+    <div class="chatArea" id="chatArea">
+<div class="pinnedNotice">
+⚠️ Lütfen sohbet kurallarına uyun. Küfür, argo, hakaret ve reklam içerikli mesajlar yasaktır.  
+İhlaller yasal sonuçlara yol açabilir.
+</div>
+        <div class="message">
+
+            <div class="avatar">
+           <p>A</p>
+          </div>
+
+            <div class="bubble">
+                <div class="name">Admin</div>
+                <div class="text">
+                    Hoş geldiniz 🚗
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="replyBox">
+
+    <div id="replyText"></div>
+
+    <button id="cancelReply">
+        ✕
+    </button>
+
+</div>
+
+<div class="communityInfo">
+🚗 Sorularınızı sorabilir ve diğer ehliyet adaylarına yardımcı olabilirsiniz.
+</div>
+    <div class="bottomBar">
+
+        <input
+        type="text"
+        id="messageInput"
+        placeholder="Mesaj yaz...">
+
+        <button id="sendBtn">
+     <i class="fa-solid fa-comment-dots"></i>
+</button>
+
+    </div>
+
+</div>
+<div id="profileModal">
+
+    <div class="profileBox">
+
+        <h2>Profil</h2>
+
+        <div class="avatarBig" id="avatarBig">A</div>
+
+        <p id="profileName"></p>
+
+        <h3>Profil Seç</h3>
+
+<div class="avatarList">
+
+    <div onclick="setAvatar('user')">
+<i class="fa-solid fa-user"></i>
+</div>
+
+<div onclick="setAvatar('user-tie')">
+<i class="fa-solid fa-user-tie"></i>
+</div>
+
+<div onclick="setAvatar('user-graduate')">
+<i class="fa-solid fa-user-graduate"></i>
+</div>
+
+<div onclick="setAvatar('user-astronaut')">
+<i class="fa-solid fa-user-astronaut"></i>
+</div>
+
+<div onclick="setAvatar('user-shield')">
+<i class="fa-solid fa-user-shield"></i>
+</div>
+
+<div onclick="setAvatar('car')">
+<i class="fa-solid fa-car"></i>
+</div>
+
+</div>
+
+        <button onclick="closeProfile()">Kapat</button>
+
+    </div>
+
+</div>
+<div id="toast"></div>
+<script>
+const modal = document.getElementById("usernameModal");
+const usernameInput = document.getElementById("usernameInput");
+history.replaceState({page:"rooms"}, "", "#rooms");
+const rulesModal =
+document.getElementById("rulesModal");
+
+const acceptRules =
+document.getElementById("acceptRules");
+
+const replyBox =
+document.getElementById("replyBox");
+
+const replyText =
+document.getElementById("replyText");
+
+const cancelReply =
+document.getElementById("cancelReply");
+
+window.onload = function(){
+    initApp();
+};
+let replyMessage = null;
+
+let username = localStorage.getItem("username");
+
+function checkEntry(){
+
+    username = localStorage.getItem("username");
+    const rulesAccepted = localStorage.getItem("rulesAccepted");
+
+    // username yoksa
+    if(!username){
+        modal.style.display = "flex";
+        document.getElementById("roomPage").style.display = "none";
+        document.getElementById("chatApp").style.display = "none";
+        return;
+    }
+
+    // kurallar yoksa
+    if(!rulesAccepted){
+        rulesModal.style.display = "flex";
+        document.getElementById("roomPage").style.display = "none";
+        document.getElementById("chatApp").style.display = "none";
+        return;
+    }
+
+    // giriş tamam ama oda seçilmemişse
+    const room = localStorage.getItem("room");
+
+    if(!room){
+        document.getElementById("roomPage").style.display = "flex";
+        history.pushState({page:"rooms"}, "", "#rooms");
+        document.getElementById("chatApp").style.display = "none";
+        return;
+    }
+
+    // her şey tamam
+    modal.style.display = "none";
+    rulesModal.style.display = "none";
+    document.getElementById("roomPage").style.display = "none";
+    document.getElementById("chatApp").style.display = "flex";
+}
+
+function saveUsername(){
+
+    let value = usernameInput.value.trim();
+
+    if(value.length < 3){
+        showToast("Kullanıcı adı en az 3 karakter olmalı");
+        return;
+    }
+     if(value.length > 20){
+        showToast("Kullanıcı adı en fazla 20 karakter olabilir");
+        return;
+    }
+
+    // özel karakter kontrolü
+   const regex = /^[a-zA-Z0-9ğüşöçıİĞÜŞÖÇ]+$/;
+
+    if(!regex.test(value)){
+        showToast("Özel karakter kullanamazsın. Boşluk da dahil.");
+        return;
+    }
+
+    localStorage.setItem("username", value);
+
+    username = value;
+
+modal.style.display = "none";
+checkEntry();
+}
+
+const sendBtn = document.getElementById("sendBtn");
+const messageInput = document.getElementById("messageInput");
+const chatArea = document.getElementById("chatArea");
+
+sendBtn.addEventListener("click", sendMessage);
+
+function sendMessage(){
+
+    let text = messageInput.value.trim();
+
+    if(!text) return;
+
+    const firstLetter =
+    username.charAt(0).toUpperCase();
+
+    chatArea.innerHTML += `
+        <div class="message">
+
+            <div class="avatar">
+      ${getAvatarIcon(avatar || "user")}
+</div>
+
+            <div class="bubble">
+
+                <div class="name">
+                    ${username}
+                </div>
+
+               ${replyMessage ? `
+<div style="
+background:#111722;
+padding:8px;
+border-left:3px solid #2f6df6;
+margin-bottom:8px;
+font-size:12px;
+color:#9db7ff;">
+${replyMessage}
+</div>
+` : ''}
+
+<div class="text">
+${text}
+</div>
+
+</div>
+
+<button class="replyBtn"
+onclick="replyToMessage(this)">
+↩
+</button>
+
+</div>
+`;
+
+
+
+    messageInput.value="";
+
+    messageInput.value="";
+
+replyMessage = null;
+
+replyBox.style.display = "none";
+
+replyText.innerHTML = "";
+
+chatArea.scrollTop =
+    chatArea.scrollHeight;
+}
+
+
+acceptRules.onclick = () => {
+
+    localStorage.setItem("rulesAccepted","true");
+
+    rulesModal.style.display = "none";
+
+    // giriş kontrolünü tekrar çalıştır
+    checkEntry();
+};
+
+setInterval(()=>{
+
+let fakeUsers =
+Math.floor(Math.random()*15)+5;
+
+document.getElementById(
+"onlineCount"
+).innerText =
+`Sohbette: ${fakeUsers} kişi`;
+
+},3000);
+
+function replyToMessage(btn){
+
+    const message =
+    btn.parentElement;
+
+    replyMessage =
+    message.querySelector(".text").innerText;
+
+    replyText.innerHTML =
+    "↩ " + replyMessage;
+
+    replyBox.style.display =
+    "flex";
+
+}
+
+function enterRoom(roomName){
+
+    localStorage.setItem("room", roomName);
+
+    document.getElementById("roomPage").style.display = "none";
+    document.getElementById("chatApp").style.display = "flex";
+
+    // 🔥 BACK BUTTON STATE EKLE
+    history.pushState({page:"chat"}, "", "#chat");
+}
+window.onpopstate = function(event){
+
+    const room = document.getElementById("roomPage");
+    const chat = document.getElementById("chatApp");
+
+    if(room.style.display === "none" && chat.style.display === "flex"){
+        // CHAT → ROOMS
+        chat.style.display = "none";
+        room.style.display = "flex";
+        localStorage.removeItem("room");
+        return;
+    }
+
+    if(room.style.display === "flex"){
+        // ROOMS → CATEGORIES
+        window.location.href = "katagoriler.html";
+    }
+};
+function exitRoom(){
+
+    document.getElementById("chatApp").style.display = "none";
+    document.getElementById("roomPage").style.display = "flex";
+
+    localStorage.removeItem("room");
+
+    history.pushState({page:"rooms"}, "", "#rooms");
+}
+function exitRoom2(){
+
+    window.location.href = "katagoriler.html";
+
+}
+
+function initApp(){
+
+    avatar = localStorage.getItem("avatar") || "user";
+    document.body.style.display = "block";
+    username = localStorage.getItem("username");
+    const rulesAccepted = localStorage.getItem("rulesAccepted");
+    const room = localStorage.getItem("room");
+
+    // HEPSİNİ SIFIRLA
+    modal.style.display = "none";
+    rulesModal.style.display = "none";
+    document.getElementById("roomPage").style.display = "none";
+    document.getElementById("chatApp").style.display = "none";
+
+    // 1. username yoksa
+    if(!username){
+        modal.style.display = "flex";
+        return;
+    }
+
+    // 2. kurallar yoksa
+    if(!rulesAccepted){
+        rulesModal.style.display = "flex";
+        return;
+    }
+
+    // 3. oda seçilmemişse
+    if(!room){
+        document.getElementById("roomPage").style.display = "flex";
+        return;
+    }
+
+    // 4. her şey tamam → chat
+    document.getElementById("chatApp").style.display = "flex";
+}
+
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.innerText = message;
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2000);
+}
+
+let avatar;
+
+function closeProfile(){
+    document.getElementById("profileModal").style.display = "none";
+}
+// avatar seçme
+function setAvatar(value){
+    avatar = value;
+    localStorage.setItem("avatar", avatar);
+
+    document.getElementById("avatarBig").innerHTML =
+    getAvatarIcon(value);
+}
+function openProfile(){
+
+    document.getElementById("profileModal").style.display = "flex";
+
+    document.getElementById("profileName").innerText = username;
+
+    document.getElementById("avatarBig").innerHTML =
+    getAvatarIcon(avatar);
+}
+function getAvatarIcon(type){
+
+    switch(type){
+
+        case "user":
+            return '<i class="fa-solid fa-user"></i>';
+
+        case "user-tie":
+            return '<i class="fa-solid fa-user-tie"></i>';
+
+        case "user-graduate":
+            return '<i class="fa-solid fa-user-graduate"></i>';
+
+        case "user-astronaut":
+            return '<i class="fa-solid fa-user-astronaut"></i>';
+
+        case "user-shield":
+            return '<i class="fa-solid fa-user-shield"></i>';
+
+        case "car":
+            return '<i class="fa-solid fa-car"></i>';
+
+        default:
+            return '<i class="fa-solid fa-user"></i>';
+    }
+}
+
+document.addEventListener("contextmenu", function(e){
+    e.preventDefault();
+});
+document.addEventListener("copy", function(e){
+    e.preventDefault();
+});
+document.addEventListener("keydown", function(e){
+
+    if(
+        e.ctrlKey && 
+        (e.key === "c" || e.key === "u" || e.key === "s")
+    ){
+        e.preventDefault();
+    }
+
+    if(e.key === "F12"){
+        e.preventDefault();
+    }
+});
+checkEntry();
+</script>
+
+</body>
+</html>
