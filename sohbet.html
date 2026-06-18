@@ -7,6 +7,9 @@
 <title>Ehliyet Topluluğu</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -600,6 +603,12 @@ color:white;
         </div>
     </div>
 
+    <div style="margin-top:auto;text-align:center;padding:15px;">
+    <button onclick="openAdminLogin()" 
+        style="background:none;border:none;color:#8f97a8;font-size:12px;">
+        Moderatör Girişi
+    </button>
+</div>
 </div>
 
 <div class="app" id="chatApp" style="display:none;">
@@ -619,7 +628,10 @@ color:white;
     Sohbette: 0 kişi
 </span>
         </div>
-
+<button id="adminClearBtn" onclick="clearAllMessages()"
+style="display:none;background:red;color:white;border:none;padding:5px 10px;border-radius:8px;margin-left:10px;">
+Tümünü Sil
+</button>
     </header>
 
 
@@ -719,31 +731,97 @@ color:white;
 
 </div>
 <div id="toast"></div>
+<div id="adminLoginModal" style="display:none;position:fixed;inset:0;background:#000000cc;z-index:99999;justify-content:center;align-items:center;">
+    <div style="background:#161a23;padding:20px;border-radius:15px;width:90%;max-width:300px;">
+        <h3>Moderatör Girişi</h3>
+
+        <input id="adminPass" placeholder="Şifre" 
+        style="width:100%;padding:10px;margin-top:10px;">
+
+        <button onclick="adminLogin()" 
+        style="width:100%;margin-top:10px;padding:10px;background:#2f6df6;color:white;border:none;border-radius:10px;">
+            Giriş
+        </button>
+
+        <button onclick="closeAdminLogin()" 
+        style="width:100%;margin-top:10px;padding:10px;background:#1d2330;color:white;border:none;border-radius:10px;">
+            Kapat
+        </button>
+    </div>
+</div>
+// ADMİN PANELi KODLARI
+<div id="adminPanel" style="display:none; position:fixed; inset:0; background:#0f1117; color:white; z-index:999999; padding:15px; overflow:auto;">
+
+    <h2>👑 Admin Panel</h2>
+
+    <input id="adminPass" placeholder="Admin şifre" style="width:100%;padding:10px;">
+    <button onclick="adminLogin()" style="width:100%;margin-top:10px;">Giriş</button>
+
+    <hr>
+
+    <button onclick="clearAllMessages()" style="width:100%;background:red;color:white;padding:10px;">
+        🧹 Tüm Mesajları Sil
+    </button>
+
+    <hr>
+
+    <h3>Mesaj Yönetimi</h3>
+    <div id="adminMessages"></div>
+
+    <hr>
+
+    <h3>👑 Admin Mesaj Gönder</h3>
+    <textarea id="adminText" style="width:100%;height:80px;"></textarea>
+    <button onclick="sendAdminMessage()" style="width:100%;margin-top:10px;">
+        Gönder
+    </button>
+
+    <br><br>
+    <button onclick="document.getElementById('adminPanel').style.display='none'">Kapat</button>
+
+</div>
 <script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBWQSAvtjgPW1k6K6y-drTKDhPpy2OwQII",
+  authDomain: "chat-a67f7.firebaseapp.com",
+  projectId: "chat-a67f7",
+  storageBucket: "chat-a67f7.firebasestorage.app",
+  messagingSenderId: "820154293996",
+  appId: "1:820154293996:web:34834d76e6885a4d844fc9",
+  measurementId: "G-J1MCTGPMP0"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+let userRole = "user";
+let avatar = "user";
 const modal = document.getElementById("usernameModal");
 const usernameInput = document.getElementById("usernameInput");
 history.replaceState({page:"rooms"}, "", "#rooms");
 const rulesModal =
 document.getElementById("rulesModal");
-
 const acceptRules =
 document.getElementById("acceptRules");
-
 const replyBox =
 document.getElementById("replyBox");
-
 const replyText =
 document.getElementById("replyText");
-
 const cancelReply =
 document.getElementById("cancelReply");
-
 window.onload = function(){
     initApp();
 };
 let replyMessage = null;
-
+let lastMessageTime = 0;
 let username = localStorage.getItem("username");
+let userId = localStorage.getItem("userId");
+
+if(!userId){
+    userId = Math.random().toString(36).substring(2);
+    localStorage.setItem("userId", userId);
+}
 
 function checkEntry(){
 
@@ -787,6 +865,30 @@ function saveUsername(){
 
     let value = usernameInput.value.trim();
 
+    if(value.includes(" ")){
+    showToast("Kullanıcı adında boşluk olamaz!");
+    return;
+    }
+    const forbidden = [
+    "şahin",
+    "ehliyet",
+    "sahin",
+    "sahinehliyet",
+    "şahinehliyet",
+    "admin",
+    "mod",
+    "moderator",
+    "👑"
+];
+
+let lower = value.toLowerCase();
+
+for(let word of forbidden){
+    if(lower.includes(word)){
+        showToast("Bu kullanıcı adı kullanılamaz!");
+        return;
+    }
+}
     if(value.length < 3){
         showToast("Kullanıcı adı en az 3 karakter olmalı");
         return;
@@ -804,12 +906,32 @@ function saveUsername(){
         return;
     }
 
-    localStorage.setItem("username", value);
+let cleanName = value
+.toLowerCase()
+.trim()
+.replace(/\s+/g,'')
+db.collection("users")
+.where("usernameLower","==", cleanName)
+.get()
+.then(snapshot => {
 
+    if(!snapshot.empty){
+        showToast("Bu kullanıcı adı zaten alınmış!");
+        return;
+    }
+
+db.collection("users").add({
+    username: value,
+    usernameLower: cleanName,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+});
+
+    localStorage.setItem("username", value);
     username = value;
 
-modal.style.display = "none";
-checkEntry();
+    modal.style.display = "none";
+    checkEntry();
+});
 }
 
 const sendBtn = document.getElementById("sendBtn");
@@ -821,65 +943,134 @@ sendBtn.addEventListener("click", sendMessage);
 function sendMessage(){
 
     let text = messageInput.value.trim();
-
     if(!text) return;
 
-    const firstLetter =
-    username.charAt(0).toUpperCase();
+    const now = Date.now();
 
-    chatArea.innerHTML += `
-        <div class="message">
+    if(now - lastMessageTime < 3000){
+        showToast("Çok hızlı mesaj gönderemezsin!");
+        return;
+    }
 
-            <div class="avatar">
-      ${getAvatarIcon(avatar || "user")}
-</div>
+    lastMessageTime = now;
 
-            <div class="bubble">
+    const room = localStorage.getItem("room") || "ehliyet";
 
-                <div class="name">
-                    ${username}
+    // 🔥 FIREBASE'E GÖNDER
+    db.collection("rooms")
+      .doc(room)
+      .collection("messages")
+      .add({
+          text: text,
+          username: userRole === "admin" ? "Şahin Ehliyet" : username,
+          isAdmin: userRole === "admin",
+          avatar: userRole === "admin" ? "user-shield" : avatar,
+          avatar: avatar || "user",
+          reply: replyMessage || null,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+    messageInput.value = "";
+    replyMessage = null;
+    replyBox.style.display = "none";
+    replyText.innerHTML = "";
+
+    chatArea.scrollTop = chatArea.scrollHeight;
+
+    // 🔥 25 mesaj limiti
+    limitMessages(room);
+}
+
+function listenMessages(){
+
+    const room = localStorage.getItem("room") || "ehliyet";
+
+    db.collection("rooms")
+      .doc(room)
+      .collection("messages")
+      .orderBy("createdAt")
+      .onSnapshot(snapshot => {
+
+        let html = `
+        <div class="pinnedNotice">
+        ⚠️ Lütfen sohbet kurallarına uyun. Küfür, argo, hakaret, spam mesajlar ve reklam yasaktır. gerektiğinde yasal işlem başlatılabilir.
+        </div>
+        `;
+
+        snapshot.forEach(doc => {
+            const msg = doc.data();
+
+            html += `
+            <div class="message">
+                <div class="avatar">
+                    ${getAvatarIcon(msg.avatar)}
                 </div>
 
-               ${replyMessage ? `
-<div style="
-background:#111722;
-padding:8px;
-border-left:3px solid #2f6df6;
-margin-bottom:8px;
-font-size:12px;
-color:#9db7ff;">
-${replyMessage}
-</div>
-` : ''}
-
-<div class="text">
-${text}
+               <div class="bubble" style="${
+    msg.isAdmin 
+    ? 'background:linear-gradient(135deg,#d4af37,#f1c40f);color:#111;border:1px solid #fff;box-shadow:0 0 10px rgba(212,175,55,0.6)'
+    : ''
+}">
+                   <div class="name" style="${
+    msg.isAdmin 
+    ? 'color:black !important;font-weight:bold;text-shadow:0 0 6px rgba(212,175,55,0.8)'
+    : ''
+}">
+${msg.isAdmin ? " Şahin Ehliyet" : msg.username}
 </div>
 
-</div>
+                    ${msg.reply ? `
+                    <div style="font-size:12px;background:#111722;padding:6px;border-left:3px solid #2f6df6;margin-bottom:6px;color:#9db7ff;border-radius:6px;">
+                        ↩ ${msg.reply}
+                    </div>` : ""}
 
-<button class="replyBtn"
-onclick="replyToMessage(this)">
-↩
-</button>
+                    <div class="text">${msg.text}</div>
+                </div>
 
-</div>
-`;
+                ${userRole === "admin" ? `
+               <button onclick="deleteMessage('${doc.id}')"
+               style="margin-left:10px;background:red;color:white;border:none;padding:5px;border-radius:5px;">
+            Sil
+            </button>` : ""}
 
+                <button class="replyBtn" onclick="replyToMessage(this)">
+                    ↩
+                </button>
+            </div>
+            `;
+        });
 
+        chatArea.innerHTML = html;
 
-    messageInput.value="";
+        setTimeout(()=>{
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }, 50);
 
-    messageInput.value="";
+      });
+}
 
-replyMessage = null;
+function limitMessages(room){
 
-replyBox.style.display = "none";
+    db.collection("rooms")
+      .doc(room)
+      .collection("messages")
+      .orderBy("createdAt")
+      .get()
+      .then(snapshot => {
 
-replyText.innerHTML = "";
+          if(snapshot.size > 25){
 
-chatArea.scrollTop =
-    chatArea.scrollHeight;
+              const extra = snapshot.size - 25;
+
+              let batch = db.batch();
+
+              snapshot.docs.slice(0, extra).forEach(doc => {
+                  batch.delete(doc.ref);
+              });
+
+              batch.commit();
+          }
+      });
 }
 
 
@@ -893,32 +1084,18 @@ acceptRules.onclick = () => {
     checkEntry();
 };
 
-setInterval(()=>{
-
-let fakeUsers =
-Math.floor(Math.random()*15)+5;
-
-document.getElementById(
-"onlineCount"
-).innerText =
-`Sohbette: ${fakeUsers} kişi`;
-
-},3000);
 
 function replyToMessage(btn){
 
-    const message =
-    btn.parentElement;
+    const msg = btn.parentElement;
 
-    replyMessage =
-    message.querySelector(".text").innerText;
+    const text = msg.querySelector(".text").innerText;
+    const name = msg.querySelector(".name").innerText;
 
-    replyText.innerHTML =
-    "↩ " + replyMessage;
+    replyMessage = `${name}: ${text}`;
 
-    replyBox.style.display =
-    "flex";
-
+    replyText.innerHTML = "↩ " + replyMessage;
+    replyBox.style.display = "flex";
 }
 
 function enterRoom(roomName){
@@ -930,6 +1107,9 @@ function enterRoom(roomName){
 
     // 🔥 BACK BUTTON STATE EKLE
     history.pushState({page:"chat"}, "", "#chat");
+    listenMessages();
+    listenOnlineUsers();
+    setOnline();
 }
 window.onpopstate = function(event){
 
@@ -967,6 +1147,7 @@ function exitRoom2(){
 function initApp(){
 
     avatar = localStorage.getItem("avatar") || "user";
+    userRole = localStorage.getItem("role") || "user";
     document.body.style.display = "block";
     username = localStorage.getItem("username");
     const rulesAccepted = localStorage.getItem("rulesAccepted");
@@ -998,6 +1179,8 @@ function initApp(){
 
     // 4. her şey tamam → chat
     document.getElementById("chatApp").style.display = "flex";
+    listenMessages();
+    updateAdminUI();
 }
 
 function showToast(message){
@@ -1012,7 +1195,6 @@ function showToast(message){
     },2000);
 }
 
-let avatar;
 
 function closeProfile(){
     document.getElementById("profileModal").style.display = "none";
@@ -1080,8 +1262,177 @@ document.addEventListener("keydown", function(e){
         e.preventDefault();
     }
 });
-checkEntry();
-</script>
 
+
+
+function setOnline(){
+
+    const room = localStorage.getItem("room") || "ehliyet";
+
+    db.collection("presence").doc(userId).set({
+        username,
+        room,
+        lastSeen: Date.now()
+    });
+}
+setInterval(()=>{
+    if(username){
+        setOnline();
+    }
+}, 5000);
+setInterval(()=>{
+
+    const now = Date.now();
+
+    db.collection("presence")
+      .where("room","==", localStorage.getItem("room") || "ehliyet")
+      .get()
+      .then(snapshot => {
+
+          let count = 0;
+
+          snapshot.forEach(doc => {
+              const data = doc.data();
+
+              if(now - data.lastSeen < 15000){
+                  count++;
+              }
+          });
+
+          document.getElementById("onlineCount").innerText =
+          `Sohbette: ${count} kişi`;
+
+      });
+
+}, 5000);
+function listenOnlineUsers(){
+
+    const room = localStorage.getItem("room") || "ehliyet";
+
+    db.collection("presence")
+      .where("room","==",room)
+      .onSnapshot(snapshot => {
+
+        document.getElementById("onlineCount").innerText =
+        `Sohbette: ${snapshot.size} kişi`;
+
+    });
+}
+
+checkEntry();
+
+
+// ADMİN PANELİ SCRİPT KODLARI
+
+    let isAdmin = false;
+
+function openAdminPanel(){
+    document.getElementById("adminPanel").style.display = "block";
+}
+
+function adminLogin(){
+
+    const pass = document.getElementById("adminPass").value;
+
+    if(pass === "1234"){ // şifreyi değiştir
+        isAdmin = true;
+        alert("Admin giriş başarılı");
+        listenAdminMessages();
+    } else {
+        alert("Hatalı şifre");
+    }
+}
+function deleteMessage(msgId){
+
+    const room = localStorage.getItem("room") || "ehliyet";
+
+    db.collection("rooms")
+      .doc(room)
+      .collection("messages")
+      .doc(msgId)
+      .delete();
+}
+function clearAllMessages(){
+
+    const room = localStorage.getItem("room") || "ehliyet";
+
+    db.collection("rooms")
+      .doc(room)
+      .collection("messages")
+      .get()
+      .then(snapshot => {
+
+          let batch = db.batch();
+
+          snapshot.forEach(doc => {
+              batch.delete(doc.ref);
+          });
+
+          return batch.commit();
+      });
+
+    alert("Tüm mesajlar silindi");
+}
+function sendAdminMessage(){
+
+    const text = document.getElementById("adminText").value;
+
+    if(!text) return;
+
+    const room = localStorage.getItem("room") || "ehliyet";
+
+    db.collection("rooms")
+      .doc(room)
+      .collection("messages")
+      .add({
+          text: text,
+          username: "👑 Şahin Ehliyet",
+          avatar: "user-shield",
+          isAdmin: true,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+    document.getElementById("adminText").value = "";
+}
+
+function openAdminLogin(){
+    document.getElementById("adminLoginModal").style.display = "flex";
+}
+
+function closeAdminLogin(){
+    document.getElementById("adminLoginModal").style.display = "none";
+}
+
+function adminLogin(){
+
+    const pass = document.getElementById("adminPass").value;
+
+    if(pass === "sahnehlyt58605834!"){
+
+        userRole = "admin";
+        localStorage.setItem("role","admin");
+
+        document.getElementById("adminLoginModal").style.display = "none";
+
+        showToast("👑 Moderatör aktif!");
+
+        listenMessages();
+        updateAdminUI();
+
+    } else {
+        alert("Hatalı şifre");
+    }
+}
+function updateAdminUI(){
+
+    const btn = document.getElementById("adminClearBtn");
+
+    if(userRole === "admin"){
+        btn.style.display = "inline-block";
+    } else {
+        btn.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
