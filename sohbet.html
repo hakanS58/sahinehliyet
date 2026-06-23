@@ -810,6 +810,11 @@ const replyText =
 document.getElementById("replyText");
 const cancelReply =
 document.getElementById("cancelReply");
+   cancelReply.addEventListener("click", () => {
+    replyMessage = null;
+    replyBox.style.display = "none";
+    replyText.innerHTML = "";
+});
 window.onload = function(){
     initApp();
 };
